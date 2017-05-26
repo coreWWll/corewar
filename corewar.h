@@ -7,9 +7,9 @@
 
 typedef struct      s_asm
 {
-	char            *file_name;
-	char            *name;
-	char            *comm;
+	char            *file_name;// имя файла
+	char            *name;// имя бота
+	char            *comm; // комментарий
 	char            *lable;
 	int             opcode;
 	char            *command;
