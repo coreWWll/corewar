@@ -69,4 +69,27 @@ typedef struct		header_s
     unsigned int		prog_size;
     char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct      s_asm
+{
+    char            *file_name;
+    char            *name;
+    char            *comm;
+    char            *lable;
+    int             opcode;
+    char            *command;
+    char            *args;
+    int             bin[8];
+    char            hexa[4];
+    int             carry;
+    int             c_oct;
+    int             cycles;
+    int             label_size;
+    struct s_asm    *next;
+}                   t_asm;
+
+//struct t_op    *g_tab; //write func to init op_c tab
+
+t_asm *new_asm();
+void    get_shit(t_asm *start, char *line);
 #endif //COREWAR_OP_H
