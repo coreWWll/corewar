@@ -78,8 +78,11 @@ typedef struct      s_asm
     char            *comm;
     char            *lable;
     int             opcode;
+    int             command_num;
     char            *command;
     int             amount_of_args;
+    char            what_args[3];
+    int             l_flag[3];
     char            **args;
     int             bin[8];
     char            hexa[4];
@@ -107,3 +110,23 @@ void    get_shit(t_asm *start, char *line);
 void    ft_exit(int flag);
 
 #endif //COREWAR_OP_H
+
+/*static t_op g_op_tab[17] = {
+        {"live",  1, {T_DIR},                                               1,  10,   0},
+        {"ld",    2, {T_DIR | T_IND,         T_REG},                        2,  5,    1},
+        {"st",    2, {T_REG, T_IND | T_REG},                                3,  5,    1},
+        {"add",   3, {T_REG, T_REG, T_REG},                                 4,  10,   1},
+        {"sub",   3, {T_REG, T_REG, T_REG},                                 5,  10,   1},
+        {"and",   3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6,  6,    1},
+        {"or",    3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7,  6,    1},
+        {"xor",   3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8,  6,    1},
+        {"zjmp",  1, {T_DIR},                                               9,  20,   0},
+        {"ldi",   3, {T_REG | T_DIR | T_IND, T_DIR | T_REG,         T_REG}, 10, 25,   1},
+        {"sti",   3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG},         11, 25,   1},
+        {"fork",  1, {T_DIR},                                               12, 800,  0},
+        {"lld",   2, {T_DIR | T_IND,         T_REG},                        13, 10,   1},
+        {"lldi",  3, {T_REG | T_DIR | T_IND, T_DIR | T_REG,         T_REG}, 14, 50,   1},
+        {"lfork", 1, {T_DIR},                                               15, 1000, 0},
+        {"aff",   1, {T_REG},                                               16, 2,    1},
+        {0,       0, 0, 0,  0,    0}
+};*/

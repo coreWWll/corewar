@@ -22,7 +22,7 @@ t_op 		*init_tab(void) {
             {"lldi",  3, {T_REG | T_DIR | T_IND, T_DIR | T_REG,         T_REG}, 14, 50,   1},
             {"lfork", 1, {T_DIR},                                               15, 1000, 0},
             {"aff",   1, {T_REG},                                               16, 2,    1},
-            {0,       0, 0, 0,  0,    0}
+            {0,       0, 0,                                                     0,  0,    0}
     };
     return(g_op_tab);
 }
@@ -47,7 +47,7 @@ char    *get_lable(char *line)
 {
     int i;
     int len;
-    char dupline[100];
+    char dupline[1000];
     char *label;
 
     i = 0;
@@ -66,7 +66,7 @@ char    *get_lable(char *line)
     return(label);
 }
 
-char *get_command(char *line, t_op *g_tab) {
+char *get_command(char *line, t_op *g_tab, t_asm *start) {
     int i;
     int len;
     char *command;
@@ -79,6 +79,7 @@ char *get_command(char *line, t_op *g_tab) {
         {
             command = (char *)malloc(sizeof(char) * 6);
             ft_strcpy(command, g_tab[i].command);
+            start->command_num = i;
             return(command);
         }
         i--;
@@ -88,7 +89,41 @@ char *get_command(char *line, t_op *g_tab) {
 
 char    **get_args(char *line, t_asm *start, t_op *g_tab)
 {
+    int i;
+    int j;
+    int k;
+    char dupline[1000];
+    char *args;
 
+    i = 0;
+    j = 0;
+    ft_strcmp(dupline, line);
+    while (dupline[i] == ' '|| dupline[i] == '\t')
+        i++;
+    while (dupline[i] != '%' && dupline[i] != ' ' && dupline[i] != '\t')
+        i++;
+    k = i;
+    if (g_tab[start->command_num].args_am == 1)
+    {
+        while (dupline[i] != '#' && dupline[i] != '\0')
+        {
+            i++;
+            j++;
+        }
+        start->args[0] = (char *) malloc(sizeof(char) * j);
+        start->args[0] = ft_strsub(dupline, k + 1, j);
+        if (dupline[k] == '%')
+            start->what_args[0] = T_DIR;
+        else if (dupline[k] == 'r')
+            start->what_args[0] = T_REG;
+    }
+    else
+    {
+        j = ft_strlen(line);
+        while (dupline[k] == ' ' || dupline[k] == '\t')
+            k++;
+        args = ft_strsub(line, k, j);
+    }
 }
 
 void    get_shit(t_asm *start, char *line)
@@ -97,7 +132,8 @@ void    get_shit(t_asm *start, char *line)
 
     g_tab = init_tab();
     start->lable = get_lable(line);
-    start->command = get_command(line, g_tab);
+    start->command = get_command(line, g_tab, start);
+    start->args = (char **)malloc(sizeof(char *) * 3);
     start->args = get_args(line, start, g_tab);
 
 

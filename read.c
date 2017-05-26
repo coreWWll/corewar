@@ -84,7 +84,7 @@ void    make_list(t_asm **start, char *line)
     p = *start;
     while (p)
     {
-        if(p->next == NULL)
+        if(p->next == NULL) //possible segfault!!!!
         {
             p->next = new_asm();
             get_shit(p, line);
