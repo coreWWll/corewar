@@ -68,7 +68,7 @@ char    *get_file_name(char *av)
     len = ft_strlen(av);
     while (len > 0 && av[len - 1] != '/')
         len--;
-    while (av[len])
+    while (av[len] != '.')
     {
         name = ft_charjoin(name, av[len]);
         len++;

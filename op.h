@@ -61,6 +61,7 @@ typedef char	t_arg_type;
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
+#define MAX_INT                 2147483647
 
 typedef struct		header_s
 {
@@ -78,7 +79,8 @@ typedef struct      s_asm
     char            *lable;
     int             opcode;
     char            *command;
-    char            *args;
+    int             amount_of_args;
+    char            **args;
     int             bin[8];
     char            hexa[4];
     int             carry;
@@ -88,8 +90,20 @@ typedef struct      s_asm
     struct s_asm    *next;
 }                   t_asm;
 
-//struct t_op    *g_tab; //write func to init op_c tab
+typedef struct s_op
+{
+    char *command;
+    int args_am;
+    char args[3];
+    int opcode;
+    int cycles;
+    int oct;
+} t_op;
+
+//t_op				*g_tab;
 
 t_asm *new_asm();
 void    get_shit(t_asm *start, char *line);
+void    ft_exit(int flag);
+
 #endif //COREWAR_OP_H
