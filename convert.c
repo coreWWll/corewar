@@ -4,6 +4,8 @@
 
 #include "corewar.h"
 
+void	get_lable(t_asm *begin, t_asm *head, int fd);
+
 int 	find_lable_in_args(int *ar)
 {
 	int i;
@@ -38,7 +40,11 @@ void	find_lable(t_asm *begin, char **args, int fd)
 				write(fd, s, ft_strlen(save->command));
 				while (save->args[j])
 				{
-
+					if (save->l_flag[j] > 0)
+						get_lable(begin, save, fd);
+					else
+						write(fd, save->args[j], ft_strlen(save->args[j]));
+					j++;
 				}
 			}
 			i++;
