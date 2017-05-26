@@ -49,26 +49,22 @@ void	find_lable(t_asm *begin, char **args, int fd)
 
 void	get_lable(t_asm *begin, t_asm *head, int fd)
 {
-	unsigned char *s;
+	int 			i;
+	unsigned char	*s;
 
+	i = 0;
 	if (find_lable_in_args(head->l_flag))
 		find_lable(begin, head->args, fd);
 	else if (head->command)
 	{
 		s = (unsigned char *)head->command;
 		write(fd, s, ft_strlen(head->command));
-		write(fd, )
+		while (head->args[i])
+		{
+			write(fd, head->args[i], ft_strlen(head->args[i]));
+			i++;
+		}
 	}
-
-}
-
-void	get_command()
-{
-
-}
-
-void	get_argument()
-{
 
 }
 
@@ -84,8 +80,6 @@ void	to_byte_code(t_asm *head)
 	while (head)
 	{
 		get_lable(begin, head, fd);
-		get_command();
-		get_argument();
 		head = head->next;
 	}
 }
