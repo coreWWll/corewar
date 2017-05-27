@@ -106,8 +106,9 @@ typedef struct s_op
 //t_op				*g_tab;
 
 t_asm *new_asm();
-void    get_shit(t_asm *start, char *line);
-void    ft_exit(int flag);
+void				get_shit(t_asm *start, char *line);
+void				ft_exit(int flag);
+void				to_byte_code(t_asm *head);
 
 #endif //COREWAR_OP_H
 
