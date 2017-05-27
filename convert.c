@@ -93,8 +93,33 @@ void	to_byte_code(t_asm *head)
 int main()
 {
 	t_asm *assem;
+	t_asm *assem1;
+	t_asm *assem2;
+	t_asm *assem3;
+	t_asm *assem4;
 
 	assem = malloc(sizeof(assem));
+	assem1 = malloc(sizeof(assem));
+	assem2 = malloc(sizeof(assem));
+	assem3 = malloc(sizeof(assem));
+	assem4 = malloc(sizeof(assem));
+
 	assem->file_name = ft_strdup("NAME");
+	assem->command = ft_strdup("fork");
+	assem->args[0] = ft_strdup("coregeni");
+	assem->l_flag[0] = 1;
+	assem->next = assem1;
+	assem1->command = ft_strdup("st");
+	assem1->args[0] = ft_strdup("r1");
+	assem1->args[1] = ft_strdup("6");
+	assem1->next = assem2;
+	assem2->command = ft_strdup("live");
+	assem2->args[0] = ft_strdup("42");
+	assem2->next = assem3;
+	assem3->command = ft_strdup("fork");
+	assem3->args[0] = "torpgeni";
+	assem3->l_flag[0] = 1;
+	assem->next = assem4;
+	assem4->lable = ft_strdup("coregeni");
 	to_byte_code(assem);
 }
