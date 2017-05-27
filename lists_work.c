@@ -36,6 +36,9 @@ t_asm *new_asm()
     new->name = ft_strnew(0);
     new->comm = ft_strnew(0);
     new->lable = ft_strnew(0);
+    new->l_flag[0] = 0;
+    new->l_flag[1] = 0;
+    new->l_flag[2] = 0;
     new->carry = 98;
     new->c_oct = 0;
     new->label_size = 0;
@@ -53,8 +56,13 @@ char    *get_lable(char *line)
     i = 0;
     len = 0;
     ft_strcpy(dupline, line);
-    while (dupline[len] != ':')
-        len++;
+    if (ft_strchr(dupline, ':') != NULL)
+    {
+        while (dupline[len] != ':' && dupline[len] != '\0')
+            len++;
+    }
+    else
+        return(NULL);
     if (dupline[len] == '\0' || dupline[len - 1] == '%')
         return(NULL);
     else
@@ -84,10 +92,42 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
         }
         i--;
     }
-    ft_exit(0);
+    if (start->lable)
+        return(NULL);
+    else
+        ft_exit(3);
 }
 
-char    **get_args(char *line, t_asm *start, t_op *g_tab)
+char *good_strtrim(char *str)
+{
+    int i;
+    int j;
+    size_t len;
+    char *res;
+
+    i = 0;
+    j = 0;
+    len = 0;
+    while (str[i])
+    {
+        if (str[i] != ' ' && str[i] != '\t')
+            len++;
+        i++;
+    }
+    res = ft_strnew(len);
+    i = 0;
+    while (str[i] == ' ' || str[i] == '\t')
+        i++;
+    while (j < len)
+    {
+        res[j] = str[i];
+        i++;
+        j++;
+    }
+    return(res);
+}
+
+void    get_args(char *line, t_asm *start, t_op *g_tab)
 {
     int i;
     int j;
@@ -123,6 +163,23 @@ char    **get_args(char *line, t_asm *start, t_op *g_tab)
         while (dupline[k] == ' ' || dupline[k] == '\t')
             k++;
         args = ft_strsub(line, k, j);
+        start->args = ft_strsplit(args, ',');
+        i = 0;
+        while (start->args[i] != NULL)
+        {
+            start->args[i] = good_strtrim(start->args[i]);
+            if (start->args[i][0] == '%')
+            {
+                start->what_args[i] = T_DIR;
+                if (start->args[i][1] == ':')
+                    start->l_flag[i] = 1;
+            }
+            else if (start->args[i][0] == 'r')
+                start->what_args[i] = T_REG;
+            else
+                start->what_args[i] = T_IND;
+            i++;
+        }
     }
 }
 
@@ -134,7 +191,7 @@ void    get_shit(t_asm *start, char *line)
     start->lable = get_lable(line);
     start->command = get_command(line, g_tab, start);
     start->args = (char **)malloc(sizeof(char *) * 3);
-    start->args = get_args(line, start, g_tab);
-
+    //start->args = get_args(line, start, g_tab);
+    get_args(line, start, g_tab);
 
 }

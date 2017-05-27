@@ -7,6 +7,12 @@ void    ft_exit(int flag)
 {
     if (flag == 0)
         ft_putendl("Wrond input");
+    if (flag == 1)
+        ft_putendl("Wrond input 2");
+    if (flag == 2)
+        ft_putendl("Wrond input 3");
+    if (flag == 3)
+        ft_putendl("Wrond input 4");
     exit(0);
 }
 
@@ -41,7 +47,7 @@ char *get_name_or_comm(char *line)
     while (t[len] != '\"' && t[len] != '\0')
         len++;
     if (t[len] != '\"')
-        ft_exit(0);
+        ft_exit(1);
     name = ft_strnew(len);
     while (i < len)
     {
@@ -53,7 +59,7 @@ char *get_name_or_comm(char *line)
     while (*t != '\0')
     {
         if (*t != ' ' && *t != '\t')
-            ft_exit(0);
+            ft_exit(2);
         t++;
     }
     return(name);
@@ -129,5 +135,14 @@ int main(int ac, char **av)
     }
     else
         write(1, "laja\n", 5);
+
+    /*t_asm *p;
+    p = start;
+    while (p)
+    {
+        printf("lable = %s,  command = %s, args = %s, %s, %s what_args = %d, %d, %d  l_flag = %d,%d,%d\n", p->lable, p->command, p->args[0],p->args[1], p->args[2], p->what_args[0], p->what_args[1],
+        p->what_args[2], p->l_flag[0], p->l_flag[1], p->l_flag[2]);
+        p = p->next;
+    }*/
     return (0);
 }
