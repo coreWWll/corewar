@@ -2,7 +2,7 @@
 // Created by Oleksiy Kres on 5/26/17.
 //
 
-#include "corewar.h"
+#include "op.h"
 
 void	get_lable(t_asm *begin, t_asm *head, int fd);
 
@@ -53,7 +53,7 @@ void	find_lable(t_asm *begin, char **args, int fd)
 	}
 }
 
-void	get_lable(t_asm *begin, t_asm *head, int fd)
+void	g_lable(t_asm *begin, t_asm *head, int fd)
 {
 	int 			i;
 	unsigned char	*s;
@@ -85,7 +85,7 @@ void	to_byte_code(t_asm *head)
 	begin = head;
 	while (head)
 	{
-		get_lable(begin, head, fd);
+		g_lable(begin, head, fd);
 		head = head->next;
 	}
 }
