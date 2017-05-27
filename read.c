@@ -88,9 +88,15 @@ void    make_list(t_asm **start, char *line)
     t_asm *p;
 
     p = *start;
-    while (p)
+    while (p) //need to improve!! breaks when label without commands
     {
-        if(p->next == NULL) //possible segfault!!!!
+        if (p->only_lable == 1)
+        {
+            get_shit(p, line);
+            p->only_lable = 0;
+            break;
+        }
+        else if(p->next == NULL)
         {
             p->next = new_asm();
             get_shit(p, line);
@@ -139,8 +145,9 @@ int main(int ac, char **av)
     p = start;
     while (p)
     {
-        printf("lable = %s,  command = %s, args = %s, %s, %s what_args = %d, %d, %d  l_flag = %d,%d,%d\n", p->lable, p->command, p->args[0],p->args[1], p->args[2], p->what_args[0], p->what_args[1],
-        p->what_args[2], p->l_flag[0], p->l_flag[1], p->l_flag[2]);
+        printf("lable = %s,  command = %s, args = %s, %s, %s what_args = %d, %d, %d
+        l_flag = %d,%d,%d\n", p->lable, p->command, p->args[0],p->args[1], p->args[2],
+        p->what_args[0], p->what_args[1],p->what_args[2], p->l_flag[0], p->l_flag[1], p->l_flag[2]);
         p = p->next;
     }*/
     return (0);
