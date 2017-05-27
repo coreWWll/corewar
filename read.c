@@ -107,7 +107,7 @@ int main(int ac, char **av)
     t_asm *start;
     char *line;
 
-    start = (t_asm*)malloc(sizeof(t_asm));
+    start = new_asm();
     start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
     if (ac == 2)
     {
@@ -120,22 +120,21 @@ int main(int ac, char **av)
                     free(line);
                     get_next_line(fd, &line);
                 }
-                if (ft_strstr(line, ".name"))
+                if (ft_strstr(line, NAME_CMD_STRING))
                     start->name = get_name_or_comm(line); //should check it len
-                else if (ft_strstr(line, ".comment"))
+                else if (ft_strstr(line, COMMENT_CMD_STRING))
                     start->comm = get_name_or_comm(line); //should check it len
                 else
                     make_list(&start, line);
                 free(line);
             }
-            printf("name = %s\ncomment = %s\nname = %s\n", start->name, start->comm, start->file_name);
+            printf("name = %s\ncomment = %s\nfilename = %s\n", start->name, start->comm, start->file_name);
         }
         else
             write(1, "this! is! lajjaaaaa!\n", 21);
     }
     else
         write(1, "laja\n", 5);
-
     /*t_asm *p;
     p = start;
     while (p)
