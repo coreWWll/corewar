@@ -41,6 +41,8 @@ t_asm *new_asm()
     new->l_flag[2] = 0;
     new->amount_of_args = 0;
     new->command_num = -1;
+    new->only_lable = 0;
+    new->opcode = 0;
     new->carry = 98;
     new->c_oct = 0;
     new->label_size = 0;
@@ -48,32 +50,30 @@ t_asm *new_asm()
     return (new);
 }
 
-char    *get_lable(char *line)
+void    get_lable(char *line, t_asm *start)
 {
     int i;
     int len;
     char dupline[1000];
-    char *label;
+    //char *label;
 
     i = 0;
     len = 0;
-    ft_strcpy(dupline, line);
-    if (ft_strchr(dupline, ':') != NULL)
-    {
-        while (dupline[len] != ':' && dupline[len] != '\0')
-            len++;
+    if (start->lable != NULL) {
+        ft_strcpy(dupline, line);
+        if (ft_strchr(dupline, ':') != NULL) {
+            while (dupline[len] != ':' && dupline[len] != '\0')
+                len++;
+        }
+        if ((dupline[len] == '\0' || dupline[len - 1] == '%') && start->only_lable != 1)
+            start->lable = NULL;
+        else if (start->only_lable != 1){
+            //label = (char *)malloc(sizeof(char) * len);
+            dupline[len] = '\0';
+            ft_strcpy(start->lable, dupline);
+        }
     }
-    else
-        return(NULL);
-    if (dupline[len] == '\0' || dupline[len - 1] == '%')
-        return(NULL);
-    else
-    {
-        label = (char *)malloc(sizeof(char) * len);
-        dupline[len] = '\0';
-        ft_strcpy(label, dupline);
-    }
-    return(label);
+    //return(label);
 }
 
 char *get_command(char *line, t_op *g_tab, t_asm *start) {
@@ -95,7 +95,10 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
         i--;
     }
     if (start->lable)
+    {
+        start->only_lable = 1;
         return (NULL);
+    }
     else
         ft_exit(3);
 }
@@ -142,9 +145,12 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     ft_strcmp(dupline, line);
     while (dupline[i] == ' '|| dupline[i] == '\t')
         i++;
-    while (dupline[i] != '%' && dupline[i] != ' ' && dupline[i] != '\t')
+    while (dupline[i] != '%' && dupline[i] != ' ' && dupline[i] != '\t' && dupline[i] != '\0')
         i++;
+    if (dupline[i] == '\0' && start->lable == NULL)
+        ft_exit(3);
     k = i;
+    start->opcode = g_tab[start->command_num].opcode;
     if (start->command_num != -1 && g_tab[start->command_num].args_am == 1)
     {
         while (dupline[i] != '#' && dupline[i] != '\0')
@@ -189,6 +195,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             i++;
         }
     }
+    //start->only_lable = 0;
 }
 
 void    get_shit(t_asm *start, char *line)
@@ -196,9 +203,11 @@ void    get_shit(t_asm *start, char *line)
     t_op *g_tab;
 
     g_tab = init_tab();
-    start->lable = get_lable(line);
+    get_lable(line, start);
+    //start->lable = get_lable(line, start);
     start->command = get_command(line, g_tab, start);
     start->args = (char **)malloc(sizeof(char *) * 3);
     get_args(line, start, g_tab);
+
 
 }
