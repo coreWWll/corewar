@@ -152,10 +152,15 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             i++;
             j++;
         }
-        start->args[0] = (char *) malloc(sizeof(char) * j);
+        start->args[0] = ft_strnew(j);
         start->args[0] = ft_strsub(dupline, k + 1, j);
-        if (dupline[k] == '%')
+        start->args[0] = good_strtrim(start->args[0]);
+        if (start->args[0][0] == '%')
+        {
             start->what_args[0] = T_DIR;
+            if (start->args[0][1] == ':')
+                start->l_flag[0] = 1;
+        }
         else if (dupline[k] == 'r')
             start->what_args[0] = T_REG;
     }
