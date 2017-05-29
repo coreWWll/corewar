@@ -99,8 +99,8 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
         start->only_lable = 1;
         return (NULL);
     }
-    else
-        ft_exit(3);
+    ft_exit(3);
+    return(NULL);
 }
 
 char *good_strtrim(char *str)
@@ -137,12 +137,13 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     int i;
     int j;
     int k;
-    char dupline[1000];
+    char dupline[100];
     char *args;
 
     i = 0;
     j = 0;
-    ft_strcmp(dupline, line);
+    k = 0;
+    ft_strcpy(dupline, line);
     while (dupline[i] == ' '|| dupline[i] == '\t')
         i++;
     while (dupline[i] != '%' && dupline[i] != ' ' && dupline[i] != '\t' && dupline[i] != '\0')

@@ -94,7 +94,7 @@ void    make_list(t_asm **start, char *line)
     p = *start;
     while (p)
     {
-        if (p->only_lable == 1 && ft_strchr(line, '%'))
+        if (p->only_lable == 1/* && (!ft_strchr(line, '%') || !ft_strchr(line, ','))*/)
         {
             get_shit(p, line);
             p->only_lable = 0;
@@ -106,6 +106,8 @@ void    make_list(t_asm **start, char *line)
             get_shit(p, line);
             break;
         }
+        if (p->only_lable == 1 && p->next->only_lable == 1)
+            p->only_lable = 0;
         p = p->next;
     }
 }
