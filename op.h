@@ -82,6 +82,7 @@ typedef struct      s_asm
     int             command_num;//num of command and its line in t_op
     char            *command;
     int             amount_of_args;
+
     int             what_args[3]; //type of args (T_DIR, T_IND or T_REG
     int             l_flag[3];//if lable in args
     char            **args;

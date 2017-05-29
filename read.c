@@ -66,6 +66,7 @@ char *get_name_or_comm(char *line, int flag)
             ft_exit(2);
         t++;
     }
+
     if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
         || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
         ft_exit(5);
@@ -108,6 +109,7 @@ void    make_list(t_asm **start, char *line)
             get_shit(p, line);
             break;
         }
+
         if (p->only_lable == 1 && p->next->only_lable == 1) //to unmark list with empty lable
             p->only_lable = 0;
         p = p->next;
@@ -119,6 +121,7 @@ void check_format(char *file)
     size_t len;
 
     len = ft_strlen(file);
+
     if (file[len - 1] != 's' && file[len - 2] != '.')//checking file format by last 2 chars
         ft_exit(3);
 }
@@ -158,5 +161,6 @@ int main(int ac, char **av)
     }
     else
         write(1, "laja\n", 5);
+	to_byte_code(start);
     return (0);
 }

@@ -110,7 +110,7 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
         }
         i--;
     }
-    if (start->lable) //
+    if (start->lable)
     {
         start->only_lable = 1;
         return (NULL);
@@ -150,9 +150,11 @@ char *good_strtrim(char *str)
 
 void    get_args(char *line, t_asm *start, t_op *g_tab)
 {
+
     size_t i;
     size_t j;
     size_t k;
+  
     char dupline[100];
     char *args;
 
@@ -176,12 +178,14 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             j++;
         }
         start->args[0] = ft_strnew(j);
+
         start->args[0] = ft_strsub(dupline, (unsigned int)k + 1, j);
         start->args[0] = good_strtrim(start->args[0]);
         if (start->args[0][0] == '%')
         {
             start->what_args[0] = T_DIR;
             if (start->args[0][1] == ':')
+
             {
                 start->args[0] = start->args[0] + 2;
                 start->l_flag[0] = 1;
@@ -234,10 +238,21 @@ int is_label(char *line) //check if lable is in line
     return(1);
 }
 
+int is_label(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i] && line[i] != ':')
+        i++;
+    if (line[i - 1] == '%' || line[i] == '\0')
+        return(0);
+    return(1);
+}
+
 void    get_shit(t_asm *start, char *line)
 {
     t_op *g_tab;
-
     if (start->only_lable == 1 && is_label(line) == 1) //if list with only lable
     {
         start = start->next;
