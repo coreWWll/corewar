@@ -13,6 +13,8 @@ void    ft_exit(int flag)
         ft_putendl("Wrong input 3");
     if (flag == 3)
         ft_putendl("Wrong input 4");
+    if (flag == 4)
+        ft_putendl("Wrong file");
     if (flag == 5)
         ft_putendl("Wrong name or comment");
     exit(0);
