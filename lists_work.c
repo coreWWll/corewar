@@ -39,6 +39,8 @@ t_asm *new_asm()
     new->l_flag[0] = 0;
     new->l_flag[1] = 0;
     new->l_flag[2] = 0;
+    new->amount_of_args = 0;
+    new->command_num = -1;
     new->carry = 98;
     new->c_oct = 0;
     new->label_size = 0;
@@ -93,7 +95,7 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
         i--;
     }
     if (start->lable)
-        return(NULL);
+        return (NULL);
     else
         ft_exit(3);
 }
@@ -143,7 +145,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     while (dupline[i] != '%' && dupline[i] != ' ' && dupline[i] != '\t')
         i++;
     k = i;
-    if (g_tab[start->command_num].args_am == 1)
+    if (start->command_num != -1 && g_tab[start->command_num].args_am == 1)
     {
         while (dupline[i] != '#' && dupline[i] != '\0')
         {
@@ -168,6 +170,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
         while (start->args[i] != NULL)
         {
             start->args[i] = good_strtrim(start->args[i]);
+            start->amount_of_args++;
             if (start->args[i][0] == '%')
             {
                 start->what_args[i] = T_DIR;
@@ -191,7 +194,6 @@ void    get_shit(t_asm *start, char *line)
     start->lable = get_lable(line);
     start->command = get_command(line, g_tab, start);
     start->args = (char **)malloc(sizeof(char *) * 3);
-    //start->args = get_args(line, start, g_tab);
     get_args(line, start, g_tab);
 
 }

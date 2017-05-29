@@ -77,6 +77,7 @@ typedef struct      s_asm
     char            *name;
     char            *comm;
     char            *lable;
+    int             only_lable;
     int             opcode;
     int             command_num;
     char            *command;
@@ -102,8 +103,6 @@ typedef struct s_op
     int cycles;
     int oct;
 } t_op;
-
-//t_op				*g_tab;
 
 t_asm *new_asm();
 void				get_shit(t_asm *start, char *line);
