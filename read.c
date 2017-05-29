@@ -86,7 +86,6 @@ char    *get_file_name(char *av)
     return (name);
 }
 
-
 void    make_list(t_asm **start, char *line)
 {
     t_asm *p;
@@ -94,7 +93,7 @@ void    make_list(t_asm **start, char *line)
     p = *start;
     while (p)
     {
-        if (p->only_lable == 1/* && (!ft_strchr(line, '%') || !ft_strchr(line, ','))*/)
+        if (p->only_lable == 1)
         {
             get_shit(p, line);
             p->only_lable = 0;
