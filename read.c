@@ -155,6 +155,7 @@ int main(int ac, char **av)
     }
     else
         write(1, "laja\n", 5);
+	to_byte_code(start);
     /*t_asm *p;
     p = start;
     while (p)

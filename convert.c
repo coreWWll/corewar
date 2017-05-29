@@ -2,7 +2,7 @@
 // Created by Oleksiy Kres on 5/26/17.
 //
 
-#include "corewar.h"
+#include "op.h"
 
 void	get_lable(t_asm *begin, t_asm *head, int fd);
 
@@ -53,7 +53,7 @@ void	find_lable(t_asm *begin, char **args, int fd)
 	}
 }
 
-void	get_lable(t_asm *begin, t_asm *head, int fd)
+void	g_lable(t_asm *begin, t_asm *head, int fd)
 {
 	int 			i;
 	unsigned char	*s;
@@ -83,18 +83,54 @@ void	to_byte_code(t_asm *head)
 	file_name = ft_strjoin(head->file_name, ".cor");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND);
 	begin = head;
+	head->header = (header_t *)malloc(sizeof(header_t));
+	header_parse(head, fd);
 	while (head)
 	{
-		get_lable(begin, head, fd);
+		g_lable(begin, head, fd);
 		head = head->next;
 	}
 }
 
-int main()
+/*int main()
 {
 	t_asm *assem;
+	t_asm *assem1;
+	t_asm *assem2;
+	t_asm *assem3;
+	t_asm *assem4;
 
-	assem = malloc(sizeof(assem));
+	assem = (t_asm *)malloc(sizeof(t_asm));
+	assem->args = (char **)malloc(sizeof(char *) * 5);
+	assem1 = (t_asm *)malloc(sizeof(t_asm));
+	assem1->args = (char **)malloc(sizeof(char *) * 5);
+	assem2 = (t_asm *)malloc(sizeof(t_asm));
+	assem2->args = (char **)malloc(sizeof(char *) * 5);
+	assem3 = (t_asm *)malloc(sizeof(t_asm));
+	assem3->args = (char **)malloc(sizeof(char *) * 5);
+	assem4 = (t_asm *)malloc(sizeof(t_asm));
+	assem4->args = (char **)malloc(sizeof(char *) * 5);
+
 	assem->file_name = ft_strdup("NAME");
+	assem->command = ft_strdup("fork");
+	assem->args[0] = ft_strdup("coregeni");
+	assem->l_flag[0] = 1;
+	assem->next = assem1;
+	assem1->command = ft_strdup("st");
+	assem1->args[0] = ft_strdup("r1");
+	assem1->args[1] = ft_strdup("6");
+	assem1->next = assem2;
+	assem2->command = ft_strdup("live");
+	assem2->args[0] = ft_strdup("42");
+	assem2->next = assem3;
+	assem3->command = ft_strdup("fork");
+	assem3->args[0] = "torpgeni";
+	assem3->l_flag[0] = 1;
+	assem3->next = assem4;
+	assem4->lable = ft_strdup("coregeni");
+	assem4->command = ft_strdup("st");
+	assem4->args[0] = ft_strdup("r1");
+	assem4->args[1] = ft_strdup("6");
+	assem4->next = NULL;
 	to_byte_code(assem);
-}
+}*/
