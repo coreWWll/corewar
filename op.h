@@ -82,7 +82,7 @@ typedef struct      s_asm
     int             command_num;
     char            *command;
     int             amount_of_args;
-    char            what_args[3];
+    int            what_args[3];
     int             l_flag[3];
     char            **args;
     int             bin[8];

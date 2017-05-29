@@ -39,6 +39,9 @@ t_asm *new_asm()
     new->l_flag[0] = 0;
     new->l_flag[1] = 0;
     new->l_flag[2] = 0;
+    new->what_args[0] = 0;
+    new->what_args[1] = 0;
+    new->what_args[2] = 0;
     new->amount_of_args = 0;
     new->command_num = -1;
     new->only_lable = 0;
