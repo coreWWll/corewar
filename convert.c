@@ -11,8 +11,10 @@ void	to_byte_code(t_asm *head)
 	int		fd;
 
 	file_name = ft_strjoin(head->file_name, ".cor");
-	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	begin = head;
 	head->header = (header_t *)malloc(sizeof(header_t));
 	header_parse(head, fd);
+	write(fd, &(*head->header), sizeof(header_t));
+
 }

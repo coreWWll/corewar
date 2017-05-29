@@ -238,18 +238,6 @@ int is_label(char *line) //check if lable is in line
     return(1);
 }
 
-int is_label(char *line)
-{
-    int i;
-
-    i = 0;
-    while (line[i] && line[i] != ':')
-        i++;
-    if (line[i - 1] == '%' || line[i] == '\0')
-        return(0);
-    return(1);
-}
-
 void    get_shit(t_asm *start, char *line)
 {
     t_op *g_tab;

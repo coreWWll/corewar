@@ -4,6 +4,23 @@
 
 #include "op.h"
 
+
+int 			get_index(int *ar)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < 3)
+	{
+		if (ar[i] == 1)
+			j = i;
+		i++;
+	}
+	return (j);
+}
+
 unsigned int	do_big_endian(unsigned int magic, int size)
 {
 	unsigned int	res;
@@ -40,32 +57,26 @@ void			fill_name_and_comment(t_asm *head)
 
 int 			find_lable(t_asm *begin, char *lable)
 {
-	t_asm			*node;
-	unsigned int	res;
+	t_asm	*node;
+	int		res;
 
 	node = begin;
+	res = 0;
 	while (node)
 	{
-
+		if (ft_strcmp(node->lable, lable) == 0)
+		{
+			res = node->what_args[0] + node->what_args[1] + node->what_args[2];
+			break ;
+		}
 		node = node->next;
 	}
+	/*if (node && (node->l_flag[0] == 1 || node->l_flag[1] == 1 ||
+		node->l_flag[2] == 1))
+		res += find_lable(begin, begin->args[get_index(begin->l_flag)]);*/ // проблема с записью лейбы, Антон фикс
+	return (res);
 }
 
-int 			get_index(int *ar)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < 3)
-	{
-		if (i == 1)
-			j = i;
-		i++;
-	}
-	return (j);
-}
 
 void			get_prog_size(t_asm *head)
 {
@@ -84,7 +95,7 @@ void			get_prog_size(t_asm *head)
 		}
 		begin = begin->next;
 	}
-	head->header->prog_size = res;
+	head->header->prog_size = do_big_endian(res, 4);
 }
 
 void			fill_header_and_get_size(t_asm *head)
@@ -94,10 +105,6 @@ void			fill_header_and_get_size(t_asm *head)
 	begin = head;
 	fill_name_and_comment(head);
 	get_prog_size(head);
-	while (begin)
-	{
-		begin = begin->next;
-	}
 }
 
 void			header_parse(t_asm *head, int fd)
