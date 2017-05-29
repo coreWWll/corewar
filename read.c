@@ -6,13 +6,15 @@
 void    ft_exit(int flag)
 {
     if (flag == 0)
-        ft_putendl("Wrond input");
+        ft_putendl("Wrong input");
     if (flag == 1)
-        ft_putendl("Wrond input 2");
+        ft_putendl("Wrong input 2");
     if (flag == 2)
-        ft_putendl("Wrond input 3");
+        ft_putendl("Wrong input 3");
     if (flag == 3)
-        ft_putendl("Wrond input 4");
+        ft_putendl("Wrong input 4");
+    if (flag == 5)
+        ft_putendl("Wrong name or comment");
     exit(0);
 }
 
@@ -32,7 +34,7 @@ int     if_comment(char *line)
     return(0);
 }
 
-char *get_name_or_comm(char *line)
+char *get_name_or_comm(char *line, int flag)
 {
     char *t;
     char *name;
@@ -62,6 +64,8 @@ char *get_name_or_comm(char *line)
             ft_exit(2);
         t++;
     }
+    if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
+        ft_exit(5);
     return(name);
 }
 
@@ -82,7 +86,6 @@ char    *get_file_name(char *av)
     return (name);
 }
 
-
 void    make_list(t_asm **start, char *line)
 {
     t_asm *p;
@@ -90,16 +93,32 @@ void    make_list(t_asm **start, char *line)
     p = *start;
     while (p)
     {
-        if(p->next == NULL) //possible segfault!!!!
+        if (p->only_lable == 1)
+        {
+            get_shit(p, line);
+            p->only_lable = 0;
+            break;
+        }
+        else if(p->next == NULL)
         {
             p->next = new_asm();
             get_shit(p, line);
             break;
         }
+        if (p->only_lable == 1 && p->next->only_lable == 1)
+            p->only_lable = 0;
         p = p->next;
     }
 }
 
+void check_format(char *file)
+{
+    size_t len;
+
+    len = ft_strlen(file);
+    if (file[len - 1] != 's' && file[len - 2] != '.')
+        ft_exit(3);
+}
 
 int main(int ac, char **av)
 {
@@ -111,6 +130,7 @@ int main(int ac, char **av)
     start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
     if (ac == 2)
     {
+        check_format(av[1]);//checking file format
         if ((fd = open(av[1], O_RDONLY)) != -1)
         {
             while ((get_next_line(fd, &line)) > 0)
@@ -121,9 +141,9 @@ int main(int ac, char **av)
                     get_next_line(fd, &line);
                 }
                 if (ft_strstr(line, NAME_CMD_STRING))
-                    start->name = get_name_or_comm(line); //should check it len
+                    start->name = get_name_or_comm(line, 1); //should check it len
                 else if (ft_strstr(line, COMMENT_CMD_STRING))
-                    start->comm = get_name_or_comm(line); //should check it len
+                    start->comm = get_name_or_comm(line, 0); //should check it len
                 else
                     make_list(&start, line);
                 free(line);
@@ -140,8 +160,9 @@ int main(int ac, char **av)
     p = start;
     while (p)
     {
-        printf("lable = %s,  command = %s, args = %s, %s, %s what_args = %d, %d, %d  l_flag = %d,%d,%d\n", p->lable, p->command, p->args[0],p->args[1], p->args[2], p->what_args[0], p->what_args[1],
-        p->what_args[2], p->l_flag[0], p->l_flag[1], p->l_flag[2]);
+        printf("lable = %s,  command = %s, args = %s, %s, %s what_args = %d, %d, %d
+        l_flag = %d,%d,%d\n", p->lable, p->command, p->args[0],p->args[1], p->args[2],
+        p->what_args[0], p->what_args[1],p->what_args[2], p->l_flag[0], p->l_flag[1], p->l_flag[2]);
         p = p->next;
     }*/
     return (0);
