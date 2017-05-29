@@ -77,13 +77,14 @@ typedef struct      s_asm
     char            *name;
     char            *comm;
     char            *lable;
-    int             only_lable;
+    int             only_lable; //flag if command is under lable
     int             opcode;
-    int             command_num;
+    int             command_num;//num of command and its line in t_op
     char            *command;
     int             amount_of_args;
-    int            what_args[3];
-    int             l_flag[3];
+
+    int             what_args[3]; //type of args (T_DIR, T_IND or T_REG
+    int             l_flag[3];//if lable in args
     char            **args;
     int             bin[8];
     char            hexa[4];
@@ -98,11 +99,11 @@ typedef struct      s_asm
 typedef struct s_op
 {
     char *command;
-    int args_am;
-    char args[3];
+    int args_am; //required number of args
+    char args[3];// 3 is maximum
     int opcode;
     int cycles;
-    int oct;
+    int oct; //codage octal (idk what is this)
 } t_op;
 
 t_asm *new_asm();
