@@ -36,6 +36,7 @@ t_asm *new_asm() //init of new list in t_asm
     new->name = ft_strnew(0);
     new->comm = ft_strnew(0);
     new->lable = ft_strnew(0);
+    new->command = ft_strnew(0);
     new->l_flag[0] = 0;
     new->l_flag[1] = 0;
     new->l_flag[2] = 0;
@@ -81,28 +82,40 @@ void    get_lable(char *line, t_asm *start)
 
 char *get_command(char *line, t_op *g_tab, t_asm *start) {
     int i;
+    int j;
     int len;
     char *command;
+    char *t;
 
     i = 15;
     len = 0;
+    j = 0;
     while (i >= 0)
     {
-        if (ft_strstr(line, g_tab[i].command) != 0)
+        if ((t = ft_strstr(line, g_tab[i].command)) != 0)
         {
-            command = (char *)malloc(sizeof(char) * 6);
-            ft_strcpy(command, g_tab[i].command);
-            start->command_num = i;
-            return(command);
+            while (g_tab[i].command[j])
+            {
+                t++;
+                j++;
+            }
+            if (*t == ' ' || *t == '\t')
+            {
+                command = (char *) malloc(sizeof(char) * 6);
+                ft_strcpy(command, g_tab[i].command);
+                start->command_num = i;
+                start->opcode = g_tab[i].opcode;
+                return (command);
+            }
         }
         i--;
     }
-    if (start->lable)
+    if (start->lable) //
     {
         start->only_lable = 1;
         return (NULL);
     }
-    ft_exit(3);
+    ft_exit(5);
     return(NULL);
 }
 
@@ -137,9 +150,9 @@ char *good_strtrim(char *str)
 
 void    get_args(char *line, t_asm *start, t_op *g_tab)
 {
-    int i;
-    int j;
-    int k;
+    size_t i;
+    size_t j;
+    size_t k;
     char dupline[100];
     char *args;
 
@@ -152,7 +165,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     while (dupline[i] != '%' && dupline[i] != ' ' && dupline[i] != '\t' && dupline[i] != '\0')
         i++;
     if (dupline[i] == '\0' && start->lable == NULL)
-        ft_exit(3);
+        ft_exit(1);
     k = i;
     start->opcode = g_tab[start->command_num].opcode;
     if (start->command_num != -1 && g_tab[start->command_num].args_am == 1)
@@ -163,13 +176,16 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             j++;
         }
         start->args[0] = ft_strnew(j);
-        start->args[0] = ft_strsub(dupline, k + 1, j);
+        start->args[0] = ft_strsub(dupline, (unsigned int)k + 1, j);
         start->args[0] = good_strtrim(start->args[0]);
         if (start->args[0][0] == '%')
         {
             start->what_args[0] = T_DIR;
             if (start->args[0][1] == ':')
+            {
+                start->args[0] = start->args[0] + 2;
                 start->l_flag[0] = 1;
+            }
         }
         else if (dupline[k] == 'r')
             start->what_args[0] = T_REG;
@@ -190,7 +206,10 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             {
                 start->what_args[i] = T_DIR;
                 if (start->args[i][1] == ':')
+                {
+                    start->args[i] = start->args[i] + 2;
                     start->l_flag[i] = 1;
+                }
             }
             else if (start->args[i][0] == 'r')
                 start->what_args[i] = T_REG;
@@ -199,6 +218,8 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             i++;
         }
     }
+    if (start->command && !start->args[0])
+        ft_exit(2);
 }
 
 int is_label(char *line) //check if lable is in line
