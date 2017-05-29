@@ -195,7 +195,6 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             i++;
         }
     }
-    //start->only_lable = 0;
 }
 
 void    get_shit(t_asm *start, char *line)
