@@ -83,6 +83,8 @@ void	to_byte_code(t_asm *head)
 	file_name = ft_strjoin(head->file_name, ".cor");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND);
 	begin = head;
+	head->header = (header_t *)malloc(sizeof(header_t));
+	header_parse(head, fd);
 	while (head)
 	{
 		g_lable(begin, head, fd);

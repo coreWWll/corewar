@@ -69,7 +69,7 @@ typedef struct		header_s
     char				prog_name[PROG_NAME_LENGTH + 1];
     unsigned int		prog_size;
     char				comment[COMMENT_LENGTH + 1];
-}					header_t;
+}						header_t;
 
 typedef struct      s_asm
 {
@@ -92,6 +92,7 @@ typedef struct      s_asm
     int             cycles;
     int             label_size;
     struct s_asm    *next;
+	header_t		*header;
 }                   t_asm;
 
 typedef struct s_op
@@ -108,6 +109,7 @@ t_asm *new_asm();
 void				get_shit(t_asm *start, char *line);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
+void 				header_parse(t_asm *asemb, int fd);
 
 
 #endif //COREWAR_OP_H
