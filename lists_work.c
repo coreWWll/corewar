@@ -27,7 +27,7 @@ t_op 		*init_tab(void) {
     return(g_op_tab);
 }
 
-t_asm *new_asm()
+t_asm *new_asm() //init of new list in t_asm
 {
     t_asm *new;
 
@@ -39,6 +39,9 @@ t_asm *new_asm()
     new->l_flag[0] = 0;
     new->l_flag[1] = 0;
     new->l_flag[2] = 0;
+    new->what_args[0] = 0;
+    new->what_args[1] = 0;
+    new->what_args[2] = 0;
     new->amount_of_args = 0;
     new->command_num = -1;
     new->only_lable = 0;
@@ -55,7 +58,6 @@ void    get_lable(char *line, t_asm *start)
     int i;
     int len;
     char dupline[1000];
-    //char *label;
 
     i = 0;
     len = 0;
@@ -67,19 +69,14 @@ void    get_lable(char *line, t_asm *start)
             while (dupline[len] != ':' && dupline[len] != '\0')
                 len++;
         }
-        if ((dupline[len] == '\0' || dupline[len - 1] == '%') && start->only_lable != 1)
+        if ((dupline[len] == '\0' || dupline[len - 1] == '%') && start->only_lable != 1)//check if lable is in line
             start->lable = NULL;
         else if (start->only_lable != 1)
         {
             dupline[len] = '\0';
             ft_strcpy(start->lable, dupline);
         }
-       // else if (start->only_lable != 1)
-
     }
-   /* len = ft_strlen(line);
-    while (line[len] == ' ' || line[len] == '\t')
-        len--;*/
 }
 
 char *get_command(char *line, t_op *g_tab, t_asm *start) {
@@ -204,7 +201,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     }
 }
 
-int is_label(char *line)
+int is_label(char *line) //check if lable is in line
 {
     int i;
 
@@ -220,7 +217,7 @@ void    get_shit(t_asm *start, char *line)
 {
     t_op *g_tab;
 
-    if (start->only_lable == 1 && is_label(line) == 1)
+    if (start->only_lable == 1 && is_label(line) == 1) //if list with only lable
     {
         start = start->next;
         start->next = new_asm();

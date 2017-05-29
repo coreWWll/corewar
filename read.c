@@ -64,7 +64,8 @@ char *get_name_or_comm(char *line, int flag)
             ft_exit(2);
         t++;
     }
-    if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
+    if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
+        || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
         ft_exit(5);
     return(name);
 }
@@ -93,7 +94,7 @@ void    make_list(t_asm **start, char *line)
     p = *start;
     while (p)
     {
-        if (p->only_lable == 1)
+        if (p->only_lable == 1) // check if lable is empty to add command in it
         {
             get_shit(p, line);
             p->only_lable = 0;
@@ -105,7 +106,7 @@ void    make_list(t_asm **start, char *line)
             get_shit(p, line);
             break;
         }
-        if (p->only_lable == 1 && p->next->only_lable == 1)
+        if (p->only_lable == 1 && p->next->only_lable == 1) //to unmark list with empty lable
             p->only_lable = 0;
         p = p->next;
     }
@@ -116,7 +117,7 @@ void check_format(char *file)
     size_t len;
 
     len = ft_strlen(file);
-    if (file[len - 1] != 's' && file[len - 2] != '.')
+    if (file[len - 1] != 's' && file[len - 2] != '.')//checking file format by last 2 chars
         ft_exit(3);
 }
 
@@ -141,9 +142,9 @@ int main(int ac, char **av)
                     get_next_line(fd, &line);
                 }
                 if (ft_strstr(line, NAME_CMD_STRING))
-                    start->name = get_name_or_comm(line, 1); //should check it len
+                    start->name = get_name_or_comm(line, 1);
                 else if (ft_strstr(line, COMMENT_CMD_STRING))
-                    start->comm = get_name_or_comm(line, 0); //should check it len
+                    start->comm = get_name_or_comm(line, 0);
                 else
                     make_list(&start, line);
                 free(line);
@@ -155,15 +156,5 @@ int main(int ac, char **av)
     }
     else
         write(1, "laja\n", 5);
-	to_byte_code(start);
-    /*t_asm *p;
-    p = start;
-    while (p)
-    {
-        printf("lable = %s,  command = %s, args = %s, %s, %s what_args = %d, %d, %d
-        l_flag = %d,%d,%d\n", p->lable, p->command, p->args[0],p->args[1], p->args[2],
-        p->what_args[0], p->what_args[1],p->what_args[2], p->l_flag[0], p->l_flag[1], p->l_flag[2]);
-        p = p->next;
-    }*/
     return (0);
 }
