@@ -110,6 +110,7 @@ void				get_shit(t_asm *start, char *line);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
 void 				header_parse(t_asm *asemb, int fd);
+void                validate_it(t_asm *start, t_op *g_tab);
 
 
 #endif //COREWAR_OP_H

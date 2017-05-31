@@ -248,5 +248,5 @@ void    get_shit(t_asm *start, char *line)
     start->command = get_command(line, g_tab, start);
     start->args = (char **)malloc(sizeof(char *) * 3);
     get_args(line, start, g_tab);
-
+    validate_it(start, g_tab);
 }
