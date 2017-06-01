@@ -2,7 +2,7 @@
 // Created by Yevhen Yefimov on 5/27/17.
 //
 
-#include "op.h"
+#include "vm.h"
 #include <stdio.h>
 #include <time.h>
 
@@ -12,20 +12,19 @@ int check_alive(t_player *p_l)
     return (1);
 }
 
-void    start_battle(t_player *p_l, char *map)
+void    start_battle(t_vm *main_struct)
 {
-    int cycle;
-    int round;
-
-    cycle = 1;
-    round = 0;
-    while (check_alive(p_l))
+	main_struct->cycle = 1;
+    main_struct->round = 0;
+    while (check_alive(main_struct->players))
     {
         nanosleep((const struct timespec[]){{0, 259900000}}, NULL);
-        if (cycle == CYCLE_TO_DIE + (CYCLE_TO_DIE - round * CYCLE_DELTA) * round)
-            round++;
-        move_car(cycle, round, p_l, map);
-        printf("CYCLE = %d PERIOD = %d\n", cycle, round);
-        cycle++;
+        if (main_struct->cycle == CYCLE_TO_DIE + (CYCLE_TO_DIE - main_struct
+																		->round * CYCLE_DELTA) * main_struct->round)
+            (main_struct->round)++;
+		move_all_car(main_struct);
+        printf("CYCLE = %d PERIOD = %d\n", main_struct->cycle, main_struct
+                ->round);
+        (main_struct->cycle)++;
     }
 }

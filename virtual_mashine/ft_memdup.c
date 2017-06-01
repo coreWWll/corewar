@@ -2,7 +2,7 @@
 // Created by Yevhen Yefimov on 6/1/17.
 //
 
-#include "op.h"
+#include "vm.h"
 
 char	*ft_memdup(size_t size, char *map, int pos)
 {
