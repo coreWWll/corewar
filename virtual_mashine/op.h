@@ -115,5 +115,7 @@ int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
 
-//exit -5 error player file reading
+
+
+//exit -5 error player file readin
 //exit -6 player size bigger than...
