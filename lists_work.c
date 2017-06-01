@@ -54,13 +54,37 @@ t_asm *new_asm() //init of new list in t_asm
     return (new);
 }
 
-void    get_lable(char *line, t_asm *start)
+void    check_label_syntax(char *line)
 {
     int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (!ft_strchr(LABEL_CHARS, line[i]))
+            ft_exit(7);
+        i++;
+    }
+}
+
+void    check_if_label_ok(char *line, int len)
+{
+    char *t;
+    line = line + len + 1;
+
+    if ((t = ft_strchr(line, ':')))
+    {
+        t--;
+        if (*t != '%')
+            ft_exit(7);
+    }
+}
+
+void    get_lable(char *line, t_asm *start)
+{
     int len;
     char dupline[1000];
 
-    i = 0;
     len = 0;
     if (start->lable[0] == '\0')
     {
@@ -70,12 +94,15 @@ void    get_lable(char *line, t_asm *start)
             while (dupline[len] != LABEL_CHAR && dupline[len] != '\0')
                 len++;
         }
+        check_if_label_ok(line, len);
         if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR) && start->only_lable != 1)//check if lable is in line
-            start->lable = NULL;
+            start->lable[0] = '\0';
         else if (start->only_lable != 1)
         {
             dupline[len] = '\0';
             ft_strcpy(start->lable, dupline);
+            check_label_syntax(start->lable);
+            line = line + len + 1;
         }
     }
 }
@@ -83,25 +110,23 @@ void    get_lable(char *line, t_asm *start)
 char *get_command(char *line, t_op *g_tab, t_asm *start) {
     int i;
     int j;
-    int len;
+    //int flag;
     char *command;
     char *t;
 
     i = 15;
-    len = 0;
-    while (i >= 0)
+    //flag = 0;
+    while (i >= 0) //dont work when 2 or more commands in line
     {
         if ((t = ft_strstr(line, g_tab[i].command)) != 0)
         {
             j = 0;
             while (g_tab[i].command[j])
-            {
-                t++;
                 j++;
-            }
+            t = t + j;
             if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR)
             {
-                command = (char *) malloc(sizeof(char) * 6);
+                command = ft_strnew(6);
                 ft_strcpy(command, g_tab[i].command);
                 start->command_num = i;
                 start->opcode = g_tab[i].opcode;
@@ -110,7 +135,7 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
         }
         i--;
     }
-    if (start->lable)
+    if (start->lable && !ft_strchr(line, DIRECT_CHAR) && !ft_strchr(line, SEPARATOR_CHAR))
     {
         start->only_lable = 1;
         return (NULL);
@@ -155,6 +180,20 @@ char *clean_arg(char *line)
     return(res);
 }
 
+int     is_num(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (ft_isdigit(str[i]) != 1)
+            return(0);
+        i++;
+    }
+    return(1);
+}
+
 void    get_args(char *line, t_asm *start, t_op *g_tab)
 {
 
@@ -169,12 +208,10 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     j = 0;
     k = 0;
     ft_strcpy(dupline, line);
-    while (dupline[i] == ' '|| dupline[i] == '\t')
-        i++;
     while (dupline[i] != DIRECT_CHAR && dupline[i] != ' ' && dupline[i] != '\t' && dupline[i] != '\0')
         i++;
     if (dupline[i] == '\0' && start->lable == NULL)
-        ft_exit(1);
+        ft_exit(2);
     k = i;
     start->opcode = g_tab[start->command_num].opcode;
     if (start->command_num != -1 && g_tab[start->command_num].args_am == 1)
@@ -212,7 +249,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
         while (start->args[i] != NULL)
         {
             start->args[i] = good_strtrim(start->args[i]);
-            if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], ' '))
+            if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], '\t'))
                 start->args[i] = clean_arg(start->args[i]);
             start->amount_of_args++;
             if (start->args[i][0] == DIRECT_CHAR)
@@ -226,8 +263,10 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             }
             else if (start->args[i][0] == 'r')
                 start->what_args[i] = T_REG;
-            else
+            else if (is_num(start->args[i]) == 1)
                 start->what_args[i] = T_IND;
+            else
+                ft_exit(2);
             i++;
         }
     }
@@ -255,6 +294,7 @@ void    get_shit(t_asm *start, char *line)
         start = start->next;
         start->next = new_asm();
     }
+    line = good_strtrim(line);
     g_tab = init_tab();
     get_lable(line, start);
     start->command = get_command(line, g_tab, start);
