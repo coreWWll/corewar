@@ -107,6 +107,8 @@ void    show_players_and_cars(t_player *p_list);
 void    start_battle(t_player *p_l, char *map);
 void    get_live_func(char *map, t_car *car, int *pos);
 void    get_ld_func(char *map, t_car *car, int *pos);
+void    get_st_func(char *map, t_car *car, int *pos);
+void    get_add_func(char *map, t_car *car, int *pos);
 void    do_live_func(char *map, t_car *car);
 void    do_ld_func(char *map, t_car *car);
 void	do_op_code(char *map, t_car *car);
