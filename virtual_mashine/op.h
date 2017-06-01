@@ -102,7 +102,7 @@ typedef struct		s_player
     struct  s_player    *next;
 }					t_player;
 
-t_player	*create_players(void *map, int n_bots, char *file_name, int *n);
+t_player	*create_players(void *map, int n_bots, char *file_name, int n);
 void    show_players_and_cars(t_player *p_list);
 void    start_battle(t_player *p_l, char *map);
 void    get_live_func(char *map, t_car *car, int *pos);

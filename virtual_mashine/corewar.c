@@ -25,61 +25,53 @@ int get_flags(int argc, char **argv, char *map)
     return (argc - 1);
 }
 
-void    get_bots(int argc, char **argv, char *map, int n_bots)
+void	add_player_back(t_player **alst, t_player *new)
 {
-    int     i;
-    int     j;
-    int     k = 0;
-    char    bot[1];
-    int     fd;
-    int     n;
+    t_player	*p;
 
-    n = 0;
-    j = 1;
-    while (j <= argc)
+    p = *alst;
+    if (*alst == NULL)
+        *alst = new;
+    else
     {
-        i = 0;
+        while (p->next)
+            p = p->next;
+        p->next = new;
+    }
+}
+void    make_players_list(t_player **head, char *map, char **argv, int argc)
+{
+    int         n;
+    t_player    *player;
+    int         j;
+    int         n_bots;
+
+    j = 1;
+    n = 1;
+    n_bots = get_flags(argc, argv, map);
+    while (j < argc)
+    {
         if (argv[j] != NULL)
         {
-            if ((fd = open(argv[j], O_RDONLY)) < 3)
-                exit(-2);
-            while (read(fd, bot, 1))
-            {
-                if (k > PROG_NAME_LENGTH + COMMENT_LENGTH + 15)
-                {
-                    map[i + (MEM_SIZE / n_bots) * n] = bot[0];
-                    i++;
-                }
-                k++;
-            }
+            player = create_players(map, n_bots, argv[j], n);
+            add_player_back(head, player);
             n++;
-            close (fd);
         }
         j++;
     }
 }
 
+
 int main(int argc, char **argv)
 {
     char	    *map;
-    int         n_bots;
-    int         n;
-    t_player    *p_list;
-    t_player    *ptr;
+    t_player    *head;
 
-    n = 1;
-    ptr = p_list;
+    head = NULL;
 	map = ft_memalloc(MEM_SIZE);
-    n_bots = get_flags(argc, argv, map);
-    while (n < n_bots + 1)
-    {
-        p_list = create_players(map, n_bots, argv[1], &n);
-        p_list = p_list->next;
-    }
-    //get_bots(argc, argv, map, n_bots);
 
+    make_players_list(&head, map, argv, argc);
     show_map(map);
-
-    //put_car(map, n_bots);
-	return (0);
+    start_battle(head, map);
+    return (0);
 }
