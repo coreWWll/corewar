@@ -28,7 +28,8 @@ void	put_bot_on_map(char *map, char *champ_code, int cor_bot, size_t prog_len)
 	while (i < prog_len)
 	{
 		map[i + cor_bot] = champ_code[i];
-		i++;	}
+		i++;
+	}
 	ft_strdel(&champ_code);
 }
 
@@ -40,11 +41,12 @@ t_player    *create_players(void *map, int n_bots, char *file_name, int n)
 
 	p_list = add_player(n, n_bots);
 	if ((fd = open(file_name, O_RDONLY)) < 3)
-		exit(-2);
+		ft_error(ERR_OPEN_FILE);
 	if (get_int_from_file(fd) != COREWAR_EXEC_MAGIC)
-		exit(-5);
+		ft_error(ERR_MAGIC);
 	p_list->bot_name = get_string_from_file(fd, PROG_NAME_LENGTH + 4);
-	prog_len = (size_t)get_int_from_file(fd);
+	if ((prog_len = (size_t)get_int_from_file(fd)) > CHAMP_MAX_SIZE)
+		ft_error(ERR_PLAYER_SIZE);
 	p_list->comment = get_string_from_file(fd, COMMENT_LENGTH + 4);
 	put_bot_on_map(map, get_champ_code(fd, prog_len), (MEM_SIZE / n_bots ) *
 			(n - 1), prog_len);

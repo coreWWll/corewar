@@ -4,11 +4,6 @@
 
 #include "vm.h"
 
-int get_flags(int argc, char **argv, char *map)
-{
-    return (argc - 1);
-}
-
 void	add_player_back(t_player **alst, t_player *new)
 {
     t_player	*p;
@@ -23,24 +18,19 @@ void	add_player_back(t_player **alst, t_player *new)
         p->next = new;
     }
 }
-void    make_players_list(t_player **head, char *map, char **argv, int argc)
+
+void    make_players_list(t_vm *main_struct, char **players_path)
 {
     int         n;
     t_player    *player;
     int         j;
-    int         n_bots;
 
-    j = 1;
-    n = 1;
-    n_bots = get_flags(argc, argv, map);
-    while (j < argc)
+    j = 0;
+    while (j < main_struct->players_nbr)
     {
-        if (argv[j] != NULL)
-        {
-            player = create_players(map, n_bots, argv[j], n);
-            add_player_back(head, player);
-            n++;
-        }
+		player = create_players(main_struct->map, main_struct->players_nbr,
+				players_path[j], j + 1);
+		add_player_back(&(main_struct->players), player);
         j++;
     }
 }
@@ -49,12 +39,13 @@ void    make_players_list(t_player **head, char *map, char **argv, int argc)
 int main(int argc, char **argv)
 {
 	t_vm		main_struct;
+	char		**players_path;
 
+	ft_bzero(main_struct, sizeof(main_struct));
     main_struct.players = NULL;
 	main_struct.map = ft_memalloc(MEM_SIZE);
-
-    make_players_list(&(main_struct.players), main_struct.map, argv, argc);
-    print_memory(main_struct.map);
+	read_arguments(&main_struct, argv, argc);
+    print_memory((unsigned char*)main_struct.map);
     start_battle(&main_struct);
     return (0);
 }

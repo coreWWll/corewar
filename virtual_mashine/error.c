@@ -6,6 +6,6 @@
 
 void	ft_error(char *error_message)
 {
-	ft_putendl(error_message);
+	perror(error_message);
 	exit(-1);
 }

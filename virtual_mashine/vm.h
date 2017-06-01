@@ -9,6 +9,15 @@
 #include "libft/libft.h"
 #include "../op.h"
 
+#define TRUE						1
+#define FALSE						0
+
+#define ERR_PLAYER_FILE_READING		"Player_file reading fail"
+#define ERR_OPEN_FILE				"Can't open file"
+#define ERR_MAGIC					"Wrong player file"
+#define ERR_PLAYER_SIZE				"The size of player is to big"
+
+
 typedef struct		s_car
 {
 	int             pos;
@@ -32,8 +41,10 @@ typedef struct			s_player
 typedef struct			s_vm
 {
 	t_player			*players;
+	int					players_nbr;
 	char 				*map;
 	int					f_dump;
+	int					dump_cycle;
 	int					f_n;
 	int					f_v;
 	int					cycle;
@@ -67,11 +78,7 @@ char	*get_champ_code(int fd, size_t prog_len);
 void	print_memory(unsigned char *map);
 void	ft_error(char *error_message);
 void    get_op_code(t_vm *main_struct, t_car *car, int *pos);
+void	read_arguments(t_vm *main_struct, char **argv, int argc);
 
-#define ERR_PLAYER_FILE_READING	"Error: player_file reading fail"
-
-
-//exit -5 error player file readin
-//exit -6 player size bigger than...
 
 #endif
