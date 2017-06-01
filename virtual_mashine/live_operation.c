@@ -2,7 +2,7 @@
 // Created by Yevhen Yefimov on 5/27/17.
 //
 
-#include "op.h"
+#include "vm.h"
 
 void    get_live_func(char *map, t_car *car, int *pos)
 {

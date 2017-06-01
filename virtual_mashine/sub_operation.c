@@ -2,7 +2,7 @@
 // Created by Yevhen Yefimov on 6/1/17.
 //
 
-#include "op.h"
+#include "vm.h"
 
 void    get_sub_func(char *map, t_car *car, int *pos)
 {

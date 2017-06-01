@@ -2,7 +2,7 @@
 // Created by Yevhen Yefimov on 5/27/17.
 //
 
-#include "op.h"
+#include "vm.h"
 
 void do_op_code(char *map, t_car *car)
 {

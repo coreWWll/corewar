@@ -2,7 +2,7 @@
 // Created by denys on 31.05.17.
 //
 
-#include "op.h"
+#include "vm.h"
 
 int		get_int_from_file(int fd)
 {
