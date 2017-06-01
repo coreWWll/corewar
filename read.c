@@ -137,10 +137,10 @@ int main(int ac, char **av)
     char *line;
     t_op *tab;
 
-    start = new_asm();
-    start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
     if (ac == 2)
     {
+        start = new_asm();
+        start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
         check_format(av[1]);//checking file format
         if ((fd = open(av[1], O_RDONLY)) != -1)
         {
@@ -160,9 +160,9 @@ int main(int ac, char **av)
             write(1, "this! is! lajjaaaaa!\n", 21);
         tab = init_tab();
         validate_it(start, tab);
+        to_byte_code(start);
     }
     else
-        write(1, "laja\n", 5);
-	//to_byte_code(start);
+        write(1, "Usage: ./asm [path to the champion_file.s]", 42);
     return (0);
 }
