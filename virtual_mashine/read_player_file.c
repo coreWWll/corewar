@@ -14,19 +14,22 @@ int		get_int_from_file(int fd)
 				( (int)buffer[0] << 24 ));
 }
 
-char	*get_string_from_file(int fd, int define_len)
+char	*get_string_from_file(int fd, size_t define_len)
 {
-	char	buf_space[define_len];
+	char	*buf_str;
+	char	*ret_str;
 
-	if (read(fd, buf_space, define_len + 1) != define_len)
+	buf_str = ft_strnew(define_len);
+	if (read(fd, buf_str, define_len) != define_len)
 		exit(-5);
-	return (ft_strdup(buf_space));
+	ret_str = ft_strdup(buf_str);
+	ft_strdel(&buf_str);
+	return (ret_str);
 }
 
-char	*get_champ_code(int fd, int prog_len)
+char	*get_champ_code(int fd, size_t prog_len)
 {
 	char	*champ_code;
-	char	test[1];
 
 	champ_code = ft_strnew(prog_len);
 	if (read(fd, champ_code, prog_len) != prog_len)
