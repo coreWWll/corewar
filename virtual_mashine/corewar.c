@@ -71,7 +71,6 @@ int main(int argc, char **argv)
 	map = ft_memalloc(MEM_SIZE);
 
     make_players_list(&head, map, argv, argc);
-
     show_map(map);
     start_battle(head, map);
     return (0);

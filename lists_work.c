@@ -172,6 +172,7 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
     start->opcode = g_tab[start->command_num].opcode;
     if (start->command_num != -1 && g_tab[start->command_num].args_am == 1)
     {
+        start->amount_of_args++;
         while (dupline[i] != '#' && dupline[i] != '\0')
         {
             i++;
@@ -263,5 +264,4 @@ void    get_shit(t_asm *start, char *line)
     start->command = get_command(line, g_tab, start);
     start->args = (char **)malloc(sizeof(char *) * 3);
     get_args(line, start, g_tab);
-
 }
