@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	char		**players_path;
 
 	ft_bzero(main_struct, sizeof(main_struct));
-    main_struct.players = NULL;
+      main_struct.players = NULL;
 	main_struct.map = ft_memalloc(MEM_SIZE);
 	read_arguments(&main_struct, argv, argc);
     print_memory((unsigned char*)main_struct.map);
