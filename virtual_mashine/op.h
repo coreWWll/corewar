@@ -112,8 +112,8 @@ void    do_ld_func(char *map, t_car *car);
 void	do_op_code(char *map, t_car *car);
 void    move_car(int cycle, int round, t_player *p_l, char *map);
 int		get_int_from_file(int fd);
-char	*get_string_from_file(int fd, int define_len);
-char	*get_champ_code(int fd, int prog_len);
+char	*get_string_from_file(int fd, size_t define_len);
+char	*get_champ_code(int fd, size_t prog_len);
 
 //exit -5 error player file reading
 //exit -6 player size bigger than...
