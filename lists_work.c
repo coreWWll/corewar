@@ -99,7 +99,7 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
                 t++;
                 j++;
             }
-            if (*t == ' ' || *t == '\t')
+            if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR)
             {
                 command = (char *) malloc(sizeof(char) * 6);
                 ft_strcpy(command, g_tab[i].command);
@@ -186,7 +186,6 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
             j++;
         }
         start->args[0] = ft_strnew(j);
-
         start->args[0] = ft_strsub(dupline, (unsigned int)k + 1, j);
         start->args[0] = good_strtrim(start->args[0]);
         if (start->args[0][0] == DIRECT_CHAR)
@@ -247,7 +246,6 @@ int is_label(char *line) //check if lable is in line
         return(0);
     return(1);
 }
-
 
 void    get_shit(t_asm *start, char *line)
 {
