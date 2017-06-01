@@ -73,5 +73,7 @@ int main(int argc, char **argv)
     make_players_list(&head, map, argv, argc);
     show_map(map);
     start_battle(head, map);
+
+
     return (0);
 }
