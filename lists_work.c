@@ -121,30 +121,37 @@ char *get_command(char *line, t_op *g_tab, t_asm *start) {
 
 char *good_strtrim(char *str)
 {
-    int i;
-    int j;
+    unsigned int i;
+    size_t j;
     size_t len;
     char *res;
 
     i = 0;
-    j = 0;
-    len = 0;
-    while (str[i])
-    {
-        if (str[i] != ' ' && str[i] != '\t')
-            len++;
-        i++;
-    }
-    res = ft_strnew(len);
-    i = 0;
+    len = ft_strlen(str) - 1;
+    j = len;
     while (str[i] == ' ' || str[i] == '\t')
         i++;
-    while (j < len)
-    {
-        res[j] = str[i];
-        i++;
-        j++;
-    }
+    while ((str[j] == ' ' || str[j] == '\t'))
+        j--;
+    len = j - i;
+    res = ft_strnew(len);
+    res = ft_strsub(str, i, len + 1);
+    return(res);
+}
+
+char *clean_arg(char *line)
+{
+    size_t i;
+    size_t len;
+    char *res;
+
+    len = ft_strlen(line);
+    i = len;
+    while (line[i] != '\t' && line[i] != ' ')
+        i--;
+    i++;
+    res = ft_strnew(len - i);
+    res = ft_strsub(line, i, len - i);
     return(res);
 }
 
@@ -205,9 +212,9 @@ void    get_args(char *line, t_asm *start, t_op *g_tab)
         i = 0;
         while (start->args[i] != NULL)
         {
-            //if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], ' '))
-
             start->args[i] = good_strtrim(start->args[i]);
+            if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], ' '))
+                start->args[i] = clean_arg(start->args[i]);
             start->amount_of_args++;
             if (start->args[i][0] == DIRECT_CHAR)
             {
