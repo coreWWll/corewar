@@ -2,7 +2,7 @@
 // Created by Yevhen Yefimov on 5/26/17.
 //
 
-#include "op.h"
+#include "vm.h"
 
 t_player *add_player(int i, int n_bots)
 {

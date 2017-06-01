@@ -105,7 +105,6 @@ set(SOURCE_FILES
         create_players.c
         dodatkovi_fynkcii.c
         field_creator.c
-        op.h
         live_operation.c
         print_memory.c
         read_player_file.c
@@ -121,7 +120,8 @@ set(SOURCE_FILES
         and_operation.c
         or_operation.c
         xor_operation.c
-        error.c)
+        error.c
+        vm.h get_op_code.c)
        
 
 add_executable(virtual_mashine ${SOURCE_FILES})
