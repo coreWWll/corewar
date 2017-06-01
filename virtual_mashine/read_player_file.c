@@ -4,45 +4,32 @@
 
 #include "op.h"
 
-int		check_magic(int fd)
+int		get_int_from_file(int fd)
 {
-	unsigned char	magic[4];
-	int				magic_int;
+	unsigned char	buffer[4];
 
-    if (read(fd, magic, 4) != 4)
+    if (read(fd, buffer, 4) != 4)
 		return (-5);
-	magic_int = magic[3] | ( (int)magic[2] << 8 ) | ( (int)magic[1] << 16 ) |
-				( (int)magic[0] << 24 );
-	return (magic_int - COREWAR_EXEC_MAGIC);
+	return (buffer[3] | ( (int)buffer[2] << 8 ) | ( (int)buffer[1] << 16 ) |
+				( (int)buffer[0] << 24 ));
 }
 
-char	*get_player_name(int fd)
+char	*get_string_from_file(int fd, int define_len)
 {
-	char	name_space[PROG_NAME_LENGTH];
+	char	buf_space[define_len];
 
-	if (read(fd, name_space, PROG_NAME_LENGTH) != PROG_NAME_LENGTH)
+	if (read(fd, buf_space, define_len + 1) != define_len)
 		exit(-5);
-	return (ft_strdup(name_space));
+	return (ft_strdup(buf_space));
 }
 
-char	*get_player_comment(int fd)
-{
-	char	comment_space[COMMENT_LENGTH];
-
-	if (read(fd, comment_space, COMMENT_LENGTH) != COMMENT_LENGTH)
-		exit(-5);
-	return (ft_strdup(comment_space));
-}
-
-char	*get_champ_code(int fd)
+char	*get_champ_code(int fd, int prog_len)
 {
 	char	*champ_code;
 	char	test[1];
 
-	champ_code = ft_strnew(CHAMP_MAX_SIZE);
-	if (read(fd, champ_code, CHAMP_MAX_SIZE) < 1)
+	champ_code = ft_strnew(prog_len);
+	if (read(fd, champ_code, prog_len) != prog_len)
 		exit(-5);
-	if (read(fd, test, 1) == 1)
-		exit(-6);
 	return (champ_code);
 }

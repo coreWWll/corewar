@@ -43,10 +43,12 @@ t_player    *create_players(void *map, int n_bots, char *file_name, int *n)
 	p_list = add_player(*n, n_bots);
 	if ((fd = open(file_name, O_RDONLY)) < 3)
 		exit(-2);
-	check_magic(fd);
-	p_list->bot_name = get_player_name(fd);
-	p_list->comment = get_player_comment(fd);
-	char *test = get_champ_code(fd);
+	if (get_int_from_file(fd) != COREWAR_EXEC_MAGIC)
+		exit(-5);
+	p_list->bot_name = get_string_from_file(fd, PROG_NAME_LENGTH);
+	p_list->comment = get_string_from_file(fd, COMMENT_LENGTH);
+	int prog_len = get_int_from_file(fd);
+	char *test = get_champ_code(fd, prog_len);
 
 	//put_bot_on_map(map, fd, n_bots, *n);
 	(*n)++;
