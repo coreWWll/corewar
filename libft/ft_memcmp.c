@@ -1,39 +1,31 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/05 15:31:15 by arepnovs          #+#    #+#             */
+/*   Updated: 2016/12/05 15:31:19 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+int					ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
-	char	*res;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	i = 0;
-	if (s1 && s2)
+	while (i < n)
 	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
-		if (!res)
-			return (NULL);
-		while (s1[i] != '\0')
-		{
-			res[i] = s1[i];
-			i++;
-		}
-		res[i] = s2;
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
-		res[i] = '\0';
-		return (res);
 	}
-	return (NULL);
-}
+	return (0);
 }

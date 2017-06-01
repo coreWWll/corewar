@@ -1,39 +1,35 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/05 17:21:48 by arepnovs          #+#    #+#             */
+/*   Updated: 2016/12/05 17:23:08 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	size_t	i;
-	char	*res;
+	char		*res;
+	size_t		i;
 
 	i = 0;
-	if (s1 && s2)
+	if (s && f)
 	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
+		res = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 		if (!res)
 			return (NULL);
-		while (s1[i] != '\0')
+		while (s[i] != '\0')
 		{
-			res[i] = s1[i];
+			res[i] = (*f)(s[i]);
 			i++;
 		}
-		res[i] = s2;
-		i++;
 		res[i] = '\0';
 		return (res);
 	}
 	return (NULL);
-}
 }

@@ -1,39 +1,22 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/05 17:15:38 by arepnovs          #+#    #+#             */
+/*   Updated: 2016/12/05 17:16:16 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+void	ft_memdel(void **ap)
 {
-	size_t	i;
-	char	*res;
-
-	i = 0;
-	if (s1 && s2)
+	if (ap)
 	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
-		if (!res)
-			return (NULL);
-		while (s1[i] != '\0')
-		{
-			res[i] = s1[i];
-			i++;
-		}
-		res[i] = s2;
-		i++;
-		res[i] = '\0';
-		return (res);
+		free(*ap);
+		*ap = NULL;
 	}
-	return (NULL);
-}
 }

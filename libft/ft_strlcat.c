@@ -1,39 +1,36 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/05 18:41:18 by arepnovs          #+#    #+#             */
+/*   Updated: 2016/12/05 18:41:24 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+size_t		ft_strlcat(char *dest, const char *src, size_t size)
 {
 	size_t	i;
-	char	*res;
+	size_t	j;
+	size_t	end;
 
 	i = 0;
-	if (s1 && s2)
-	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
-		if (!res)
-			return (NULL);
-		while (s1[i] != '\0')
-		{
-			res[i] = s1[i];
-			i++;
-		}
-		res[i] = s2;
+	j = 0;
+	while (dest[i] && i < size)
 		i++;
-		res[i] = '\0';
-		return (res);
+	while (src[j])
+		j++;
+	end = i;
+	while (src[i - end] && i < size - 1)
+	{
+		dest[i] = src[i - end];
+		i++;
 	}
-	return (NULL);
-}
+	if (end < size)
+		dest[i] = '\0';
+	return (end + j);
 }

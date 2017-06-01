@@ -1,39 +1,40 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/09 20:13:48 by dburtnja          #+#    #+#             */
+/*   Updated: 2016/12/10 14:31:49 by dburtnja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
-	char	*res;
+	size_t	j;
+	size_t	k;
+	char	*p;
 
+	p = (char*)big;
+	if (*little == '\0')
+		return (p);
 	i = 0;
-	if (s1 && s2)
+	while (p[i] != '\0' && i < len)
 	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
-		if (!res)
-			return (NULL);
-		while (s1[i] != '\0')
+		j = 0;
+		k = i;
+		while (p[k] == little[j] && k < len)
 		{
-			res[i] = s1[i];
-			i++;
+			k++;
+			j++;
+			if (little[j] == '\0')
+				return (p + i);
 		}
-		res[i] = s2;
 		i++;
-		res[i] = '\0';
-		return (res);
 	}
 	return (NULL);
-}
 }

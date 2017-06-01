@@ -1,39 +1,33 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/05 17:25:05 by arepnovs          #+#    #+#             */
+/*   Updated: 2016/12/05 17:26:21 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+int			ft_strequ(char const *s1, char const *s2)
 {
 	size_t	i;
-	char	*res;
 
 	i = 0;
 	if (s1 && s2)
 	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
-		if (!res)
-			return (NULL);
-		while (s1[i] != '\0')
+		while (s1[i] != '\0' && s2[i] != '\0')
 		{
-			res[i] = s1[i];
+			if (s1[i] != s2[i])
+				return (0);
 			i++;
 		}
-		res[i] = s2;
-		i++;
-		res[i] = '\0';
-		return (res);
+		if (s1[i] != s2[i])
+			return (0);
+		return (1);
 	}
-	return (NULL);
-}
+	return (0);
 }

@@ -1,39 +1,23 @@
-#include "libft.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_charjoin.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 13:52:50 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/02/24 13:52:53 by arepnovs         ###   ########.fr       */
+/*   Created: 2016/12/05 13:09:42 by arepnovs          #+#    #+#             */
+/*   Updated: 2016/12/07 15:11:45 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_charjoin(const char *s1, const char s2)
+size_t	ft_strnlen(const char *s, size_t maxlen)
 {
-	size_t	i;
-	char	*res;
+	size_t i;
 
 	i = 0;
-	if (s1 && s2)
-	{
-		res = (char *)malloc((ft_strlen(s1) + 2) * sizeof(char));
-		if (!res)
-			return (NULL);
-		while (s1[i] != '\0')
-		{
-			res[i] = s1[i];
-			i++;
-		}
-		res[i] = s2;
+	while (s[i] != '\0' && i < maxlen)
 		i++;
-		res[i] = '\0';
-		return (res);
-	}
-	return (NULL);
-}
+	return (i);
 }

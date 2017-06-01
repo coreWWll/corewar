@@ -17,6 +17,10 @@ void    ft_exit(int flag)
         ft_putendl("Wrong file");
     if (flag == 5)
         ft_putendl("Wrong name or comment");
+    if (flag == 6)
+        ft_putendl("Validation");
+    if (flag == 7)
+        ft_putendl("ARGS Validation");
     exit(0);
 }
 
@@ -131,6 +135,7 @@ int main(int ac, char **av)
     int fd;
     t_asm *start;
     char *line;
+    t_op *tab;
 
     start = new_asm();
     start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
@@ -141,16 +146,11 @@ int main(int ac, char **av)
         {
             while ((get_next_line(fd, &line)) > 0)
             {
-                while (if_comment(line) == 1)
-                {
-                    free(line);
-                    get_next_line(fd, &line);
-                }
                 if (ft_strstr(line, NAME_CMD_STRING))
                     start->name = get_name_or_comm(line, 1);
                 else if (ft_strstr(line, COMMENT_CMD_STRING))
                     start->comm = get_name_or_comm(line, 0);
-                else
+                else if (if_comment(line) != 1)
                     make_list(&start, line);
                 free(line);
             }
@@ -158,6 +158,8 @@ int main(int ac, char **av)
         }
         else
             write(1, "this! is! lajjaaaaa!\n", 21);
+        tab = init_tab();
+        validate_it(start, tab);
     }
     else
         write(1, "laja\n", 5);
