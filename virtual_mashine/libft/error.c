@@ -8,5 +8,4 @@
 
 void	error(int error_code)
 {
-	if (ERR_PLAYER_FILE_READING == -5)
 }

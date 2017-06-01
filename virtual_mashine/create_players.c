@@ -20,37 +20,34 @@ t_player *add_player(int i, int n_bots)
     return (new);
 }
 
-void	put_bot_on_map(char *map, int fd, int n_bots, int *n)
+void	put_bot_on_map(char *map, char *champ_code, int cor_bot, size_t prog_len)
 {
-	int				i;
-	unsigned char 			buf[1];
-	int 			k;
+	size_t	i;
 
-	k = *n;
 	i = 0;
-	while (read(fd, buf, 1))
+	while (i < prog_len)
 	{
-		map[i + ( MEM_SIZE / n_bots ) * k] = buf[0];
+		map[i + cor_bot] = champ_code[i];
 		i++;
 	}
+	ft_strdel(&champ_code);
 }
 
-t_player    *create_players(void *map, int n_bots, char *file_name, int *n)
+t_player    *create_players(void *map, int n_bots, char *file_name, int n)
 {
     t_player    *p_list;
-	int fd;
+	size_t		prog_len;
+	int			fd;
 
-	p_list = add_player(*n, n_bots);
+	p_list = add_player(n, n_bots);
 	if ((fd = open(file_name, O_RDONLY)) < 3)
 		exit(-2);
 	if (get_int_from_file(fd) != COREWAR_EXEC_MAGIC)
 		exit(-5);
 	p_list->bot_name = get_string_from_file(fd, PROG_NAME_LENGTH + 4);
-	size_t prog_len = (size_t)get_int_from_file(fd);
+	prog_len = (size_t)get_int_from_file(fd);
 	p_list->comment = get_string_from_file(fd, COMMENT_LENGTH + 4);
-	char *test = get_champ_code(fd, prog_len);
-
-	//put_bot_on_map(map, fd, n_bots, *n);
-	(*n)++;
-	return (NULL);
+	put_bot_on_map(map, get_champ_code(fd, prog_len), (MEM_SIZE / n_bots ) *
+			(n - 1), prog_len);
+	return (p_list);
 }
