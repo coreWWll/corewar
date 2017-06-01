@@ -102,6 +102,7 @@ typedef struct		s_player
     struct  s_player    *next;
 }					t_player;
 
+char	*ft_memdup(size_t size, char *map, int pos);
 t_player	*create_players(void *map, int n_bots, char *file_name, int n);
 void    show_players_and_cars(t_player *p_list);
 void    start_battle(t_player *p_l, char *map);
@@ -109,8 +110,18 @@ void    get_live_func(char *map, t_car *car, int *pos);
 void    get_ld_func(char *map, t_car *car, int *pos);
 void    get_st_func(char *map, t_car *car, int *pos);
 void    get_add_func(char *map, t_car *car, int *pos);
+void    get_sub_func(char *map, t_car *car, int *pos);
+void    get_or_func(char *map, t_car *car, int *pos);
+void    get_xor_func(char *map, t_car *car, int *pos);
 void    do_live_func(char *map, t_car *car);
 void    do_ld_func(char *map, t_car *car);
+void    do_st_func(char *map, t_car *car);
+void    do_add_func(char *map, t_car *car);
+void    do_sub_func(char *map, t_car *car);
+void    do_and_func(char *map, t_car *car);
+void    do_or_func(char *map, t_car *car);
+void    do_xor_func(char *map, t_car *car);
+void    get_and_func(char *map, t_car *car, int *pos);
 void	do_op_code(char *map, t_car *car);
 void    move_car(int cycle, int round, t_player *p_l, char *map);
 int		get_int_from_file(int fd);

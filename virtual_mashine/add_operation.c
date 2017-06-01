@@ -2,9 +2,11 @@
 // Created by Yevhen Yefimov on 6/1/17.
 //
 
+#include "op.h"
+
 void    get_add_func(char *map, t_car *car, int *pos)
 {
-    car->data = ft_strsub(map + *pos + 1, 0, 4);
+    car->data = ft_memdup(4, map, (*pos) + 1);
     car->op_type = 1;
     car->c_for_op = 9;
     *pos = (*pos) + 5;
