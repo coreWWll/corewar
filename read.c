@@ -6,21 +6,19 @@
 void    ft_exit(int flag)
 {
     if (flag == 0)
-        ft_putendl("Wrong input");
+        ft_putendl("Wrong name or comment format");
     if (flag == 1)
-        ft_putendl("Wrong input 2");
+        ft_putendl("Size of name or comment is too big");
     if (flag == 2)
-        ft_putendl("Wrong input 3");
+        ft_putendl("Wrong argument");
     if (flag == 3)
-        ft_putendl("Wrong input 4");
-    if (flag == 4)
-        ft_putendl("Wrong file");
+        ft_putendl("Wrong format of file");
     if (flag == 5)
-        ft_putendl("Wrong name or comment");
+        ft_putendl("No command or wrong command");
     if (flag == 6)
-        ft_putendl("Validation");
+        ft_putendl("Wrong label");
     if (flag == 7)
-        ft_putendl("ARGS Validation");
+        ft_putendl("Wrong label syntax");
     exit(0);
 }
 
@@ -55,7 +53,7 @@ char *get_name_or_comm(char *line, int flag)
     while (t[len] != '\"' && t[len] != '\0')
         len++;
     if (t[len] != '\"')
-        ft_exit(1);
+        ft_exit(0);
     name = ft_strnew(len);
     while (i < len)
     {
@@ -67,13 +65,13 @@ char *get_name_or_comm(char *line, int flag)
     while (*t != '\0')
     {
         if (*t != ' ' && *t != '\t')
-            ft_exit(2);
+            ft_exit(0);
         t++;
     }
 
     if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
         || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
-        ft_exit(5);
+        ft_exit(1);
     return(name);
 }
 
@@ -160,7 +158,7 @@ int main(int ac, char **av)
             write(1, "this! is! lajjaaaaa!\n", 21);
         tab = init_tab();
         validate_it(start, tab);
-        to_byte_code(start);
+        //to_byte_code(start);
     }
     else
         write(1, "Usage: ./asm [path to the champion_file.s]", 42);
