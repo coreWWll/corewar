@@ -31,9 +31,9 @@ int     if_comment(char *line)
     i = 0;
     if (line[0] == '\0')
         return(1);
-    while (line[i] == ' ' || line[i] == '#')
+    while (line[i] == ' ' || line[i] == COMMENT_CHAR)
     {
-        if (line[i] == '#')
+        if (line[i] == COMMENT_CHAR)
             return(1);
         i++;
     }
@@ -163,6 +163,6 @@ int main(int ac, char **av)
     }
     else
         write(1, "laja\n", 5);
-	to_byte_code(start);
+	//to_byte_code(start);
     return (0);
 }
