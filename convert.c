@@ -4,6 +4,18 @@
 
 #include "op.h"
 
+void	get_commands(t_asm *head)
+{
+	t_asm *begin;
+
+	begin = head;
+	while (begin)
+	{
+
+		begin = begin->next;
+	}
+}
+
 void	to_byte_code(t_asm *head)
 {
 	t_asm	*begin;
@@ -16,5 +28,5 @@ void	to_byte_code(t_asm *head)
 	head->header = (header_t *)malloc(sizeof(header_t));
 	header_parse(head, fd);
 	write(fd, &(*head->header), sizeof(header_t));
-
+	get_commands(head);
 }

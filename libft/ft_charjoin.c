@@ -36,4 +36,3 @@ char		*ft_charjoin(const char *s1, const char s2)
 	}
 	return (NULL);
 }
-}

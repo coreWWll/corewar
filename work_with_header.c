@@ -64,7 +64,7 @@ int 			find_lable(t_asm *begin, char *lable)
 	res = 0;
 	while (node)
 	{
-		if (ft_strcmp(node->lable, lable) == 0)
+		if (node->lable && ft_strcmp(node->lable, lable) == 0)
 		{
 			res = node->what_args[0] + node->what_args[1] + node->what_args[2];
 			break ;
