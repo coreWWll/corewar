@@ -102,19 +102,26 @@ set(SOURCE_FILES
         libft/get_next_line.h
         libft/libft.h
         corewar.c
-        st_operation.c
-        sub_operation.c
         create_players.c
         dodatkovi_fynkcii.c
-        error.c
         field_creator.c
-        move_carr_and_do_operations.c
         op.h
         live_operation.c
-        ld_operation.c
         print_memory.c
         read_player_file.c
         run_operation.c
-        start_battle.c)
+        start_battle.c
+        move_carr_and_do_operations.c
+        live_operation.c
+        ld_operation.c
+        st_operation.c
+        add_operation.c
+        sub_operation.c
+        ft_memdup.c
+        and_operation.c
+        or_operation.c
+        xor_operation.c
+        error.c)
+       
 
 add_executable(virtual_mashine ${SOURCE_FILES})

@@ -14,6 +14,14 @@ void    get_op_code(char *map, int cycle, t_car *car, int *pos)
         get_st_func(map, car, pos);
     if (map[*pos] == 4)
         get_add_func(map, car, pos);
+    if (map[*pos] == 5)
+        get_sub_func(map, car, pos);
+    if (map[*pos] == 6)
+        get_and_func(map, car, pos);
+	if (map[*pos] == 7)
+		get_or_func(map, car, pos);
+	if (map[*pos] == 7)
+		get_xor_func(map, car, pos);
 }
 
 void    look_on_car(int cycle, int round, t_car *car, char *map)
