@@ -33,7 +33,6 @@ set(SOURCE_FILES
         libft/ft_printf/mod_void.c
         libft/ft_printf/processing_wint_t.c
         libft/ft_printf/read_str.c
-        libft/error.c
         libft/ft_atoi.c
         libft/ft_atoi_move.c
         libft/ft_bzero.c
@@ -117,6 +116,12 @@ set(SOURCE_FILES
         ld_operation.c
         st_operation.c
         add_operation.c
-        sub_operation.c ft_memdup.c and_operation.c or_operation.c xor_operation.c)
+        sub_operation.c
+        ft_memdup.c
+        and_operation.c
+        or_operation.c
+        xor_operation.c
+        error.c)
+       
 
 add_executable(virtual_mashine ${SOURCE_FILES})
