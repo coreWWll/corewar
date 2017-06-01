@@ -114,7 +114,9 @@ void    move_car(int cycle, int round, t_player *p_l, char *map);
 int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
+void	ft_error(char *error_message);
 
+#define ERR_PLAYER_FILE_READING	"Error: player_file reading fail"
 
 
 //exit -5 error player file readin

@@ -28,8 +28,7 @@ void	put_bot_on_map(char *map, char *champ_code, int cor_bot, size_t prog_len)
 	while (i < prog_len)
 	{
 		map[i + cor_bot] = champ_code[i];
-		i++;
-	}
+		i++;	}
 	ft_strdel(&champ_code);
 }
 
