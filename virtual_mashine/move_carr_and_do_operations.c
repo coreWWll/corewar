@@ -20,7 +20,7 @@ void    get_op_code(char *map, int cycle, t_car *car, int *pos)
         get_and_func(map, car, pos);
 	if (map[*pos] == 7)
 		get_or_func(map, car, pos);
-	if (map[*pos] == 7)
+	if (map[*pos] == 8)
 		get_xor_func(map, car, pos);
 }
 
