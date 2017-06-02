@@ -10,26 +10,8 @@ t_player *add_player(int boot_nbr)
 
     new = (t_player *)ft_memalloc(sizeof(t_player));
     new->car = (t_car *)malloc(sizeof(t_car));
-	new->boot_nbr =boot_nbr;
+	new->boot_nbr = boot_nbr;
     return (new);
-}
-
-void	put_bot_on_map(char *map, char *champ_code, int cor_bot, size_t prog_len)
-{
-
-	/*
-	 * put_bot_on_map(map, get_champ_code(fd, prog_len), (MEM_SIZE / n_bots ) *
-			(n - 1), prog_len);
-	 */
-	size_t	i;
-
-	i = 0;
-	while (i < prog_len)
-	{
-		map[i + cor_bot] = champ_code[i];
-		i++;
-	}
-	ft_strdel(&champ_code);
 }
 
 t_player	*create_players(char *file_name, int boot_nbr)
