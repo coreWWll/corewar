@@ -3,7 +3,7 @@
 //
 
 #include "vm.h"
-
+/*
 void	add_player_back(t_player **alst, t_player *new)
 {
     t_player	*p;
@@ -35,17 +35,18 @@ void    make_players_list(t_vm *main_struct, char **players_path)
     }
 }
 
-
+*/
 int main(int argc, char **argv)
 {
-	t_vm		main_struct;
-	char		**players_path;
+	t_vm		*main_struct;
 
-	ft_bzero(main_struct, sizeof(main_struct));
-      main_struct.players = NULL;
-	main_struct.map = ft_memalloc(MEM_SIZE);
-	read_arguments(&main_struct, argv, argc);
-    print_memory((unsigned char*)main_struct.map);
-    start_battle(&main_struct);
+	main_struct = (t_vm*)ft_memalloc(sizeof(t_vm));
+	main_struct->players = (t_player**)ft_memalloc(sizeof(t_player*) *
+														   (MAX_PLAYERS + 1));
+	main_struct->map = ft_memalloc(MEM_SIZE);
+	read_arguments(main_struct, argv, argc);
+
+    print_memory((unsigned char*)main_struct->map);
+    start_battle(main_struct);
     return (0);
 }

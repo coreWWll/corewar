@@ -13,9 +13,8 @@
 #define FALSE						0
 
 #define ERR_PLAYER_FILE_READING		"Player_file reading fail"
-#define ERR_OPEN_FILE				"Can't open file"
-#define ERR_MAGIC					"Wrong player file"
-#define ERR_PLAYER_SIZE				"The size of player is to big"
+#define ERR_OPEN_FILE				"Can't open file - "
+#define ERR_PLAYER_SIZE				"The size of player is to big - "
 
 
 typedef struct		s_car
@@ -26,33 +25,33 @@ typedef struct		s_car
 	int             c_for_op;
 	char            *data;
 	struct s_car    *next;
-
 }					t_car;
 
 typedef struct			s_player
 {
+	int					boot_nbr;
 	int                 name;
 	char 				*bot_name;
 	char 				*comment;
 	struct s_car        *car;
-	struct  s_player    *next;
+	size_t				prog_len;
+	char				*champ_code;
 }						t_player;
 
 typedef struct			s_vm
 {
-	t_player			*players;
+	t_player			**players;
 	int					players_nbr;
 	char 				*map;
 	int					f_dump;
 	int					dump_cycle;
-	int					f_n;
 	int					f_v;
 	int					cycle;
 	int					round;
 }						t_vm;
 
 char	*ft_memdup(size_t size, char *map, int pos);
-t_player	*create_players(void *map, int n_bots, char *file_name, int n);
+t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
 void    get_live_func(char *map, t_car *car, int *pos);
 void    get_ld_func(char *map, t_car *car, int *pos);
