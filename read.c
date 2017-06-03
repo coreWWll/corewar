@@ -103,20 +103,26 @@ void    make_list(t_asm **start, char *line)
     p = *start;
     while (p)
     {
-        if (p->only_lable == 1) // check if lable is empty to add command in it
+        if (p->only_label == 1) // check if label is empty to add command in it
         {
             get_shit(p, line);
-            p->only_lable = 0;
+            p->only_label = 0;
             break;
         }
         else if(p->next == NULL)
         {
-            p->next = new_asm();
+            if (p->command || p->label)
+            {
+                p->next = new_asm();
+                p = p->next;
+            }
             get_shit(p, line);
+            if (p->only_label != 1)
+                p->next = new_asm();
             break;
         }
-        if (p->only_lable == 1 && p->next->only_lable == 1) //to unmark list with empty lable
-            p->only_lable = 0;
+        if (p->only_label == 1 && p->next->only_label == 1) //to unmark list with empty label
+            p->only_label = 0;
         p = p->next;
     }
 }
@@ -171,5 +177,6 @@ int main(int ac, char **av)
     }
     else
         write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
+    sleep(20);
     return (0);
 }

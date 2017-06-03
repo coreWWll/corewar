@@ -35,7 +35,7 @@ t_asm *new_asm() //init of new list in t_asm
     new->file_name = NULL;
     new->name = NULL;
     new->comm = NULL;
-    new->lable = NULL;
+    new->label = NULL;
     new->command = NULL;
     new->l_flag[0] = 0;
     new->l_flag[1] = 0;
@@ -45,7 +45,7 @@ t_asm *new_asm() //init of new list in t_asm
     new->what_args[2] = 0;
     new->amount_of_args = 0;
     new->command_num = -1;
-    new->only_lable = 0;
+    new->only_label = 0;
     new->opcode = 0;
     new->carry = 98;
     new->c_oct = 0;
@@ -70,25 +70,26 @@ void    check_label_syntax(char *line)
 void    check_if_label_ok(char *line, int len)
 {
     char *t;
-    line = line + len + 1;
+    char *p;
 
-    if ((t = ft_strchr(line, ':')))
+    p = line + len + 1;
+    if ((t = ft_strchr(p, LABEL_CHAR)))
     {
         t--;
-        if (*t != '%')
+        if (*t != DIRECT_CHAR)
             ft_exit(7);
     }
+    //free(p);
 }
 
-void    get_lable(char *line, t_asm *start)
+void    get_label(char *line, t_asm *start)
 {
     int len;
     char dupline[1000];
 
     len = 0;
-    if (start->lable == NULL)
+    if (start->label == NULL)
     {
-        start->lable = ft_strnew(0);
         ft_strcpy(dupline, line);
         if (ft_strchr(dupline, LABEL_CHAR) != NULL)
         {
@@ -96,14 +97,14 @@ void    get_lable(char *line, t_asm *start)
                 len++;
         }
         check_if_label_ok(line, len);
-        if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR) && start->only_lable != 1)//check if lable is in line
-            start->lable = NULL;
-        else if (start->only_lable != 1)
+        if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR) && start->only_label != 1)//check if label is in line
+            start->label = start->label;
+        else if (start->only_label != 1)
         {
             dupline[len] = '\0';
-            ft_strcpy(start->lable, dupline);
-            check_label_syntax(start->lable);
-            line = line + len + 1;
+            start->label = ft_strnew(0);
+            ft_strcpy(start->label, dupline);
+            check_label_syntax(start->label);
         }
     }
 }
@@ -133,9 +134,9 @@ void get_command(char *line, t_op *g_tab, t_asm *start) {
         }
         i--;
     }
-    if (start->lable && !ft_strchr(line, DIRECT_CHAR) && !ft_strchr(line, SEPARATOR_CHAR))
-        start->only_lable = 1;
-    if (!start->lable && !start->command)
+    if (start->label && !ft_strchr(line, DIRECT_CHAR) && !ft_strchr(line, SEPARATOR_CHAR))
+        start->only_label = 1;
+    if (!start->label && !start->command)
         ft_exit(5);
 }
 
@@ -154,7 +155,6 @@ char *good_strtrim(char *str)
     while ((str[j] == ' ' || str[j] == '\t'))
         j--;
     len = j - i;
-    res = ft_strnew(len);
     res = ft_strsub(str, i, len + 1);
     return(res);
 }
@@ -170,8 +170,7 @@ char *clean_arg(char *line)
     while (line[i] != '\t' && line[i] != ' ')
         i--;
     i++;
-    res = ft_strnew(len - i);
-    res = ft_strsub(line, i, len - i);
+    res = ft_strsub(line, (unsigned int)i, len - i);
     return(res);
 }
 
@@ -192,23 +191,25 @@ int     is_num(char *str)
 void  if_one_arg(t_asm *start, char *dupline, size_t i)
 {
     size_t j;
+    char *temp;
 
     j = 0;
     start->amount_of_args++;
     while (dupline[i + j] != COMMENT_CHAR && dupline[i + j] != '\0')
-    {
-       // i++;
         j++;
-    }
-    start->args[0] = ft_strnew(j);
+    start->args= (char **)malloc(sizeof(char *));
     start->args[0] = ft_strsub(dupline, (unsigned int)i + 1, j);
-    start->args[0] = good_strtrim(start->args[0]);
+    temp = start->args[0];
+    start->args[0] = good_strtrim(temp);
+    free(temp);
     if (start->args[0][0] == DIRECT_CHAR)
     {
         start->what_args[0] = T_DIR;
         if (start->args[0][1] == LABEL_CHAR)
         {
-            start->args[0] = start->args[0] + 2;
+            temp = start->args[0];
+            start->args[0] = ft_strsub(temp, 2, ft_strlen(temp) - 2);
+            free(temp);
             start->l_flag[0] = 1;
         }
     }
@@ -219,20 +220,29 @@ void  if_one_arg(t_asm *start, char *dupline, size_t i)
 void    if_more_args(t_asm *start)
 {
     int i;
+    char *temp;
 
     i = 0;
     while (start->args[i] != NULL)
     {
-        start->args[i] = good_strtrim(start->args[i]);
+        temp = start->args[i];
+        start->args[i] = good_strtrim(temp);
+        free(temp);
         if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], '\t'))
-            start->args[i] = clean_arg(start->args[i]);
+        {
+            temp = start->args[i];
+            start->args[i] = clean_arg(temp);
+            free(temp);
+        }
         start->amount_of_args++;
         if (start->args[i][0] == DIRECT_CHAR)
         {
             start->what_args[i] = T_DIR;
             if (start->args[i][1] == LABEL_CHAR)
             {
-                start->args[i] = start->args[i] + 2;
+                temp = start->args[i];
+                start->args[i] = ft_strsub(temp, 2, ft_strlen(temp) - 2);
+                free(temp);
                 start->l_flag[i] = 1;
             }
         }
@@ -248,22 +258,19 @@ void    if_more_args(t_asm *start)
 
 void    get_args_now(t_asm *start, t_op *tab, char *dupline, size_t i)
 {
-    size_t k;
     size_t j;
     char *args;
 
-    j = 0;
-    k = i;
     if (start->command_num != -1 && tab[start->command_num].args_am == 1)
         if_one_arg(start, dupline, i);
     else
     {
         j = ft_strlen(dupline);
-        while (dupline[k] == ' ' || dupline[k] == '\t')
-            k++;
-        args = ft_strsub(dupline, k, j);
+        while (dupline[i] == ' ' || dupline[i] == '\t')
+            i++;
+        args = ft_strsub(dupline, (unsigned int)i, j);
         start->args = ft_strsplit(args, SEPARATOR_CHAR);
-        i = 0;
+        ft_strdel(&args);
         if_more_args(start);
     }
 }
@@ -271,26 +278,21 @@ void    get_args_now(t_asm *start, t_op *tab, char *dupline, size_t i)
 void    get_args(char *line, t_asm *start, t_op *tab)
 {
     size_t i;
-    size_t j;
-    size_t k;
     char dupline[100];
-    char *args;
 
     i = 0;
-    j = 0;
     ft_strcpy(dupline, line);
     while (dupline[i] != DIRECT_CHAR && dupline[i] != ' ' && dupline[i] != '\t' && dupline[i] != '\0')
         i++;
-    if (dupline[i] == '\0' && start->lable == NULL)
+    if (dupline[i] == '\0' && start->label == NULL)
         ft_exit(2);
-    k = i;
     start->opcode = tab[start->command_num].opcode;
     get_args_now(start, tab, dupline, i);
     if (start->command && !start->args[0])
         ft_exit(2);
 }
 
-int is_label(char *line) //check if lable is in line
+int is_label(char *line) //check if label is in line
 {
     int i;
 
@@ -305,16 +307,16 @@ int is_label(char *line) //check if lable is in line
 void    get_shit(t_asm *start, char *line)
 {
     t_op *g_tab;
-    if (start->only_lable == 1 && is_label(line) == 1) //if list with only lable
+    if (start->only_label == 1 && is_label(line) == 1) //if list with only label
     {
-        start = start->next;
         start->next = new_asm();
+        start->only_label = 0;
+        start = start->next;
     }
     line = good_strtrim(line);
     g_tab = init_tab();
-    get_lable(line, start);
+    get_label(line, start);
     get_command(line, g_tab, start);
-    //start->command = get_command(line, g_tab, start);
-    start->args = (char **)malloc(sizeof(char *) * 3);
     get_args(line, start, g_tab);
+    free(line);
 }
