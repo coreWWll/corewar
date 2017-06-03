@@ -2,8 +2,8 @@
 // Created by Yevhen Yefimov on 5/26/17.
 //
 
-#include "op.h"
-
+#include "vm.h"
+/*
 void    show_players_and_cars(t_player *p_list)
 {
     while (p_list)
@@ -13,4 +13,4 @@ void    show_players_and_cars(t_player *p_list)
         p_list = p_list->next;
     }
 
-}
+}*/
