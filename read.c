@@ -38,6 +38,20 @@ int     if_comment(char *line)
     return(0);
 }
 
+void check_endl_and_len(char *t, char *name, int flag)
+{
+    t++;
+    while (*t != '\0')
+    {
+        if (*t != ' ' && *t != '\t')
+            ft_exit(0);
+        t++;
+    }
+    if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
+        || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
+        ft_exit(1);
+}
+
 char *get_name_or_comm(char *line, int flag)
 {
     char *t;
@@ -61,17 +75,7 @@ char *get_name_or_comm(char *line, int flag)
         t++;
         i++;
     }
-    t++;
-    while (*t != '\0')
-    {
-        if (*t != ' ' && *t != '\t')
-            ft_exit(0);
-        t++;
-    }
-
-    if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
-        || (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
-        ft_exit(1);
+    check_endl_and_len(t, name, flag);
     return(name);
 }
 
@@ -111,7 +115,6 @@ void    make_list(t_asm **start, char *line)
             get_shit(p, line);
             break;
         }
-
         if (p->only_lable == 1 && p->next->only_lable == 1) //to unmark list with empty lable
             p->only_lable = 0;
         p = p->next;
@@ -128,11 +131,32 @@ void check_format(char *file)
         ft_exit(3);
 }
 
+void    do_parsing_work(char *av, t_asm *start)
+{
+    char *line;
+    int fd;
+
+    if ((fd = open(av, O_RDONLY)) != -1)
+    {
+        while ((get_next_line(fd, &line)) > 0)
+        {
+            if (ft_strstr(line, NAME_CMD_STRING))
+                start->name = get_name_or_comm(line, 1);
+            else if (ft_strstr(line, COMMENT_CMD_STRING))
+                start->comm = get_name_or_comm(line, 0);
+            else if (if_comment(line) != 1)
+                make_list(&start, line);
+            free(line);
+        }
+        printf("name = %s\ncomment = %s\nfilename = %s\n", start->name, start->comm, start->file_name);
+    }
+    else
+        ft_exit(3);
+}
+
 int main(int ac, char **av)
 {
-    int fd;
     t_asm *start;
-    char *line;
     t_op *tab;
 
     if (ac == 2)
@@ -140,27 +164,12 @@ int main(int ac, char **av)
         start = new_asm();
         start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
         check_format(av[1]);//checking file format
-        if ((fd = open(av[1], O_RDONLY)) != -1)
-        {
-            while ((get_next_line(fd, &line)) > 0)
-            {
-                if (ft_strstr(line, NAME_CMD_STRING))
-                    start->name = get_name_or_comm(line, 1);
-                else if (ft_strstr(line, COMMENT_CMD_STRING))
-                    start->comm = get_name_or_comm(line, 0);
-                else if (if_comment(line) != 1)
-                    make_list(&start, line);
-                free(line);
-            }
-            printf("name = %s\ncomment = %s\nfilename = %s\n", start->name, start->comm, start->file_name);
-        }
-        else
-            write(1, "this! is! lajjaaaaa!\n", 21);
+        do_parsing_work(av[1], start);
         tab = init_tab();
         validate_it(start, tab);
         //to_byte_code(start);
     }
     else
-        write(1, "Usage: ./asm [path to the champion_file.s]", 42);
+        write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
     return (0);
 }
