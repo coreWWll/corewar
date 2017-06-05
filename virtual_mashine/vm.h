@@ -19,6 +19,7 @@
 
 typedef struct		s_car
 {
+	unsigned int	reg[16];
 	int             pos;
 	int             nb;
 	int             op_type;
