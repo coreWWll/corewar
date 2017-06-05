@@ -4,13 +4,11 @@
 .name		"fluttershy"
 .comment	"oh, my, what a scary project"
 
-
-coregeni:
-	st		r1, 6
-	zjmp	%:ardefinit
-
 entry:
-	fork	%:coregeni
+xor		r2, r5, r15 	zjmp	%:ardefinit
+    st		r1, 6
+	live	%42
+    fork	%:coregeni
 	st		r1, 6
 	live	%42
 	fork	%:torpgeni
@@ -18,10 +16,12 @@ entry:
 	live	%42
 	fork	%:avdefgeni
 
-ardeftgt:
+coregeni:   st r1,6
+	zjmp	%:ardefinit
 
-ardefgeni:
-	st 		r1, 6
+
+ardeftgt:
+ardefgeni:	st 		r1, 6
 
 ardefgen:
 	live 	%213904

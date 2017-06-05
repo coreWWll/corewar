@@ -12,7 +12,7 @@ void	put_nbr(unsigned char c)
 	}
 	else
 	{
-		if (c < 9)
+		if (c < 10)
 			print = (unsigned char)(c + '0');
 		else
 			print = (unsigned char)((c - 10) + 'a');

@@ -4,21 +4,30 @@
 
 #include "op.h"
 
-
-int 			get_index(int *ar)
+int 	check_if_comand_is(char *command, int *cur_com_size, unsigned int *prog_s )
 {
-	int i;
-	int j;
+    int i;
+    int size[] = {4, 4, 0, 0, 0, 4, 4, 4, 2, 2, 2, 2, 4, 2, 2, 4};
+    int codage_octal[] = {0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1};
+    char *comm[] = {"live", "ld", "st", "add", "sub", "and", "or",
+                    "xor", "zjmp", "ldi", "sti", "fork", "lld",
+                    "lldi", "lfork", "aff"};
 
-	i = 0;
-	j = 0;
-	while (i < 3)
-	{
-		if (ar[i] == 1)
-			j = i;
-		i++;
-	}
-	return (j);
+    i = 0;
+    *prog_s += 2;
+    while (i < 16)
+    {
+        if (ft_strcmp(command, comm[i]) == 0)
+        {
+            if (cur_com_size)
+                *cur_com_size = size[i];
+            if (prog_s)
+                *prog_s += codage_octal[i] - 1;
+            return (i + 1);
+        }
+        i++;
+    }
+    return (MAX_INT);
 }
 
 unsigned int	do_big_endian(unsigned int magic, int size)
@@ -55,47 +64,44 @@ void			fill_name_and_comment(t_asm *head)
 	}
 }
 
-int 			find_lable(t_asm *begin, char *lable)
+void 			modify_size(t_asm *head, t_asm *begin, int cur_size)
 {
-	t_asm	*node;
-	int		res;
+	int i;
 
-	node = begin;
-	res = 0;
-	while (node)
+	i = 0;
+	while (i < 3)
 	{
-		if (node->lable && ft_strcmp(node->lable, lable) == 0)
-		{
-			res = node->what_args[0] + node->what_args[1] + node->what_args[2];
-			break ;
-		}
-		node = node->next;
+		if (begin->what_args[i] == T_DIR)
+			head->header->prog_size += cur_size;
+		else
+			head->header->prog_size += begin->what_args[i];
+		i++;
 	}
-	/*if (node && (node->l_flag[0] == 1 || node->l_flag[1] == 1 ||
-		node->l_flag[2] == 1))
-		res += find_lable(begin, begin->args[get_index(begin->l_flag)]);*/ // проблема с записью лейбы, Антон фикс
-	return (res);
+
 }
 
+void			get_prog_size(t_asm *head) {
+	t_asm *begin;
+	int cur_com_size;
+	int i;
 
-void			get_prog_size(t_asm *head)
-{
-	t_asm			*begin;
-	unsigned int 	res;
-
-	res = 0;
 	begin = head;
+	cur_com_size = 4;
+	i = 0;
 	while (begin)
 	{
-		res += begin->what_args[0] + begin->what_args[1] + begin->what_args[2];
-		if (begin->l_flag[0] == 1 || begin->l_flag[1] == 1 ||
-				begin->l_flag[2] == 1)
+		if (*(begin->lable) != '\0')
+			begin->program_s = head->header->prog_size;
+		if (begin->command)
 		{
-			res += find_lable(head, begin->args[get_index(begin->l_flag)]);
+			check_if_comand_is(begin->command, &cur_com_size, &(head->header->prog_size));
+			modify_size(head, begin, cur_com_size);
 		}
 		begin = begin->next;
+		if (begin->next == NULL)
+			break ;
 	}
-	head->header->prog_size = do_big_endian(res, 4);
+	head->header->prog_size = do_big_endian(head->header->prog_size, 4);
 }
 
 void			header_parse(t_asm *head, int fd)

@@ -3,7 +3,7 @@
 //
 
 #include "vm.h"
-
+/*
 void    show_players_and_cars(t_player *p_list)
 {
     while (p_list)
@@ -13,4 +13,4 @@ void    show_players_and_cars(t_player *p_list)
         p_list = p_list->next;
     }
 
-}
+}*/
