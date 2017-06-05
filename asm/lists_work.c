@@ -174,11 +174,15 @@ char *clean_arg(char *line)
 int     is_num(char *str)
 {
     int i;
+    int minus;
 
     i = 0;
+    minus = 0;
     while (str[i])
     {
-        if (ft_isdigit(str[i]) != 1)
+        if (str[i] == '-')
+            minus++;
+        if (ft_isdigit(str[i]) != 1 && minus > 1)
             return(0);
         i++;
     }
@@ -355,7 +359,7 @@ void    get_shit(t_asm *start, char *line)
         start = start->next;
     }
     if_comment_at_end(&line);
-    line =good_strtrim(line);
+    line = good_strtrim(line);
     g_tab = init_tab();
     get_label(line, start);
     get_command(line, g_tab, start);
