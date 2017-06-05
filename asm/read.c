@@ -29,13 +29,13 @@ int     if_comment(char *line)
     i = 0;
     if (line[0] == '\0')
         return(1);
-    while (line[i] == ' ' || line[i] == COMMENT_CHAR)
+    while (line[i] == ' ' || line[i] == '\t' || line[i] == COMMENT_CHAR)
     {
         if (line[i] == COMMENT_CHAR)
             return(1);
         i++;
     }
-    return(0);
+    return((line[i] == '\0') ? 1: 0);
 }
 
 void check_endl_and_len(char *t, char *name, int flag)
@@ -152,7 +152,7 @@ void    do_parsing_work(char *av, t_asm *start)
                 start->comm = get_name_or_comm(line, 0);
             else if (if_comment(line) != 1)
                 make_list(&start, line);
-            free(line);
+            //ft_strdel(&line);
         }
         printf("name = %s\ncomment = %s\nfilename = %s\n", start->name, start->comm, start->file_name);
     }
