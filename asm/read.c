@@ -83,6 +83,7 @@ char    *get_file_name(char *av)
 {
     size_t len;
     char *name;
+    char *t;
 
     name = ft_strnew(0);
     len = ft_strlen(av);
@@ -90,7 +91,9 @@ char    *get_file_name(char *av)
         len--;
     while (av[len] != '.')
     {
-        name = ft_charjoin(name, av[len]);
+        t = name;
+        name = ft_charjoin(t, av[len]);
+        free(t);
         len++;
     }
     return (name);
@@ -152,8 +155,9 @@ void    do_parsing_work(char *av, t_asm *start)
                 start->comm = get_name_or_comm(line, 0);
             else if (if_comment(line) != 1)
                 make_list(&start, line);
-            //ft_strdel(&line);
+            ft_strdel(&line);
         }
+        ft_strdel(&line);
         printf("name = %s\ncomment = %s\nfilename = %s\n", start->name, start->comm, start->file_name);
     }
     else
@@ -177,6 +181,6 @@ int main(int ac, char **av)
     }
     else
         write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
-    //sleep(20);
+    sleep(20);
     return (0);
 }

@@ -37,6 +37,7 @@ t_asm *new_asm() //init of new list in t_asm
     new->comm = NULL;
     new->label = NULL;
     new->command = NULL;
+    new->args = NULL;
     new->l_flag[0] = 0;
     new->l_flag[1] = 0;
     new->l_flag[2] = 0;
@@ -201,7 +202,8 @@ void  if_one_arg(t_asm *start, char *dupline, size_t i)
         j++;
     start->args= (char **)malloc(sizeof(char *));
     start->args[0] = ft_strsub(dupline, (unsigned int)i + 1, j);
-    temp = start->args[0];
+    temp = ft_strdup(start->args[0]);
+    ft_strdel(&start->args[0]);
     start->args[0] = good_strtrim(temp);
     free(temp);
     if (start->args[0][0] == DIRECT_CHAR)
@@ -225,7 +227,7 @@ void    if_more_args(t_asm *start)
     char *temp;
 
     i = 0;
-    while (start->args[i] != NULL)
+    while (start->args && start->args[i] != NULL)
     {
         temp = start->args[i];
         start->args[i] = good_strtrim(temp);
@@ -284,7 +286,8 @@ void    get_args_now(t_asm *start, t_op *tab, char *dupline, size_t i)
         while (dupline[i] == ' ' || dupline[i] == '\t')
             i++;
         args = ft_strsub(dupline, (unsigned int)i, j);
-        start->args = ft_strsplit(args, SEPARATOR_CHAR);
+        if (args[0] != '\0')
+            start->args = ft_strsplit(args, SEPARATOR_CHAR);
         //if_comment_at_endl(start);
         ft_strdel(&args);
         if_more_args(start);
