@@ -7,7 +7,7 @@
 
 #include <fcntl.h>
 #include "libft/libft.h"
-#include "../op.h"
+#include "../asm/op.h"
 
 #define TRUE						1
 #define FALSE						0

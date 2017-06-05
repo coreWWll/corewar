@@ -97,7 +97,7 @@ void    get_label(char *line, t_asm *start)
         check_if_label_ok(line, len);
         if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR) && start->only_label != 1)//check if label is in line
             start->label = start->label;
-        else if (start->only_label != 1)
+        else if (start->only_label != 1 && len != 0)
         {
             dupline[len] = '\0';
             start->label = ft_strnew(0);
