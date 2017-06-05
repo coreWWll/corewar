@@ -77,7 +77,6 @@ void    check_if_label_ok(char *line, int len)
         if (*t != DIRECT_CHAR)
             ft_exit(7);
     }
-    //free(p);
 }
 
 void    get_label(char *line, t_asm *start)
@@ -150,7 +149,7 @@ char *good_strtrim(char *str)
     j = len;
     while (str[i] == ' ' || str[i] == '\t')
         i++;
-    while ((str[j] == ' ' || str[j] == '\t'))
+    while (str[j] == ' ' || str[j] == '\t' || str[j] == COMMENT_CHAR || str[j] == ';')
         j--;
     len = j - i;
     res = ft_strsub(str, i, len + 1);
@@ -254,6 +253,48 @@ void    if_more_args(t_asm *start)
     }
 }
 
+void    if_comment_at_endl(t_asm *start)
+{
+    int i;
+    int j;
+    char *t;
+
+    i = 0;
+    j = 0;
+    while (start->args[i] != NULL)
+    {
+        if ((t = ft_strchr(start->args[i], COMMENT_CHAR)) || (t = ft_strchr(start->args[i], ';')))
+        {
+            *t = '\0';
+            t = start->args[i];
+            start->args[i] = ft_strdup(t);
+            free(t);
+        }
+        i++;
+    }
+}
+
+void    if_comment_at_end(char **line)
+{
+    int i;
+    int j;
+    char *t;
+
+    i = 0;
+    j = 0;
+    /*while (start->args[i] != NULL)
+    {*/
+        if ((t = ft_strchr(*line, COMMENT_CHAR)) || (t = ft_strchr(*line, ';')))
+        {
+            *t = '\0';
+            t = *line;
+            *line = ft_strdup(t);
+            free(t);
+        }
+        //i++;
+    //}
+}
+
 void    get_args_now(t_asm *start, t_op *tab, char *dupline, size_t i)
 {
     size_t j;
@@ -268,6 +309,7 @@ void    get_args_now(t_asm *start, t_op *tab, char *dupline, size_t i)
             i++;
         args = ft_strsub(dupline, (unsigned int)i, j);
         start->args = ft_strsplit(args, SEPARATOR_CHAR);
+        //if_comment_at_endl(start);
         ft_strdel(&args);
         if_more_args(start);
     }
@@ -312,7 +354,8 @@ void    get_shit(t_asm *start, char *line)
         start->only_label = 0;
         start = start->next;
     }
-    line = good_strtrim(line);
+    if_comment_at_end(&line);
+    line =good_strtrim(line);
     g_tab = init_tab();
     get_label(line, start);
     get_command(line, g_tab, start);
