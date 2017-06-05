@@ -8,7 +8,7 @@ ardefgeni:	st 		r1, 6
 entry:
     st		r1, 6
 	live	%42
-    fork	%:coregeni
+    fork	%:coregeni  ;dafsdfasd
 	st		r1, 6
 	live	%42
 	fork	%:torpgeni
