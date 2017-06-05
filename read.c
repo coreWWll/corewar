@@ -177,6 +177,6 @@ int main(int ac, char **av)
     }
     else
         write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
-    sleep(20);
+    //sleep(20);
     return (0);
 }
