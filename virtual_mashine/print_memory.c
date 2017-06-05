@@ -1,55 +1,38 @@
 
-#include <unistd.h>
-#include "op.h"
+#include "vm.h"
 
-void	put_16(unsigned char c, char *str, int *i)
+void	put_nbr(unsigned char c)
 {
+	unsigned char	print;
+
 	if (c >= 16)
 	{
-		put_16(c / 16, str, i);
-		put_16(c % 16, str, i);
+		put_nbr(c / (char)16);
+		put_nbr(c % (char)16);
 	}
 	else
 	{
-		if (c < 10)
-			c = c + '0';
+		if (c < 9)
+			print = (unsigned char)(c + '0');
 		else
-			c = c + 'a' - 10;
-		str[*i] = c;
-		(*i)++;
+			print = (unsigned char)((c - 10) + 'a');
+		write(1, &print, 1);
 	}
-
 }
 
-void	print_memory(const void *addr, char *buf, int *i)
+void	print_memory(unsigned char *map)
 {
-	unsigned char	*str;
+	int		i;
 
-	str = (unsigned char*)addr;
-		if (str[0] < 16)
-		{
-			buf[*i] = '0';
-			(*i)++;
-		}
-	put_16(str[0], buf, i);
-}
-
-/*char	*put_bot_on_map(int fd)
-{
-	char 			ptr[1];
-	int 			c;
-	char			*str;
-	int				i;
-
-    i = 0;
-	str = ft_strnew(MEM_SIZE / 6);
-	ft_bzero(str, MEM_SIZE / 6);
-	c = 0;
-	while (read(fd, ptr, 1))
+	i = 0;
+	while (i < MEM_SIZE)
 	{
-		if (c > PROG_NAME_LENGTH + COMMENT_LENGTH + 15)
-			print_memory(ptr, str, &i);
-		c++;
+		if (i % 64 == 0)
+			ft_putendl("");
+		if (map[i] < 16)
+			ft_putchar('0');
+		put_nbr(map[i]);
+		ft_putchar(' ');
+		i++;
 	}
-	return (ft_strsub(str, 0, i));
-}*/
+}

@@ -2,23 +2,7 @@
 // Created by Denys Burtnjak on 5/24/17.
 //
 
-#include "op.h"
-
-void    show_map(char *map)
-{
-    int i;
-
-    i = 0;
-    while (i < MEM_SIZE)
-    {
-        if (i % 64 == 0 && i != 0)
-            write (1, "\n", 1);
-        if (i % 2 == 0 && i % 64 != 0 && i != 0)
-            write (1, " ", 1);
-        write (1, &map[i], 1);
-        i++;
-    }
-}
+#include "vm.h"
 
 int get_flags(int argc, char **argv, char *map)
 {
@@ -64,16 +48,13 @@ void    make_players_list(t_player **head, char *map, char **argv, int argc)
 
 int main(int argc, char **argv)
 {
-    char	    *map;
-    t_player    *head;
+	t_vm		main_struct;
 
-    head = NULL;
-	map = ft_memalloc(MEM_SIZE);
+    main_struct.players = NULL;
+	main_struct.map = ft_memalloc(MEM_SIZE);
 
-    make_players_list(&head, map, argv, argc);
-    show_map(map);
-    start_battle(head, map);
-
-
+    make_players_list(&(main_struct.players), main_struct.map, argv, argc);
+    print_memory(main_struct.map);
+    start_battle(&main_struct);
     return (0);
 }

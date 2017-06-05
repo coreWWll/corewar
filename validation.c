@@ -58,19 +58,19 @@ void check_args_type(t_asm *p, t_op *tab)
             {
                 if (tab[p->command_num].args[i] != 1 && tab[p->command_num].args[i] != 3 &&
                     tab[p->command_num].args[i] != 5)
-                    ft_exit(7);
+                    ft_exit(2);
             }
             else if (p->what_args[i] == 2)
             {
                 if (tab[p->command_num].args[i] != 2 && tab[p->command_num].args[i] != 3 &&
                     tab[p->command_num].args[i] != 6)
-                    ft_exit(7);
+                    ft_exit(2);
             }
             else if (p->what_args[i] == 4)
             {
                 if (tab[p->command_num].args[i] != 4 && tab[p->command_num].args[i] != 5 &&
                     tab[p->command_num].args[i] != 6)
-                    ft_exit(7);
+                    ft_exit(2);
             }
         }
         i++;
@@ -87,7 +87,7 @@ void check_args_now(t_asm *start, t_op *tab)
         if (p->command && p->command[0] != '\0')
         {
             if (p->amount_of_args != tab[p->command_num].args_am)
-                ft_exit(6);
+                ft_exit(2);
             check_args_type(p, tab);
         }
         p = p->next;
