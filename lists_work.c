@@ -297,6 +297,7 @@ int is_label(char *line) //check if label is in line
     int i;
 
     i = 0;
+
     while (line[i] && line[i] != LABEL_CHAR)
         i++;
     if (line[i - 1] == DIRECT_CHAR || line[i] == '\0')

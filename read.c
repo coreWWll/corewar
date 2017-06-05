@@ -173,7 +173,7 @@ int main(int ac, char **av)
         do_parsing_work(av[1], start);
         tab = init_tab();
         validate_it(start, tab);
-        //to_byte_code(start);
+        to_byte_code(start);
     }
     else
         write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
