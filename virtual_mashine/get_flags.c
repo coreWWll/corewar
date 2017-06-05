@@ -15,7 +15,6 @@ int		get_nbr_after_flag(char **argv, int argc, int *i)
 	ret_val = ft_atoi_move(&(argv[*i]), &error, FALSE);
 	if (error == TRUE || ret_val < 0)
 		ft_error(ft_strjoin("Bad number: ", argv[*i]));
-	(*i)++;
 	return (ret_val);
 }
 
@@ -40,7 +39,10 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 	if (main_struct->players_nbr > MAX_PLAYERS)
 		ft_error(ft_strjoin("Many players, allowed - ", ft_itoa(MAX_PLAYERS)));
 	if (ft_strcmp("-n", argv[*i]) == 0)
+	{
 		boot_nbr = get_nbr_after_flag(argv, argc, i);
+		(*i)++;
+	}
 	return (create_players(argv[*i], boot_nbr));
 }
 
