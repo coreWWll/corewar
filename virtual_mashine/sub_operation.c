@@ -16,7 +16,7 @@ void    get_sub_func(char *map, t_car *car, int *pos)
 
 
 
-void    do_sub_func(char *map, t_car *car)
+void    do_sub_func(t_vm *main_struct, t_car *car)
 {
     car->op_type = 0;
     ft_printf("SUB!!!!!\n");

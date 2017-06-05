@@ -13,7 +13,7 @@ void    get_st_func(char *map, t_car *car, int *pos)
     ft_printf ("-> зчитали інструкцію і її аргументи ST = %s\n", car->data);
 }
 
-void    do_st_func(char *map, t_car *car)
+void    do_st_func(t_vm *main_struct, t_car *car)
 {
     car->op_type = 0;
     ft_printf("ST HAX!!!!\n");

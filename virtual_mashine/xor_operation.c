@@ -17,7 +17,7 @@ void    get_xor_func(char *map, t_car *car, int *pos)
 
 
 
-void    do_xor_func(char *map, t_car *car)
+void    do_xor_func(t_vm *main_struct, t_car *car)
 {
 	car->op_type = 0;
 	ft_printf("I'm ALIVE!!!!!\n");

@@ -11,13 +11,13 @@ void    get_live_func(char *map, t_car *car, int *pos)
     car->op_type = 1;
     car->c_for_op = 9;
     *pos = (*pos) + 5;
-    ft_printf ("-> зчитали інструкцію і її аргументи LIVE = %s\n", (char*)
+    ft_printf ("-> read LIVE instruction, data = %s\n", (char*)
 			car->data);
 }
 
 
 
-void    do_live_func(char *map, t_car *car)
+void    do_live_func(t_vm *main_struct, t_car *car)
 {
     car->op_type = 0;
     ft_printf("I'm ALIVE!!!!!\n");

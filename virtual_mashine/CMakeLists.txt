@@ -121,7 +121,7 @@ set(SOURCE_FILES
         or_operation.c
         xor_operation.c
         error.c
-        vm.h get_op_code.c)
+        vm.h get_op_code.c zjmp_operation.c ldi_operation.c sti_operation.c fork_operation.c lld_operation.c lldi_operation.c lfork_operation.c aff_operation.c)
        
 
 add_executable(virtual_mashine ${SOURCE_FILES})

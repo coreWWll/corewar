@@ -43,6 +43,7 @@ typedef struct			s_vm
 char	*ft_memdup(size_t size, char *map, int pos);
 t_player	*create_players(void *map, int n_bots, char *file_name, int n);
 void    start_battle(t_vm *main_struct);
+
 void    get_live_func(char *map, t_car *car, int *pos);
 void    get_ld_func(char *map, t_car *car, int *pos);
 void    get_st_func(char *map, t_car *car, int *pos);
@@ -50,16 +51,38 @@ void    get_add_func(char *map, t_car *car, int *pos);
 void    get_sub_func(char *map, t_car *car, int *pos);
 void    get_or_func(char *map, t_car *car, int *pos);
 void    get_xor_func(char *map, t_car *car, int *pos);
-void    do_live_func(char *map, t_car *car);
-void    do_ld_func(char *map, t_car *car);
-void    do_st_func(char *map, t_car *car);
-void    do_add_func(char *map, t_car *car);
-void    do_sub_func(char *map, t_car *car);
-void    do_and_func(char *map, t_car *car);
-void    do_or_func(char *map, t_car *car);
-void    do_xor_func(char *map, t_car *car);
+void    get_zjmp_func(char *map, t_car *car, int *pos);
+void    get_ldi_func(char *map, t_car *car, int *pos);
+void    get_sti_func(char *map, t_car *car, int *pos);
+void    get_fork_func(char *map, t_car *car, int *pos);
+void    get_lld_func(char *map, t_car *car, int *pos);
+void    get_lldi_func(char *map, t_car *car, int *pos);
+void    get_lfork_func(char *map, t_car *car, int *pos);
+void    get_aff_func(char *map, t_car *car, int *pos);
+void    get_xor_func(char *map, t_car *car, int *pos);
 void    get_and_func(char *map, t_car *car, int *pos);
-void	do_op_code(char *map, t_car *car);
+
+void	do_op_code(t_vm *main_struct, t_car *car);
+
+void    do_live_func(t_vm *main_struct, t_car *car);
+void    do_ld_func(t_vm *main_struct, t_car *car);
+void    do_st_func(t_vm *main_struct, t_car *car);
+void    do_add_func(t_vm *main_struct, t_car *car);
+void    do_sub_func(t_vm *main_struct, t_car *car);
+void    do_and_func(t_vm *main_struct, t_car *car);
+void    do_or_func(t_vm *main_struct, t_car *car);
+void    do_xor_func(t_vm *main_struct, t_car *car);
+void    do_zjmp_func(t_vm *main_struct, t_car *car);
+void    do_ldi_func(t_vm *main_struct, t_car *car);
+void    do_sti_func(t_vm *main_struct, t_car *car);
+void    do_fork_func(t_vm *main_struct, t_car *car);
+void    do_lld_func(t_vm *main_struct, t_car *car);
+void    do_lld_func(t_vm *main_struct, t_car *car);
+void    do_lldi_func(t_vm *main_struct, t_car *car);
+void    do_lfork_func(t_vm *main_struct, t_car *car);
+void    do_aff_func(t_vm *main_struct, t_car *car);
+
+
 void    move_all_car(t_vm *main_struct);
 int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
