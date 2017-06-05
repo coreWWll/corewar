@@ -90,7 +90,7 @@ void			get_prog_size(t_asm *head) {
 	i = 0;
 	while (begin)
 	{
-		if (*(begin->lable) != '\0')
+		if (*(begin->label) != '\0')
 			begin->program_s = head->header->prog_size;
 		if (begin->command)
 		{

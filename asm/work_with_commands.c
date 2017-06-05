@@ -91,7 +91,7 @@ int 			find_lable(t_asm *begin, char *lable, int val_cur)
 	res = 0;
 	while (node)
 	{
-		if (node->lable && ft_strcmp(node->lable, lable) == 0)
+		if (node->label && ft_strcmp(node->label, lable) == 0)
 		{
 			if (node->program_s >= val_cur)
 				return (node->program_s - val_cur);

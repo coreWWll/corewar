@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	count_words(const char *s, char c)
 {
@@ -33,7 +32,7 @@ static int	count_words(const char *s, char c)
 	return (words);
 }
 
-static int	word_start(const char *s, char c, size_t start)
+static size_t	word_start(const char *s, char c, size_t start)
 {
 	size_t		i;
 
@@ -43,7 +42,7 @@ static int	word_start(const char *s, char c, size_t start)
 	return (i);
 }
 
-static int	length(const char *s, size_t start, char c)
+static size_t	length(const char *s, size_t start, char c)
 {
 	size_t		len;
 
@@ -93,8 +92,7 @@ char		**ft_strsplit(const char *s, char c)
 			return (NULL);
 		if (!(tab = (char **)malloc((words + 1) * sizeof(char *))))
 			return (NULL);
-		if (tab)
-			fill_tabs(&(*tab), s, c, words);
+		fill_tabs(&(*tab), s, c, words);
 		return (tab);
 	}
 	return (NULL);

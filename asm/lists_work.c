@@ -47,8 +47,6 @@ t_asm *new_asm() //init of new list in t_asm
     new->command_num = -1;
     new->only_label = 0;
     new->opcode = 0;
-    new->carry = 98;
-    new->c_oct = 0;
     new->label_size = 0;
     new->next = NULL;
     return (new);
