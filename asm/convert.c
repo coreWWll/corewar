@@ -54,4 +54,5 @@ void	to_byte_code(t_asm *head)
 	header_parse(head, fd);
 	write(fd, &(*head->header), sizeof(header_t));
 	get_commands(head, fd);
+	ft_strdel(&file_name);
 }
