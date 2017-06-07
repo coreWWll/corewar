@@ -4,15 +4,14 @@
 
 #include "vm.h"
 
-void    get_fork_func(char *map, t_car *car, int *pos)
+void get_fork_func(char *map, t_car *car)
 {
 
-	car->data = ft_memdup(2, map, (*pos) + 1);
+	car->data = ft_memdup(2, map, car->pos + 1);
 	car->op_type = 12;
 	car->c_for_op = 799;
-	*pos = (*pos) + 3;
-	ft_printf ("-> read FORK instruction, data = %s\n", (char*)
-			car->data);
+	car->pos = car->pos + 3;
+	ft_printf ("-> read FORK instruction, data = %s\n", car->data);
 }
 
 

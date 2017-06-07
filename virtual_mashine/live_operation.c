@@ -11,12 +11,12 @@ int		get_int_from_byte_code(char *buffer)
 			( (int)buffer[0] << 24 ));
 }
 
-void    get_live_func(char *map, t_car *car, int *pos)
+void    get_live_func(char *map, t_car *car)
 {
-    car->data = ft_memdup(REG_SIZE, map, (*pos) + 1);
+    car->data = ft_memdup(REG_SIZE, map, car->pos + 1);
     car->op_type = op_tab[0].opcode;
     car->c_for_op = op_tab[0].nb_tours - 1;
-    *pos = (*pos) + REG_SIZE + 1;
+    car->pos = car->pos + REG_SIZE + 1;
     ft_printf ("-> read LIVE instruction, data = %s\n", car->data);
 }
 

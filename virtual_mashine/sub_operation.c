@@ -4,14 +4,12 @@
 
 #include "vm.h"
 
-void    get_sub_func(char *map, t_car *car, int *pos)
+void get_sub_func(t_car *car)
 {
-
-	car->data = ft_memdup(4, map, (*pos) + 1);
-    car->op_type = 5;
+	//car->data = ft_memdup(4, map, (*pos) + 1);
     car->c_for_op = 9;
-    *pos = (*pos) + 5;
-    ft_printf ("-> зчитали інструкцію і її аргументи SUB = %s\n", car->data);
+    car->pos = car->pos + 5;
+    ft_printf ("-> зчитали інструкцію і її аргументи SUB = %s\n");
 }
 
 
