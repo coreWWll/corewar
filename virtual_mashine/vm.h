@@ -107,6 +107,7 @@ void	ft_error(char *error_message);
 void    get_op_code(t_vm *main_struct, t_car *car, int *pos);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
 void	create_map(t_vm *main_struct);
+void	create_names_players(t_vm *main_struct);
 
 
 int		get_int_from_byte_code(char *buffer);

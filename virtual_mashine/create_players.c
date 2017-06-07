@@ -34,3 +34,41 @@ t_player	*create_players(char *file_name, int boot_nbr)
 	p_list->champ_code = get_champ_code(fd, p_list->prog_len);
 	return (p_list);
 }
+
+int			name_is_taken(t_vm *main_struct, int name)
+{
+	int	i;
+
+	i = 0;
+	while (main_struct->players[i])
+	{
+		if (main_struct->players[i]->boot_nbr == name)
+			return TRUE;
+		i++;
+	}
+	return FALSE;
+}
+
+void		create_names_players(t_vm *main_struct)
+{
+	int		i;
+	int 	names;
+
+	i = 0;
+	names = 1;
+	while (main_struct->players[i])
+	{
+		if (main_struct->players[i]->boot_nbr == 0)
+		{
+			while (name_is_taken(main_struct, names))
+				names++;
+			main_struct->players[i]->name = -names;
+			names++;
+		}
+		else
+		{
+			main_struct->players[i]->name = - main_struct->players[i]->boot_nbr;
+		}
+		i++;
+	}
+}
