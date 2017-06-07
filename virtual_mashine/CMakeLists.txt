@@ -130,7 +130,9 @@ set(SOURCE_FILES
         lldi_operation.c
         lfork_operation.c
         aff_operation.c
-        get_flags.c create_map.c.c memory_dump.c)
+        get_flags.c
+        create_map.c
+        memory_dump.c)
        
 
 add_executable(virtual_mashine ${SOURCE_FILES})
