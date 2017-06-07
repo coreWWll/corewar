@@ -49,6 +49,7 @@ typedef struct			s_vm
 	int					f_v;
 	int					cycle;
 	int					round;
+	int 				cycle_to_die;
 }						t_vm;
 
 char	*ft_memdup(size_t size, char *map, int pos);

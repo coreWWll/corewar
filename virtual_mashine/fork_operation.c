@@ -20,5 +20,5 @@ void    get_fork_func(char *map, t_car *car, int *pos)
 void    do_fork_func(t_vm *main_struct, t_car *car)
 {
 	car->op_type = 0;
-	ft_printf("-> BU/|KA <-\n");
+	ft_printf("-> FORK <-\n");
 }

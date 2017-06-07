@@ -70,6 +70,7 @@ int main(int argc, char **argv)
 	main_struct = (t_vm*)ft_memalloc(sizeof(t_vm));
 	main_struct->players = (t_player**)ft_memalloc(sizeof(t_player*) *
 														   (MAX_PLAYERS + 1));
+	main_struct->cycle_to_die = CYCLE_TO_DIE;
 	read_arguments(main_struct, argv, argc);
 	put_cat_on_start(main_struct);
 	create_map(main_struct);

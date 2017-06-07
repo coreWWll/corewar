@@ -21,5 +21,6 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 {
     car->op_type = 0;
     ft_printf("I'm ALIVE!!!!!\n");
+    car->data = NULL;
 }
 

@@ -7,10 +7,10 @@
 void    get_ldi_func(char *map, t_car *car, int *pos)
 {
 
-	car->data = ft_memdup(5, map, (*pos) + 1);
+	car->data = ft_memdup(6, map, (*pos) + 1);
 	car->op_type = 10;
 	car->c_for_op = 24;
-	*pos = (*pos) + 6;
+	*pos = (*pos) + 7;
 	ft_printf ("-> read LDI instruction, data = %s\n", (char*)
 			car->data);
 }
