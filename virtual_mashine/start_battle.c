@@ -7,7 +7,7 @@
 #include <time.h>
 
 
-int check_alive(t_player *p_l)
+int check_alive(t_vm *main_struct)
 {
     return (1);
 }
@@ -16,7 +16,7 @@ void    start_battle(t_vm *main_struct)
 {
 	main_struct->cycle = 1;
     main_struct->round = 0;
-    while (check_alive(main_struct->players) && (CYCLE_TO_DIE -
+    while (check_alive(main_struct) && (CYCLE_TO_DIE -
 			main_struct->round * CYCLE_DELTA) >= 0)
     {
         nanosleep((const struct timespec[]){{0, 2599000}}, NULL);

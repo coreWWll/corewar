@@ -11,6 +11,7 @@ t_player *add_player(int boot_nbr)
 
     new = (t_player *)ft_memalloc(sizeof(t_player));
     new->car = (t_car *)malloc(sizeof(t_car));
+	new->car->live = 0;
 	new->boot_nbr = boot_nbr;
 	ft_bzero(new->car->reg, sizeof(int) * 16);
     return (new);

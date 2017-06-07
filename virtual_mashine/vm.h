@@ -21,7 +21,8 @@ typedef struct		s_car
 {
 	unsigned int	reg[16];
 	int             pos;
-	int             nb;
+	int             live;
+	int 			nb;
 	int             op_type;
 	int             c_for_op;
 	char            *data;
