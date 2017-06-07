@@ -12,6 +12,21 @@
 
 #include "op.h"
 
+char	*clean_arg(char *line)
+{
+	size_t	i;
+	size_t	len;
+	char	*res;
+
+	len = ft_strlen(line);
+	i = len;
+	while (line[i] != '\t' && line[i] != ' ')
+		i--;
+	i++;
+	res = ft_strsub(line, (unsigned int)i, len - i);
+	return (res);
+}
+
 void	put_args_types(t_asm *start, int i)
 {
 	char *temp;
@@ -45,10 +60,10 @@ void	if_one_arg(t_asm *start, char *dupline, size_t i)
 	while (dupline[i + j] != COMMENT_CHAR && dupline[i + j] != '\0')
 		j++;
 	start->args = (char **)malloc(sizeof(char *));
-	start->args[0] = ft_strsub(dupline, (unsigned int)i + 1, j);
+	start->args[0] = ft_strsub(dupline, (unsigned int)i, j);
 	temp = ft_strdup(start->args[0]);
 	ft_strdel(&start->args[0]);
-	start->args[0] = good_strtrim(temp);
+	start->args[0] = clean_arg(temp);
 	free(temp);
 	put_args_types(start, 0);
 }
@@ -67,7 +82,7 @@ void	if_more_args(t_asm *start)
 		if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], '\t'))
 		{
 			temp = start->args[i];
-            start->args[i] = good_strtrim(temp);
+            start->args[i] = clean_arg(temp);
 			free(temp);
 		}
 		start->amount_of_args++;

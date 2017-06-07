@@ -137,5 +137,5 @@ void	get_all_info(t_asm *start, char *line)//work
 	get_label(&dupline, start);
 	get_command(dupline, g_tab, start);
 	get_args(dupline, start, g_tab);
-	free(line);
+	ft_strdel(&line);
 }
