@@ -99,6 +99,26 @@ char	*get_file_name(char *av)
 	return (name);
 }
 
+char	*get_result_output(char *av)
+{
+    size_t	len;
+    int i;
+    char	*name;
+    char	*t;
+
+    i = 0;
+    name = ft_strnew(0);
+    len = ft_strlen(av);
+    while (i < len - 2)
+    {
+        t = name;
+        name = ft_charjoin(t, av[i]);
+        ft_strdel(&t);
+        i++;
+    }
+    return (name);
+}
+
 void	make_list(t_asm **start, char *line)
 {
 	t_asm *p;
@@ -108,7 +128,7 @@ void	make_list(t_asm **start, char *line)
 	{
 		if (p->only_label == 1) // check if label is empty to add command in it
 		{
-			get_shit(p, line);
+			get_all_info(p, line);
 			p->only_label = 0;
 			break ;
 		}
@@ -119,7 +139,7 @@ void	make_list(t_asm **start, char *line)
 				p->next = new_asm();
 				p = p->next;
 			}
-			get_shit(p, line);
+			get_all_info(p, line);
 			if (p->only_label != 1)
 				p->next = new_asm();
 			break ;
@@ -155,10 +175,16 @@ void	do_parsing_work(char *av, t_asm *start)
 			ft_strdel(&line);
 		}
 		ft_strdel(&line);
-		printf("name = %s\ncomment = %s\nfilename = %s\n", start->name, start->comm, start->file_name);
 	}
 	else
 		ft_exit(3);
+}
+
+void    mult_putstr(char *str, char *str1, char *str2)
+{
+    ft_putstr(str);
+    ft_putstr(str1);
+    ft_putstr(str2);
 }
 
 int		main(int ac, char **av)
@@ -169,12 +195,14 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		start = new_asm();
+        start->file_path = get_result_output(av[1]);
 		start->file_name = (av[1][0] == '.') ? get_file_name(av[1]) : av[1];
 		check_format(av[1]);
 		do_parsing_work(av[1], start);
 		tab = init_tab();
 		validate_it(start, tab);
 		to_byte_code(start);
+        mult_putstr("Writing output program to ", start->file_path, ".cor\n");
 	}
 	else
 		write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);

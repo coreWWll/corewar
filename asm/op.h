@@ -71,6 +71,7 @@ typedef struct		header_s
 typedef struct      s_asm
 {
     char            *file_name;
+    char            *file_path;
     char            *name;
     char            *comm;
     char            *label;
@@ -79,7 +80,6 @@ typedef struct      s_asm
     int             command_num;//num of command and its line in t_op
     char            *command;
     int             amount_of_args;
-
     int             what_args[3]; //type of args (T_DIR, T_IND or T_REG
     int             l_flag[3];//if lable in args
     char            **args;
@@ -108,7 +108,7 @@ typedef enum e_t
 }			t_t;
 
 t_asm               *new_asm();
-void				get_shit(t_asm *start, char *line);
+void				get_all_info(t_asm *start, char *line);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
 void 				header_parse(t_asm *asemb, int fd);

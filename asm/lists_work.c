@@ -7,20 +7,20 @@
 t_op		*init_tab(void)
 {
 	static t_op g_op_tab[16] = {{"live", 1, {T_DIR}, 1, 10, 0},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, 1},
-	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, 1},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, 1},
 	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, 1},
 	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, 1},
 	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, 1},
 	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, 1},
 	{"zjmp", 1, {T_DIR}, 9, 20, 0},
+    {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, 1},
 	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25, 1},
+    {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, 1},
 	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25, 1},
-	{"fork", 1, {T_DIR}, 12, 800, 0},
 	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, 1},
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50, 1},
-	{"lfork", 1, {T_DIR}, 15, 1000, 0},
+    {"fork", 1, {T_DIR}, 12, 800, 0},
+    {"lfork", 1, {T_DIR}, 15, 1000, 0},
 	{"aff", 1, {T_REG}, 16, 2, 1},
 	};
 
@@ -95,7 +95,8 @@ void	get_label(char **line, t_asm *start)
 				len++;
 		}
 		check_if_label_ok(*line, len);
-		if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR) && start->only_label != 1)//check if label is in line
+		if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR)
+            && start->only_label != 1)//check if label is in line
 			start->label = start->label;
 		else if (start->only_label != 1 && len != 0)
 		{
@@ -111,7 +112,7 @@ void	get_label(char **line, t_asm *start)
 void	get_command(char *line, t_op *g_tab, t_asm *start)
 {
 	int		i;
-	int		j;
+	size_t	j;
 	char	*t;
 
 	i = 15;
@@ -119,14 +120,11 @@ void	get_command(char *line, t_op *g_tab, t_asm *start)
 	{
 		if ((t = ft_strstr(line, g_tab[i].command)) != 0)
 		{
-			j = 0;
-			while (g_tab[i].command[j])
-				j++;
+            j = ft_strlen(g_tab[i].command);
 			t = t + j;
 			if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR)
 			{
-				start->command = ft_strnew(6);
-				ft_strcpy(start->command, g_tab[i].command);
+                start->command = ft_strdup(g_tab[i].command);
 				start->command_num = i;
 				start->opcode = g_tab[i].opcode;
 				break ;
@@ -192,6 +190,29 @@ int		is_num(char *str)
 	return (1);
 }
 
+void    put_types(t_asm *start, int i)
+{
+    char *temp;
+
+    if (start->args[i][0] == DIRECT_CHAR)
+    {
+        start->what_args[i] = T_DIR;
+        if (start->args[i][1] == LABEL_CHAR)
+        {
+            temp = start->args[i];
+            start->args[i] = ft_strsub(temp, 2, ft_strlen(temp) - 2);
+            free(temp);
+            start->l_flag[i] = 1;
+        }
+    }
+    else if (start->args[i][0] == 'r')
+        start->what_args[i] = T_REG;
+    else if (is_num(start->args[i]) == 1)
+        start->what_args[i] = T_IND;
+    else
+        ft_exit(2);
+}
+
 void	if_one_arg(t_asm *start, char *dupline, size_t i)
 {
 	size_t	j;
@@ -207,19 +228,7 @@ void	if_one_arg(t_asm *start, char *dupline, size_t i)
 	ft_strdel(&start->args[0]);
 	start->args[0] = good_strtrim(temp);
 	free(temp);
-	if (start->args[0][0] == DIRECT_CHAR)
-	{
-		start->what_args[0] = T_DIR;
-		if (start->args[0][1] == LABEL_CHAR)
-		{
-			temp = start->args[0];
-			start->args[0] = ft_strsub(temp, 2, ft_strlen(temp) - 2);
-			free(temp);
-			start->l_flag[0] = 1;
-		}
-	}
-	else if (dupline[i] == 'r')
-		start->what_args[0] = T_REG;
+    put_types(start, 0);
 }
 
 void	if_more_args(t_asm *start)
@@ -240,23 +249,7 @@ void	if_more_args(t_asm *start)
 			free(temp);
 		}
 		start->amount_of_args++;
-		if (start->args[i][0] == DIRECT_CHAR)
-		{
-			start->what_args[i] = T_DIR;
-			if (start->args[i][1] == LABEL_CHAR)
-			{
-				temp = start->args[i];
-				start->args[i] = ft_strsub(temp, 2, ft_strlen(temp) - 2);
-				free(temp);
-				start->l_flag[i] = 1;
-			}
-		}
-		else if (start->args[i][0] == 'r')
-			start->what_args[i] = T_REG;
-		else if (is_num(start->args[i]) == 1)
-			start->what_args[i] = T_IND;
-		else
-			ft_exit(2);
+        put_types(start, i);
 		i++;
 	}
 }
@@ -326,7 +319,7 @@ int		is_label(char *line) //check if label is in line
 	return (1);
 }
 
-void	get_shit(t_asm *start, char *line)
+void	get_all_info(t_asm *start, char *line)
 {
 	t_op *g_tab;
 	char *dupline;
