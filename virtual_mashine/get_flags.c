@@ -13,7 +13,7 @@ int		get_nbr_after_flag(char **argv, int argc, int *i)
 	if (*i >= argc)
 		ft_error(ft_strjoin("No parameter after flag ", argv[(*i) - 1]));
 	ret_val = ft_atoi_move(&(argv[*i]), &error, FALSE);
-	if (error == TRUE || ret_val < 0)
+	if (error == TRUE || ret_val <= 0)
 		ft_error(ft_strjoin("Bad number: ", argv[*i]));
 	return (ret_val);
 }
@@ -60,4 +60,5 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc)
 					add_players(main_struct, argv, argc, &i);
 		i++;
 	}
+	create_names_players(main_struct);
 }

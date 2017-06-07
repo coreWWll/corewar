@@ -4,48 +4,15 @@
 
 #include "vm.h"
 
-/*
-void	add_player_back(t_player **alst, t_player *new)
-{
-    t_player	*p;
-
-    p = *alst;
-    if (*alst == NULL)
-        *alst = new;
-    else
-    {
-        while (p->next)
-            p = p->next;
-        p->next = new;
-    }
-}
-
-void    make_players_list(t_vm *main_struct, char **players_path)
-{
-    int         n;
-    t_player    *player;
-    int         j;
-
-    j = 0;
-    while (j < main_struct->players_nbr)
-    {
-		player = create_players(main_struct->map, main_struct->players_nbr,
-				players_path[j], j + 1);
-		add_player_back(&(main_struct->players), player);
-        j++;
-    }
-}
-
-*/
 void	put_cat_on_start(t_vm	*main_struct)
 {
 	int i;
 
-	i = 1;
-	while (i <= main_struct->players_nbr)
+	i = 0;
+	while (i < main_struct->players_nbr)
 	{
 		main_struct->players[i]->car->pos = MEM_SIZE /
-				main_struct->players_nbr * (i - 1);
+				main_struct->players_nbr * (i);
 		main_struct->players[i]->car->nb = 0;
 		if (main_struct->players[i]->boot_nbr != 0)
 		{

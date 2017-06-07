@@ -26,7 +26,7 @@ void    move_all_car(t_vm *main_struct)
     t_car		*car;
 	int			i;
 
-	i = 1;
+	i = 0;
     player = main_struct->players;
     while (player[i])
     {
