@@ -10,11 +10,12 @@ void    get_ld_func(char *map, t_car *car, int *pos)
     car->op_type = 2;
     car->c_for_op = 4;
     *pos = (*pos) + 7;
-    ft_printf ("-> зчитали інструкцію і її аргументи LD = %s\n", car->data);
+    ft_printf ("-> read LD intruction, data = %s\n", (char *)car->data);
 }
 
-void    do_ld_func(char *map, t_car *car)
+void    do_ld_func(t_vm *main_struct, t_car *car)
 {
     car->op_type = 0;
     ft_printf("LOAD HAX!!!!\n");
+    car->data = NULL;
 }
