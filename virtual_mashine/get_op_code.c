@@ -27,21 +27,21 @@ void	get_op_code_part_one(char *map, t_car *car, int *pos)
 void	get_op_code_part_two(char *map, t_car *car, int *pos)
 {
 	if (map[*pos]  == 9)
-		get_live_func(map, car, pos);
+		get_zjmp_func(map, car, pos);
 	else if (map[*pos] == 10)
-		get_ld_func(map, car, pos);
+		get_ldi_func(map, car, pos);
 	else if (map[*pos] == 11)
-		get_st_func(map, car, pos);
+		get_sti_func(map, car, pos);
 	else if (map[*pos] == 12)
-		get_add_func(map, car, pos);
+		get_fork_func(map, car, pos);
 	else if (map[*pos] == 13)
-		get_sub_func(map, car, pos);
+		get_lld_func(map, car, pos);
 	else if (map[*pos] == 14)
-		get_and_func(map, car, pos);
+		get_lldi_func(map, car, pos);
 	else if (map[*pos] == 15)
-		get_or_func(map, car, pos);
+		get_lfork_func(map, car, pos);
 	else if (map[*pos] == 16)
-		get_xor_func(map, car, pos);
+		get_aff_func(map, car, pos);
 }
 
 

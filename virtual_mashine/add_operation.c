@@ -7,7 +7,7 @@
 void    get_add_func(char *map, t_car *car, int *pos)
 {
     car->data = ft_memdup(4, map, (*pos) + 1);
-    car->op_type = 1;
+    car->op_type = 4;
     car->c_for_op = 9;
     *pos = (*pos) + 5;
     ft_printf ("-> зчитали інструкцію і її аргументи ADD = %s\n", car->data);
@@ -15,7 +15,7 @@ void    get_add_func(char *map, t_car *car, int *pos)
 
 
 
-void    do_add_func(char *map, t_car *car)
+void    do_add_func(t_vm *main_struct, t_car *car)
 {
     car->op_type = 0;
     ft_printf("ADD OPERATION LAUNCHED!!!!!\n");

@@ -104,7 +104,6 @@ set(SOURCE_FILES
         corewar.c
         create_players.c
         dodatkovi_fynkcii.c
-        field_creator.c
         live_operation.c
         print_memory.c
         read_player_file.c
@@ -121,7 +120,17 @@ set(SOURCE_FILES
         or_operation.c
         xor_operation.c
         error.c
-        vm.h get_op_code.c get_flags.c create_map.c)
+        vm.h
+        get_op_code.c
+        zjmp_operation.c
+        ldi_operation.c
+        sti_operation.c
+        fork_operation.c
+        lld_operation.c
+        lldi_operation.c
+        lfork_operation.c
+        aff_operation.c
+        get_flags.c create_map.c.c memory_dump.c)
        
 
 add_executable(virtual_mashine ${SOURCE_FILES})
