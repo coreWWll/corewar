@@ -6,6 +6,8 @@
 
 void    get_ld_func(char *map, t_car *car, int *pos)
 {
+    size_t buf;
+
     car->data = ft_memdup(7, map, (*pos) + 1);
     car->op_type = 2;
     car->c_for_op = 4;

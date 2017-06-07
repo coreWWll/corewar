@@ -16,10 +16,12 @@
 #define ERR_OPEN_FILE				"Can't open file - "
 #define ERR_PLAYER_SIZE				"The size of player is to big - "
 
+extern t_op op_tab[17];
 
 typedef struct		s_car
 {
 	unsigned int	reg[16];
+	t_op			op_tabble;
 	int             pos;
 	int             live;
 	int 			nb;
@@ -29,8 +31,10 @@ typedef struct		s_car
 	struct s_car    *next;
 }					t_car;
 
+
 typedef struct			s_player
 {
+	unsigned int		lives_in_current_period;
 	int					boot_nbr;
 	int                 name;
 	char 				*bot_name;
