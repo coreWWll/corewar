@@ -21,7 +21,8 @@ typedef struct		s_car
 {
 	unsigned int	reg[16];
 	int             pos;
-	int             nb;
+	int             live;
+	int 			nb;
 	int             op_type;
 	int             c_for_op;
 	char            *data;
@@ -42,6 +43,7 @@ typedef struct			s_player
 typedef struct			s_vm
 {
 	t_player			**players;
+	int 				last_live[2];
 	int					players_nbr;
 	char 				*map;
 	int					f_dump;
@@ -55,6 +57,7 @@ typedef struct			s_vm
 char	*ft_memdup(size_t size, char *map, int pos);
 t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
+void	put_cat_on_start(t_vm	*main_struct);
 
 void    get_live_func(char *map, t_car *car, int *pos);
 void    get_ld_func(char *map, t_car *car, int *pos);
@@ -106,5 +109,7 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc);
 void	create_map(t_vm *main_struct);
 void	create_names_players(t_vm *main_struct);
 
+
+int		get_int_from_byte_code(char *buffer);
 
 #endif
