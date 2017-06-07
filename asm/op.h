@@ -71,15 +71,15 @@ typedef struct		header_s
 typedef struct      s_asm
 {
     char            *file_name;
+    char            *file_path;
     char            *name;
     char            *comm;
     char            *label;
     int             only_label; //flag if command is under lable
     int             opcode;
-    int             command_num;//num of command and its line in t_op
+    int             comm_num;//num of command and its line in t_op
     char            *command;
     int             amount_of_args;
-
     int             what_args[3]; //type of args (T_DIR, T_IND or T_REG
     int             l_flag[3];//if lable in args
     char            **args;
@@ -97,8 +97,6 @@ typedef struct s_op
     int args_am; //required number of args
     int args[3];// 3 is maximum
     int opcode;
-	int cycles;
-	int oct; //codage octal (idk what is this)
 } t_op;
 
 typedef enum e_t
@@ -108,7 +106,22 @@ typedef enum e_t
 }			t_t;
 
 t_asm               *new_asm();
-void				get_shit(t_asm *start, char *line);
+void				get_all_info(t_asm *start, char *line);
+void				get_args(char *line, t_asm *start, t_op *tab);
+int					is_num(char *str);
+char				*good_strtrim(char *str);
+void    			mult_putstr(char *str, char *str1, char *str2);
+char				*get_name_or_comm(char *line, int flag);
+char				*get_file_name(char *av);
+char				*get_result_output(char *av);
+void				check_format(char *file);
+void				check_endl_and_len(char *t, char *name, int flag);
+int					if_comment(char *line);
+int					is_label(char *line);
+void				if_comment_at_end(char **line);
+void				check_if_label_ok(char *line, int len);
+void				check_label_syntax(char *line);
+void				find_label_or_die(t_asm *start, char *label);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
 void 				header_parse(t_asm *asemb, int fd);
