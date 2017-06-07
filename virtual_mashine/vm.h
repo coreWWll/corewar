@@ -56,6 +56,7 @@ typedef struct			s_vm
 char	*ft_memdup(size_t size, char *map, int pos);
 t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
+void	put_cat_on_start(t_vm	*main_struct);
 
 void    get_live_func(char *map, t_car *car, int *pos);
 void    get_ld_func(char *map, t_car *car, int *pos);
