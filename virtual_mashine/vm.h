@@ -43,6 +43,7 @@ typedef struct			s_player
 typedef struct			s_vm
 {
 	t_player			**players;
+	int 				last_live[2];
 	int					players_nbr;
 	char 				*map;
 	int					f_dump;
@@ -107,5 +108,7 @@ void    get_op_code(t_vm *main_struct, t_car *car, int *pos);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
 void	create_map(t_vm *main_struct);
 
+
+int		get_int_from_byte_code(char *buffer);
 
 #endif
