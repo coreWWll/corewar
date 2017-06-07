@@ -4,11 +4,11 @@
 .name		"fluttershy"
 .comment	"oh, my, what a scary project"
 
+ardefgeni:	st 		r1, 6
 entry:
-xor		r2, r5, r15 	zjmp	%:ardefinit
     st		r1, 6
 	live	%42
-    fork	%:coregeni
+    fork	%:coregeni  ;dafsdfasd
 	st		r1, 6
 	live	%42
 	fork	%:torpgeni
@@ -115,7 +115,7 @@ avdefchk:
 	live	%3940641
 	xor		r2, r5, r15
 	zjmp	%:avdefinit
-avdefloop:	
+avdefloop:
 	ld		%0, r16
 	zjmp	%:avdefwrite
 
@@ -144,7 +144,7 @@ torpl1:
 	add		r2, r3, r2
 torpchk:
 	live	%89523
-	xor		r2, r5, r15	
+	xor		r2, r5, r15
 	zjmp	%362
 torploop:
 	ld		%0, r15

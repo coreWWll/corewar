@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lentoc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 19:22:19 by dburtnja          #+#    #+#             */
-/*   Updated: 2017/01/19 19:48:21 by dburtnja         ###   ########.fr       */
+/*   Created: 2016/12/06 17:33:17 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/02/08 16:28:19 by dburtnja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_atoi_mod(char *buf, int *i)
+int		ft_lentoc(char *buf, char c)
 {
-	unsigned long long nb;
+	int i;
 
-	nb = 0;
-	while (buf[*i] != '\0' && (buf[*i] >= '0' && buf[*i] <= '9'))
+	i = 0;
+	while (buf[i] != '\0' && buf[i] != c)
 	{
-		nb = nb * 10 + (buf[*i] - '0');
-		(*i)++;
+		i++;
 	}
-	return (nb);
+	return (i);
 }
