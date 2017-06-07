@@ -31,22 +31,22 @@ void	check_if_labels(t_asm *start)
 
 void	check_args_type(t_asm *p, t_op *tab, int i)
 {
-	if (p->what_args[i] == 1)
+	if (p->what_args[i] == T_REG)
 	{
-		if (tab[p->comm_num].args[i] != 1 && tab[p->comm_num].args[i] != 3 &&
-			tab[p->comm_num].args[i] != 5)
+		if (tab[p->comm_num].args[i] != 1 && tab[p->comm_num].args[i] != 3
+            && tab[p->comm_num].args[i] != 5)
 			ft_exit(2);
 	}
-	else if (p->what_args[i] == 2)
+	else if (p->what_args[i] == T_IND)
 	{
-		if (tab[p->comm_num].args[i] != 2 && tab[p->comm_num].args[i] != 3 &&
-			tab[p->comm_num].args[i] != 6)
+		if (tab[p->comm_num].args[i] != 2 && tab[p->comm_num].args[i] != 3
+            && tab[p->comm_num].args[i] != 6)
 			ft_exit(2);
 	}
-	else if (p->what_args[i] == 4)
+	else if (p->what_args[i] == T_DIR)
 	{
-		if (tab[p->comm_num].args[i] != 4 && tab[p->comm_num].args[i] != 5 &&
-			tab[p->comm_num].args[i] != 6)
+		if (tab[p->comm_num].args[i] != 4 && tab[p->comm_num].args[i] != 5
+            && tab[p->comm_num].args[i] != 6)
 			ft_exit(2);
 	}
 }
