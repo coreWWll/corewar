@@ -10,7 +10,7 @@
 /*																			  */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "../op.h"
 
 void	make_list(t_asm **start, char *line)//main
 {
