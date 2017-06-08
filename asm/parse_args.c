@@ -12,21 +12,6 @@
 
 #include "op.h"
 
-char	*clean_arg(char *line)
-{
-	size_t	i;
-	size_t	len;
-	char	*res;
-
-	len = ft_strlen(line);
-	i = len;
-	while (line[i] != '\t' && line[i] != ' ')
-		i--;
-	i++;
-	res = ft_strsub(line, (unsigned int)i, len - i);
-	return (res);
-}
-
 void	put_args_types(t_asm *start, int i)
 {
 	char *temp;

@@ -12,7 +12,7 @@
 
 #include "op.h"
 
-t_op	*init_tab(void)//init
+t_op	*init_tab(void)
 {
 	static t_op g_op_tab[16] = {{"live", 1, {T_DIR}, 1},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4},
@@ -35,7 +35,7 @@ t_op	*init_tab(void)//init
 	return (g_op_tab);
 }
 
-t_asm	*new_asm(void) //init of new list in t_asm//work?int?
+t_asm	*new_asm(void)
 {
 	t_asm *new;
 
@@ -61,7 +61,7 @@ t_asm	*new_asm(void) //init of new list in t_asm//work?int?
 	return (new);
 }
 
-void	get_label(char **line, t_asm *start)//work
+void	get_label(char **line, t_asm *start)
 {
 	int		len;
 	char	dupline[1000];
@@ -90,7 +90,7 @@ void	get_label(char **line, t_asm *start)//work
 	}
 }
 
-void	get_command(char *line, t_op *g_tab, t_asm *start)//work
+void	get_command(char *line, t_op *g_tab, t_asm *start)
 {
 	int		i;
 	size_t	j;
@@ -119,7 +119,7 @@ void	get_command(char *line, t_op *g_tab, t_asm *start)//work
 		ft_exit(5);
 }
 
-void	get_all_info(t_asm *start, char *line)//work
+void	get_all_info(t_asm *start, char *line)
 {
 	t_op *g_tab;
 	char *dupline;
