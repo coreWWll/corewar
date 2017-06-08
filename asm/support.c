@@ -88,5 +88,7 @@ void	ft_exit(int flag)
 		ft_putendl("Wrong label");
 	if (flag == 7)
 		ft_putendl("Wrong label syntax");
+    if (flag == 8)
+        ft_putendl("azazazaz");
 	exit(0);
 }

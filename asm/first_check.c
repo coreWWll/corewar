@@ -30,10 +30,10 @@ int		if_comment(char *line)
 
 void	check_endl_and_len(char *t, char *name, int flag)
 {
-	t++;
+    t++;
 	while (*t != '\0')
 	{
-		if (*t != ' ' && *t != '\t')
+		if (*t != ' ' && *t != '\t' && flag != 2)
 			ft_exit(0);
 		t++;
 	}
