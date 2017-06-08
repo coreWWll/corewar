@@ -29,6 +29,7 @@ typedef struct		s_car
 	t_args			args[3];
 	unsigned int	reg[16];
 	t_op			op_tabble;
+	int				op_size;
 	int             pos;
 	int             live;
 	int 			nb;
