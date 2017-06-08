@@ -132,7 +132,9 @@ set(SOURCE_FILES
         aff_operation.c
         get_flags.c
         create_map.c
-        memory_dump.c operations_with_car.c op.c get_args_and_value.c)
+        memory_dump.c operations_with_car.c
+        ../op.c
+        get_args_and_value.c)
        
 
 add_executable(virtual_mashine ${SOURCE_FILES})
