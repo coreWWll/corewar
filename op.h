@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/types.h>
 #include "libft/libft.h"
 #define COREWAR_OP_H
 
@@ -103,6 +104,7 @@ typedef struct s_op
 	int				codage_octal;
 } t_op;
 
+extern t_op op_tab[17];
 
 typedef enum e_t
 {
@@ -112,7 +114,7 @@ typedef enum e_t
 
 t_asm               *new_asm();
 void				get_all_info(t_asm *start, char *line);
-void				get_args(char *line, t_asm *start, t_op *tab);
+void				get_args(char *line, t_asm *start);
 int					is_num(char *str);
 char				*good_strtrim(char *str);
 void    			mult_putstr(char *str, char *str1, char *str2);
@@ -130,7 +132,7 @@ void				find_label_or_die(t_asm *start, char *label);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
 void 				header_parse(t_asm *asemb, int fd);
-void                validate_it(t_asm *start, t_op *g_tab);
+void                validate_it(t_asm *start);
 t_op                *init_tab();
 char	            *clean_arg(char *line);
 int 				if_lable(int *ar);// check if in arguments lable

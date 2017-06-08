@@ -12,29 +12,6 @@
 
 #include "../op.h"
 
-t_op	*init_tab(void)
-{
-	static t_op g_op_tab[16] = {{"live", 1, {T_DIR}, 1},
-	{"add", 3, {T_REG, T_REG, T_REG}, 4},
-	{"sub", 3, {T_REG, T_REG, T_REG}, 5},
-	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6},
-	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7},
-	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8},
-	{"zjmp", 1, {T_DIR}, 9},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2},
-	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10},
-	{"st", 2, {T_REG, T_IND | T_REG}, 3},
-	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11},
-	{"lld", 2, {T_DIR | T_IND, T_REG}, 13},
-	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14},
-	{"fork", 1, {T_DIR}, 12},
-	{"lfork", 1, {T_DIR}, 15},
-	{"aff", 1, {T_REG}, 16},
-	};
-
-	return (g_op_tab);
-}
-
 t_asm	*new_asm(void)
 {
 	t_asm *new;
@@ -90,7 +67,7 @@ void	get_label(char **line, t_asm *start)
 	}
 }
 
-void	get_command(char *line, t_op *g_tab, t_asm *start)
+void	get_command(char *line, t_asm *start)
 {
 	int		i;
 	size_t	j;
@@ -99,15 +76,15 @@ void	get_command(char *line, t_op *g_tab, t_asm *start)
 	i = 16;
 	while (--i >= 0) //sometimes works when 2 or more commands in line
 	{
-		if ((t = ft_strstr(line, g_tab[i].command)) != 0)
+		if ((t = ft_strstr(line, op_tab[i].command)) != 0)
 		{
-			j = ft_strlen(g_tab[i].command);
+			j = ft_strlen(op_tab[i].command);
 			t = t + j;
 			if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR)
 			{
-				start->command = ft_strdup(g_tab[i].command);
+				start->command = ft_strdup(op_tab[i].command);
 				start->comm_num = i;
-				start->opcode = g_tab[i].opcode;
+				start->opcode = op_tab[i].opcode;
 				break ;
 			}
 		}
@@ -121,7 +98,6 @@ void	get_command(char *line, t_op *g_tab, t_asm *start)
 
 void	get_all_info(t_asm *start, char *line)
 {
-	t_op *g_tab;
 	char *dupline;
 
 	if (start->only_label == 1 && is_label(line) == 1)//if list with only label
@@ -133,9 +109,8 @@ void	get_all_info(t_asm *start, char *line)
 	if_comment_at_end(&line);
 	line = good_strtrim(line);
 	dupline = line;
-	g_tab = init_tab();
 	get_label(&dupline, start);
-	get_command(dupline, g_tab, start);
-	get_args(dupline, start, g_tab);
+	get_command(dupline, start);
+	get_args(dupline, start);
 	ft_strdel(&line);
 }
