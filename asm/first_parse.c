@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "../op.h"
 
 char	*get_name_or_comm(char *line, int flag)
 {

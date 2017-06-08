@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #define COREWAR_OP_H
 
 #define IND_SIZE				2
@@ -100,7 +100,7 @@ typedef struct s_op
 	int             nb_tours;
 	char            *full_name;
 	int 			carry;
-	int            codage_octal;
+	int				codage_octal;
 } t_op;
 
 
