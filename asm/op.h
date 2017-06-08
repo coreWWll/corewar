@@ -132,9 +132,10 @@ void				to_byte_code(t_asm *head);
 void 				header_parse(t_asm *asemb, int fd);
 void                validate_it(t_asm *start, t_op *g_tab);
 t_op                *init_tab();
+char	            *clean_arg(char *line);
 int 				if_lable(int *ar);// check if in arguments lable
 void				write_op_code(t_asm *head, t_asm *begin, int op_c, int fd); // write commands in file
-unsigned int		do_big_endian(unsigned int magic, int size); // chang place of bits
+unsigned int		do_big_endian(unsigned int magic, int size); // change place of bits
 
 
 #endif //COREWAR_OP_H
