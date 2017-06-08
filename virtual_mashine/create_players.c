@@ -13,6 +13,7 @@ t_player *add_player(int boot_nbr)
     new->car = (t_car *)ft_memalloc(sizeof(t_car));
 	new->car->live = 0;
 	new->boot_nbr = boot_nbr;
+	new->car->next = NULL;
 	ft_bzero(new->car->reg, sizeof(int) * 16);
     return (new);
 }
