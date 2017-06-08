@@ -16,10 +16,19 @@
 #define ERR_OPEN_FILE				"Can't open file - "
 #define ERR_PLAYER_SIZE				"The size of player is to big - "
 
+extern t_op op_tab[17];
+
+typedef struct		s_args
+{
+	int				name;
+	int 			value;
+}					t_args;
 
 typedef struct		s_car
 {
+	t_args			args[3];
 	unsigned int	reg[16];
+	t_op			op_tabble;
 	int             pos;
 	int             live;
 	int 			nb;
@@ -29,8 +38,10 @@ typedef struct		s_car
 	struct s_car    *next;
 }					t_car;
 
+
 typedef struct			s_player
 {
+	unsigned int		lives_in_current_period;
 	int					boot_nbr;
 	int                 name;
 	char 				*bot_name;
@@ -59,23 +70,23 @@ t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
 void	put_cat_on_start(t_vm	*main_struct);
 
-void    get_live_func(char *map, t_car *car, int *pos);
-void    get_ld_func(char *map, t_car *car, int *pos);
-void    get_st_func(char *map, t_car *car, int *pos);
-void    get_add_func(char *map, t_car *car, int *pos);
-void    get_sub_func(char *map, t_car *car, int *pos);
-void    get_or_func(char *map, t_car *car, int *pos);
-void    get_xor_func(char *map, t_car *car, int *pos);
-void    get_zjmp_func(char *map, t_car *car, int *pos);
-void    get_ldi_func(char *map, t_car *car, int *pos);
-void    get_sti_func(char *map, t_car *car, int *pos);
-void    get_fork_func(char *map, t_car *car, int *pos);
-void    get_lld_func(char *map, t_car *car, int *pos);
-void    get_lldi_func(char *map, t_car *car, int *pos);
-void    get_lfork_func(char *map, t_car *car, int *pos);
-void    get_aff_func(char *map, t_car *car, int *pos);
-void    get_xor_func(char *map, t_car *car, int *pos);
-void    get_and_func(char *map, t_car *car, int *pos);
+void    get_live_func(char *map, t_car *car);
+void get_ld_func(t_car *car);
+void get_st_func(t_car *car);
+void get_add_func(t_car *car);
+void get_sub_func(t_car *car);
+void get_or_func(t_car *car);
+void get_xor_func(t_car *car);
+void    get_zjmp_func(char *map, t_car *car);
+void get_ldi_func(t_car *car);
+void get_sti_func(t_car *car);
+void get_fork_func(char *map, t_car *car);
+void get_lld_func(t_car *car);
+void get_lldi_func(t_car *car);
+void get_lfork_func(char *map, t_car *car);
+void get_aff_func(char *map, t_car *car);
+void get_xor_func(t_car *car);
+void get_and_func(t_car *car);
 
 void	do_op_code(t_vm *main_struct, t_car *car);
 
@@ -104,12 +115,14 @@ char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
 void	print_memory(unsigned char *map);
 void	ft_error(char *error_message);
-void    get_op_code(t_vm *main_struct, t_car *car, int *pos);
+void    get_op_code(t_vm *main_struct, t_car *car);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
 void	create_map(t_vm *main_struct);
 void	create_names_players(t_vm *main_struct);
 
 
 int		get_int_from_byte_code(char *buffer);
+void	get_args_nd_value(t_car *car, t_vm *main_struct);
+
 
 #endif

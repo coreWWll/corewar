@@ -10,12 +10,12 @@ void    move_single_car(t_vm *main_struct, t_car *car)
 		return ;
     if (car->c_for_op == 0)
     {
-        if (car->op_type == 0)
-            get_op_code(main_struct, car, &car->pos);
+        if (car->op_tabble.opcode == 0)
+            get_op_code(main_struct, car);
         else
         {
             do_op_code(main_struct, car);
-            get_op_code(main_struct, car, &car->pos);
+            get_op_code(main_struct, car);
         }
     }
     else

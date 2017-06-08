@@ -4,15 +4,13 @@
 
 #include "vm.h"
 
-void    get_or_func(char *map, t_car *car, int *pos)
+void get_or_func(t_car *car)
 {
 
-	car->data = ft_memdup(4, map, (*pos) + 1);
-	car->op_type = 7;
+	//car->data = ft_memdup(4, map, (*pos) + 1);
 	car->c_for_op = 5;
-	*pos = (*pos) + 5;
-	ft_printf ("-> read OR operation ant it data =  %s\n", (char*)
-			car->data);
+	car->pos = car->pos + 5;
+	ft_printf ("-> read OR operation ant it data\n", car->data);
 }
 
 

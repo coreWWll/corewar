@@ -4,13 +4,12 @@
 
 #include "vm.h"
 
-void    get_st_func(char *map, t_car *car, int *pos)
+void get_st_func(t_car *car)
 {
-    car->data = ft_memdup(4, map, (*pos) + 1);
-    car->op_type = 3;
+   // car->data = ft_memdup(4, map, (*pos) + 1);
     car->c_for_op = 4;
-    *pos = (*pos) + 5;
-    ft_printf ("-> зчитали інструкцію і її аргументи ST = %s\n", car->data);
+    car->pos = car->pos + 5;
+    ft_printf ("-> зчитали інструкцію і її аргументи ST = %s\n");
 }
 
 void    do_st_func(t_vm *main_struct, t_car *car)

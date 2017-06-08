@@ -4,13 +4,12 @@
 
 #include "vm.h"
 
-void    get_and_func(char *map, t_car *car, int *pos)
+void get_and_func(t_car *car)
 {
-	car->data = ft_memdup(4, map, (*pos) + 1);
-	car->op_type = 6;
+	//car->data = ft_memdup(4, map, (*pos) + 1);
 	car->c_for_op = 5;
-	*pos = (*pos) + 5;
-	ft_printf ("-> read AND operation and it data = %s\n", car->data);
+	car->pos = car->pos + 5;
+	ft_printf ("-> read AND operation and it data = %s\n");
 }
 
 void    do_and_func(t_vm *main_struct, t_car *car)

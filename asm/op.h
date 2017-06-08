@@ -93,11 +93,16 @@ typedef struct      s_asm
 
 typedef struct s_op
 {
-    char *command;
-    int args_am; //required number of args
-    int args[3];// 3 is maximum
-    int opcode;
+    char 			*command;
+    int 			args_am; //required number of args
+    int 			args[3];// 3 is maximum
+    int 			opcode;
+	int             nb_tours;
+	char            *full_name;
+	int 			carry;
+	int            codage_octal;
 } t_op;
+
 
 typedef enum e_t
 {
