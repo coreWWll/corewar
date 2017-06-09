@@ -79,10 +79,9 @@ void    get_op_code(t_vm *main_struct, t_car *car)
 				get_op_code_part_one(main_struct->map, car);
 			else
 			{
-				// function will get all args and values and write into the *car
-				get_op_code_part_two(car);
+				get_args_nd_value(car, main_struct);
+			  get_op_code_part_two(car);
 			}
-
 		}
 	}
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "../op.h"
 
 void	check_if_label_ok(char *line, int len)
 {

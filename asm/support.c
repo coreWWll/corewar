@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "../op.h"
 
 void	mult_putstr(char *str, char *str1, char *str2)
 {
@@ -57,6 +57,21 @@ int		is_num(char *str)
 	return (1);
 }
 
+char	*clean_arg(char *line)
+{
+    size_t	i;
+    size_t	len;
+    char	*res;
+
+    len = ft_strlen(line);
+    i = len;
+    while (line[i] != '\t' && line[i] != ' ')
+        i--;
+    i++;
+    res = ft_strsub(line, (unsigned int)i, len - i);
+    return (res);
+}
+
 void	ft_exit(int flag)
 {
 	if (flag == 0)
@@ -73,5 +88,7 @@ void	ft_exit(int flag)
 		ft_putendl("Wrong label");
 	if (flag == 7)
 		ft_putendl("Wrong label syntax");
+    if (flag == 8)
+        ft_putendl("azazazaz");
 	exit(0);
 }
