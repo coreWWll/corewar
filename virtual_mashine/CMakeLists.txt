@@ -133,7 +133,7 @@ set(SOURCE_FILES
         get_flags.c
         create_map.c
         memory_dump.c operations_with_car.c
-        op.c
+        ../op.c
         get_args_and_value.c)
        
 
