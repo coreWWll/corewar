@@ -28,6 +28,7 @@ typedef struct		s_args
 typedef struct		s_car
 {
 	t_args			args[3];
+	int 			carry;
 	int				arg_size;
 	unsigned int	reg[16];
 	t_op			op_tabble;

@@ -6,17 +6,16 @@
 
 void get_ld_func(t_car *car)
 {
-    size_t buf;
-
-    //car->data = ft_memdup(7, map, (*pos) + 1);
-    car->c_for_op = 4;
-    car->pos = car->pos + 7;
-    ft_printf ("-> read LD intruction, data = %s\n");
+    ft_printf ("-> read LD intruction, data =\n");
 }
 
 void    do_ld_func(t_vm *main_struct, t_car *car)
 {
-    car->op_type = 0;
+	if (car->args[0].name == 4 && car->args[0].value == 0
+			&& car->args[1].name == 1)
+		car->carry = 1;
+    car->op_tabble.opcode = 0;
+	car->pos = car->pos + car->arg_size + 2;
     ft_printf("LOAD HAX!!!!\n");
     car->data = NULL;
 }
