@@ -15,9 +15,9 @@
 #define ERR_PLAYER_FILE_READING		"Player_file reading fail"
 #define ERR_OPEN_FILE				"Can't open file - "
 #define ERR_PLAYER_SIZE				"The size of player is to big - "
-#define ERR_MEM_ALLOC				"Cant allocate the memory."
+#define ERR_MEM_ALLOC				"Cant allocate the memory: "
 
-extern t_op op_tab[17];
+//extern t_op op_tab[17];
 
 typedef struct		s_args
 {
@@ -58,7 +58,9 @@ typedef struct			s_vm
 {
 	t_player			**players;
 	int 				last_live[2];
+	int 				max_checks;
 	int 				nbr_of_lifes;
+	int 				count_live_functions;
 	int					players_nbr;
 	char 				*map;
 	int					f_dump;
@@ -107,6 +109,9 @@ void    do_zjmp_func(t_vm *main_struct, t_car *car);
 void    do_ldi_func(t_vm *main_struct, t_car *car);
 void    do_sti_func(t_vm *main_struct, t_car *car);
 void    do_fork_func(t_vm *main_struct, t_car *car);
+void	create_new_car(t_car *car, int delta);
+t_car	*add_car(t_car *car, int delta);
+short	get_short_from_byte_code(char *buffer, int flag);
 void    do_lld_func(t_vm *main_struct, t_car *car);
 void    do_lld_func(t_vm *main_struct, t_car *car);
 void    do_lldi_func(t_vm *main_struct, t_car *car);
