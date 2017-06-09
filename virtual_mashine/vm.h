@@ -123,7 +123,7 @@ void	create_names_players(t_vm *main_struct);
 
 
 int		get_int_from_byte_code(char *buffer);
-void	get_args_nd_value(t_car *car, t_vm *main_struct);
+int		get_args_nd_value(t_car *car, t_vm *main_struct);
 
 
 #endif
