@@ -15,6 +15,7 @@
 #define ERR_PLAYER_FILE_READING		"Player_file reading fail"
 #define ERR_OPEN_FILE				"Can't open file - "
 #define ERR_PLAYER_SIZE				"The size of player is to big - "
+#define ERR_MEM_ALLOC				"Cant allocate the memory."
 
 extern t_op op_tab[17];
 
@@ -56,6 +57,7 @@ typedef struct			s_vm
 {
 	t_player			**players;
 	int 				last_live[2];
+	int 				nbr_of_lifes;
 	int					players_nbr;
 	char 				*map;
 	int					f_dump;
@@ -66,6 +68,7 @@ typedef struct			s_vm
 	int 				cycle_to_die;
 }						t_vm;
 
+void	dell_car_from_list(t_car **head, t_car *to_dell);
 char	*ft_memdup(size_t size, char *map, int pos);
 t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
