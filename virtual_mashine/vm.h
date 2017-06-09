@@ -17,7 +17,7 @@
 #define ERR_PLAYER_SIZE				"The size of player is to big - "
 #define ERR_MEM_ALLOC				"Cant allocate the memory."
 
-extern t_op op_tab[17];
+//extern t_op op_tab[17];
 
 typedef struct		s_args
 {
