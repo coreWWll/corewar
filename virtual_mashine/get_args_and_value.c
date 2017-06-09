@@ -15,11 +15,11 @@ void	read_args_from_char(t_car *car, unsigned char c, int pos)
 	car->args[2].name = (buf = (c >> 2) << 6) >> 6;
 	while (i < 3)
 	{
-		if (car->args[i].name == 1)
+		if (car->args[i].name == REG_CODE)
 			car->args[i].name = T_REG;
-		if (car->args[i].name == 2)
+		if (car->args[i].name == DIR_CODE)
 			car->args[i].name = T_DIR;
-		if (car->args[i].name == 3)
+		if (car->args[i].name == IND_CODE)
 			car->args[i].name = T_IND;
 		i++;
 	}
@@ -51,7 +51,7 @@ int 	read_args(t_car *car, unsigned char *map)
 
 	i = 0;
 	error = FALSE;
-	label_size = car->op_tabble.codage_octal == 0 ? 4 : 2;
+	label_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	while (i < car->op_tabble.args_am)
 	{
 		read_size = car->args[i].name == 4 ? label_size : car->args[i].name;
