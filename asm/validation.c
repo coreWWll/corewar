@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "../op.h"
 
 void	check_if_labels(t_asm *start)
 {
@@ -29,42 +29,42 @@ void	check_if_labels(t_asm *start)
 	}
 }
 
-void	check_args_type(t_asm *p, t_op *tab, int i)
+void	check_args_type(t_asm *p, int i)
 {
 	if (p->what_args[i] == T_REG)
 	{
-		if (tab[p->comm_num].args[i] != 1 && tab[p->comm_num].args[i] != 3
-            && tab[p->comm_num].args[i] != 5)
+		if (op_tab[p->comm_num].args[i] != T_REG && op_tab[p->comm_num].args[i] != T_REG + T_IND
+            && op_tab[p->comm_num].args[i] != T_REG + T_DIR)
 			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_IND)
 	{
-		if (tab[p->comm_num].args[i] != 2 && tab[p->comm_num].args[i] != 3
-            && tab[p->comm_num].args[i] != 6)
+		if (op_tab[p->comm_num].args[i] != T_IND && op_tab[p->comm_num].args[i] != T_IND + T_REG
+            && op_tab[p->comm_num].args[i] != T_IND + T_DIR)
 			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_DIR)
 	{
-		if (tab[p->comm_num].args[i] != 4 && tab[p->comm_num].args[i] != 5
-            && tab[p->comm_num].args[i] != 6)
+		if (op_tab[p->comm_num].args[i] != T_DIR && op_tab[p->comm_num].args[i] != T_DIR + T_REG
+            && op_tab[p->comm_num].args[i] != T_DIR + T_IND)
 			ft_exit(2);
 	}
 }
 
-void	check_args(t_asm *p, t_op *tab)
+void	check_args(t_asm *p)
 {
 	int i;
 
 	i = 0;
-	while (i < tab[p->comm_num].args_am || (p->comm_num == 0 && i == 0))
+	while (i < op_tab[p->comm_num].args_am || (p->comm_num == 0 && i == 0))
 	{
-		if (tab[p->comm_num].args[i] != 7)
-			check_args_type(p, tab, i);
+		if (op_tab[p->comm_num].args[i] != 7)
+			check_args_type(p, i);
 		i++;
 	}
 }
 
-void	check_args_now(t_asm *start, t_op *tab)
+void	check_args_now(t_asm *start)
 {
 	t_asm *p;
 
@@ -73,16 +73,16 @@ void	check_args_now(t_asm *start, t_op *tab)
 	{
 		if (p->command && p->command[0] != '\0')
 		{
-			if (p->amount_of_args != tab[p->comm_num].args_am)
+			if (p->amount_of_args != op_tab[p->comm_num].args_am)
 				ft_exit(2);
-			check_args(p, tab);
+			check_args(p);
 		}
 		p = p->next;
 	}
 }
 
-void	validate_it(t_asm *start, t_op *tab)
+void	validate_it(t_asm *start)
 {
 	check_if_labels(start);
-	check_args_now(start, tab);
+	check_args_now(start);
 }
