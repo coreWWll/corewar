@@ -15,7 +15,7 @@ void    do_ld_func(t_vm *main_struct, t_car *car)
 			&& car->args[1].name == 1)
 		car->carry = 1;
     car->op_tabble.opcode = 0;
-	car->pos = car->pos + car->arg_size + 2;
+	  car->pos = car->pos + car->arg_size + 2;
     ft_printf("LOAD HAX!!!!\n");
     car->data = NULL;
 }
