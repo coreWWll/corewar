@@ -7,7 +7,7 @@
 void do_op_code_part_two(t_vm *main_struct, t_car *car)
 {
 
-	if (car->op_type == 9)
+	if (car->op_tabble.opcode == 9)
 		do_zjmp_func(main_struct, car);
 	else if (car->op_type == 10)
 		do_ldi_func(main_struct, car);
@@ -30,7 +30,7 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
 
     if (car->op_tabble.opcode == 1)
         do_live_func(main_struct, car);
-    else if (car->op_type == 2)
+    else if (car->op_tabble.opcode == 2)
         do_ld_func(main_struct, car);
 	else if (car->op_type == 3)
 		do_st_func(main_struct, car);
