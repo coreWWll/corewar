@@ -61,3 +61,20 @@ void	find_label_or_die(t_asm *start, char *label)
 	if (i != 1)
 		ft_exit(6);
 }
+
+void 	check_if_end_is_newln(char *av)
+{
+    int fd;
+    char buf[5];
+    int i = 0;
+
+    fd = open(av, O_RDONLY);
+    while(read(fd,buf,1) > 0)
+        i += 1;
+    if(lseek(fd,i - 5,SEEK_SET) < 0)
+        ft_exit(3);
+    if(read(fd,buf,5) != 5)
+        ft_exit(3);;
+    if (!ft_strchr(buf, '\n'))
+        ft_exit(8);
+}
