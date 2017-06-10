@@ -118,14 +118,14 @@ void				get_args(char *line, t_asm *start);
 int					is_num(char *str);
 char				*good_strtrim(char *str);
 void    			mult_putstr(char *str, char *str1, char *str2);
-char				*get_name_or_comm(char *line, int flag);
+char				*get_name_or_comm(char *line, int fd, int flag);
 char				*get_file_name(char *av);
 char				*get_result_output(char *av);
 void				check_format(char *file);
 void				check_endl_and_len(char *t, char *name, int flag);
 int					if_comment(char *line);
 int					is_label(char *line);
-void				if_comment_at_end(char **line);
+char				*if_comment_at_end(char *line);
 void				check_if_label_ok(char *line, int len);
 void				check_label_syntax(char *line);
 void				find_label_or_die(t_asm *start, char *label);
@@ -135,6 +135,7 @@ void 				header_parse(t_asm *asemb, int fd);
 void                validate_it(t_asm *start);
 t_op                *init_tab();
 char	            *clean_arg(char *line);
+void 	            check_if_end_is_newln(char *av);
 int 				if_lable(int *ar);// check if in arguments lable
 void				write_op_code(t_asm *head, t_asm *begin, int op_c, int fd); // write commands in file
 unsigned int		do_big_endian(unsigned int magic, int size); // change place of bits

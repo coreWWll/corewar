@@ -106,7 +106,7 @@ void	get_all_info(t_asm *start, char *line)
 		start->only_label = 0;
 		start = start->next;
 	}
-	if_comment_at_end(&line);
+	line = if_comment_at_end(line);
 	line = good_strtrim(line);
 	dupline = line;
 	get_label(&dupline, start);
