@@ -26,6 +26,10 @@ char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
         ft_exit(0);
     else
     {
+        t = line;
+        line = if_comment_at_end(t);//leaks !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        free(t);
+        line = good_strtrim(line);
         while(line[i] != '\"' && line[i] != '\0')
         {
             t = name;
@@ -38,7 +42,7 @@ char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
         {
             get_next_line(fd, &line);
             t = name;
-            name = get_full_name_or_comment(fd,t, line, flag); //leaks here!!!!!!!!!!!!!!
+            name = get_full_name_or_comment(fd, t, line, flag); //leaks here!!!!!!!!!!!!!!
             //ft_strdel(&t);
         }
     }
@@ -56,8 +60,9 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 	i = 0;
 	len = 0;
     p = line;
-    line = if_comment_at_end(p);//leaks !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    line = good_strtrim(line);//leaks!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    line = if_comment_at_end(p);
+    free(p);
+    line = good_strtrim(line);
 	if (!(t = ft_strchr(line, '\"')))
 		ft_exit(0);
 	t++;
@@ -75,7 +80,7 @@ char	*get_name_or_comm(char *line, int fd, int flag)
         get_next_line(fd, &line);
         p = name;
         name = get_full_name_or_comment(fd, p, line, flag);
-        //ft_strdel(&p);;
+        ft_strdel(&p);;
     }
 	check_endl_and_len(t, name, flag);
 	return (name);
