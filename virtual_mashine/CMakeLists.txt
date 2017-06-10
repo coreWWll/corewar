@@ -134,7 +134,6 @@ set(SOURCE_FILES
         create_map.c
         memory_dump.c operations_with_car.c
         ../op.c
-        get_args_and_value.c put_int_on_map.c)
-       
+        get_args_and_value.c)       
 
 add_executable(virtual_mashine ${SOURCE_FILES})
