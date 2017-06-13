@@ -70,6 +70,7 @@ typedef struct			s_vm
 	int					cycle;
 	int					round;
 	int 				cycle_to_die;
+	int					time;
 }						t_vm;
 
 void	dell_car_from_list(t_car **head, t_car *to_dell);

@@ -15,6 +15,7 @@ t_vm	*create_main_struct(void)
 	if (main_struct->players == NULL)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
+	main_struct->time = 50;
 	return (main_struct);
 }
 
@@ -22,7 +23,7 @@ int		main(int argc, char **argv)
 {
 	t_vm		*main_struct;
 
-	char	*buf;
+/*	char	*buf;
 	int		i;
 
 	i = 0;
@@ -34,7 +35,7 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	print_memory((unsigned char*)buf, 129);
-
+*/
 	main_struct = create_main_struct();
 	read_arguments(main_struct, argv, argc);
 	if (main_struct->players_nbr == 0)
