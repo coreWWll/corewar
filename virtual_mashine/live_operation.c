@@ -18,7 +18,7 @@ void    get_live_func(char *map, t_car *car)
     car->op_type = op_tab[0].opcode;
     car->c_for_op = op_tab[0].nb_tours - 1;
 
-    ft_printf ("-> read LIVE instruction, data = %s\n", car->data);
+    printf ("-> read LIVE instruction, data = %s\n", car->data); //printf 
 }
 
 int		check_who_live(unsigned int number, t_vm *main_struct)
