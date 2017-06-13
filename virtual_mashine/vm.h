@@ -124,7 +124,7 @@ void    move_all_car(t_vm *main_struct);
 int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
-void	print_memory(unsigned char *map);
+void	print_memory(unsigned char *map, size_t size);
 void	ft_error(char *error_message);
 void    get_op_code(t_vm *main_struct, t_car *car);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
@@ -136,6 +136,6 @@ int		get_int_from_byte_code(char *buffer);
 int		get_args_nd_value(t_car *car, t_vm *main_struct);
 void	put_int_on_map(char *map, int data);
 
-
+void	visualisation(t_vm *main_struct);
 
 #endif
