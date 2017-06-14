@@ -61,6 +61,8 @@ t_op	find_op_tab(char code)
 void    get_op_code(t_vm *main_struct, t_car *car)
 {
 	car->op_tabble = find_op_tab(main_struct->map[car->pos]);
+	if (main_struct->cycle == 0)
+		car->op_tabble.nb_tours--;
 	if (car->op_tabble.opcode == 0)
 	{
 		if (car->pos == MEM_SIZE - 1)

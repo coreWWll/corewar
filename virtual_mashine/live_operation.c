@@ -6,17 +6,18 @@
 
 int		get_int_from_byte_code(char *buffer)
 {
+	int		ret;
 
-	return (buffer[3] | ( (int)buffer[2] << 8 ) | ( (int)buffer[1] << 16 ) |
-			( (int)buffer[0] << 24 ));
+	ret = (buffer[3] | ( (int)buffer[2] << 8 ) | ( (int)buffer[1] << 16 ) |
+		   ( (int)buffer[0] << 24 ));
+	return (ret);
 }
 
 void    get_live_func(char *map, t_car *car)
 {
     if (!(car->data = ft_memdup(5, map, car->pos + 1)))
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "file: live_operation.c:17"));
-    car->op_type = op_tab[0].opcode;
-    car->c_for_op = op_tab[0].nb_tours - 1;
+	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
 
     printf ("-> read LIVE instruction, data = %s\n", car->data); //printf 
 }
@@ -24,8 +25,8 @@ void    get_live_func(char *map, t_car *car)
 int		check_who_live(unsigned int number, t_vm *main_struct)
 {
 	int			i;
-	i = 0;
 
+	i = 0;
 	while (main_struct->players[i])
 	{
 		if (number == main_struct->players[i]->name)

@@ -71,6 +71,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 {
 	int		local_pos;
 
+	car->arg_size = 0;
 	local_pos = car->pos + 1;
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos],
 			local_pos);
