@@ -64,7 +64,7 @@ void	do_parsing_work(char *av, t_asm *start)
 	else
 		ft_exit(3);
 }
-//need to make when name or comm more than 1 line, all commands under label
+
 int		main(int ac, char **av)
 {
 	t_asm	*start;

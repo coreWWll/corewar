@@ -31,12 +31,12 @@ int		if_comment(char *line)
 void	check_endl_and_len(char *t, char *name, int flag)
 {
     t++;
-	while (*t != '\0')
-	{
-		if (*t != ' ' && *t != '\t')
-			ft_exit(0);
-		t++;
-	}
+    while (*t != '\0')
+    {
+        if (*t != ' ' && *t != '\t')
+            ft_exit(0);
+        t++;
+    }
 	if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
 		|| (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
 		ft_exit(1);
