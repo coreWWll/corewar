@@ -3,6 +3,9 @@ project(virtual_mashine)
 
 set(CMAKE_CXX_STANDARD 11)
 
+find_package( Curses REQUIRED )
+include_directories( ${CURSES_INCLUDE_DIRS} )
+
 set(SOURCE_FILES
         libft/ft_printf/check_nbr.c
         libft/ft_printf/check_type.c
@@ -142,3 +145,4 @@ set(SOURCE_FILES
         put_int_on_map.c)
 
 add_executable(virtual_mashine ${SOURCE_FILES})
+target_link_libraries( virtual_mashine ${CURSES_LIBRARIES} )

@@ -138,6 +138,8 @@ int		get_int_from_byte_code(char *buffer);
 int		get_args_nd_value(t_car *car, t_vm *main_struct);
 void	put_int_on_map(char *map, int data);
 
-void	visualisation(t_vm *main_struct);
+//void	visualisation(t_vm *main_struct);
+void	start_visualisation(void);
+
 
 #endif
