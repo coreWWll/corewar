@@ -1,14 +1,20 @@
 
 #include "vm.h"
 
-void	put_nbr(unsigned char c)
+void	add_char(char *buf, int *j, char c)
+{
+	buf[*j] = c;
+	(*j)++;
+}
+
+void	put_nbr(unsigned char c, char *buf, int *j)
 {
 	unsigned char	print;
 
 	if (c >= 16)
 	{
-		put_nbr(c / (char)16);
-		put_nbr(c % (char)16);
+		put_nbr(c / (char)16, buf, j);
+		put_nbr(c % (char)16, buf, j);
 	}
 	else
 	{
@@ -16,23 +22,31 @@ void	put_nbr(unsigned char c)
 			print = (unsigned char)(c + '0');
 		else
 			print = (unsigned char)((c - 10) + 'a');
-		write(1, &print, 1);
+		add_char(buf, j, print);
 	}
 }
 
-void	print_memory(unsigned char *map)
+void	print_memory(unsigned char *map, size_t size)
 {
 	int		i;
+	int		j;
+	char	*buf;
 
 	i = 0;
-	while (i < MEM_SIZE)
+	j = 0;
+	if (!(buf = ft_strnew(size * 3)))
+		ft_error(ERR_MEM_ALLOC);
+	while (i < size)
 	{
-		if (i % 64 == 0)
-			ft_putendl("");
 		if (map[i] < 16)
-			ft_putchar('0');
-		put_nbr(map[i]);
-		ft_putchar(' ');
+			add_char(buf, &j, '0');
+		put_nbr(map[i], buf, &j);
 		i++;
+		if (i % 64 == 0 && i != 0)
+			add_char(buf, &j,'\n');
+		else
+			add_char(buf, &j, ' ');
 	}
+	write(1, buf, size * 3);
+	ft_strdel(&buf);
 }

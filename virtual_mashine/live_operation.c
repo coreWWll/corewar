@@ -19,7 +19,7 @@ void    get_live_func(char *map, t_car *car)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "file: live_operation.c:17"));
 	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
 
-    ft_printf ("-> read LIVE instruction, data = %s\n", car->data);
+    printf ("-> read LIVE instruction, data = %s\n", car->data); //printf 
 }
 
 int		check_who_live(unsigned int number, t_vm *main_struct)

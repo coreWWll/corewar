@@ -136,6 +136,8 @@ set(SOURCE_FILES
         operations_with_car.c
         ../op.c
         get_args_and_value.c
-        put_int_on_map.c)
+        bonus/visualisation.c
+        bonus/visualisation.h
+        bonus/ft_kbhit.c)
 
 add_executable(virtual_mashine ${SOURCE_FILES})
