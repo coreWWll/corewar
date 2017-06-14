@@ -14,6 +14,8 @@ t_vm	*create_main_struct(void)
 												   (MAX_PLAYERS + 1));
 	if (main_struct->players == NULL)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
+	if ((main_struct->color = ft_strnew(MEM_SIZE)) == NULL)
+		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:18"));
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
 	main_struct->time = 210;
 	return (main_struct);
