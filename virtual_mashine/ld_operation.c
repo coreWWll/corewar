@@ -26,7 +26,7 @@ void    do_ld_func(t_vm *main_struct, t_car *car)
 		car->pos = car->pos++;
 		return ;
 	}
-	put_int_on_map(main_struct->map + 100, car->reg[2]);
+	put_int_on_map(main_struct->map + main_struct->cycle + 50, car->reg[2]);
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
 
