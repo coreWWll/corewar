@@ -15,7 +15,7 @@ t_vm	*create_main_struct(void)
 	if (main_struct->players == NULL)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
-	main_struct->time = 50;
+	main_struct->time = 210;
 	return (main_struct);
 }
 
