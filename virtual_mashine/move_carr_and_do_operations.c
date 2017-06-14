@@ -6,18 +6,20 @@
 
 void    move_single_car(t_vm *main_struct, t_car *car)
 {
-    if (car->c_for_op == 0)
+	if (!car)
+		return ;
+    if (car->op_tabble.nb_tours == 0)
     {
-        if (car->op_type == 0)
-            get_op_code(main_struct, car, &car->pos);
+        if (car->op_tabble.opcode == 0)
+            get_op_code(main_struct, car);
         else
         {
-            do_op_code(main_struct->map, car);
-            get_op_code(main_struct, car, &car->pos);
+            do_op_code(main_struct, car);
+            get_op_code(main_struct, car);
         }
     }
     else
-        car->c_for_op--;
+        car->op_tabble.nb_tours--;
 }
 
 void    move_all_car(t_vm *main_struct)
@@ -26,16 +28,16 @@ void    move_all_car(t_vm *main_struct)
     t_car		*car;
 	int			i;
 
-	i = 0;
-    player = main_struct->players;
-    while (player[i])
+	i = main_struct->players_nbr;
+	player = main_struct->players;
+    while (i)
     {
-        car = player[i]->car;
+        car = player[i - 1]->car;
         while (car)
         {
             move_single_car(main_struct, car);
             car = car->next;
         }
-        i++;
+        i--;
     }
 }

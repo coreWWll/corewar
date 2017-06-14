@@ -8,9 +8,13 @@ t_player *add_player(int boot_nbr)
 {
     t_player    *new;
 
+
     new = (t_player *)ft_memalloc(sizeof(t_player));
-    new->car = (t_car *)malloc(sizeof(t_car));
+    new->car = (t_car *)ft_memalloc(sizeof(t_car));
+	new->car->live = 0;
 	new->boot_nbr = boot_nbr;
+	new->car->next = NULL;
+	ft_bzero(new->car->reg, sizeof(int) * 16);
     return (new);
 }
 
@@ -30,4 +34,42 @@ t_player	*create_players(char *file_name, int boot_nbr)
 	p_list->comment = get_string_from_file(fd, COMMENT_LENGTH + 4);
 	p_list->champ_code = get_champ_code(fd, p_list->prog_len);
 	return (p_list);
+}
+
+int			name_is_taken(t_vm *main_struct, int name)
+{
+	int	i;
+
+	i = 0;
+	while (main_struct->players[i])
+	{
+		if (main_struct->players[i]->boot_nbr == name)
+			return TRUE;
+		i++;
+	}
+	return FALSE;
+}
+
+void		create_names_players(t_vm *main_struct)
+{
+	int		i;
+	int 	names;
+
+	i = 0;
+	names = 1;
+	while (main_struct->players[i])
+	{
+		if (main_struct->players[i]->boot_nbr == 0)
+		{
+			while (name_is_taken(main_struct, names))
+				names++;
+			main_struct->players[i]->name = -names;
+			names++;
+		}
+		else
+		{
+			main_struct->players[i]->name = - main_struct->players[i]->boot_nbr;
+		}
+		i++;
+	}
 }
