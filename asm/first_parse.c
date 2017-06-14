@@ -26,25 +26,30 @@ char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
         ft_exit(0);
     else
     {
-        t = line;
-        line = if_comment_at_end(t);//leaks !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        free(t);
-        line = good_strtrim(line);
+        t = if_comment_at_end(line);//leaks !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ft_strdel(&line);
+        line = good_strtrim(t);
+        if (ft_strcmp(line, t) != 0)
+            ft_strdel(&t);
         while(line[i] != '\"' && line[i] != '\0')
         {
-            t = name;
-            name = ft_charjoin(t, line[i]);
+            t = ft_charjoin(name, line[i]);
+            ft_strdel(&name);
+            name = ft_strdup(t);
             ft_strdel(&t);
             i++;
         }
         len = ft_strlen(line);
-        if (line[len - 1] != '\"')
+        if (!ft_strchr(line, '\"'))
         {
+           ft_strdel(&line);
             get_next_line(fd, &line);
-            t = name;
-            name = get_full_name_or_comment(fd, t, line, flag); //leaks here!!!!!!!!!!!!!!
-            //ft_strdel(&t);
+            t = get_full_name_or_comment(fd, name, line, flag); //leaks here!!!!!!!!!!!!!!
+            //ft_strdel(&name);
+            name = t;
         }
+        /*else
+            ft_strdel(&line);*/
     }
     return(name);
 }
@@ -59,10 +64,14 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 
 	i = 0;
 	len = 0;
-    p = line;
-    line = if_comment_at_end(p);
-    free(p);
-    line = good_strtrim(line);
+    //p = line;
+    if (ft_strchr(line, '#') || ft_strchr(line, ';'))
+    {
+        p = if_comment_at_end(line);
+        line = ft_strdup(p);
+        ft_strdel(&p);
+        line = good_strtrim(line);
+    }
 	if (!(t = ft_strchr(line, '\"')))
 		ft_exit(0);
 	t++;
@@ -77,12 +86,17 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 	}
     if (*t != '\"')
     {
+        ft_strdel(&line);
         get_next_line(fd, &line);
-        p = name;
-        name = get_full_name_or_comment(fd, p, line, flag);
-        ft_strdel(&p);;
+        //p = name;
+        p = get_full_name_or_comment(fd, name, line, flag);
+        //ft_strdel(&name);
+        name = p;
     }
-	check_endl_and_len(t, name, flag);
+    t = name;
+    while (*t != '\"' && *t != '\0')
+        t++;
+    check_endl_and_len(t, name, flag);
 	return (name);
 }
 
