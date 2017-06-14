@@ -9,6 +9,7 @@ void    get_zjmp_func(char *map, t_car *car)
 
 	car->data = ft_memdup((size_t)DIR_SIZE - 2 * car->op_tabble.codage_octal,
 						  map, car->pos + 1);
+	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
 	ft_printf ("-> read instruction ZJMP, data = %s\n", car->data);
 }
 

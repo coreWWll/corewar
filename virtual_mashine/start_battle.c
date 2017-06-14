@@ -78,6 +78,7 @@ void    start_battle(t_vm *main_struct)
 			cycles_and_rounds(main_struct);
 		}
 		move_all_car(main_struct);
+		//DUMP MAP DENYSS CYKA!!!!!!
         printf("CYCLE = %d PERIOD = %d\n", main_struct->cycle, main_struct
                 ->round);
         (main_struct->cycle)++;
