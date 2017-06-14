@@ -4,13 +4,13 @@
 
 #include "vm.h"
 
-int		get_int_from_byte_code(char *buffer)
+int		get_int_from_byte_code(char *byte_array)
 {
-	int		ret;
+	int		i;
 
-	ret = (buffer[3] | ( (int)buffer[2] << 8 ) | ( (int)buffer[1] << 16 ) |
-		   ( (int)buffer[0] << 24 ));
-	return (ret);
+	i = ((byte_array[0] & 0xFF) << 24) + ((byte_array[1] & 0xFF) << 16)
+			+ ((byte_array[2] & 0xFF) << 8) + (byte_array[3] & 0xFF);
+	return (i);
 }
 
 void    get_live_func(char *map, t_car *car)

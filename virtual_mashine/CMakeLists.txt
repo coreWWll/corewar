@@ -138,6 +138,7 @@ set(SOURCE_FILES
         get_args_and_value.c
         bonus/visualisation.c
         bonus/visualisation.h
-        bonus/ft_kbhit.c)
+        bonus/ft_kbhit.c
+        put_int_on_map.c)
 
 add_executable(virtual_mashine ${SOURCE_FILES})

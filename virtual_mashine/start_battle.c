@@ -72,7 +72,7 @@ void    start_battle(t_vm *main_struct)
 	while (check_alive(main_struct) && (CYCLE_TO_DIE -
 			main_struct->round * CYCLE_DELTA) >= 0)
     {
-       // nanosleep((const struct timespec[]){{0, 259900}}, NULL);
+       // nanosleep((const struct timespec[]){{0, 25990}}, NULL);
 		//visualisation
 		visualisation(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)

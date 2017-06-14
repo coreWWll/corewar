@@ -42,7 +42,8 @@ int		main(int argc, char **argv)
 		ft_error("NO PLAYERS!");
 	put_cat_on_start(main_struct);
 	create_map(main_struct);
-  print_memory((unsigned char*)main_struct->map, MEM_SIZE);
+  	print_memory((unsigned char*)main_struct->map, MEM_SIZE);
 	start_battle(main_struct);
-  return (0);
+	print_memory((unsigned char*)main_struct->map, MEM_SIZE);
+	return (0);
 }
