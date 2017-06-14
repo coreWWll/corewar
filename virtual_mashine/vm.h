@@ -64,6 +64,7 @@ typedef struct			s_vm
 	int 				count_live_functions;
 	int					players_nbr;
 	char 				*map;
+	char				*color;
 	int					f_dump;
 	int					dump_cycle;
 	int					f_v;
