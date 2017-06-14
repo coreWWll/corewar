@@ -10,7 +10,7 @@ void get_sti_func(t_car *car)
 	//car->data = ft_memdup(6, map, (*pos) + 1);
 	car->c_for_op = 24;
 	car->pos = car->pos + 7;
-	ft_printf ("-> read STI instruction, data\n", car->data);
+	ft_printf ("-> read STI instruction, data\n");
 }
 
 

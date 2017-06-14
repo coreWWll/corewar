@@ -32,7 +32,7 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
         do_live_func(main_struct, car);
     else if (car->op_tabble.opcode == 2)
         do_ld_func(main_struct, car);
-	else if (car->op_type == 3)
+	else if (car->op_tabble.opcode == 3)
 		do_st_func(main_struct, car);
 	else if (car->op_type == 4)
 		do_add_func(main_struct, car);
