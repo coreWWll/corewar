@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-void	put_int_on_map(char *map, int data)
+void put_int_on_map(char *map, int data, char *players, char player_nbr)
 {
 	int		i;
 
@@ -20,6 +20,7 @@ void	put_int_on_map(char *map, int data)
 	while (i >= 0)
 	{
 		map[i] = (char)data;
+		players[i] = player_nbr;
 		data = data >> 8;
 		i--;
 	}
