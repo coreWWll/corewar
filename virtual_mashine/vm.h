@@ -27,6 +27,7 @@ typedef struct		s_args
 
 typedef struct		s_car
 {
+	char 			color;
 	t_args			args[3];
 	int 			carry;
 	int				arg_size;

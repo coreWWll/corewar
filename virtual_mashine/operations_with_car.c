@@ -11,6 +11,7 @@ void	put_cat_on_start(t_vm	*main_struct)
 	i = 0;
 	while (i < main_struct->players_nbr)
 	{
+		main_struct->players[i]->car->color = (char)(i + 1);
 		main_struct->players[i]->car->pos = MEM_SIZE /
 											main_struct->players_nbr * (i);
 		main_struct->players[i]->car->reg[0] = (unsigned int)
