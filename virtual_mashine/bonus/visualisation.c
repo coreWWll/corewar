@@ -4,7 +4,28 @@
 
 #include "../vm.h"
 #include "visualisation.h"
-#include <time.h>
+#include <ncurses.h>
+
+void	start_visualisation(void)
+{
+	initscr();
+	cbreak();
+	raw();
+	nonl();
+	noecho();
+	curs_set(FALSE);
+	keypad(stdscr, TRUE);
+	start_color();
+	use_default_colors();
+	init_pair(1, COLOR_WHITE, COLOR_BLUE);
+	init_pair(2, COLOR_WHITE, COLOR_RED);
+}
+
+
+
+/*
+ *
+ * #include <time.h>
 
 int 	i = 0;
 
@@ -41,3 +62,4 @@ void	visualisation(t_vm *main_struct)
 	//print_memory((unsigned char*)main_struct->map, MEM_SIZE);
 	nanosleep((const struct timespec[]){{0, time}}, NULL);
 }
+ */

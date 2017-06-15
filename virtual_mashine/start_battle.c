@@ -74,13 +74,12 @@ void    start_battle(t_vm *main_struct)
     {
        // nanosleep((const struct timespec[]){{0, 25990}}, NULL);
 		//visualisation
-		visualisation(main_struct);
+//		visualisation(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
 		{
 			cycles_and_rounds(main_struct);
 		}
 		move_all_car(main_struct);
-		//DUMP MAP DENYSS CYKA!!!!!!
         (main_struct->cycle)++;
     }
 }

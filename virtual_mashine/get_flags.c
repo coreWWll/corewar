@@ -56,7 +56,7 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc)
 		if (argv[i][0] == '-' && argv[i][1] != 'n')
 			read_flags(main_struct, argv, argc, &i);
 		else
-			main_struct->players[main_struct->players_nbr - 1] =
+			main_struct->players[main_struct->players_nbr] = /*on MAC - 1*/
 					add_players(main_struct, argv, argc, &i);
 		i++;
 	}
