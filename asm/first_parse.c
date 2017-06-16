@@ -12,7 +12,7 @@
 
 #include "../op.h"
 
-char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
+/*char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
 {
     size_t len;
     char *t;
@@ -49,7 +49,51 @@ char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
             name = t;
         }
         /*else
-            ft_strdel(&line);*/
+            ft_strdel(&line);
+    }
+    return(name);
+}*/
+
+char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
+{
+    size_t len;
+    char *t;
+    int i;
+
+    i = 0;
+
+    if (flag == 1 && ft_strstr(line, ".comment"))
+        ft_exit(0);
+    else if (flag == 0 && ft_strchr(line, ','))
+        ft_exit(0);
+    else
+    {
+        while (!ft_strchr(line, '\"') && ft_strlen(name) <= COMMENT_LENGTH)
+        {
+            //ft_strdel(&line);
+            get_next_line(fd, &line);
+            if (!ft_strchr(line, '\"'))
+            {
+                t = ft_strjoin(name, line);
+                //ft_strdel(&name);
+                name = ft_strdup(t);
+                //ft_strdel(&t);
+            }
+        }
+        if (ft_strchr(line, '\"'))
+        {
+            t = if_comment_at_end(line);
+            //ft_strdel(&line);
+            line = good_strtrim(t);
+            while(line[i] != '\"' && line[i] != '\0')
+            {
+                t = ft_charjoin(name, line[i]);
+                //ft_strdel(&name);
+                name = ft_strdup(t);
+                //ft_strdel(&t);
+                i++;
+            }
+        }
     }
     return(name);
 }
@@ -65,13 +109,13 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 	i = 0;
 	len = 0;
     //p = line;
-    if (ft_strchr(line, '#') || ft_strchr(line, ';'))
+    /*if (ft_strchr(line, '#') || ft_strchr(line, ';'))
     {
         p = if_comment_at_end(line);
         line = ft_strdup(p);
         ft_strdel(&p);
         line = good_strtrim(line);
-    }
+    }*/
 	if (!(t = ft_strchr(line, '\"')))
 		ft_exit(0);
 	t++;
@@ -86,12 +130,12 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 	}
     if (*t != '\"')
     {
-        ft_strdel(&line);
+        //ft_strdel(&line);
         get_next_line(fd, &line);
         //p = name;
-        p = get_full_name_or_comment(fd, name, line, flag);
+        name = get_full_name_or_comment(fd, name, line, flag);
         //ft_strdel(&name);
-        name = p;
+        //name = p;
     }
     t = name;
     while (*t != '\"' && *t != '\0')
