@@ -6,19 +6,55 @@
 #include "visualisation.h"
 #include <ncurses.h>
 
-void	start_visualisation(void)
+void	refresh_all(t_vis *vis)
 {
+	refresh();
+	wrefresh(vis->arena);
+	wrefresh(vis->param);
+}
+
+void	create_windows(t_vm *main_struct, short color_pair)
+{
+	WINDOW	*background_arena;
+	WINDOW	*background_param;
+
+	background_arena = newwin((MEM_SIZE / CHAR_IN_ROW) + 2,
+							  (CHAR_IN_ROW * 3) + 2, 1, 1);
+	main_struct->vis->arena = newwin(MEM_SIZE / CHAR_IN_ROW,
+									 CHAR_IN_ROW * 3, 2, 2);
+	wbkgd(background_arena, COLOR_PAIR(color_pair));
+	wbkgd(main_struct->vis->arena, COLOR_PAIR(color_pair));
+	background_param = newwin(50, 50, 1, (CHAR_IN_ROW * 3) + 4);
+	wbkgd(background_param, COLOR_PAIR(COLOR_RED));
+	wrefresh(background_arena);
+	wrefresh(background_param);
+}
+
+void start_visualisation(t_vm *main_struct)
+{
+	short int	i;
+
+	main_struct->vis = (t_vis*)ft_memalloc(sizeof(t_vis));
 	initscr();
-	cbreak();
-	raw();
-	nonl();
 	noecho();
 	curs_set(FALSE);
-	keypad(stdscr, TRUE);
 	start_color();
-	use_default_colors();
-	init_pair(1, COLOR_WHITE, COLOR_BLUE);
-	init_pair(2, COLOR_WHITE, COLOR_RED);
+	i = 1;
+	while (i < COLOR_WHITE)
+	{
+		init_pair(i, COLOR_BLACK, i);
+		if (i == COLOR_CYAN)
+			create_windows(main_struct, i);
+		i++;
+	}
+
+}
+
+void	stop_visualisation(t_vm *main_struct)
+{
+	delwin(main_struct->vis->arena);
+	delwin(main_struct->vis->param);
+	endwin();
 }
 
 
