@@ -6,11 +6,14 @@
 #define VIRTUAL_MASHINE_VM_H_H
 
 #include <fcntl.h>
+#include <ncurses.h>
 #include "libft/libft.h"
 #include "../op.h"
 
 #define TRUE						1
 #define FALSE						0
+
+# define CHAR_IN_ROW				64
 
 #define ERR_PLAYER_FILE_READING		"Player_file reading fail"
 #define ERR_OPEN_FILE				"Can't open file - "
@@ -56,6 +59,13 @@ typedef struct			s_player
 	char				*champ_code;
 }						t_player;
 
+typedef struct			s_vis
+{
+	WINDOW				*arena;
+	WINDOW				*param;
+}						t_vis;
+
+
 typedef struct			s_vm
 {
 	t_player			**players;
@@ -73,6 +83,7 @@ typedef struct			s_vm
 	int					round;
 	int 				cycle_to_die;
 	int					time;
+	t_vis				*vis;
 }						t_vm;
 
 void	dell_car_from_list(t_car **head, t_car *to_dell);
@@ -140,7 +151,10 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct);
 void 	put_int_on_map(char *map, int data, char *players, char player_nbr);
 
 //void	visualisation(t_vm *main_struct);
-void	start_visualisation(void);
+void	start_visualisation(t_vm *main_struct);
+void	stop_visualisation(t_vm *main_struct);
+void	refresh_all(t_vis *vis);
+
 
 
 #endif

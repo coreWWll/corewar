@@ -42,7 +42,7 @@ void	print_memory(unsigned char *map, size_t size)
 			add_char(buf, &j, '0');
 		put_nbr(map[i], buf, &j);
 		i++;
-		if (i % 64 == 0 && i != 0)
+		if (i % CHAR_IN_ROW == 0 && i != 0)
 			add_char(buf, &j,'\n');
 		else
 			add_char(buf, &j, ' ');
