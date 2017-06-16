@@ -30,5 +30,4 @@ void    do_ld_func(t_vm *main_struct, t_car *car)
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
     ft_printf("LOAD HAX!!!!\n");
-	car->arg_size = 0;
 }

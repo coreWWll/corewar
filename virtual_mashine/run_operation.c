@@ -21,7 +21,7 @@ void do_op_code_part_two(t_vm *main_struct, t_car *car)
 		do_lldi_func(main_struct, car);
 	else if (car->op_tabble.opcode == 15)
 		do_lfork_func(main_struct, car);
-	else if (car->op_type == 16)
+	else if (car->op_tabble.opcode == 16)
 		do_aff_func(main_struct, car);
 }
 
@@ -34,11 +34,11 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
         do_ld_func(main_struct, car);
 	else if (car->op_tabble.opcode == 3)
 		do_st_func(main_struct, car);
-	else if (car->op_type == 4)
+	else if (car->op_tabble.opcode  == 4)
 		do_add_func(main_struct, car);
 	else if (car->op_type == 5)
 		do_sub_func(main_struct, car);
-	else if (car->op_type == 6)
+	else if (car->op_tabble.opcode == 6)
 		do_and_func(main_struct, car);
 	else if (car->op_type == 7)
 		do_or_func(main_struct, car);
