@@ -61,6 +61,7 @@ void	if_more_args(t_asm *start)
 	i = 0;
 	while (start->args && start->args[i] != NULL)
 	{
+        //start->args[i] = good_strtrim(start->args[i]);
 		temp = start->args[i];
 		start->args[i] = good_strtrim(temp);
 		free(temp);
