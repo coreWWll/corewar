@@ -12,87 +12,48 @@
 
 #include "../op.h"
 
-/*char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
-{
-    size_t len;
-    char *t;
-    int i;
-
-    i = 0;
-
-    if (flag == 1 && ft_strstr(line, ".comment"))
-        ft_exit(0);
-    else if (flag == 0 && ft_strchr(line, ','))
-        ft_exit(0);
-    else
-    {
-        t = if_comment_at_end(line);//leaks !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        ft_strdel(&line);
-        line = good_strtrim(t);
-        if (ft_strcmp(line, t) != 0)
-            ft_strdel(&t);
-        while(line[i] != '\"' && line[i] != '\0')
-        {
-            t = ft_charjoin(name, line[i]);
-            ft_strdel(&name);
-            name = ft_strdup(t);
-            ft_strdel(&t);
-            i++;
-        }
-        len = ft_strlen(line);
-        if (!ft_strchr(line, '\"'))
-        {
-           ft_strdel(&line);
-            get_next_line(fd, &line);
-            t = get_full_name_or_comment(fd, name, line, flag); //leaks here!!!!!!!!!!!!!!
-            //ft_strdel(&name);
-            name = t;
-        }
-        /*else
-            ft_strdel(&line);
-    }
-    return(name);
-}*/
-
 char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
 {
-    size_t len;
     char *t;
     int i;
+    int check;
+    char *p;
 
     i = 0;
-
+    check = 9;
     if (flag == 1 && ft_strstr(line, ".comment"))
         ft_exit(0);
     else if (flag == 0 && ft_strchr(line, ','))
         ft_exit(0);
     else
     {
-        while (!ft_strchr(line, '\"') && ft_strlen(name) <= COMMENT_LENGTH)
+        while (!ft_strchr(line, '\"') && (check = get_next_line(fd, &line)) > 0)
         {
-            //ft_strdel(&line);
-            get_next_line(fd, &line);
             if (!ft_strchr(line, '\"'))
             {
                 t = ft_strjoin(name, line);
-                //ft_strdel(&name);
                 name = ft_strdup(t);
-                //ft_strdel(&t);
+                free(t);
             }
+            free(line);
         }
+        if (check <= 0)
+            ft_exit(0);
         if (ft_strchr(line, '\"'))
         {
-            t = if_comment_at_end(line);
-            //ft_strdel(&line);
-            line = good_strtrim(t);
-            while(line[i] != '\"' && line[i] != '\0')
+            p = ft_strdup(line);
+            while(p[i] != '\"')
             {
-                t = ft_charjoin(name, line[i]);
-                //ft_strdel(&name);
-                name = ft_strdup(t);
-                //ft_strdel(&t);
+                t = name;
+                name = ft_charjoin(t, p[i]);
+                free(t);
                 i++;
             }
+            free(p);
+            t = line;
+            while (*t != '\"' && *t != '\0')
+                t++;
+            check_endl_and_len(t, name, line, flag);
         }
     }
     return(name);
@@ -108,14 +69,6 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 
 	i = 0;
 	len = 0;
-    //p = line;
-    /*if (ft_strchr(line, '#') || ft_strchr(line, ';'))
-    {
-        p = if_comment_at_end(line);
-        line = ft_strdup(p);
-        ft_strdel(&p);
-        line = good_strtrim(line);
-    }*/
 	if (!(t = ft_strchr(line, '\"')))
 		ft_exit(0);
 	t++;
@@ -130,17 +83,12 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 	}
     if (*t != '\"')
     {
-        //ft_strdel(&line);
         get_next_line(fd, &line);
-        //p = name;
-        name = get_full_name_or_comment(fd, name, line, flag);
-        //ft_strdel(&name);
-        //name = p;
+        t = get_full_name_or_comment(fd, name, line, flag);
+        free(line);
+        free(name);
+        name = t;
     }
-    t = name;
-    while (*t != '\"' && *t != '\0')
-        t++;
-    check_endl_and_len(t, name, flag);
 	return (name);
 }
 

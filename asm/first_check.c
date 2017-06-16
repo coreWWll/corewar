@@ -28,11 +28,14 @@ int		if_comment(char *line)
 	return ((line[i] == '\0') ? 1 : 0);
 }
 
-void	check_endl_and_len(char *t, char *name, int flag)
+void	check_endl_and_len(char *t, char *name, char *line, int flag)
 {
-    t++;
+    if (t != '\0')
+        t++;
     while (*t != '\0')
     {
+        if (*t == '#' || *t == ';')
+            break;
         if (*t != ' ' && *t != '\t')
             ft_exit(0);
         t++;
@@ -73,10 +76,9 @@ char	*if_comment_at_end(char *line) //check if comment is after command line
 	if (t)
 	{
 		*t = '\0';
-		t = line;
-		line = ft_strdup(t);//leaks here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//ft_strdel(&t);
+		t = ft_strdup(line);
+		//free(line);
+        return(t);
 	}
 	return(line);
-    //ft_strdel(&t);
 }

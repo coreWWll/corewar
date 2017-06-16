@@ -122,7 +122,7 @@ char				*get_name_or_comm(char *line, int fd, int flag);
 char				*get_file_name(char *av);
 char				*get_result_output(char *av);
 void				check_format(char *file);
-void				check_endl_and_len(char *t, char *name, int flag);
+void				check_endl_and_len(char *t, char *name, char *line, int flag);
 int					if_comment(char *line);
 int					is_label(char *line);
 char				*if_comment_at_end(char *line);
