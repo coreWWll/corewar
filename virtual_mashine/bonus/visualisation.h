@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include "../vm.h"
 #include <ncurses.h>
+#include <time.h>
 
 # define	COL_ARENA	10
 # define	COL_CAR		20

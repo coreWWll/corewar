@@ -54,6 +54,6 @@ void	w_print_arena(t_vm *main_struct)
 		if (i % CHAR_IN_ROW == 0 && i != 0)
 			waddch(win, '\n');
 		else
-			waddch(win, ' ');
+			w_print_char(' ', win, main_struct->color[i]);
 	}
 }

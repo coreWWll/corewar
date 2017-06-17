@@ -28,11 +28,11 @@ void	create_windows(t_vm *main_struct)
 	wbkgd(main_struct->vis->arena, COLOR_PAIR(COL_ARENA));
 	main_struct->vis->bg_param = newwin(42 , 52, 1, (CHAR_IN_ROW * 3) + 4);
 	main_struct->vis->param = newwin(40, 50, 2, (CHAR_IN_ROW * 3) + 5);
-	wbkgd(main_struct->vis->bg_param, COLOR_PAIR(COLOR_RED));
+	wbkgd(main_struct->vis->bg_param, COLOR_PAIR(COL_ARENA));
 	wbkgd(main_struct->vis->param, COLOR_PAIR(COL_ARENA));
 	main_struct->vis->bg_usage = newwin(23, 52, 44, (CHAR_IN_ROW * 3) + 4);
 	main_struct->vis->usage = newwin(21, 50, 45, (CHAR_IN_ROW * 3) + 5);
-	wbkgd(main_struct->vis->bg_usage, COLOR_PAIR(COLOR_RED));
+	wbkgd(main_struct->vis->bg_usage, COLOR_PAIR(COL_ARENA));
 	wbkgd(main_struct->vis->usage, COLOR_PAIR(COL_ARENA));
 	wrefresh(main_struct->vis->bg_arena);
 	wrefresh(main_struct->vis->bg_param);
