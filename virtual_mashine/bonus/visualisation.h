@@ -10,10 +10,15 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "../vm.h"
+#include <ncurses.h>
 
-# define COLOR_WINDOW	1;
-
+#define COL_ARENA	10
 
 int		ft_kbhit(void);
+void	w_print_arena(t_vm *main_struct);
+void	erase_all(t_vis *vis);
+void	refresh_all(t_vis *vis);
+
+
 
 #endif //VIRTUAL_MASHINE_VISUALISATION_H

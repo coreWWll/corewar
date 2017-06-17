@@ -26,7 +26,7 @@ void	put_nbr(unsigned char c, char *buf, int *j)
 	}
 }
 
-void	print_memory(unsigned char *map, size_t size)
+void print_memory(unsigned char *map, size_t size, WINDOW *win)
 {
 	int		i;
 	int		j;

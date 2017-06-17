@@ -138,7 +138,7 @@ void    move_all_car(t_vm *main_struct);
 int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
-void	print_memory(unsigned char *map, size_t size);
+void print_memory(unsigned char *map, size_t size, WINDOW *win);
 void	ft_error(char *error_message);
 void    get_op_code(t_vm *main_struct, t_car *car);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
@@ -154,6 +154,7 @@ void 	put_int_on_map(char *map, int data, char *players, char player_nbr);
 void	start_visualisation(t_vm *main_struct);
 void	stop_visualisation(t_vm *main_struct);
 void	refresh_all(t_vis *vis);
+void	visualisate(t_vm *main_struct);
 
 
 

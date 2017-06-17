@@ -45,18 +45,11 @@ int		main(int argc, char **argv)
 	put_cat_on_start(main_struct);
 	create_map(main_struct);
 	if (main_struct->f_v == TRUE)
-	{
 		start_visualisation(main_struct);
-		while (wgetch(main_struct->vis->arena) != 'q')
-			refresh_all(main_struct->vis);
-		if (main_struct->f_v == TRUE)
-			stop_visualisation(main_struct);
-	}
-	else
-	{
-		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-		start_battle(main_struct);
-		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-	}
+	start_battle(main_struct);
+	if (main_struct->f_v == TRUE)
+		stop_visualisation(main_struct);
+//		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
+//		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	return (0);
 }
