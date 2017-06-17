@@ -4,11 +4,25 @@
 
 #include "visualisation.h"
 
+int i = 0;
+
+void	read_comands(t_vm *main_struct)
+{
+	if (wgetch(main_struct->vis->arena) == ' ')
+		while (wgetch(main_struct->vis->arena) != ' ');
+}
+
 void	visualisate(t_vm *main_struct)
 {
+	read_comands(main_struct);
 	erase_all(main_struct->vis);
 	w_print_arena(main_struct);
+	w_print_param(main_struct);
+	wprintw(main_struct->vis->param ,"Time = %d", i);
+	if (main_struct->cycle % 50 == 0)
+		i++;
 	refresh_all(main_struct->vis);
+	usleep(1000 * (useconds_t)main_struct->time);
 }
 
 

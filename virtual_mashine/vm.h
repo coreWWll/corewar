@@ -63,6 +63,10 @@ typedef struct			s_vis
 {
 	WINDOW				*arena;
 	WINDOW				*param;
+	WINDOW				*usage;
+	WINDOW				*bg_arena;
+	WINDOW				*bg_param;
+	WINDOW				*bg_usage;
 }						t_vis;
 
 
@@ -155,6 +159,8 @@ void	start_visualisation(t_vm *main_struct);
 void	stop_visualisation(t_vm *main_struct);
 void	refresh_all(t_vis *vis);
 void	visualisate(t_vm *main_struct);
+void	put_caret_on_map(t_vm *main_struct);
+
 
 
 
