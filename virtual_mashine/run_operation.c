@@ -15,7 +15,7 @@ void do_op_code_part_two(t_vm *main_struct, t_car *car)
 		do_sti_func(main_struct, car);
 	else if (car->op_tabble.opcode == 12)
 		do_fork_func(main_struct, car);
-	else if (car->op_type == 13)
+	else if (car->op_tabble.opcode == 13)
 		do_lld_func(main_struct, car);
 	else if (car->op_type == 14)
 		do_lldi_func(main_struct, car);
@@ -40,9 +40,9 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
 		do_sub_func(main_struct, car);
 	else if (car->op_tabble.opcode == 6)
 		do_and_func(main_struct, car);
-	else if (car->op_type == 7)
+	else if (car->op_tabble.opcode == 7)
 		do_or_func(main_struct, car);
-	else if (car->op_type == 8)
+	else if (car->op_tabble.opcode == 8)
 		do_xor_func(main_struct, car);
 }
 

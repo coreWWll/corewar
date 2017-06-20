@@ -6,17 +6,26 @@
 
 void get_xor_func(t_car *car)
 {
-
-	//car->data = ft_memdup(4, map, (*pos) + 1);
-	car->c_for_op = 5;
-	car->pos = car->pos + 5;
-	ft_printf ("-> read XOR operation ant it data \n", car->data);
+	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
+	ft_printf ("-> read XOR intruction, data =\n");
 }
 
 
 
 void    do_xor_func(t_vm *main_struct, t_car *car)
 {
-	car->op_type = 0;
-	ft_printf("XOR OPERATION\n");
+	if (car->args[2].name == 1)
+	{
+		car->reg[car->args[2].value + 2] = (unsigned int) (car->args[0].value ^
+														   car->args[1].value);
+	}
+	else
+	{
+		car->op_tabble.opcode = 0;
+		car->pos = car->pos++;
+		return;
+	}
+	car->op_tabble.opcode = 0;
+	car->pos = car->pos + car->arg_size + 2;
+	ft_printf("XOR OPERATION!!!!\n");
 }

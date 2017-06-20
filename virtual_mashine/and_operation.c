@@ -6,10 +6,11 @@
 
 void get_and_func(t_car *car)
 {
+	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
 	ft_printf ("-> read AND intruction, data =\n");
 }
 
-void	check_args(t_vm *main_struct, t_car *car, int reg_n)
+/*void	check_args(t_vm *main_struct, t_car *car, int reg_n)
 {
 	if (car->args[0].name == 1 && car->args[1].name == 1)
 		 and_reg_reg(car, reg_n);
@@ -36,12 +37,13 @@ void	check_args(t_vm *main_struct, t_car *car, int reg_n)
 		return;
 	}
 }
-
+*/
 void    do_and_func(t_vm *main_struct, t_car *car)
 {
 	if (car->args[2].name == 1)
 	{
-		check_args(main_struct, car, car->args[2].value);
+		car->reg[car->args[2].value + 2] = (unsigned int) (car->args[0].value &
+				car->args[1].value);
 	}
 	else
 	{

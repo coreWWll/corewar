@@ -70,7 +70,9 @@ int 	read_args(t_car *car, unsigned char *map)
 int		get_args_nd_value(t_car *car, t_vm *main_struct)
 {
 	int		local_pos;
+	int 	i;
 
+	i = 0;
 	car->arg_size = 0;
 	local_pos = car->pos + 1;
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos],
@@ -78,5 +80,18 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos))
 		return FALSE;
+	while (i < 3)
+	{
+		if (car->args[i].name == 1 && car->op_tabble.opcode != 3 &&
+				car->op_tabble.opcode != 11 && car->op_tabble.opcode != 2
+			&& car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5 && car->op_tabble.opcode != 2)
+			car->args[i].value = car->reg[car->args[i].value];
+		else if (car->args[i].name == 2 && car->op_tabble.opcode != 3 &&
+				 car->op_tabble.opcode != 11 && car->op_tabble.opcode != 2
+				 && car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5 && car->op_tabble.opcode != 2)
+			car->args[i].value = get_int_from_byte_code(main_struct->map +
+				car->pos + car->args[i].value);
+		i++;
+	}
 	return TRUE;
 }

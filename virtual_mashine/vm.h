@@ -142,15 +142,4 @@ void 	put_int_on_map(char *map, int data, char *players, char player_nbr);
 //void	visualisation(t_vm *main_struct);
 void	start_visualisation(void);
 
-void and_reg_reg(t_car *car, int reg_n);
-void and_ind_reg(t_car *car, int reg_n, char *map);
-void	and_dir_reg(t_car *car, int reg_n);
-void and_reg_ind(t_car *car, int reg_n, char *map);
-void and_ind_ind(t_car *car, int reg_n, char *map);
-void and_dir_ind(t_car *car, int reg_n, char *map);
-void and_reg_dir(t_car *car, int reg_n);
-void and_ind_dir(t_car *car, int reg_n, char *map);
-void and_dir_dir(t_car *car, int reg_n);
-
-
 #endif
