@@ -111,7 +111,9 @@ void	get_all_info(t_asm *start, char *line)
 	}
 	if (ft_strchr(line, '#'))
 	{
-		line = if_comment_at_end(line);//maybe the reason of leaks!!!!!!!!!
+		p = if_comment_at_end(line);//maybe the reason of leaks!!!!!!!!!
+        line = p;
+        free(p);
 		comm = 1;
 	}
 	line = good_strtrim(line);//leaks!!!!!!!!!!
