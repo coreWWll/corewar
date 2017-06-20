@@ -8,7 +8,7 @@ void	memory_dump(t_vm *main_struct, int nbr_cycles)
 {
 	if (main_struct->f_dump == TRUE && nbr_cycles == main_struct->dump_cycle)
 	{
-		print_memory((unsigned char*)main_struct->map, MEM_SIZE);
+		print_memory((unsigned char *) main_struct->map, MEM_SIZE, NULL);
 		exit(1);
 	}
 }

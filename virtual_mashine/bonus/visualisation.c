@@ -4,30 +4,41 @@
 
 #include "../vm.h"
 #include "visualisation.h"
-#include <ncurses.h>
+
+void	erase_all(t_vis *vis)
+{
+	werase(vis->param);
+	werase(vis->arena);
+}
 
 void	refresh_all(t_vis *vis)
 {
-	refresh();
-	wrefresh(vis->arena);
 	wrefresh(vis->param);
+	wrefresh(vis->arena);
 }
 
-void	create_windows(t_vm *main_struct, short color_pair)
+void	create_windows(t_vm *main_struct)
 {
-	WINDOW	*background_arena;
-	WINDOW	*background_param;
+	int	h;
 
-	background_arena = newwin((MEM_SIZE / CHAR_IN_ROW) + 2,
-							  (CHAR_IN_ROW * 3) + 2, 1, 1);
-	main_struct->vis->arena = newwin(MEM_SIZE / CHAR_IN_ROW,
-									 CHAR_IN_ROW * 3, 2, 2);
-	wbkgd(background_arena, COLOR_PAIR(color_pair));
-	wbkgd(main_struct->vis->arena, COLOR_PAIR(color_pair));
-	background_param = newwin(50, 50, 1, (CHAR_IN_ROW * 3) + 4);
-	wbkgd(background_param, COLOR_PAIR(COLOR_RED));
-	wrefresh(background_arena);
-	wrefresh(background_param);
+	h = MEM_SIZE / CHAR_IN_ROW;
+	main_struct->vis->bg_arena = newwin(h + 2, (CHAR_IN_ROW * 3) + 2, 1, 1);
+	main_struct->vis->arena = newwin(h, CHAR_IN_ROW * 3, 2, 2);
+	wbkgd(main_struct->vis->bg_arena, COLOR_PAIR(COL_ARENA));
+	wbkgd(main_struct->vis->arena, COLOR_PAIR(COL_ARENA));
+	main_struct->vis->bg_param = newwin(42 , 52, 1, (CHAR_IN_ROW * 3) + 4);
+	main_struct->vis->param = newwin(40, 50, 2, (CHAR_IN_ROW * 3) + 5);
+	wbkgd(main_struct->vis->bg_param, COLOR_PAIR(COL_ARENA));
+	wbkgd(main_struct->vis->param, COLOR_PAIR(COL_ARENA));
+	main_struct->vis->bg_usage = newwin(23, 52, 44, (CHAR_IN_ROW * 3) + 4);
+	main_struct->vis->usage = newwin(21, 50, 45, (CHAR_IN_ROW * 3) + 5);
+	wbkgd(main_struct->vis->bg_usage, COLOR_PAIR(COL_ARENA));
+	wbkgd(main_struct->vis->usage, COLOR_PAIR(COL_ARENA));
+	wrefresh(main_struct->vis->bg_arena);
+	wrefresh(main_struct->vis->bg_param);
+	wrefresh(main_struct->vis->bg_usage);
+	wrefresh(main_struct->vis->usage);
+	nodelay(main_struct->vis->arena, TRUE);
 }
 
 void start_visualisation(t_vm *main_struct)
@@ -40,62 +51,24 @@ void start_visualisation(t_vm *main_struct)
 	curs_set(FALSE);
 	start_color();
 	i = 1;
-	while (i < COLOR_WHITE)
+	while (i < COLOR_CYAN)
 	{
 		init_pair(i, COLOR_BLACK, i);
-		if (i == COLOR_CYAN)
-			create_windows(main_struct, i);
 		i++;
 	}
-
+	init_pair(COL_ARENA, COLOR_BLACK, COLOR_CYAN);
+	init_pair(COL_CAR, COLOR_WHITE, COLOR_BLACK);
+	create_windows(main_struct);
+	w_print_usage(main_struct->vis->usage);
 }
 
 void	stop_visualisation(t_vm *main_struct)
 {
 	delwin(main_struct->vis->arena);
 	delwin(main_struct->vis->param);
+	delwin(main_struct->vis->usage);
+	delwin(main_struct->vis->bg_arena);
+	delwin(main_struct->vis->bg_param);
+	delwin(main_struct->vis->bg_usage);
 	endwin();
 }
-
-
-
-/*
- *
- * #include <time.h>
-
-int 	i = 0;
-
-
-void	get_input(t_vm *main_struct)
-{
-	char	buf[2];
-
-	if (ft_kbhit() && fgets(buf, 2, stdin))
-	{
-		if (buf[0] == '+' && main_struct->time > 10)
-			main_struct->time -= 10;
-		if (buf[0] == '-' && main_struct->time < 9990)
-			main_struct->time += 10;
-	}
-}
-
-void	visualisation(t_vm *main_struct)
-{
-	long	time;
-
-	//210 * 100000 50/c
-	//    1/c
-	time = 10000 * main_struct->time;
-	get_input(main_struct);
-	ft_putstr(CLEARE);
-	ft_putstr(TO_BEGIN);
-	printf("CYCLE = %10d PERIOD = %10d\n", main_struct->cycle, main_struct
-		->round);
-	//ft_putnbr(main_struct->time);
-	if (main_struct->cycle % 50 == 0)
-		i++;
-//	ft_putnbr(i);
-	//print_memory((unsigned char*)main_struct->map, MEM_SIZE);
-	nanosleep((const struct timespec[]){{0, time}}, NULL);
-}
- */

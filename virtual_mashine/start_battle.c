@@ -4,7 +4,6 @@
 
 #include "vm.h"
 #include <stdio.h>
-#include <time.h>
 
 
 void change_alive_flag(t_vm *main_struct)
@@ -72,13 +71,11 @@ void    start_battle(t_vm *main_struct)
 	while (check_alive(main_struct) && (CYCLE_TO_DIE -
 			main_struct->round * CYCLE_DELTA) >= 0)
     {
-       // nanosleep((const struct timespec[]){{0, 25990}}, NULL);
-		//visualisation
-//		visualisation(main_struct);
+		put_caret_on_map(main_struct);
+		if (main_struct->f_v == TRUE)
+			visualisate(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
-		{
 			cycles_and_rounds(main_struct);
-		}
 		move_all_car(main_struct);
         (main_struct->cycle)++;
     }

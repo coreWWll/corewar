@@ -3,6 +3,21 @@
 //
 
 #include "vm.h"
+#include "bonus/visualisation.h"
+
+void	create_color_array(t_vm *main_struct)
+{
+	int 	i;
+
+	i = 0;
+	if ((main_struct->color = (char *)malloc(MEM_SIZE)) == NULL)
+		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:10"));
+	while (i < MEM_SIZE)
+	{
+		main_struct->color[i] = COL_ARENA;
+		i++;
+	}
+}
 
 t_vm	*create_main_struct(void)
 {
@@ -14,10 +29,9 @@ t_vm	*create_main_struct(void)
 												   (MAX_PLAYERS + 1));
 	if (main_struct->players == NULL)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
-	if ((main_struct->color = ft_strnew(MEM_SIZE)) == NULL)
-		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:18"));
+	create_color_array(main_struct);
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
-	main_struct->time = 210;
+	main_struct->time = 20000;
 	return (main_struct);
 }
 
@@ -45,18 +59,11 @@ int		main(int argc, char **argv)
 	put_cat_on_start(main_struct);
 	create_map(main_struct);
 	if (main_struct->f_v == TRUE)
-	{
 		start_visualisation(main_struct);
-		while (wgetch(main_struct->vis->arena) != 'q')
-			refresh_all(main_struct->vis);
-		if (main_struct->f_v == TRUE)
-			stop_visualisation(main_struct);
-	}
-	else
-	{
-		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-		start_battle(main_struct);
-		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-	}
+	start_battle(main_struct);
+	if (main_struct->f_v == TRUE)
+		stop_visualisation(main_struct);
+//		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
+//		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	return (0);
 }
