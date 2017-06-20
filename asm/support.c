@@ -32,7 +32,7 @@ char	*good_strtrim(char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	while (str[j] == ' ' || str[j] == '\t'
-			|| str[j] == COMMENT_CHAR || str[j] == ';')
+			|| str[j] == COMMENT_CHAR/* || str[j] == ';'*/)
 		j--;
 	len = j - i;
 	res = ft_strsub(str, i, len + 1);

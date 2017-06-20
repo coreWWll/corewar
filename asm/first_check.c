@@ -34,7 +34,7 @@ void	check_endl_and_len(char *t, char *name, char *line, int flag)
         t++;
     while (*t != '\0')
     {
-        if (*t == '#' || *t == ';')
+        if (*t == '#'/* || *t == ';'*/)
             break;
         if (*t != ' ' && *t != '\t')
             ft_exit(0);
@@ -71,8 +71,8 @@ char	*if_comment_at_end(char *line) //check if comment is after command line
 	char *t;
 
 	t = ft_strchr(line, COMMENT_CHAR);
-	if (!t)
-		t = ft_strchr(line, ';');
+	/*if (!t)
+		t = ft_strchr(line, ';');*/
 	if (t)
 	{
 		*t = '\0';

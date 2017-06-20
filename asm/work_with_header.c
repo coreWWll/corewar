@@ -51,16 +51,20 @@ void			fill_name_and_comment(t_asm *head)
 	int i;
 
 	i = 0;
-	while (head->comm[i])
+	if (head->comm)
 	{
-		head->header->comment[i] = head->comm[i];
-		i++;
+		while (head->comm[i]) {
+			head->header->comment[i] = head->comm[i];
+			i++;
+		}
 	}
 	i = 0;
-	while (head->name[i])
+	if (head->name)
 	{
-		head->header->prog_name[i] = head->name[i];
-		i++;
+		while (head->name[i]) {
+			head->header->prog_name[i] = head->name[i];
+			i++;
+		}
 	}
 }
 
