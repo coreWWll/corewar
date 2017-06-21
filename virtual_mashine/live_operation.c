@@ -19,7 +19,7 @@ void    get_live_func(char *map, t_car *car)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "file: live_operation.c:17"));
 	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
 
-    printf ("-> read LIVE instruction, data = %s\n", car->data); //printf 
+    //printf ("-> read LIVE instruction, data = %s\n", car->data); //printf
 }
 
 int		check_who_live(unsigned int number, t_vm *main_struct)
@@ -48,8 +48,8 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 	car->live = 1;
 	number = (unsigned int)get_int_from_byte_code(car->data);
 	main_struct->last_live[0] = check_who_live(number, main_struct);
-	if (main_struct->last_live[0] != 0)
-		ft_printf ("Player ->%d<- is ALIVE\n", main_struct->last_live[0]);
+	//if (main_struct->last_live[0] != 0)
+	//	ft_printf ("Player ->%d<- is ALIVE\n", main_struct->last_live[0]);
 	main_struct->last_live[1] = main_struct->cycle;
 	car->pos = car->pos + 5;
     car->op_type = 0;

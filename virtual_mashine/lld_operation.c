@@ -7,7 +7,7 @@
 void get_lld_func(t_car *car)
 {
 	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
-	ft_printf ("-> read LLD intruction, data =\n");
+	//ft_printf ("-> read LLD intruction, data =\n");
 }
 
 void    do_lld_func(t_vm *main_struct, t_car *car)
@@ -29,5 +29,5 @@ void    do_lld_func(t_vm *main_struct, t_car *car)
 	}
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
-	ft_printf("LONG LOAD HAX!!!!\n");
+	//ft_printf("LONG LOAD HAX!!!!\n");
 }

@@ -80,18 +80,41 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos))
 		return FALSE;
-	while (i < 3)
+	while (i < 2)
 	{
 		if (car->args[i].name == 1 && car->op_tabble.opcode != 3 &&
 				car->op_tabble.opcode != 11 && car->op_tabble.opcode != 2
-			&& car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5 && car->op_tabble.opcode != 2)
+			&& car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5 &&
+				car->op_tabble.opcode != 10)
 			car->args[i].value = car->reg[car->args[i].value];
 		else if (car->args[i].name == 2 && car->op_tabble.opcode != 3 &&
 				 car->op_tabble.opcode != 11 && car->op_tabble.opcode != 2
-				 && car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5 && car->op_tabble.opcode != 2)
-			car->args[i].value = get_int_from_byte_code(main_struct->map +
+				 && car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5
+				 && car->op_tabble.opcode != 10)
+		{
+			if (car->op_tabble.opcode != 14)
+				car->args[i].value = get_int_from_byte_code(main_struct->map +
+				car->pos + car->args[i].value % IDX_MOD);
+			else
+				car->args[i].value = get_int_from_byte_code(main_struct->map +
 				car->pos + car->args[i].value);
+		}
 		i++;
+	}
+	if (car->op_tabble.opcode == 10)
+	{
+		i = 1;
+		while (i < 3)
+		{
+			if (car->args[i].name == 1)
+				car->args[i].value = car->reg[car->args[i].value];
+			else if (car->args[i].name == 2)
+			{
+				car->args[i].value = get_int_from_byte_code(main_struct->map +
+				car->pos + car->args[i].value % IDX_MOD);
+			}
+			i++;
+		}
 	}
 	return TRUE;
 }
