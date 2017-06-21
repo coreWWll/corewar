@@ -83,6 +83,8 @@ void	check_args_now(t_asm *start)
 
 void	validate_it(t_asm *start)
 {
+    if (!start->name || !start->comm)
+        ft_exit(9);
 	check_if_labels(start);
 	check_args_now(start);
 }
