@@ -6,14 +6,26 @@
 
 void get_and_func(t_car *car)
 {
-	//car->data = ft_memdup(4, map, (*pos) + 1);
-	car->c_for_op = 5;
-	car->pos = car->pos + 5;
-	ft_printf ("-> read AND operation and it data = %s\n");
+	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
+	//ft_printf ("-> read AND intruction, data =\n");
 }
 
 void    do_and_func(t_vm *main_struct, t_car *car)
 {
-	car->op_type = 0;
-	ft_printf("AND FUNCTION!!!!\n");
+	if (car->args[2].name == 1 && car->args[2].value > 0)
+	{
+		car->reg[car->args[2].value - 1] = (unsigned int) (car->args[0].value &
+				car->args[1].value);
+	}
+	else
+	{
+		car->op_tabble.opcode = 0;
+		car->pos = car->pos++;
+		return;
+	}
+	car->op_tabble.opcode = 0;
+	car->pos = car->pos + car->arg_size + 2;
+	if (car->reg[car->args[2].value - 1] == 0)
+		car->carry = 1;
+	//ft_printf("AND OPERATION!!!!\n");
 }

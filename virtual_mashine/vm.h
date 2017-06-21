@@ -163,5 +163,4 @@ void	put_caret_on_map(t_vm *main_struct);
 
 
 
-
 #endif
