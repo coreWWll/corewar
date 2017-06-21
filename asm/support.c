@@ -36,7 +36,6 @@ char	*good_strtrim(char *str)
 		j--;
 	len = j - i;
 	res = ft_strsub(str, i, len + 1);
-	//free(str);
 	return (res);
 }
 
