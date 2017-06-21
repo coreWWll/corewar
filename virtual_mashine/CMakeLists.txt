@@ -143,8 +143,11 @@ set(SOURCE_FILES
         bonus/visualisation.h
         bonus/ft_kbhit.c
         put_int_on_map.c
-
-        )
+        bonus/visualisate.c
+        bonus/w_print_memory.c
+        bonus/w_print_param.c
+        bonus/w_print_usage.c
+        bonus/put_caret_on_map.c)
 
 add_executable(virtual_mashine ${SOURCE_FILES})
 target_link_libraries( virtual_mashine ${CURSES_LIBRARIES} )

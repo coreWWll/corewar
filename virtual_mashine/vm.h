@@ -6,11 +6,14 @@
 #define VIRTUAL_MASHINE_VM_H_H
 
 #include <fcntl.h>
+#include <ncurses.h>
 #include "libft/libft.h"
 #include "../op.h"
 
 #define TRUE						1
 #define FALSE						0
+
+# define CHAR_IN_ROW				64
 
 #define ERR_PLAYER_FILE_READING		"Player_file reading fail"
 #define ERR_OPEN_FILE				"Can't open file - "
@@ -56,6 +59,17 @@ typedef struct			s_player
 	char				*champ_code;
 }						t_player;
 
+typedef struct			s_vis
+{
+	WINDOW				*arena;
+	WINDOW				*param;
+	WINDOW				*usage;
+	WINDOW				*bg_arena;
+	WINDOW				*bg_param;
+	WINDOW				*bg_usage;
+}						t_vis;
+
+
 typedef struct			s_vm
 {
 	t_player			**players;
@@ -73,6 +87,7 @@ typedef struct			s_vm
 	int					round;
 	int 				cycle_to_die;
 	int					time;
+	t_vis				*vis;
 }						t_vm;
 
 void	dell_car_from_list(t_car **head, t_car *to_dell);
@@ -127,7 +142,7 @@ void    move_all_car(t_vm *main_struct);
 int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
-void	print_memory(unsigned char *map, size_t size);
+void print_memory(unsigned char *map, size_t size, WINDOW *win);
 void	ft_error(char *error_message);
 void    get_op_code(t_vm *main_struct, t_car *car);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
@@ -140,6 +155,12 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct);
 void 	put_int_on_map(char *map, int data, char *players, char player_nbr);
 
 //void	visualisation(t_vm *main_struct);
-void	start_visualisation(void);
+void	start_visualisation(t_vm *main_struct);
+void	stop_visualisation(t_vm *main_struct);
+void	refresh_all(t_vis *vis);
+void	visualisate(t_vm *main_struct);
+void	put_caret_on_map(t_vm *main_struct);
+
+
 
 #endif

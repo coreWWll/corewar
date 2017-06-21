@@ -99,18 +99,28 @@ void	get_command(char *line, t_asm *start)
 void	get_all_info(t_asm *start, char *line)
 {
 	char *dupline;
+	char *p;
+	int comm;
 
+	comm = 0;
 	if (start->only_label == 1 && is_label(line) == 1)//if list with only label
 	{
 		start->next = new_asm();
 		start->only_label = 0;
 		start = start->next;
 	}
-	line = if_comment_at_end(line);
-	line = good_strtrim(line);
+	if (ft_strchr(line, '#'))
+	{
+		p = if_comment_at_end(line);//maybe the reason of leaks!!!!!!!!!
+        line = p;
+        free(p);
+		comm = 1;
+	}
+	line = good_strtrim(line);//leaks!!!!!!!!!!
 	dupline = line;
 	get_label(&dupline, start);
 	get_command(dupline, start);
 	get_args(dupline, start);
 	ft_strdel(&line);
+	//line = NULL;
 }
