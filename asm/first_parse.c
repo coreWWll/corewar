@@ -59,6 +59,41 @@ char    *get_full_name_or_comment(int fd, char *name, char *line, int flag)
     return(name);
 }
 
+void     check_if_name_comment_is_correct(char *line, int flag)
+{
+    int i;
+    int j;
+    char *tmp;
+
+    i = 0;
+    j = 0;
+    while (line[i] != '.')
+    {
+        if (line[i] != ' ' && line[i] != '\t')
+            ft_exit(9);
+        i++;
+    }
+    tmp = (flag == 0) ? COMMENT_CMD_STRING : NAME_CMD_STRING;
+    if (line[i] == '.')
+    {
+        while (tmp[j])
+        {
+            if (line[i] != tmp[j])
+                ft_exit(9);
+            i++;
+            j++;
+        }
+    }
+    else
+        ft_exit(9);
+    while (line[i] != '\"')
+    {
+        if (line[i] != ' ' && line[i] != '\t')
+            ft_exit(9);
+        i++;
+    }
+}
+
 char	*get_name_or_comm(char *line, int fd, int flag)
 {
 	char	*t;
@@ -69,6 +104,7 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 
 	i = 0;
 	len = 0;
+    check_if_name_comment_is_correct(line, flag);
 	if (!(t = ft_strchr(line, '\"')))
 		ft_exit(0);
 	t++;
@@ -89,6 +125,8 @@ char	*get_name_or_comm(char *line, int fd, int flag)
         free(name);
         name = t;
     }
+    else
+        check_endl_and_len(t, name, line, flag);
 	return (name);
 }
 

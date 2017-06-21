@@ -77,7 +77,6 @@ char	*if_comment_at_end(char *line) //check if comment is after command line
 	{
 		*t = '\0';
 		t = ft_strdup(line);
-		//free(line);
         return(t);
 	}
 	return(line);
