@@ -25,7 +25,7 @@ void    do_st_func(t_vm *main_struct, t_car *car)
     else
     {
         car->op_tabble.opcode = 0;
-        car->pos = car->pos++;
+        car->pos++;
         return ;
     }
 	car->op_tabble.opcode = 0;

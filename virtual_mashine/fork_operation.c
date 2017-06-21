@@ -15,10 +15,10 @@ void get_fork_func(char *map, t_car *car)
 short		get_short_from_byte_code(char *buffer, int flag)
 {
 	if (flag == 0)
-		return (buffer[3] | ( (short)buffer[2] << 8 ) | ( (short)buffer[1] << 16) |
-				( (short)buffer[0] << 24 ));
+		return((buffer[0] & 0xFF) << 24) + ((buffer[1] & 0xFF) << 16)
+				   + ((buffer[2] & 0xFF) << 8) + (buffer[3] & 0xFF);
 	else
-		return (( (short)buffer[1] ) | ( (short )buffer[0] << 8 ));
+		return ((buffer[0] & 0xFF) << 8) + ((buffer[1] & 0xFF));
 }
 t_car	*add_car(t_car *car, int delta)
 {

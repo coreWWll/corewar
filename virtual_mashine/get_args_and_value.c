@@ -101,13 +101,13 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 		}
 		i++;
 	}
-	if (car->op_tabble.opcode == 10)
+	if (car->op_tabble.opcode == 11)
 	{
 		i = 1;
 		while (i < 3)
 		{
 			if (car->args[i].name == 1)
-				car->args[i].value = car->reg[car->args[i].value];
+				car->args[i].value = car->reg[car->args[i].value - 1];
 			else if (car->args[i].name == 2)
 			{
 				car->args[i].value = get_int_from_byte_code(main_struct->map +
