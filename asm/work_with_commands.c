@@ -105,7 +105,7 @@ void	write_op_code(t_asm *head, t_asm *begin, int op_c, int fd)
 	{
 		if (begin->what_args[i] == T_REG)
 			val_tmp += write_ind(fd, begin->args[i], REG);
-		else if (begin->what_args[i] == T_DIR)
+		else if (begin->what_args[i] == T_IND)
 			val_tmp += write_dir(fd, val_cur, head, i, begin);
 		else if (begin->what_args[i] != 0)
 			val_tmp += write_ind(fd, begin->args[i], IND);

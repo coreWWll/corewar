@@ -71,7 +71,7 @@ void 			modify_size(t_asm *head, t_asm *begin, int cur_size)
 	i = 0;
 	while (i < 3)
 	{
-		if (begin->what_args[i] == T_DIR)
+		if (begin->what_args[i] == T_IND)
 			head->header->prog_size += cur_size;
 		else
 			head->header->prog_size += begin->what_args[i];
