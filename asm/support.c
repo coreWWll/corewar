@@ -92,6 +92,6 @@ void	ft_exit(int flag)
     if (flag == 8)
         ft_putendl("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline?)");
     if (flag == 9)
-        ft_putendl("No name or initial comment");
+        ft_putendl("Wrong or no name or initial comment");
 	exit(0);
 }

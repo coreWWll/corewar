@@ -41,6 +41,54 @@ void	make_list(t_asm **start, char *line)//main
 	}
 }
 
+int     check_if_name_comment_is_correct(char *line, int flag)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (line[i] != '.')
+    {
+        if (line[i] != ' ' && line[i] != '\t')
+            ft_exit(9);
+        i++;
+    }
+    if (line[i] == '.')
+    {
+        if (flag == 0)
+        {
+            while (NAME_CMD_STRING[j])
+            {
+                if (line[i] != NAME_CMD_STRING[j])
+                    ft_exit(9);
+                i++;
+                j++;
+            }
+        }
+        else
+        {
+            while (COMMENT_CMD_STRING[j])
+            {
+                if (line[i] != COMMENT_CMD_STRING[j])
+                    ft_exit(9);
+                i++;
+                j++;
+            }
+        }
+    }
+    else
+        ft_exit(9);
+    while (line[i] != '\"')
+    {
+        if (line[i] != ' ' && line[i] != '\t')
+            ft_exit(9);
+        i++;
+    }
+    return(1);
+}
+
+
 void	do_parsing_work(char *av, t_asm *start)
 {
 	char	*line;
@@ -51,9 +99,19 @@ void	do_parsing_work(char *av, t_asm *start)
 		while ((get_next_line(fd, &line)) > 0)
 		{
 			if (ft_strstr(line, NAME_CMD_STRING))
-				start->name = get_name_or_comm(line, fd, 1);
+            {
+                if (check_if_name_comment_is_correct(line, 0) == 1)
+                    start->name = get_name_or_comm(line, fd, 1);
+                else
+                    ft_exit(9);
+            }
 			else if (ft_strstr(line, COMMENT_CMD_STRING))
-				start->comm = get_name_or_comm(line, fd, 0);
+            {
+                if (check_if_name_comment_is_correct(line, 1) == 1)
+                    start->comm = get_name_or_comm(line, fd, 0);
+                else
+                    ft_exit(9);
+            }
 			else if (if_comment(line) != 1)
 				make_list(&start, line);
 			ft_strdel(&line);
@@ -82,6 +140,6 @@ int		main(int ac, char **av)
 	}
 	else
 		write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
-	sleep(20);
+	//sleep(20);
 	return (0);
 }
