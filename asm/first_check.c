@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::   */
-/*	 first_check.c										:+:		 :+:	:+:   */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: arepnovs <marvin@42.fr>					+#+  +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2017/06/07 14:08:27 by arepnovs		   #+#	  #+#			  */
-/*	 Updated: 2017/06/07 14:08:27 by arepnovs		  ###	########.fr		  */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   first_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/24 14:40:49 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/06/24 14:41:09 by arepnovs         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../op.h"
@@ -30,18 +30,18 @@ int		if_comment(char *line)
 
 void	check_endl_and_len(char *t, char *name, char *line, int flag)
 {
-    if (t != '\0')
-        t++;
-    while (*t != '\0')
-    {
-        if (*t == '#'/* || *t == ';'*/)
-            break;
-        if (*t != ' ' && *t != '\t')
-            ft_exit(0);
-        t++;
-    }
-	if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH) //checking of name and comment size
-		|| (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
+	if (t != '\0')
+		t++;
+	while (*t != '\0')
+	{
+		if (*t == '#')
+			break ;
+		if (*t != ' ' && *t != '\t')
+			ft_exit(0);
+		t++;
+	}
+	if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH)
+			|| (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
 		ft_exit(1);
 }
 
@@ -50,11 +50,11 @@ void	check_format(char *file)
 	size_t len;
 
 	len = ft_strlen(file);
-	if (file[len - 1] != 's' && file[len - 2] != '.')//checking file format by last 2 chars
+	if (file[len - 1] != 's' && file[len - 2] != '.')
 		ft_exit(3);
 }
 
-int		is_label(char *line) //check if label is in line
+int		is_label(char *line)
 {
 	int i;
 
@@ -66,18 +66,16 @@ int		is_label(char *line) //check if label is in line
 	return (1);
 }
 
-char	*if_comment_at_end(char *line) //check if comment is after command line
+char	*if_comment_at_end(char *line)
 {
 	char *t;
 
 	t = ft_strchr(line, COMMENT_CHAR);
-	/*if (!t)
-		t = ft_strchr(line, ';');*/
 	if (t)
 	{
 		*t = '\0';
 		t = ft_strdup(line);
-        return(t);
+		return (t);
 	}
-	return(line);
+	return (line);
 }

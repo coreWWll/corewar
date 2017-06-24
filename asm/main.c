@@ -1,25 +1,25 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::   */
-/*	 main.c												:+:		 :+:	:+:   */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: arepnovs <marvin@42.fr>					+#+  +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2017/06/07 14:07:01 by arepnovs		   #+#	  #+#			  */
-/*	 Updated: 2017/06/07 14:07:01 by arepnovs		  ###	########.fr		  */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/24 14:37:19 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/06/24 14:37:56 by arepnovs         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../op.h"
 
-void	make_list(t_asm **start, char *line)//main
+void	make_list(t_asm **start, char *line)
 {
 	t_asm *p;
 
 	p = *start;
 	while (p)
 	{
-		if (p->only_label == 1) // check if label is empty to add command in it
+		if (p->only_label == 1)
 		{
 			get_all_info(p, line);
 			p->only_label = 0;
@@ -27,7 +27,7 @@ void	make_list(t_asm **start, char *line)//main
 		}
 		else if (p->next == NULL)
 		{
-			if (p->command || p->label) //if lable was empty in prev iteration
+			if (p->command || p->label)
 			{
 				p->next = new_asm();
 				p = p->next;
@@ -51,9 +51,9 @@ void	do_parsing_work(char *av, t_asm *start)
 		while ((get_next_line(fd, &line)) > 0)
 		{
 			if (ft_strstr(line, NAME_CMD_STRING))
-                start->name = get_name_or_comm(line, fd, 1);
+				start->name = get_name_or_comm(line, fd, 1);
 			else if (ft_strstr(line, COMMENT_CMD_STRING))
-                start->comm = get_name_or_comm(line, fd, 0);
+				start->comm = get_name_or_comm(line, fd, 0);
 			else if (if_comment(line) != 1)
 				make_list(&start, line);
 			ft_strdel(&line);
