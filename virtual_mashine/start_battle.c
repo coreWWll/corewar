@@ -86,4 +86,6 @@ void    start_battle(t_vm *main_struct)
 		//ft_printf("\n---------------------------------------------------\n");
 		//print_memory((unsigned char *) main_struct->map, MEM_SIZE);
     }
+	if (main_struct->f_v == TRUE)
+		while (wgetch(main_struct->vis->arena) != 'q');
 }
