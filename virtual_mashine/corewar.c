@@ -64,8 +64,9 @@ int		main(int argc, char **argv)
 	start_battle(main_struct);
 	if (main_struct->f_v == TRUE)
 		stop_visualisation(main_struct);
-	print_memory((unsigned char *) main_struct->map, MEM_SIZE);
+	
 //		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	return 0;
+
 	return (0);
 }
