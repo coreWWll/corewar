@@ -46,7 +46,7 @@ void	w_print_arena(t_vm *main_struct)
 	win = main_struct->vis->arena;
 	while (i < MEM_SIZE)
 	{
-		if ((unsigned char)main_struct->map[i] < 10)
+		if ((unsigned char)main_struct->map[i] < 16)
 			w_print_char('0', win, main_struct->color[i]);
 		w_put_nbr((unsigned char)main_struct->map[i], win,
 				main_struct->color[i]);
