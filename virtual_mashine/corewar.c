@@ -66,5 +66,6 @@ int		main(int argc, char **argv)
 		stop_visualisation(main_struct);
 	print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 //		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
+	return 0;
 	return (0);
 }
