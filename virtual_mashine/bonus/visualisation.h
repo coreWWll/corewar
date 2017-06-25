@@ -22,7 +22,7 @@ void	erase_all(t_vis *vis);
 void	refresh_all(t_vis *vis);
 void	w_print_param(t_vm *main_struct);
 void	w_print_usage(WINDOW *win);
-void	read_comands(t_vm *main_struct, int pause);
+void	read_commands(t_vm *main_struct);
 
 
 
