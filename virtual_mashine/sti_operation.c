@@ -17,10 +17,8 @@ void    do_sti_func(t_vm *main_struct, t_car *car)
 {
 	if (car->args[0].name == 1 && car->args[0].value > 0)
 	{
-		put_int_on_map(main_struct->map + car->args[1].value + car->args[2]
-																	   .value,
-					   car->reg[car->args[0].value - 1], main_struct->color,
-					   car->color);
+		put_int_on_map(main_struct->map+car->pos + (car->args[1].value +
+							   car->args[2].value) % MEM_SIZE,car->reg[car->args[0].value - 1], main_struct->color,car->color);
 	}
 	else
 	{

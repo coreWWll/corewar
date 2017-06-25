@@ -83,7 +83,7 @@ void    start_battle(t_vm *main_struct)
 			cycles_and_rounds(main_struct);
 		move_all_car(main_struct);
         (main_struct->cycle)++;
-		ft_printf("\n---------------------------------------------------\n");
-		print_memory((unsigned char *) main_struct->map, MEM_SIZE,NULL);
+		//ft_printf("\n---------------------------------------------------\n");
+		//print_memory((unsigned char *) main_struct->map, MEM_SIZE,NULL);
     }
 }

@@ -54,7 +54,14 @@ int 	read_args(t_car *car, unsigned char *map)
 	label_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	while (i < car->op_tabble.args_am)
 	{
-		read_size = car->args[i].name == 4 ? label_size : car->args[i].name;
+		if (car->args[i].name == T_REG)
+			read_size = T_REG;          // CHECK IT SUKA!!!!!!OUT,
+		else if (car->args[i].name == T_DIR)
+			read_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
+		else if (car->args[i].name == T_IND)
+			read_size = IND_SIZE;
+		else
+				read_size = 0;
 		buf = car->op_tabble.args[i] & car->args[i].name;
 		if (buf != car->args[i].name || buf == 0)
 			error = TRUE;
@@ -80,6 +87,10 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos))
 		return FALSE;
+
+
+
+
 	while (i < 2)
 	{
 		if (car->args[i].name == 1 && car->op_tabble.opcode != 3 &&
