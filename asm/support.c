@@ -36,7 +36,6 @@ char	*good_strtrim(char *str)
 		j--;
 	len = j - i;
 	res = ft_strsub(str, i, len + 1);
-	//free(str);
 	return (res);
 }
 
@@ -91,5 +90,7 @@ void	ft_exit(int flag)
 		ft_putendl("Wrong label syntax");
     if (flag == 8)
         ft_putendl("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline?)");
+    if (flag == 9)
+        ft_putendl("Wrong or no name or initial comment");
 	exit(0);
 }
