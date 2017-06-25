@@ -51,7 +51,7 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 	//if (main_struct->last_live[0] != 0)
 	//	ft_printf ("Player ->%d<- is ALIVE\n", main_struct->last_live[0]);
 	main_struct->last_live[1] = main_struct->cycle + 1;
-	car->pos = car->pos + 5;
+	car->pos = car->pos + DIR_SIZE + 1;
     car->op_type = 0;
     ft_strdel(&(car->data));
 }

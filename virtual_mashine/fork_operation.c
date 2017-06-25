@@ -37,22 +37,23 @@ void	create_new_car(t_car *car, int delta)
 {
 	t_car	*ptr;
 
-	ptr = car;
-	while (ptr->next)
-		ptr = ptr->next;
-	ptr->next = add_car(car, delta);
+	ptr = add_car(car, delta);
+	ptr->next = car;
+	car = ptr;
 }
 
 void    do_fork_func(t_vm *main_struct, t_car *car)
 {
 	int dist;
+	int arg_size;
 
+	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	dist = (int)get_short_from_byte_code(car->data, car->op_tabble
 			.codage_octal) % IDX_MOD;
 	//ft_printf("FORK DISTANCE = %d\n", dist);
 	create_new_car(car, dist);
 	//ft_printf("-> FORK <-\n");
-	car->pos = car->pos + 1 + DIR_SIZE - 2 * car->op_tabble.codage_octal;
+	car->pos = car->pos + 1 + arg_size;
 	car->op_tabble.opcode = 0;
 	if (car->data)
 		ft_strdel(&(car->data));

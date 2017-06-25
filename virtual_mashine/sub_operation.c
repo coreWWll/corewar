@@ -14,10 +14,9 @@ void get_sub_func(t_car *car)
 
 void    do_sub_func(t_vm *main_struct, t_car *car)
 {
-	if (car->args[0].name == 1 && car->args[1].name == 1 && car->args[2].name
-															== 1 &&
-			car->args[0].value > 0 && car->args[1].value > 0 && car->args[2]
-																		.value > 0)
+	if (car->args[0].name == T_REG && car->args[1].name == T_REG &&
+			car->args[2].name == T_REG && car->args[0].value > 0 &&
+			car->args[1].value > 0 && car->args[2].value > 0)
 	{
 		car->reg[car->args[2].value - 1] = car->reg[car->args[0].value - 1] -
 										   car->reg[car->args[1].value - 1];
