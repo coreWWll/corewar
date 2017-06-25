@@ -71,6 +71,11 @@ void    start_battle(t_vm *main_struct)
 	while (check_alive(main_struct) && (CYCLE_TO_DIE -
 			main_struct->round * CYCLE_DELTA) >= 0)
     {
+		if (main_struct->f_dump)
+		{
+			print_memory((unsigned char *) main_struct->map, MEM_SIZE, NULL);
+			break ;
+		}
 		put_caret_on_map(main_struct);
 		if (main_struct->f_v == TRUE)
 			visualisate(main_struct);
@@ -78,5 +83,7 @@ void    start_battle(t_vm *main_struct)
 			cycles_and_rounds(main_struct);
 		move_all_car(main_struct);
         (main_struct->cycle)++;
+		//ft_printf("\n---------------------------------------------------\n");
+		//print_memory((unsigned char *) main_struct->map, MEM_SIZE,NULL);
     }
 }
