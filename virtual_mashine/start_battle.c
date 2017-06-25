@@ -73,7 +73,7 @@ void    start_battle(t_vm *main_struct)
     {
 		if (main_struct->f_dump)
 		{
-			print_memory((unsigned char *) main_struct->map, MEM_SIZE, NULL);
+			print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 			break ;
 		}
 		put_caret_on_map(main_struct);
@@ -84,6 +84,6 @@ void    start_battle(t_vm *main_struct)
 		move_all_car(main_struct);
         (main_struct->cycle)++;
 		//ft_printf("\n---------------------------------------------------\n");
-		//print_memory((unsigned char *) main_struct->map, MEM_SIZE,NULL);
+		//print_memory((unsigned char *) main_struct->map, MEM_SIZE);
     }
 }
