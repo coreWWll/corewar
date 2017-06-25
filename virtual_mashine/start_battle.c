@@ -79,4 +79,6 @@ void    start_battle(t_vm *main_struct)
 		move_all_car(main_struct);
         (main_struct->cycle)++;
     }
+	if (main_struct->f_v == TRUE)
+		while (wgetch(main_struct->vis->arena) != 'q');
 }
