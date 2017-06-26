@@ -18,6 +18,7 @@ t_asm	*new_asm(void)
 
 	new = (t_asm *)malloc(sizeof(t_asm));
 	new->file_name = NULL;
+	new->file_path = NULL;
 	new->name = NULL;
 	new->comm = NULL;
 	new->label = NULL;
