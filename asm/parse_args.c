@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:14:23 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 15:45:55 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 19:54:54 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@ void	put_args_types(t_asm *start, int i)
 		else
 			check_if_num_ok(start->args[i], 1);
 	}
-	else if (start->args[i][0] == 'r' && check_if_num_ok(start->args[i], 0) == 1)
-	{
-		//check_if_reg_ok(start->args[i]);
+	else if (start->args[i][0] == 'r'
+			&& check_if_num_ok(start->args[i], 0) == 1)
 		start->what_args[i] = T_REG;
-	}
 	else if (is_num(start->args[i]) == 1)
 		start->what_args[i] = T_IND;
 	else

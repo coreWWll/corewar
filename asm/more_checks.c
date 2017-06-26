@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 15:46:33 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 15:48:42 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 19:54:12 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	check_if_end_is_newln(char *av)
 		ft_exit(8);
 }
 
-int	check_if_num_ok(char *reg, int f)
+int		check_if_num_ok(char *reg, int f)
 {
 	int i;
 	int minus;
@@ -100,5 +100,5 @@ int	check_if_num_ok(char *reg, int f)
 		}
 		i++;
 	}
-	return(1);
+	return (1);
 }
