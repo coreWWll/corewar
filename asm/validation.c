@@ -77,7 +77,7 @@ void	check_args_now(t_asm *start)
 		if (p->command && p->command[0] != '\0')
 		{
 			if (p->amount_of_args != op_tab[p->comm_num].args_am)
-				ft_exit(2);
+				ft_exit(10);
 			check_args(p);
 		}
 		p = p->next;

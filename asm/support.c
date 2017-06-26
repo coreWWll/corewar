@@ -50,7 +50,7 @@ int		is_num(char *str)
 	{
 		if (str[i] == '-')
 			minus++;
-		if (ft_isdigit(str[i]) != 1 && minus > 1)
+		if (ft_isdigit(str[i]) != 1 || minus > 1)
 			return (0);
 		i++;
 	}
@@ -67,7 +67,7 @@ char	*clean_arg(char *line)
 	i = len;
 	while (line[i] != '\t' && line[i] != ' ')
 		i--;
-	i++;
+	i = (i > MAX_INT) ? 0 : i + 1;
 	res = ft_strsub(line, (unsigned int)i, len - i);
 	return (res);
 }
@@ -81,7 +81,7 @@ void	ft_exit(int flag)
 	if (flag == 2)
 		ft_putendl("Wrong argument");
 	if (flag == 3)
-		ft_putendl("Wrong format of file");
+		ft_putendl("Wrong file format");
 	if (flag == 5)
 		ft_putendl("No command or wrong command");
 	if (flag == 6)
@@ -93,5 +93,7 @@ void	ft_exit(int flag)
 				" (Perhaps you forgot to end with a newline?)");
 	if (flag == 9)
 		ft_putendl("Wrong or no name or initial comment");
+	if (flag == 10)
+		ft_putendl("Invalid parameter count for instruction");
 	exit(0);
 }

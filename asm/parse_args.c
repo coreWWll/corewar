@@ -26,9 +26,14 @@ void	put_args_types(t_asm *start, int i)
 			free(temp);
 			start->l_flag[i] = 1;
 		}
+		else
+			check_if_num_ok(start->args[i], 1);
 	}
-	else if (start->args[i][0] == 'r')
+	else if (start->args[i][0] == 'r' && check_if_num_ok(start->args[i], 0) == 1)
+	{
+		//check_if_reg_ok(start->args[i]);
 		start->what_args[i] = T_REG;
+	}
 	else if (is_num(start->args[i]) == 1)
 		start->what_args[i] = T_IND;
 	else

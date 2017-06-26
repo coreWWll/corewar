@@ -7,6 +7,8 @@
 #include "../op.h"
 #include "../libft/libft.h"
 #define COREWAR_ASM_H
+#define MAX_INT                 2147483647
+#define MAX_SHORT_INT 			65535
 
 typedef struct      s_asm
 {
@@ -58,7 +60,6 @@ void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
 void 				header_parse(t_asm *asemb, int fd);
 void                validate_it(t_asm *start);
-t_op                *init_tab();
 char	            *clean_arg(char *line);
 void 	            check_if_end_is_newln(char *av);
 int 				if_lable(int *ar);// check if in arguments lable
@@ -67,5 +68,6 @@ unsigned int		do_big_endian(unsigned int magic, int size); // change place of bi
 char	            *get_full_name_or_comment(int fd, char *name, char *line, int flag);
 char	            *start_getting_name(char **name, char *t, size_t len);
 void	            check_if_name_comment_is_correct(char *line, int flag);
+int	                check_if_num_ok(char *reg, int f);
 
 #endif //COREWAR_ASM_H
