@@ -36,8 +36,6 @@ void	get_commands(t_asm *head, int fd)
 		if ((op_c = check_if_comand(begin->command)) != MAX_INT)
 			write_op_code(head, begin, op_c, fd);
 		begin = begin->next;
-		if (begin->next == NULL)
-			break ;
 	}
 }
 

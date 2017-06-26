@@ -71,7 +71,7 @@ void 			modify_size(t_asm *head, t_asm *begin, int cur_size)
 	i = 0;
 	while (i < 3)
 	{
-		if (begin->what_args[i] == T_IND)
+		if (begin->what_args[i] == T_DIR)
 			head->header->prog_size += cur_size;
 		else
 			head->header->prog_size += begin->what_args[i];
@@ -91,15 +91,17 @@ void			get_prog_size(t_asm *head) {
 	while (begin)
 	{
 		if (begin->label)
+		{
 			begin->program_s = head->header->prog_size;
+			printf("Write to begin: %d\n", head->header->prog_size);
+
+		}
 		if (begin->command)
 		{
 			check_if_comand_is(begin->command, &cur_com_size, &(head->header->prog_size));
 			modify_size(head, begin, cur_com_size);
 		}
 		begin = begin->next;
-		if (begin->next == NULL)
-			break ;
 	}
 	head->header->prog_size = do_big_endian(head->header->prog_size, 4);
 }
