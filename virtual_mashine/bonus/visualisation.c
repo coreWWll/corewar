@@ -46,6 +46,7 @@ void start_visualisation(t_vm *main_struct)
 	short int	i;
 
 	main_struct->vis = (t_vis*)ft_memalloc(sizeof(t_vis));
+	main_struct->vis->pause = TRUE;
 	initscr();
 	noecho();
 	curs_set(FALSE);

@@ -61,6 +61,7 @@ typedef struct			s_player
 
 typedef struct			s_vis
 {
+	int					pause;
 	WINDOW				*arena;
 	WINDOW				*param;
 	WINDOW				*usage;
