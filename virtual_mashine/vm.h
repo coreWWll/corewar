@@ -29,7 +29,6 @@ typedef struct		s_args
 
 typedef struct		s_car
 {
-	int 			error;
 	char 			color;
 	t_args			args[3];
 	int 			carry;
@@ -40,7 +39,6 @@ typedef struct		s_car
 	int             pos;
 	int             live;
 	int 			nb;
-	int             op_type;
 	int             c_for_op;
 	char            *data;
 	struct s_car    *next;

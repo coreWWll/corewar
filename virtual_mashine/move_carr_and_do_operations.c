@@ -36,9 +36,9 @@ void    move_all_car(t_vm *main_struct)
         while (car)
         {
             move_single_car(main_struct, car);
-            if (main_struct->ptr)
+            /*if (main_struct->ptr)
                 player[i - 1]->car = main_struct->ptr;
-            main_struct->ptr = NULL;
+            main_struct->ptr = NULL;*/
             car = car->next;
         }
         i--;
