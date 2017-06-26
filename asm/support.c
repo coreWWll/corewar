@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 14:13:16 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/07 14:13:25 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/06/26 15:44:19 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/06/26 15:56:05 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*good_strtrim(char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	while (str[j] == ' ' || str[j] == '\t'
-			|| str[j] == COMMENT_CHAR/* || str[j] == ';'*/)
+			|| str[j] == COMMENT_CHAR)
 		j--;
 	len = j - i;
 	res = ft_strsub(str, i, len + 1);
@@ -59,17 +59,17 @@ int		is_num(char *str)
 
 char	*clean_arg(char *line)
 {
-    size_t	i;
-    size_t	len;
-    char	*res;
+	size_t	i;
+	size_t	len;
+	char	*res;
 
-    len = ft_strlen(line);
-    i = len;
-    while (line[i] != '\t' && line[i] != ' ')
-        i--;
-    i++;
-    res = ft_strsub(line, (unsigned int)i, len - i);
-    return (res);
+	len = ft_strlen(line);
+	i = len;
+	while (line[i] != '\t' && line[i] != ' ')
+		i--;
+	i++;
+	res = ft_strsub(line, (unsigned int)i, len - i);
+	return (res);
 }
 
 void	ft_exit(int flag)
@@ -88,9 +88,10 @@ void	ft_exit(int flag)
 		ft_putendl("Wrong label");
 	if (flag == 7)
 		ft_putendl("Wrong label syntax");
-    if (flag == 8)
-        ft_putendl("Syntax error - unexpected end of input (Perhaps you forgot to end with a newline?)");
-    if (flag == 9)
-        ft_putendl("Wrong or no name or initial comment");
+	if (flag == 8)
+		ft_putendl("Syntax error - unexpected end of input"
+				" (Perhaps you forgot to end with a newline?)");
+	if (flag == 9)
+		ft_putendl("Wrong or no name or initial comment");
 	exit(0);
 }
