@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:14:23 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/07 14:17:39 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 15:45:55 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	if_more_args(t_asm *start)
 		if (ft_strchr(start->args[i], ' ') || ft_strchr(start->args[i], '\t'))
 		{
 			temp = start->args[i];
-            start->args[i] = clean_arg(temp);
+			start->args[i] = clean_arg(temp);
 			free(temp);
 		}
 		start->amount_of_args++;
