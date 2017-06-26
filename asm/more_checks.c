@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 14:18:03 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/07 14:18:21 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/06/26 15:46:33 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/06/26 15:48:42 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 void	check_if_label_ok(char *line, int len)
 {
@@ -62,19 +62,20 @@ void	find_label_or_die(t_asm *start, char *label)
 		ft_exit(6);
 }
 
-void 	check_if_end_is_newln(char *av)
+void	check_if_end_is_newln(char *av)
 {
-    int fd;
-    char buf[5];
-    int i = 0;
+	int		fd;
+	char	buf[5];
+	int		i;
 
-    fd = open(av, O_RDONLY);
-    while(read(fd,buf,1) > 0)
-        i += 1;
-    if(lseek(fd,i - 5,SEEK_SET) < 0)
-        ft_exit(3);
-    if(read(fd,buf,5) != 5)
-        ft_exit(3);;
-    if (!ft_strchr(buf, '\n'))
-        ft_exit(8);
+	i = 0;
+	fd = open(av, O_RDONLY);
+	while (read(fd, buf, 1) > 0)
+		i += 1;
+	if (lseek(fd, i - 5, SEEK_SET) < 0)
+		ft_exit(3);
+	if (read(fd, buf, 5) != 5)
+		ft_exit(3);
+	if (!ft_strchr(buf, '\n'))
+		ft_exit(8);
 }

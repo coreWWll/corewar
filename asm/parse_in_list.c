@@ -6,11 +6,11 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:19:46 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/07 14:26:15 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 15:52:28 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 t_asm	*new_asm(void)
 {
@@ -18,6 +18,7 @@ t_asm	*new_asm(void)
 
 	new = (t_asm *)malloc(sizeof(t_asm));
 	new->file_name = NULL;
+	new->file_path = NULL;
 	new->name = NULL;
 	new->comm = NULL;
 	new->label = NULL;
@@ -54,7 +55,7 @@ void	get_label(char **line, t_asm *start)
 		}
 		check_if_label_ok(*line, len);
 		if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR)
-			&& start->only_label != 1)//check if label is in line
+			&& start->only_label != 1)
 			start->label = start->label;
 		else if (start->only_label != 1 && len != 0)
 		{
@@ -74,7 +75,7 @@ void	get_command(char *line, t_asm *start)
 	char	*t;
 
 	i = 16;
-	while (--i >= 0) //sometimes works when 2 or more commands in line
+	while (--i >= 0)
 	{
 		if ((t = ft_strstr(line, op_tab[i].command)) != 0)
 		{
@@ -98,12 +99,12 @@ void	get_command(char *line, t_asm *start)
 
 void	get_all_info(t_asm *start, char *line)
 {
-	char *dupline;
-	char *p;
-	int comm;
+	char	*dupline;
+	char	*p;
+	int		comm;
 
 	comm = 0;
-	if (start->only_label == 1 && is_label(line) == 1)//if list with only label
+	if (start->only_label == 1 && is_label(line) == 1)
 	{
 		start->next = new_asm();
 		start->only_label = 0;
@@ -111,16 +112,15 @@ void	get_all_info(t_asm *start, char *line)
 	}
 	if (ft_strchr(line, '#'))
 	{
-		p = if_comment_at_end(line);//maybe the reason of leaks!!!!!!!!!
-        line = p;
-        free(p);
+		p = if_comment_at_end(line);
+		line = p;
+		ft_strdel(&p);
 		comm = 1;
 	}
-	line = good_strtrim(line);//leaks!!!!!!!!!!
+	line = good_strtrim(line);
 	dupline = line;
 	get_label(&dupline, start);
 	get_command(dupline, start);
 	get_args(dupline, start);
 	ft_strdel(&line);
-	//line = NULL;
 }

@@ -5,7 +5,6 @@
 #ifndef VIRTUAL_MASHINE_VM_H_H
 #define VIRTUAL_MASHINE_VM_H_H
 
-#include <fcntl.h>
 #include <ncurses.h>
 #include "libft/libft.h"
 #include "../op.h"
