@@ -16,12 +16,20 @@ void    do_lfork_func(t_vm *main_struct, t_car *car)
 {
 	int dist;
 	int arg_size;
+	int 	i;
 
+	i = 0;
 	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	dist = (int)get_short_from_byte_code(car->data, car->op_tabble
 			.codage_octal);
 	//ft_printf("FORK DISTANCE = %d\n", dist);
-	main_struct->ptr = create_new_car(car, dist, main_struct);
+	while (i < main_struct->players_nbr)
+	{
+		if (car->nb == i)
+			main_struct->players[i]->car = create_new_car
+					(main_struct->players[i]->car, dist, main_struct);
+	}
+	//main_struct->ptr = create_new_car(car, dist, main_struct);
 	//ft_printf("-> FORK <-\n");
 	car->pos = car->pos + 1 + arg_size;
 	car->op_tabble.opcode = 0;
