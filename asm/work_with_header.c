@@ -2,7 +2,7 @@
 // Created by Oleksiy Kres on 15/29/17.
 //
 
-#include "../op.h"
+#include "asm.h"
 
 int 	check_if_comand_is(char *command, int *cur_com_size, unsigned int *prog_s )
 {

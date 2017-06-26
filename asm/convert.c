@@ -2,7 +2,7 @@
 // Created by Oleksiy Kres on 5/26/17.
 //
 
-#include "../op.h"
+#include "asm.h"
 
 int 	check_if_comand(char *command)
 {

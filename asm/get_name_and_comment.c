@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 void	get_name_comment_till_end(char **line, char **name, int fd)
 {
