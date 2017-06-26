@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 char	*get_name_or_comm(char *line, int fd, int flag)
 {

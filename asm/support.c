@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 void	mult_putstr(char *str, char *str1, char *str2)
 {
