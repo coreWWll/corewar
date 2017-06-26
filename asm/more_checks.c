@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 15:46:33 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 15:48:42 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 19:54:12 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,27 @@ void	check_if_end_is_newln(char *av)
 		ft_exit(3);
 	if (!ft_strchr(buf, '\n'))
 		ft_exit(8);
+}
+
+int		check_if_num_ok(char *reg, int f)
+{
+	int i;
+	int minus;
+
+	minus = 0;
+	i = 1;
+	while (reg[i])
+	{
+		if (ft_isdigit(reg[i]) != 1)
+		{
+			if (f != 1)
+				ft_exit(2);
+			else if (i == 1 && reg[i] != '-')
+				ft_exit(2);
+			else if (i != 1)
+				ft_exit(2);
+		}
+		i++;
+	}
+	return (1);
 }

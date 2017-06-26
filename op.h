@@ -56,8 +56,6 @@ typedef char	t_arg_type;
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
-#define MAX_INT                 2147483647
-# define MAX_SHORT_INT 			65535
 
 typedef struct		header_s
 {
