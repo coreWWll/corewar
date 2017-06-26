@@ -6,11 +6,11 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:18:36 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/07 14:19:30 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 15:50:26 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 void	check_if_labels(t_asm *start)
 {
@@ -33,20 +33,23 @@ void	check_args_type(t_asm *p, int i)
 {
 	if (p->what_args[i] == T_REG)
 	{
-		if (op_tab[p->comm_num].args[i] != T_REG && op_tab[p->comm_num].args[i] != T_REG + T_IND
-            && op_tab[p->comm_num].args[i] != T_REG + T_DIR)
+		if (op_tab[p->comm_num].args[i] != T_REG &&
+				op_tab[p->comm_num].args[i] != T_REG + T_IND
+				&& op_tab[p->comm_num].args[i] != T_REG + T_DIR)
 			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_IND)
 	{
-		if (op_tab[p->comm_num].args[i] != T_IND && op_tab[p->comm_num].args[i] != T_IND + T_REG
-            && op_tab[p->comm_num].args[i] != T_IND + T_DIR)
+		if (op_tab[p->comm_num].args[i] != T_IND
+				&& op_tab[p->comm_num].args[i] != T_IND + T_REG
+				&& op_tab[p->comm_num].args[i] != T_IND + T_DIR)
 			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_DIR)
 	{
-		if (op_tab[p->comm_num].args[i] != T_DIR && op_tab[p->comm_num].args[i] != T_DIR + T_REG
-            && op_tab[p->comm_num].args[i] != T_DIR + T_IND)
+		if (op_tab[p->comm_num].args[i] != T_DIR
+				&& op_tab[p->comm_num].args[i] != T_DIR + T_REG
+				&& op_tab[p->comm_num].args[i] != T_DIR + T_IND)
 			ft_exit(2);
 	}
 }
@@ -74,7 +77,7 @@ void	check_args_now(t_asm *start)
 		if (p->command && p->command[0] != '\0')
 		{
 			if (p->amount_of_args != op_tab[p->comm_num].args_am)
-				ft_exit(2);
+				ft_exit(10);
 			check_args(p);
 		}
 		p = p->next;
@@ -83,8 +86,8 @@ void	check_args_now(t_asm *start)
 
 void	validate_it(t_asm *start)
 {
-    if (!start->name || !start->comm)
-        ft_exit(9);
+	if (!start->name || !start->comm)
+		ft_exit(9);
 	check_if_labels(start);
 	check_args_now(start);
 }

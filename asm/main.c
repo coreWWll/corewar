@@ -6,11 +6,11 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 14:37:19 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/24 14:37:56 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/06/26 19:53:25 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "asm.h"
 
 void	make_list(t_asm **start, char *line)
 {
@@ -82,6 +82,6 @@ int		main(int ac, char **av)
 	}
 	else
 		write(1, "Usage: ./asm [path to the champion_file.s]\n", 43);
-	sleep(20);
+	//sleep(20);
 	return (0);
 }

@@ -14,13 +14,18 @@ void get_lfork_func(char *map, t_car *car)
 
 void    do_lfork_func(t_vm *main_struct, t_car *car)
 {
-	int delta;
+	int dist;
+	int arg_size;
 
-	delta = (int)get_short_from_byte_code(car->data, car->op_tabble.codage_octal);
-	ft_printf("distance = %d\n", delta);
-	create_new_car(car, delta);
-	//ft_printf("-> LONG FORK <-\n");
-	car->pos = car->pos + 1 + DIR_SIZE - 2 * car->op_tabble.codage_octal;
-	car->op_type = 0;
-	ft_strdel(&(car->data));
+	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
+	dist = (int)get_short_from_byte_code(car->data, car->op_tabble
+			.codage_octal);
+	//ft_printf("FORK DISTANCE = %d\n", dist);
+	main_struct->ptr = create_new_car(car, dist, main_struct);
+	//ft_printf("-> FORK <-\n");
+	car->pos = car->pos + 1 + arg_size;
+	car->op_tabble.opcode = 0;
+
+	if (car->data)
+		ft_strdel(&(car->data));
 }

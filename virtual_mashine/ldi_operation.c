@@ -15,7 +15,7 @@ void get_ldi_func(t_car *car)
 
 void    do_ldi_func(t_vm *main_struct, t_car *car)
 {
-	if (car->args[3].name == 1 && car->args[3].value > 0)
+	if (car->args[3].name == T_REG && car->args[3].value > 0)
 	{
 		car->reg[car->args[3].value] = (unsigned int)get_int_from_byte_code
 				(main_struct->map + car->args[0].value + car->args[1].value);
