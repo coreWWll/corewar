@@ -15,8 +15,9 @@
 
 # define	COL_ARENA	10
 # define	COL_CAR		20
+# define	COL_NEW_MEM		30
 
-int		ft_kbhit(void);
+
 void	w_print_arena(t_vm *main_struct);
 void	erase_all(t_vis *vis);
 void	refresh_all(t_vis *vis);

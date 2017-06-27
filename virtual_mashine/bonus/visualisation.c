@@ -41,22 +41,37 @@ void	create_windows(t_vm *main_struct)
 	nodelay(main_struct->vis->arena, TRUE);
 }
 
+void	init_color_pair_from(short from, short till, short let)
+{
+	short	save_from;
+	short	fon;
+
+	save_from = (short)(from - 1);
+	till += save_from;
+	while (from < till)
+	{
+		if (save_from != 0)
+			fon = from % save_from;
+		else
+			fon = from;
+		init_pair(from, let, fon);
+		ft_printf("from %d, let %d, fon %d\n", from, let, fon);
+		from++;
+	}
+/*	if (save_from != 0)
+		sleep(40);*/
+}
+
 void start_visualisation(t_vm *main_struct)
 {
-	short int	i;
-
 	main_struct->vis = (t_vis*)ft_memalloc(sizeof(t_vis));
 	main_struct->vis->pause = TRUE;
 	initscr();
 	noecho();
 	curs_set(FALSE);
 	start_color();
-	i = 1;
-	while (i < COLOR_CYAN)
-	{
-		init_pair(i, COLOR_BLACK, i);
-		i++;
-	}
+	init_color_pair_from(1, COLOR_CYAN, COLOR_BLACK);
+	init_color_pair_from(COL_NEW_MEM + 1, COLOR_CYAN, COLOR_WHITE);
 	init_pair(COL_ARENA, COLOR_BLACK, COLOR_CYAN);
 	init_pair(COL_CAR, COLOR_WHITE, COLOR_BLACK);
 	create_windows(main_struct);
