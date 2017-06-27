@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "vm.h"
+#include "bonus/visualisation.h"
 
 void put_int_on_map(char *map, int data, char *players, char player_nbr)
 {
@@ -20,7 +21,7 @@ void put_int_on_map(char *map, int data, char *players, char player_nbr)
 	while (i >= 0)
 	{
 		map[i] = (char)data;
-		players[i] = player_nbr;
+		players[i] = (char)(player_nbr + COL_NEW_MEM);
 		data = data >> 8;
 		i--;
 	}
