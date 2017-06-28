@@ -55,17 +55,16 @@ void	init_color_pair_from(short from, short till, short let)
 		else
 			fon = from;
 		init_pair(from, let, fon);
-		ft_printf("from %d, let %d, fon %d\n", from, let, fon);
 		from++;
 	}
-/*	if (save_from != 0)
-		sleep(40);*/
 }
 
 void start_visualisation(t_vm *main_struct)
 {
 	main_struct->vis = (t_vis*)ft_memalloc(sizeof(t_vis));
 	main_struct->vis->pause = TRUE;
+	main_struct->vis->t_pause = -1;
+	main_struct->vis->h_pause = -1;
 	initscr();
 	noecho();
 	curs_set(FALSE);

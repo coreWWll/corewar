@@ -45,7 +45,8 @@ void	w_print_param(t_vm *main_struct)
 	wprintw(win, "%-35s%d\n\n", "PLAYERS:", main_struct->players_nbr);
 	print_all_players_name(win, main_struct->players, main_struct->players_nbr);
 	wprintw(win, "%-35s%d\n\n", "CYCLES:", main_struct->cycle);
-	wprintw(win, "%-35s%d\n\n", "CYCLE TO DIE:", main_struct->cycle_to_die);
+	wprintw(win, "%-35s%d\n\n", "CYCLE TO DIE:",
+			main_struct->cycle_to_die_for_viz);
 	wprintw(win, "%-35s%d\n\n", "PROCESSES:", main_struct->processes);
 	wprintw(win, "%-35s%d\n\n", "NUMBER OF LIVES:", main_struct->nbr_of_lifes);
 	wprintw(win, "%-35s\n\n", "LAST LIVE:");
