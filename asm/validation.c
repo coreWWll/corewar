@@ -36,7 +36,7 @@ void	check_args_type(t_asm *p, int i)
 		if (op_tab[p->comm_num].args[i] != T_REG &&
 				op_tab[p->comm_num].args[i] != T_REG + T_IND
 				&& op_tab[p->comm_num].args[i] != T_REG + T_DIR)
-			ft_exit(2);
+            ft_exit(2);
 	}
 	else if (p->what_args[i] == T_IND)
 	{

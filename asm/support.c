@@ -49,7 +49,10 @@ int		is_num(char *str)
 	while (str[i])
 	{
 		if (str[i] == '-')
-			minus++;
+        {
+            i++;
+            minus++;
+        }
 		if (ft_isdigit(str[i]) != 1 || minus > 1)
 			return (0);
 		i++;
