@@ -26,7 +26,7 @@ void    do_lfork_func(t_vm *main_struct, t_car *car)
 			.codage_octal);
 	while (i < main_struct->players_nbr)
 	{
-		if (car->nb == i)
+		if (car->index == i)
 			main_struct->players[i]->car = create_new_car
 					(main_struct->players[i]->car, car, dist, main_struct);
 		i++;

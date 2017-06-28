@@ -7,7 +7,7 @@
 void get_ldi_func(t_car *car)
 {
 	car->op_tabble.nb_tours--;
-	//ft_printf ("-> read LDI intruction\n");
+
 }
 
 int 	get_correct_ind(int mark)
@@ -19,6 +19,8 @@ int 	get_correct_ind(int mark)
 		k = mark / MEM_SIZE;
 		mark = mark - k * MEM_SIZE;
 	}
+	if (mark < 0)
+		mark = mark + MEM_SIZE;
 	return (mark);
 }
 
@@ -26,7 +28,7 @@ void    do_ldi_func(t_vm *main_struct, t_car *car)
 {
 	int mark;
 
-	mark = get_correct_ind(car->pos + car->args[0].value + car->args[1].value - 2);
+	mark = get_correct_ind(car->pos + car->args[0].value + car->args[1].value);
 	if (car->args[2].name == T_REG && car->args[2].value > 0)
 	{
 		car->reg[car->args[2].value - 1] = (unsigned int)get_int_from_byte_code(main_struct->map + mark);

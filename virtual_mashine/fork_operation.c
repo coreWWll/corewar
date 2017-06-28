@@ -32,7 +32,7 @@ t_car	*add_car(t_car *car, int delta)
 	if (new->pos > MEM_SIZE)
 		new->pos = new->pos - MEM_SIZE;
 	new->op_tabble.opcode = 0;
-	new->live = 0;
+	//new->live = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -42,10 +42,10 @@ t_car	*create_new_car(t_car *head, t_car *car, int delta, t_vm *main_struct)
 	t_car	*to_find;
 	t_car	*ptr;
 
-	to_find = head;
-	while (to_find != car && to_find != NULL)
-		to_find = to_find->next;
-	ptr = add_car(to_find, delta);
+	//to_find = head;
+	//while (to_find != car)
+	//	to_find = to_find->next;
+	ptr = add_car(car, delta);
 	move_single_car(main_struct, ptr);
 	ptr->next = head;
 	return (ptr);
@@ -63,7 +63,7 @@ void    do_fork_func(t_vm *main_struct, t_car *car)
 			.codage_octal) % IDX_MOD;
 	while (i < main_struct->players_nbr)
 	{
-		if (car->nb == i)
+		if (car->index == i)
 			main_struct->players[i]->car = create_new_car
 				(main_struct->players[i]->car, car, dist, main_struct);
 		i++;

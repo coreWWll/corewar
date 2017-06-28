@@ -7,14 +7,14 @@
 void get_ld_func(t_car *car)
 {
 	car->op_tabble.nb_tours--;
-	//ft_printf ("-> read LD intruction, data =\n");
+
 }
 
 void    do_ld_func(t_vm *main_struct, t_car *car)
 {
 	int mark;
 
-	mark = car->pos + car->args[0].value % IDX_MOD - 2;
+	mark = (car->pos + car->args[0].value) % IDX_MOD;
 	if (car->args[0].name == T_DIR && car->args[1].name == T_REG)
 		car->reg[car->args[1].value - 1] = (unsigned int)car->args[0].value;
 	else if (car->args[0].name == T_IND && car->args[1].name == T_REG &&

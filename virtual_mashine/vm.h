@@ -29,11 +29,12 @@ typedef struct		s_args
 
 typedef struct		s_car
 {
+	int 			index;
 	char 			color;
 	t_args			args[3];
 	int 			carry;
 	int				arg_size;
-	unsigned int	reg[REG_NUMBER];
+	int	reg[REG_NUMBER];
 	t_op			op_tabble;
 	int				op_size;
 	int             pos;
@@ -71,6 +72,8 @@ typedef struct			s_vis
 
 typedef struct			s_vm
 {
+	int 				coord_for_put_int_on_map;
+	int 				aff;
 	int 				cycle_to_die_for_viz;
 	int 				processes;
 	t_car				*ptr;
@@ -154,7 +157,7 @@ void	create_names_players(t_vm *main_struct);
 
 int		get_int_from_byte_code(char *buffer);
 int		get_args_nd_value(t_car *car, t_vm *main_struct);
-void 	put_int_on_map(char *map, int data, char *players, char player_nbr);
+void 	put_int_on_map(t_vm *m_s, int data, char *players, char player_nbr);
 
 void    move_single_car(t_vm *main_struct, t_car *car);
 //void	visualisation(t_vm *main_struct);

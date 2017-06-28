@@ -6,7 +6,7 @@
 
 void get_sub_func(t_car *car)
 {
-	car->op_tabble.nb_tours = car->op_tabble.nb_tours--;
+	car->op_tabble.nb_tours--;
 }
 
 

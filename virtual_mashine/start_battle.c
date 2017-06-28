@@ -11,7 +11,7 @@ void change_alive_flag(t_vm *main_struct)
 	t_player	**player;
 	t_car		*car;
 	int			i;
-
+	//int 		k = 0;
 	i = 0;
 	player = main_struct->players;
 	while (player[i])
@@ -20,10 +20,12 @@ void change_alive_flag(t_vm *main_struct)
 		player[i]->lives_in_current_period = 0;
 		while (car)
 		{
+			//printf ("car nomer %d\n", k);
 			if (car->live == 0)
 				dell_car_from_list(&(player[i]->car), car);
 			car->live = 0;
 			car = car->next;
+			//k++;
 		}
 		i++;
 	}
@@ -87,11 +89,12 @@ void    start_battle(t_vm *main_struct)
 			cycles_and_rounds(main_struct);
 		move_all_car(main_struct);
 		main_struct->processes = count_car(main_struct);
-        (main_struct->cycle)++;
-		//ft_printf("-----------------------------\n");
-		//print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-		//ft_printf("cycle = %d, processes = %d\n",main_struct->cycle,
-		//		   main_struct->processes);
+
+		/*ft_printf("-----------------------------\n");
+		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
+		ft_printf("cycle = %d, processes = %d\n",main_struct->cycle,
+				   main_struct->processes);*/
+		(main_struct->cycle)++;
     }
 	if (main_struct->f_v == TRUE)
 		while (wgetch(main_struct->vis->arena) != 'q');

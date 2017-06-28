@@ -10,7 +10,7 @@ void    get_zjmp_func(char *map, t_car *car)
 
 	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	car->data = ft_memdup((size_t)arg_size, map, car->pos + 1);
-	car->op_tabble.nb_tours = car->op_tabble.nb_tours--;
+	car->op_tabble.nb_tours--;
 }
 
 
