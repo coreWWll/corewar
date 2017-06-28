@@ -45,6 +45,8 @@ void	to_byte_code(t_asm *head)
 	char 	*file_name;
 	int		fd;
 
+
+
 	file_name = ft_strjoin(head->file_name, ".cor");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	begin = head;
