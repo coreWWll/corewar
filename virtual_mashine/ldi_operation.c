@@ -6,19 +6,31 @@
 
 void get_ldi_func(t_car *car)
 {
-
-	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
+	car->op_tabble.nb_tours--;
 	//ft_printf ("-> read LDI intruction\n");
 }
 
+int 	get_correct_ind(int mark)
+{
+	int k;
 
+	if (mark > MEM_SIZE)
+	{
+		k = mark / MEM_SIZE;
+		mark = mark - k * MEM_SIZE;
+	}
+	return (mark);
+}
 
 void    do_ldi_func(t_vm *main_struct, t_car *car)
 {
-	if (car->args[3].name == T_REG && car->args[3].value > 0)
+	int mark;
+
+	mark = get_correct_ind(car->pos + car->args[0].value + car->args[1].value - 2);
+	if (car->args[2].name == T_REG && car->args[2].value > 0)
 	{
-		car->reg[car->args[3].value] = (unsigned int)get_int_from_byte_code
-				(main_struct->map + car->args[0].value + car->args[1].value);
+		car->reg[car->args[2].value - 1] = (unsigned int)get_int_from_byte_code(main_struct->map + mark);
+		// reading a value of a registry’s size !!!!!!!!!!!!!!!!!!!!
 	}
 	else
 	{
@@ -26,9 +38,10 @@ void    do_ldi_func(t_vm *main_struct, t_car *car)
 		car->pos = car->pos++;
 		return ;
 	}
-	if (car->reg[car->args[2].value - 1] == 0)
+	if (car->reg[car->args[2].value - 1] == 0 && car->carry == 0)
 		car->carry = 1;
+	else if (car->reg[car->args[2].value - 1] != 0 && car->carry == 1)
+		car->carry = 0;
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
-	//ft_printf("LDI HAX!!!!\n");
 }

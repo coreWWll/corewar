@@ -68,8 +68,8 @@ int 	read_args(t_car *car, unsigned char *map)
 		if (error == FALSE)
 		{
 			car->args[i].value = read_one_arg(car, map, read_size);
-			if (car->args[i].name == T_IND)
-				car->args[i].value = (short)car->args[i].value;
+			/*if (car->args[i].name == T_IND)
+				car->args[i].value = (short)car->args[i].value;*/
 		}
 		car->arg_size += read_size;
 		map += read_size;

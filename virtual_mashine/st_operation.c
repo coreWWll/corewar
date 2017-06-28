@@ -6,8 +6,7 @@
 
 void get_st_func(t_car *car)
 {
-	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
-	//ft_printf ("-> read ST intruction, data =\n");
+	car->op_tabble.nb_tours--;
 }
 
 void    do_st_func(t_vm *main_struct, t_car *car)
@@ -15,9 +14,6 @@ void    do_st_func(t_vm *main_struct, t_car *car)
 	int map_pos;
 
 	map_pos = car->pos + car->args[1].value % IDX_MOD;
-	if (car->args[0].name == T_REG && car->reg[car->args[0].value - 1] == 0
-		&& car->args[1].name == T_REG && car->args[1].value > 0)
-		car->carry = 1;
     if (car->args[0].name == T_REG && car->args[1].name == T_REG &&
 			car->args[0]
          .value > 0 && car->args[1].value > 0)
@@ -32,8 +28,13 @@ void    do_st_func(t_vm *main_struct, t_car *car)
         car->pos++;
         return ;
     }
+	if (car->reg[car->args[1].value - 1] == 0 && car->carry == 0 &&
+			car->args[1].name == 1)
+		car->carry = 1;
+	else if (car->reg[car->args[1].value - 1] != 0 && car->carry == 1 &&
+													  car->args[1].name == 1)
+		car->carry = 0;
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
-    //ft_printf("ST HAX!!!!\n");
     car->data = NULL;
 }

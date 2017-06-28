@@ -47,3 +47,26 @@ void	dell_car_from_list(t_car **head, t_car *to_dell)
 		}
 	}
 }
+
+int count_car(t_vm *main_struct)
+{
+	int 		count;
+	t_player	**player;
+	t_car		*car;
+	int			i;
+
+	count = 0;
+	i = main_struct->players_nbr;
+	player = main_struct->players;
+	while (i)
+	{
+		car = player[i - 1]->car;
+		while (car)
+		{
+			count++;
+			car = car->next;
+		}
+		i--;
+	}
+	return (count);
+}

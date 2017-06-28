@@ -7,8 +7,7 @@
 void get_sti_func(t_car *car)
 {
 
-	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
-	//ft_printf ("-> read STI intruction\n");
+	car->op_tabble.nb_tours--;
 }
 
 
@@ -29,8 +28,14 @@ void    do_sti_func(t_vm *main_struct, t_car *car)
 		car->pos = car->pos++;
 		return ;
 	}
+	if (car->reg[car->args[2].value - 1] == 0 && car->carry == 0 &&
+		car->args[2].name == 1)
+		car->carry = 1;
+	else if (car->reg[car->args[2].value - 1] != 0 && car->carry == 1 &&
+			 car->args[2].name == 1)
+		car->carry = 0;
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
-	//ft_printf("ST HAX!!!!\n");
-	car->data = NULL;
+	if (car->data)
+		ft_memdel(&(car->data));
 }

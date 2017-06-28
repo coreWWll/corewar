@@ -36,9 +36,8 @@ void    move_all_car(t_vm *main_struct)
         while (car)
         {
             move_single_car(main_struct, car);
-            /*if (main_struct->ptr)
-                player[i - 1]->car = main_struct->ptr;
-            main_struct->ptr = NULL;*/
+			if (car->pos > MEM_SIZE)
+				car->pos = car->pos - MEM_SIZE;
             car = car->next;
         }
         i--;
