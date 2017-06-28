@@ -60,10 +60,13 @@ void	get_label(char **line, t_asm *start)
 		else if (start->only_label != 1 && len != 0)
 		{
 			dupline[len] = '\0';
-			start->label = ft_strnew(0);
-			ft_strcpy(start->label, dupline);
-			check_label_syntax(start->label);
-			*line = *line + len + 1;
+            if (dupline[len - 1] != ' ' && dupline[len - 1] != ',' && dupline[len - 1] != '\t')
+            {
+                start->label = ft_strnew(0);
+                ft_strcpy(start->label, dupline);
+                check_label_syntax(start->label);
+                *line = *line + len + 1;
+            }
 		}
 	}
 }

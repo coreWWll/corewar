@@ -16,13 +16,14 @@ void	put_args_types(t_asm *start, int i)
 {
 	char *temp;
 
-	if (start->args[i][0] == DIRECT_CHAR)
+	if (start->args[i][0] == DIRECT_CHAR || start->args[i][0] == LABEL_CHAR)
 	{
 		start->what_args[i] = T_DIR;
-		if (start->args[i][1] == LABEL_CHAR)
+		if (start->args[i][1] == LABEL_CHAR || start->args[i][0] == LABEL_CHAR)
 		{
 			temp = start->args[i];
-			start->args[i] = ft_strsub(temp, 2, ft_strlen(temp) - 2);
+			start->args[i] = (start->args[i][0] == DIRECT_CHAR)
+                             ? ft_strsub(temp, 2, ft_strlen(temp) - 2) : ft_strsub(temp, 1, ft_strlen(temp) - 1);
 			free(temp);
 			start->l_flag[i] = 1;
 		}
