@@ -48,6 +48,7 @@ int		main(int argc, char **argv)
 	//print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	if (main_struct->f_v == TRUE)
 		start_visualisation(main_struct);
+	main_struct->cycle_to_die_for_viz = CYCLE_TO_DIE;
 	start_battle(main_struct);
 	if (main_struct->f_v == TRUE)
 		stop_visualisation(main_struct);
