@@ -15,7 +15,8 @@
 
 # define	COL_ARENA	10
 # define	COL_CAR		20
-# define	COL_NEW_MEM		30
+# define	COL_NEW_MEM			30
+# define	RED_TEXT_ON_CYAN	40
 
 
 void	w_print_arena(t_vm *main_struct);
