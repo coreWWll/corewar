@@ -30,7 +30,9 @@ void	print_all_players_name(WINDOW *win, t_player **players, int player_nbr)
 	while (player_nbr > i)
 	{
 		str = remove_unprintable(players[i]->bot_name);
+		wattron(win, COLOR_PAIR(i + 1));
 		wprintw(win, "%-4d %s\n\n", players[i]->name, str);
+		wattroff(win, COLOR_PAIR(COL_ARENA));
 		ft_strdel(&str);
 		i++;
 	}
