@@ -36,8 +36,6 @@ void	get_commands(t_asm *head, int fd)
 		if ((op_c = check_if_comand(begin->command)) != MAX_INT)
 			write_op_code(head, begin, op_c, fd);
 		begin = begin->next;
-		if (begin->next == NULL)
-			break ;
 	}
 }
 
@@ -46,6 +44,8 @@ void	to_byte_code(t_asm *head)
 	t_asm	*begin;
 	char 	*file_name;
 	int		fd;
+
+
 
 	file_name = ft_strjoin(head->file_name, ".cor");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);

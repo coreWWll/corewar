@@ -29,18 +29,17 @@ typedef struct		s_args
 
 typedef struct		s_car
 {
-	int 			error;
+	int 			index;
 	char 			color;
 	t_args			args[3];
 	int 			carry;
 	int				arg_size;
-	unsigned int	reg[REG_NUMBER];
+	int	reg[REG_NUMBER];
 	t_op			op_tabble;
 	int				op_size;
 	int             pos;
 	int             live;
 	int 			nb;
-	int             op_type;
 	int             c_for_op;
 	char            *data;
 	struct s_car    *next;
@@ -61,6 +60,9 @@ typedef struct			s_player
 
 typedef struct			s_vis
 {
+	int					pause;
+	int					t_pause;
+	int 				h_pause;
 	WINDOW				*arena;
 	WINDOW				*param;
 	WINDOW				*usage;
@@ -72,6 +74,11 @@ typedef struct			s_vis
 
 typedef struct			s_vm
 {
+	int 				coord_for_put_int_on_map;
+	int 				aff;
+	int 				cycle_to_die_for_viz;
+	int 				processes;
+	t_car				*ptr;
 	t_player			**players;
 	int 				last_live[2];
 	int 				max_checks;
@@ -128,7 +135,7 @@ void    do_zjmp_func(t_vm *main_struct, t_car *car);
 void    do_ldi_func(t_vm *main_struct, t_car *car);
 void    do_sti_func(t_vm *main_struct, t_car *car);
 void    do_fork_func(t_vm *main_struct, t_car *car);
-void	create_new_car(t_car *car, int delta);
+t_car	*create_new_car(t_car *head, t_car *car, int delta, t_vm *main_struct);
 t_car	*add_car(t_car *car, int delta);
 short	get_short_from_byte_code(char *buffer, int flag);
 void    do_lld_func(t_vm *main_struct, t_car *car);
@@ -152,8 +159,9 @@ void	create_names_players(t_vm *main_struct);
 
 int		get_int_from_byte_code(char *buffer);
 int		get_args_nd_value(t_car *car, t_vm *main_struct);
-void 	put_int_on_map(char *map, int data, char *players, char player_nbr);
+void 	put_int_on_map(t_vm *m_s, int data, char *players, char player_nbr);
 
+void    move_single_car(t_vm *main_struct, t_car *car);
 //void	visualisation(t_vm *main_struct);
 void	start_visualisation(t_vm *main_struct);
 void	stop_visualisation(t_vm *main_struct);
@@ -161,6 +169,7 @@ void	refresh_all(t_vis *vis);
 void	visualisate(t_vm *main_struct);
 void	put_caret_on_map(t_vm *main_struct);
 
-
+int count_car(t_vm *main_struct);
+int 	get_correct_ind(int mark);
 
 #endif

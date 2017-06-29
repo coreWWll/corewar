@@ -15,11 +15,10 @@ int		get_int_from_byte_code(char *byte_array)
 
 void    get_live_func(char *map, t_car *car)
 {
-    if (!(car->data = ft_memdup(5, map, car->pos + 1)))
+	car->live = 1;
+    if (!(car->data = ft_memdup(4, map, car->pos + 1)))
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "file: live_operation.c:17"));
-	car->op_tabble.nb_tours = car->op_tabble.nb_tours - 1;
-
-    //printf ("-> read LIVE instruction, data = %s\n", car->data); //printf
+	car->op_tabble.nb_tours--;
 }
 
 int		check_who_live(unsigned int number, t_vm *main_struct)
@@ -32,6 +31,7 @@ int		check_who_live(unsigned int number, t_vm *main_struct)
 		if (number == main_struct->players[i]->name)
 		{
 			main_struct->players[i]->lives_in_current_period++;
+			main_struct->nbr_of_lifes++;
 			return (main_struct->players[i]->name);
 		}
 		i++;
@@ -43,16 +43,12 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 {
 	unsigned int number;
 
-	main_struct->nbr_of_lifes++;
 	main_struct->count_live_functions++;
-	car->live = 1;
 	number = (unsigned int)get_int_from_byte_code(car->data);
 	main_struct->last_live[0] = check_who_live(number, main_struct);
-	//if (main_struct->last_live[0] != 0)
-	//	ft_printf ("Player ->%d<- is ALIVE\n", main_struct->last_live[0]);
 	main_struct->last_live[1] = main_struct->cycle + 1;
-	car->pos = car->pos + 5;
-    car->op_type = 0;
+	car->pos = car->pos + DIR_SIZE + 1;
+    car->op_tabble.opcode = 0;
     ft_strdel(&(car->data));
 }
 

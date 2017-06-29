@@ -39,28 +39,16 @@ int		main(int argc, char **argv)
 {
 	t_vm		*main_struct;
 
-/*	char	*buf;
-	int		i;
-
-	i = 0;
-
-	buf = ft_strnew(128);
-	while (i < 129)
-	{
-		buf[i] = (char)i;
-		i++;
-	}
-	print_memory((unsigned char*)buf, 129);
-*/
 	main_struct = create_main_struct();
 	read_arguments(main_struct, argv, argc);
 	if (main_struct->players_nbr == 0)
 		ft_error("NO PLAYERS!");
 	put_cat_on_start(main_struct);
 	create_map(main_struct);
-	print_memory((unsigned char *) main_struct->map, MEM_SIZE);
+	//print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	if (main_struct->f_v == TRUE)
 		start_visualisation(main_struct);
+	main_struct->cycle_to_die_for_viz = CYCLE_TO_DIE;
 	start_battle(main_struct);
 	if (main_struct->f_v == TRUE)
 		stop_visualisation(main_struct);
