@@ -29,6 +29,7 @@ typedef struct		s_args
 
 typedef struct		s_car
 {
+	int 			args_error;
 	int 			index;
 	char 			color;
 	t_args			args[3];
@@ -74,11 +75,13 @@ typedef struct			s_vis
 
 typedef struct			s_vm
 {
+	int 				winner;
+	int 				alive_flag;
+	int 				aff_flag;
 	int 				coord_for_put_int_on_map;
 	int 				aff;
 	int 				cycle_to_die_for_viz;
 	int 				processes;
-	t_car				*ptr;
 	t_player			**players;
 	int 				last_live[2];
 	int 				max_checks;
@@ -97,7 +100,7 @@ typedef struct			s_vm
 	t_vis				*vis;
 }						t_vm;
 
-void	dell_car_from_list(t_car **head, t_car *to_dell);
+void	dell_car_from_list(t_car **head, t_car *to_dell, t_vm *main_struct);
 char	*ft_memdup(size_t size, char *map, int pos);
 t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
@@ -150,6 +153,7 @@ int		get_int_from_file(int fd);
 char	*get_string_from_file(int fd, size_t define_len);
 char	*get_champ_code(int fd, size_t prog_len);
 void	print_memory(unsigned char *map, size_t size);
+void 	dump_memory(unsigned char *map, size_t size);
 void	ft_error(char *error_message);
 void    get_op_code(t_vm *main_struct, t_car *car);
 void	read_arguments(t_vm *main_struct, char **argv, int argc);
@@ -169,7 +173,10 @@ void	refresh_all(t_vis *vis);
 void	visualisate(t_vm *main_struct);
 void	put_caret_on_map(t_vm *main_struct);
 
-int count_car(t_vm *main_struct);
+int 	count_car(t_vm *main_struct);
 int 	get_correct_ind(int mark);
+void 	get_values_reg_end(t_car *car, t_vm *main_struct, int i);
+void 	get_values_reg_start(t_car *car, t_vm *main_struct, int i);
+
 
 #endif

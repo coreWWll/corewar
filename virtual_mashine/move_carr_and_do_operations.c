@@ -4,6 +4,23 @@
 
 #include "vm.h"
 
+void	fix_car_pos(t_car *car)
+{
+	int count;
+
+	if (car->pos > MEM_SIZE - 1)
+	{
+		count = car->pos / (MEM_SIZE - 1);
+		car->pos = car->pos % (count * MEM_SIZE);
+	}
+	else if (car->pos < - MEM_SIZE + 1 || car->pos < 0)
+	{
+		count = car->pos / (-MEM_SIZE + 1) + 1;
+		car->pos = car->pos + count * (MEM_SIZE);
+	}
+}
+
+
 void    move_single_car(t_vm *main_struct, t_car *car)
 {
 	if (!car)
@@ -36,8 +53,8 @@ void    move_all_car(t_vm *main_struct)
         while (car)
         {
             move_single_car(main_struct, car);
-			if (car->pos > MEM_SIZE)
-				car->pos = car->pos - MEM_SIZE;
+			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE+1)
+				fix_car_pos(car);
             car = car->next;
         }
         i--;

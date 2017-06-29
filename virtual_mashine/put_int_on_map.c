@@ -20,13 +20,15 @@ void put_int_on_map(t_vm *main_struct, int data, char *players, char player_nbr)
 
 
 	cor = main_struct->coord_for_put_int_on_map;
-	i = 3;
+	if (cor < 0)
+		cor = cor + MEM_SIZE - 1;
+	i = DIR_SIZE - 1;
 	while (i >= 0)
 	{
 		if (cor + i > MEM_SIZE - 1)
 			main_struct->map[cor + i - MEM_SIZE] = (char) data;
 		else
-			main_struct->map[cor] = (char) data;
+			main_struct->map[cor + i] = (char) data;
 
 		players[i] = (char)(player_nbr + COL_NEW_MEM);
 		data = data >> 8;

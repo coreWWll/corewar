@@ -46,12 +46,10 @@ int 	read_args(t_car *car, unsigned char *map)
 	int		i;
 	int		error;
 	int		buf;
-	int		label_size;
 	int 	read_size;
 
 	i = 0;
 	error = FALSE;
-	label_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	while (i < car->op_tabble.args_am)
 	{
 		if (car->args[i].name == T_REG)
@@ -66,11 +64,11 @@ int 	read_args(t_car *car, unsigned char *map)
 		if (buf != car->args[i].name || buf == 0)
 			error = TRUE;
 		if (error == FALSE)
-		{
 			car->args[i].value = read_one_arg(car, map, read_size);
-			/*if (car->args[i].name == T_IND)
-				car->args[i].value = (short)car->args[i].value;*/
-		}
+		if (car->args[i].name == T_IND)
+			car->args[i].value = (short)car->args[i].value;
+		if (car->args[i].name == T_REG && car->args[i].value < 0)
+			return (FALSE);
 		car->arg_size += read_size;
 		map += read_size;
 		i++;
@@ -81,9 +79,7 @@ int 	read_args(t_car *car, unsigned char *map)
 int		get_args_nd_value(t_car *car, t_vm *main_struct)
 {
 	int		local_pos;
-	int 	i;
 
-	i = 0;
 	car->arg_size = 0;
 	local_pos = car->pos + 1;
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos],
@@ -91,43 +87,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos))
 		return FALSE;
-
-
-
-
-	while (i < 2)
-	{
-		if (car->args[i].name == T_REG && car->op_tabble.opcode != 3 &&
-				car->op_tabble.opcode != 11 && car->op_tabble.opcode != 2
-			&& car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5)
-			car->args[i].value = car->reg[car->args[i].value - 1];
-		else if (car->args[i].name == T_IND && car->op_tabble.opcode != 3 &&
-				 car->op_tabble.opcode != 11 && car->op_tabble.opcode != 2
-				 && car->op_tabble.opcode != 4 && car->op_tabble.opcode != 5)
-		{
-			if (car->op_tabble.opcode != 14)
-				car->args[i].value = get_int_from_byte_code(main_struct->map +
-				car->pos + car->args[i].value % IDX_MOD);
-			else
-				car->args[i].value = get_int_from_byte_code(main_struct->map +
-				car->pos + car->args[i].value);
-		}
-		i++;
-	}
-	if (car->op_tabble.opcode == 11)
-	{
-		i = 1;
-		while (i < 3)
-		{
-			if (car->args[i].name == T_REG)
-				car->args[i].value = car->reg[car->args[i].value - 1];
-			else if (car->args[i].name == T_IND)
-			{
-				car->args[i].value = get_int_from_byte_code(main_struct->map +
-				car->pos + car->args[i].value % IDX_MOD);
-			}
-			i++;
-		}
-	}
+	get_values_reg_end(car, main_struct, 0);
+	get_values_reg_start(car, main_struct, 1);
 	return TRUE;
 }
