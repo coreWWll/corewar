@@ -93,6 +93,7 @@ void	visualisate(t_vm *main_struct)
 	read_commands(main_struct);
 	if (check_if_refresh(main_struct))
 	{
+		put_caret_on_map(main_struct);
 		w_print_arena(main_struct);
 		w_print_param(main_struct);
 		refresh_all(main_struct->vis);

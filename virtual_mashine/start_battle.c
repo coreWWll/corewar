@@ -82,7 +82,6 @@ void    start_battle(t_vm *main_struct)
 			print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 			break ; //need to change. use flag dump in func to EXIT, save 3 lines
 		}
-		put_caret_on_map(main_struct);
 		if (main_struct->f_v == TRUE)
 			visualisate(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
