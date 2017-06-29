@@ -13,8 +13,6 @@ void    get_zjmp_func(char *map, t_car *car)
 	car->op_tabble.nb_tours--;
 }
 
-
-
 void    do_zjmp_func(t_vm *main_struct, t_car *car)
 {
 	int dist;
@@ -27,6 +25,6 @@ void    do_zjmp_func(t_vm *main_struct, t_car *car)
 		car->pos = car->pos + dist;
 	}
 	else
-		car->pos = car->pos + 1 + arg_size;
+		car->pos = car->pos + arg_size + 1;
 	car->op_tabble.opcode = 0;
 }
