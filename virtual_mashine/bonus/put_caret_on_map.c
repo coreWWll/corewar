@@ -20,7 +20,8 @@ void	find_all_palyers_car(t_car *car, char *color)
 {
 	while (car)
 	{
-		color[car->pos] = -color[car->pos];
+		if (color[car->pos] > 0)
+			color[car->pos] = -color[car->pos];
 		car = car->next;
 	}
 }

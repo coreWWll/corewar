@@ -69,22 +69,25 @@ void	read_commands(t_vm *main_struct)
 
 int		check_if_refresh(t_vm *main_struct)
 {
-	if (main_struct->vis->h_pause != -1 || main_struct->vis->t_pause != -1)
+	int		bul_h;
+	int		bul_t;
+
+	bul_h = main_struct->vis->h_pause != -1;
+	bul_t = main_struct->vis->t_pause != -1;
+	if (bul_h && main_struct->cycle == main_struct->vis->h_pause + 99)
 	{
-		if (main_struct->cycle % 99 == main_struct->vis->h_pause)
-		{
-			main_struct->vis->pause = TRUE;
-			main_struct->vis->h_pause = -1;
-			return (TRUE);
-		}
-		if (main_struct->cycle % 999 == main_struct->vis->t_pause)
-		{
-			main_struct->vis->pause = TRUE;
-			main_struct->vis->t_pause = -1;
-			return (TRUE);
-		}
-		return (FALSE);
+		main_struct->vis->pause = TRUE;
+		main_struct->vis->h_pause = -1;
+		return (TRUE);
 	}
+	if (bul_t && main_struct->cycle == main_struct->vis->t_pause + 999)
+	{
+		main_struct->vis->pause = TRUE;
+		main_struct->vis->t_pause = -1;
+		return (TRUE);
+	}
+	if (bul_h || bul_t)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -93,6 +96,7 @@ void	visualisate(t_vm *main_struct)
 	read_commands(main_struct);
 	if (check_if_refresh(main_struct))
 	{
+		put_caret_on_map(main_struct);
 		w_print_arena(main_struct);
 		w_print_param(main_struct);
 		refresh_all(main_struct->vis);

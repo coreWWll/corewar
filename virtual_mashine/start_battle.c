@@ -84,14 +84,15 @@ void    start_battle(t_vm *main_struct)
     {
 		if (main_struct->f_dump)
 			dump_memory((unsigned char *) main_struct->map, MEM_SIZE);
+		move_all_car(main_struct);
+		main_struct->processes = count_car(main_struct);
 		put_caret_on_map(main_struct);
 		if (main_struct->f_v == TRUE)
 			visualisate(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
 			cycles_and_rounds(main_struct);
-		move_all_car(main_struct);
-		main_struct->processes = count_car(main_struct);
-		ft_printf("cycle = %d, processes = %d\n",main_struct->cycle,main_struct->processes);
+	/*	ft_printf("cycle = %d, processes = %d\n",main_struct->cycle,
+				   main_struct->processes);*/
 		(main_struct->cycle)++;
     }
 	if (main_struct->f_v == TRUE)

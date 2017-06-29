@@ -27,6 +27,8 @@ void	read_flags(t_vm *main_struct, char **argv, int argc, int *i)
 	}
 	else if (ft_strcmp("-v", argv[*i]) == 0)
 		main_struct->f_v = TRUE;
+	else if (ft_strcmp("-log", argv[*i]) == 0)
+		main_struct->f_log = TRUE;
 	else
 		ft_error(ft_strjoin("NO such flag - ", argv[*i]));
 }

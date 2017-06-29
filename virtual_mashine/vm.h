@@ -93,6 +93,7 @@ typedef struct			s_vm
 	int					f_dump;
 	int					dump_cycle;
 	int					f_v;
+	int 				f_log;
 	int					cycle;
 	int					round;
 	int 				cycle_to_die;
