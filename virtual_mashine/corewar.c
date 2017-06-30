@@ -31,7 +31,7 @@ t_vm	*create_main_struct(void)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
 	create_color_array(main_struct);
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
-	main_struct->time = 20000;
+	main_struct->time = 50;
 	return (main_struct);
 }
 

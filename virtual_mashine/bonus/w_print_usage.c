@@ -6,6 +6,8 @@
 
 void	w_print_usage(WINDOW *win)
 {
+	wprintw(win, "%-35s %s\n", "QUIT", "q");
+	wprintw(win, "%-35s %s\n", "Go to END", "e");
 	wprintw(win, "%-35s %s\n", "PAUSE / PLAY:", "/SPACE/");
 	wprintw(win, "%-35s %s\n", "STEP one cycle:", "s");
 	wprintw(win, "%-35s %s\n", "STEP over 100 cycles:", "h");
@@ -16,7 +18,8 @@ void	w_print_usage(WINDOW *win)
 
 	init_pair(RED_TEXT_ON_CYAN, COLOR_RED, COLOR_CYAN);
 	wattron(win, COLOR_PAIR(RED_TEXT_ON_CYAN));
-	wprintw(win, "\n\n\n\n\npowered by: arepnov, dburtnja, okres, yyefimov\n");
+	wprintw(win, "\n\n\n\n\n\n\npowered by: arepnov, dburtnja, okres, "
+			"yyefimov\n");
 	wprintw(win, "all rights reserved");
 	wattroff(win, COLOR_PAIR(RED_TEXT_ON_CYAN));
 	wrefresh(win);

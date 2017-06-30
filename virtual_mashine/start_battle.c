@@ -3,7 +3,6 @@
 //
 
 #include "vm.h"
-#include <stdio.h>
 
 
 void change_alive_flag(t_vm *main_struct)
@@ -87,7 +86,7 @@ void    start_battle(t_vm *main_struct)
 		move_all_car(main_struct);
 		main_struct->processes = count_car(main_struct);
 		put_caret_on_map(main_struct);
-		if (main_struct->f_v == TRUE)
+		if (main_struct->f_v == TRUE && main_struct->vis->go_to_end == FALSE)
 			visualisate(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
 			cycles_and_rounds(main_struct);
@@ -96,6 +95,9 @@ void    start_battle(t_vm *main_struct)
 		(main_struct->cycle)++;
     }
 	if (main_struct->f_v == TRUE)
+	{
+		throw_visualization(main_struct);
 		while (wgetch(main_struct->vis->arena) != 'q');
+	}
 	the_winner_is(main_struct);
 }
