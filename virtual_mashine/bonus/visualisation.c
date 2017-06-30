@@ -85,5 +85,6 @@ void	stop_visualisation(t_vm *main_struct)
 	delwin(main_struct->vis->bg_arena);
 	delwin(main_struct->vis->bg_param);
 	delwin(main_struct->vis->bg_usage);
+	curs_set(TRUE);
 	endwin();
 }

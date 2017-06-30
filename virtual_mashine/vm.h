@@ -64,6 +64,7 @@ typedef struct			s_vis
 	int					pause;
 	int					t_pause;
 	int 				h_pause;
+	int					go_to_end;
 	WINDOW				*arena;
 	WINDOW				*param;
 	WINDOW				*usage;
@@ -167,11 +168,11 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct);
 void 	put_int_on_map(t_vm *m_s, int data, char *players, char player_nbr);
 
 void    move_single_car(t_vm *main_struct, t_car *car);
-//void	visualisation(t_vm *main_struct);
 void	start_visualisation(t_vm *main_struct);
 void	stop_visualisation(t_vm *main_struct);
 void	refresh_all(t_vis *vis);
 void	visualisate(t_vm *main_struct);
+void	throw_visualization(t_vm *main_struct);
 void	put_caret_on_map(t_vm *main_struct);
 
 int 	count_car(t_vm *main_struct);
