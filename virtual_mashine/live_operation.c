@@ -45,12 +45,17 @@ int		check_who_live(unsigned int number, t_vm *main_struct)
 
 void    do_live_func(t_vm *main_struct, t_car *car)
 {
-	unsigned int number;
+	unsigned int	number;
+	int 			new_life;
 
 	main_struct->count_live_functions++;
 	number = (unsigned int)get_int_from_byte_code(car->data);
-	main_struct->last_live[0] = check_who_live(number, main_struct);
-	main_struct->last_live[1] = main_struct->cycle + 1;
+	new_life = check_who_live(number, main_struct);
+	if (new_life != 0)
+	{
+		main_struct->last_live[0] = new_life;
+		main_struct->last_live[1] = main_struct->cycle;
+	}
 	car->pos = car->pos + DIR_SIZE + 1;
     car->op_tabble.opcode = 0;
     ft_strdel(&(car->data));
