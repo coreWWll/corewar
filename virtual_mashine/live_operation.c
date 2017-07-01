@@ -26,14 +26,14 @@ int		check_who_live(unsigned int number, t_vm *main_struct)
 	int			i;
 
 	i = 0;
-	main_struct->alive_flag = FALSE;
+	main_struct->f_alive = FALSE;
 	while (main_struct->players[i])
 	{
 		if (number == main_struct->players[i]->name)
 		{
 			main_struct->players[i]->lives_in_current_period++;
 			main_struct->nbr_of_lifes++;
-			if (main_struct->alive_flag)
+			if (main_struct->f_alive)
 				ft_printf("Player %d (%s) is said to be alive\n",
 						  -number, main_struct->players[i]->bot_name);
 			return (main_struct->players[i]->name);

@@ -52,4 +52,6 @@ void do_op_code(t_vm *main_struct, t_car *car)
 		do_op_code_part_one(main_struct, car);
 	else if (car->op_tabble.opcode > 8)
 		do_op_code_part_two(main_struct,car);
+	if (main_struct->map[car->pos] == 0)
+		car->pos--;
 }
