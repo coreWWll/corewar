@@ -2,8 +2,8 @@
 // Created by Denys Burtnjak on 6/1/17.
 //
 
-#ifndef VIRTUAL_MASHINE_VM_H_H
-#define VIRTUAL_MASHINE_VM_H_H
+#ifndef VIRTUAL_MACHINE_VM_H_H
+#define VIRTUAL_MACHINE_VM_H_H
 
 #include <ncurses.h>
 #include "libft/libft.h"
@@ -178,6 +178,7 @@ int 	count_car(t_vm *main_struct);
 int 	get_correct_ind(int mark);
 void 	get_values_reg_end(t_car *car, t_vm *main_struct, int i);
 void 	get_values_reg_start(t_car *car, t_vm *main_struct, int i);
+void	fix_car_pos(t_car *car);
 
 
 #endif

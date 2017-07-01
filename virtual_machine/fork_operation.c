@@ -29,6 +29,7 @@ t_car	*add_car(t_car *car, int delta)
 	new = ft_memalloc(sizeof(t_car));
 	new = ft_memmove(new, car, sizeof(t_car));
 	new->pos = new->pos + delta;
+	fix_car_pos(new);
 	if (new->pos > MEM_SIZE)
 		new->pos = new->pos - MEM_SIZE;
 	new->op_tabble.opcode = 0;
@@ -67,4 +68,5 @@ void    do_fork_func(t_vm *main_struct, t_car *car)
 	if (car->data)
 		ft_strdel(&(car->data));
 	car->pos = car->pos + arg_size + 1;
+	fix_car_pos(car);
 }
