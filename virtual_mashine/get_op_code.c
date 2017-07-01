@@ -61,14 +61,13 @@ t_op	find_op_tab(char code)
 void    get_op_code(t_vm *main_struct, t_car *car)
 {
 	car->op_tabble = find_op_tab(main_struct->map[car->pos]);
-	if (main_struct->cycle == 0)
-		car->op_tabble.nb_tours--;
 	if (car->op_tabble.opcode == 0)
 	{
+			car->pos++;
 		if (car->pos == MEM_SIZE - 1)
 			car->pos = 0;
-		else
-			car->pos++;
+		if (main_struct->map[car->pos] != 0)
+			get_op_code(main_struct, car);
 	}
 	else
 	{
@@ -81,7 +80,7 @@ void    get_op_code(t_vm *main_struct, t_car *car)
 				get_op_code_part_one(main_struct->map, car);
 			else
 			{
-				get_args_nd_value(car, main_struct);
+				car->args_error= get_args_nd_value(car, main_struct);
 				get_op_code_part_two(car);
 			}
 		}

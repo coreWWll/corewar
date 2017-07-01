@@ -31,8 +31,29 @@ t_vm	*create_main_struct(void)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
 	create_color_array(main_struct);
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
-	main_struct->time = 20000;
+	main_struct->time = 50;
 	return (main_struct);
+}
+
+void	introducing(t_vm *main_struct)
+{
+	int			i;
+
+	i = 0;
+	if (main_struct->f_v == FALSE)
+		ft_printf("Introducing contestants...\n");
+	if (main_struct->f_v == FALSE)
+	{
+		while (main_struct->players[i])
+		{
+			ft_printf("* Player %d, weighing %d bytes,  \"%s\" (\"%s\") !\n",
+					  -main_struct->players[i]->name,
+					  main_struct->players[i]->prog_len,
+					  main_struct->players[i]->bot_name,
+					  main_struct->players[i]->comment);
+			i++;
+		}
+	}
 }
 
 int		main(int argc, char **argv)
@@ -45,14 +66,12 @@ int		main(int argc, char **argv)
 		ft_error("NO PLAYERS!");
 	put_cat_on_start(main_struct);
 	create_map(main_struct);
-	//print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	if (main_struct->f_v == TRUE)
 		start_visualisation(main_struct);
 	main_struct->cycle_to_die_for_viz = CYCLE_TO_DIE;
+	introducing(main_struct);
 	start_battle(main_struct);
 	if (main_struct->f_v == TRUE)
 		stop_visualisation(main_struct);
-//	print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-//		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
 	return 0;
 }

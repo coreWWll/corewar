@@ -31,9 +31,8 @@ void    do_lfork_func(t_vm *main_struct, t_car *car)
 					(main_struct->players[i]->car, car, dist, main_struct);
 		i++;
 	}
-	car->pos = car->pos + 1 + arg_size;
 	car->op_tabble.opcode = 0;
-
 	if (car->data)
 		ft_strdel(&(car->data));
+	car->pos = car->pos + arg_size + 1;
 }

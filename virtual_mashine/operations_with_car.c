@@ -22,7 +22,7 @@ void	put_cat_on_start(t_vm	*main_struct)
 	}
 }
 
-void	dell_car_from_list(t_car **head, t_car *to_dell)
+void	dell_car_from_list(t_car **head, t_car *to_dell, t_vm *main_struct)
 {
 	t_car	*ptr;
 	t_car	*dell;
@@ -31,6 +31,7 @@ void	dell_car_from_list(t_car **head, t_car *to_dell)
 	if (*head == to_dell)
 	{
 		*head = (*head)->next;
+		main_struct->winner = ptr->index;
 		ft_memdel((void **) &ptr);
 	}
 	else
@@ -41,6 +42,7 @@ void	dell_car_from_list(t_car **head, t_car *to_dell)
 			{
 				dell = ptr->next;
 				ptr->next = ptr->next->next;
+				main_struct->winner = ptr->index;
 				ft_memdel((void **) &dell);
 			}
 			else

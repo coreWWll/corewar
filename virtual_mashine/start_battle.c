@@ -3,7 +3,6 @@
 //
 
 #include "vm.h"
-#include <stdio.h>
 
 
 void change_alive_flag(t_vm *main_struct)
@@ -11,7 +10,6 @@ void change_alive_flag(t_vm *main_struct)
 	t_player	**player;
 	t_car		*car;
 	int			i;
-	//int 		k = 0;
 	i = 0;
 	player = main_struct->players;
 	while (player[i])
@@ -20,12 +18,10 @@ void change_alive_flag(t_vm *main_struct)
 		player[i]->lives_in_current_period = 0;
 		while (car)
 		{
-			//printf ("car nomer %d\n", k);
 			if (car->live == 0)
-				dell_car_from_list(&(player[i]->car), car);
+				dell_car_from_list(&(player[i]->car), car, main_struct);
 			car->live = 0;
 			car = car->next;
-			//k++;
 		}
 		i++;
 	}
@@ -72,30 +68,35 @@ void	cycles_and_rounds(t_vm *main_struct)
 	main_struct->count_live_functions = 0;
 }
 
+void	the_winner_is(t_vm *main_struct)
+{
+	if (main_struct->f_v == FALSE)
+		ft_printf("Player: %d -  \"%s\", has won.\n",
+				  -main_struct->players[main_struct->winner]->name,
+			  main_struct->players[main_struct->winner]->bot_name);
+}
+
 void    start_battle(t_vm *main_struct)
 {
-	while (check_alive(main_struct) && (CYCLE_TO_DIE -
+		while (check_alive(main_struct) && (CYCLE_TO_DIE -
 			main_struct->round * CYCLE_DELTA) >= 0)
     {
-		if (main_struct->f_dump)
-		{
-			print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-			break ; //need to change. use flag dump in func to EXIT, save 3 lines
-		}
+		if (main_struct->f_dump && main_struct->dump_cycle == main_struct->cycle)
+			dump_memory((unsigned char *) main_struct->map, MEM_SIZE);
+		move_all_car(main_struct);
+		main_struct->processes = count_car(main_struct);
 		put_caret_on_map(main_struct);
-		if (main_struct->f_v == TRUE)
+		if (main_struct->f_v == TRUE && main_struct->vis->go_to_end == FALSE)
 			visualisate(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
 			cycles_and_rounds(main_struct);
-		move_all_car(main_struct);
-		main_struct->processes = count_car(main_struct);
-
-		/*ft_printf("-----------------------------\n");
-		print_memory((unsigned char *) main_struct->map, MEM_SIZE);
-		ft_printf("cycle = %d, processes = %d\n",main_struct->cycle,
-				   main_struct->processes);*/
 		(main_struct->cycle)++;
     }
 	if (main_struct->f_v == TRUE)
+	{
+		throw_visualization(main_struct, "BATTLE IS OVER");
 		while (wgetch(main_struct->vis->arena) != 'q');
+		stop_visualisation(main_struct);
+	}
+	the_winner_is(main_struct);
 }
