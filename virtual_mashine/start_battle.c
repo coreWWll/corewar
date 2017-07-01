@@ -94,8 +94,9 @@ void    start_battle(t_vm *main_struct)
     }
 	if (main_struct->f_v == TRUE)
 	{
-		throw_visualization(main_struct);
+		throw_visualization(main_struct, "BATTLE IS OVER");
 		while (wgetch(main_struct->vis->arena) != 'q');
+		stop_visualisation(main_struct);
 	}
 	the_winner_is(main_struct);
 }

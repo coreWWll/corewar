@@ -23,7 +23,7 @@
 void	w_print_arena(t_vm *main_struct);
 void	erase_all(t_vis *vis);
 void	refresh_all(t_vis *vis);
-void	w_print_param(t_vm *main_struct);
+void w_print_param(t_vm *main_struct, char *status);
 void	w_print_usage(WINDOW *win);
 void	read_commands(t_vm *main_struct);
 void	time_pause(t_vm *main_struct);

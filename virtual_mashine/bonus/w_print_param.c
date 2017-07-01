@@ -39,11 +39,12 @@ void	print_all_players_name(WINDOW *win, t_player **players, int player_nbr)
 	wprintw(win, "\n");
 }
 
-void	w_print_param(t_vm *main_struct)
+void	w_print_param(t_vm *main_struct, char *status)
 {
 	WINDOW	*win;
 
 	win = main_struct->vis->param;
+	wprintw(main_struct->vis->param, "\t\t== %s ==\n", status);
 	wprintw(win, "%-35s%d\n\n", "PLAYERS:", main_struct->players_nbr);
 	print_all_players_name(win, main_struct->players, main_struct->players_nbr);
 	wprintw(win, "%-35s%d\n\n", "CYCLES:", main_struct->cycle);
@@ -56,5 +57,5 @@ void	w_print_param(t_vm *main_struct)
 	wprintw(win, "\t%-27s%d\n\n", "Cycle", main_struct->last_live[1]);
 	wprintw(win, "%-35s%d\n\n", "MAX CHECKS:", main_struct->max_checks);
 
-	wprintw(win ,"Time = %d", main_struct->time);
+	wprintw(win, "%-35s%d\n\n", "CYCLE / SECOND:", main_struct->time);
 }

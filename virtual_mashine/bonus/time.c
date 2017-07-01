@@ -8,8 +8,8 @@ void	change_time(t_vm *main_struct, int c)
 {
 	if (c == '-' && main_struct->time - 1 > 0)
 		main_struct->time--;
-	else if (c == '+' && main_struct->time + 1 < 1000)
-		main_struct->time++;
+	else if (c == '+' && main_struct->time + 50 < 10000)
+		main_struct->time += 50;
 }
 
 void	time_pause(t_vm *main_struct)
