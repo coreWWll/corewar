@@ -1,6 +1,14 @@
-//
-// Created by Denys Burtnjak on 6/17/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   w_print_param.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/01 16:39:23 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/01 16:39:25 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "visualisation.h"
 
@@ -56,6 +64,5 @@ void	w_print_param(t_vm *main_struct, char *status)
 	wprintw(win, "\t%-27s%d\n\n", "Player number:", main_struct->last_live[0]);
 	wprintw(win, "\t%-27s%d\n\n", "Cycle", main_struct->last_live[1]);
 	wprintw(win, "%-35s%d\n\n", "MAX CHECKS:", main_struct->max_checks);
-
 	wprintw(win, "%-35s%d\n\n", "CYCLE / SECOND:", main_struct->time);
 }

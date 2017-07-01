@@ -1,6 +1,14 @@
-//
-// Created by Denys Burtnjak on 6/30/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/01 16:39:39 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/01 16:39:41 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "visualisation.h"
 
@@ -28,8 +36,8 @@ void	time_pause(t_vm *main_struct)
 	{
 		main_struct->vis->refresh_time = main_struct->cycle +
 				(main_struct->time / 50);
-		usleep((useconds_t) TIME_TWO_MS);
+		usleep((useconds_t)TIME_TWO_MS);
 	}
 	else
-		usleep((useconds_t) TIME_ONE_S / main_struct->time);
+		usleep((useconds_t)TIME_ONE_S / main_struct->time);
 }
