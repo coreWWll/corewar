@@ -18,7 +18,8 @@ void	put_args_types(t_asm *start, int i)
 
 	if (start->args[i][0] == DIRECT_CHAR || start->args[i][0] == LABEL_CHAR)
 	{
-		start->what_args[i] = T_DIR;
+		start->what_args[i] =T_DIR;
+		// start->what_args[i] = (start->args[i][0] == LABEL_CHAR) ? T_IND : T_DIR;
 		if (start->args[i][1] == LABEL_CHAR || start->args[i][0] == LABEL_CHAR)
 		{
 			temp = start->args[i];
