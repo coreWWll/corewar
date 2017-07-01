@@ -179,6 +179,8 @@ int 	count_car(t_vm *main_struct);
 int 	get_correct_ind(int mark);
 void 	get_values_reg_end(t_car *car, t_vm *main_struct, int i);
 void 	get_values_reg_start(t_car *car, t_vm *main_struct, int i);
+void	usage(void);
+
 
 
 #endif

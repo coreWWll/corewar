@@ -63,7 +63,7 @@ int		main(int argc, char **argv)
 	main_struct = create_main_struct();
 	read_arguments(main_struct, argv, argc);
 	if (main_struct->players_nbr == 0)
-		ft_error("NO PLAYERS!");
+		usage();
 	put_cat_on_start(main_struct);
 	create_map(main_struct);
 	if (main_struct->f_v == TRUE)
