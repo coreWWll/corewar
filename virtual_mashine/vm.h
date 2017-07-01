@@ -65,6 +65,7 @@ typedef struct			s_vis
 	int					t_pause;
 	int 				h_pause;
 	int					go_to_end;
+	int					refresh_time;
 	WINDOW				*arena;
 	WINDOW				*param;
 	WINDOW				*usage;

@@ -8,7 +8,7 @@ int		time_refresh(t_vm *main_struct)
 {
 	if (main_struct->time > 50)
 	{
-		if (main_struct->cycle )
+		if (main_struct->cycle != main_struct->vis->refresh_time)
 			return (TRUE);
 	}
 	return (FALSE);
