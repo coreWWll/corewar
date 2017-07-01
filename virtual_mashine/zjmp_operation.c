@@ -29,4 +29,5 @@ void    do_zjmp_func(t_vm *main_struct, t_car *car)
 	else
 		car->pos = car->pos + 1 + arg_size;
 	car->op_tabble.opcode = 0;
+	ft_strdel(&car->data);
 }
