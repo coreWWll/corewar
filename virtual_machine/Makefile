@@ -37,16 +37,16 @@ SRC =	corewar.c\
         get_args_and_values_part_2.c\
         dump_memory.c\
         put_int_on_map.c\
-        visualisation.c\
-        visualisate.c\
-        w_print_memory.c\
-        w_print_param.c\
-        w_print_usage.c\
-        put_caret_on_map.c\
-        time.c\
-       	check_if_refresh.c\
-        read_commands.c\
-        create_windows.c\
+        bonus/visualisation.c\
+        bonus/visualisate.c\
+        bonus/w_print_memory.c\
+        bonus/w_print_param.c\
+        bonus/w_print_usage.c\
+        bonus/put_caret_on_map.c\
+        bonus/time.c\
+       	bonus/check_if_refresh.c\
+        bonus/read_commands.c\
+        bonus/create_windows.c\
 
 LIBFT = libft/libft.a
 
