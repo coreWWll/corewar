@@ -71,5 +71,3 @@ gen21:	live %1
 	zjmp %:slide1
 gen22:	live %1		
 	zjmp %:slide2
-
-

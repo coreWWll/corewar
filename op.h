@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/types.h>
+#include <stdio.h>
 #define COREWAR_OP_H
 
 #define IND_SIZE				2

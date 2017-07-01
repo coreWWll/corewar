@@ -74,7 +74,7 @@ char	*get_full_name_or_comment(int fd, char *name, char *line, int flag)
 			t = line;
 			while (*t != '\"' && *t != '\0')
 				t++;
-			check_endl_and_len(t, name, line, flag);
+			check_endl_and_len(t, name, flag);
 		}
 	}
 	return (name);
