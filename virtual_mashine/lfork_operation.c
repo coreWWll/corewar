@@ -24,7 +24,7 @@ void    do_lfork_func(t_vm *main_struct, t_car *car)
 	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 	dist = (int) get_short_from_byte_code(car->data, car->op_tabble
 			.codage_octal);
-	while (i < main_struct->players_nbr && car->args_error)
+	while (i < main_struct->players_nbr)
 	{
 		if (car->index == i)
 			main_struct->players[i]->car = create_new_car

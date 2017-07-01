@@ -77,10 +77,9 @@ typedef struct			s_vis
 typedef struct			s_vm
 {
 	int 				winner;
-	int 				alive_flag;
-	int 				aff_flag;
+	int 				f_alive;
+	int 				f_aff;
 	int 				coord_for_put_int_on_map;
-	int 				aff;
 	int 				cycle_to_die_for_viz;
 	int 				processes;
 	t_player			**players;
