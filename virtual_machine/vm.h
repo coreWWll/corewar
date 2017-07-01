@@ -2,8 +2,8 @@
 // Created by Denys Burtnjak on 6/1/17.
 //
 
-#ifndef VIRTUAL_MASHINE_VM_H_H
-#define VIRTUAL_MASHINE_VM_H_H
+#ifndef VIRTUAL_MACHINE_VM_H_H
+#define VIRTUAL_MACHINE_VM_H_H
 
 #include <ncurses.h>
 #include "libft/libft.h"

@@ -113,7 +113,7 @@ void			get_prog_size(t_asm *head) {
 	head->header->prog_size = do_big_endian(head->header->prog_size, 4);
 }
 
-void			header_parse(t_asm *head, int fd)
+void			header_parse(t_asm *head)
 {
 	t_asm *begin;
 
