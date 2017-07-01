@@ -41,6 +41,8 @@ void	introducing(t_vm *main_struct)
 
 	i = 0;
 	if (main_struct->f_v == FALSE)
+		ft_printf("Introducing contestants...\n");
+	if (main_struct->f_v == FALSE)
 	{
 		while (main_struct->players[i])
 		{

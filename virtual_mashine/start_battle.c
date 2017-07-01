@@ -81,7 +81,7 @@ void    start_battle(t_vm *main_struct)
 		while (check_alive(main_struct) && (CYCLE_TO_DIE -
 			main_struct->round * CYCLE_DELTA) >= 0)
     {
-		if (main_struct->f_dump)
+		if (main_struct->f_dump && main_struct->dump_cycle == main_struct->cycle)
 			dump_memory((unsigned char *) main_struct->map, MEM_SIZE);
 		move_all_car(main_struct);
 		main_struct->processes = count_car(main_struct);
@@ -90,8 +90,6 @@ void    start_battle(t_vm *main_struct)
 			visualisate(main_struct);
         if (main_struct->cycle == main_struct->cycle_to_die)
 			cycles_and_rounds(main_struct);
-	/*	ft_printf("cycle = %d, processes = %d\n",main_struct->cycle,
-				   main_struct->processes);*/
 		(main_struct->cycle)++;
     }
 	if (main_struct->f_v == TRUE)

@@ -6,7 +6,6 @@
 
 void get_sti_func(t_car *car)
 {
-
 	car->op_tabble.nb_tours--;
 }
 
