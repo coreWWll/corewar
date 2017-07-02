@@ -3,7 +3,7 @@
 //
 
 #include "vm.h"
-#include "bonus/visualisation.h"
+#include "visualisation.h"
 
 void	create_color_array(t_vm *main_struct)
 {

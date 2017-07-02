@@ -6,14 +6,14 @@
 #    By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/09 16:49:11 by dburtnja          #+#    #+#              #
-#    Updated: 2017/03/15 15:36:22 by dburtnja         ###   ########.fr        #
+#    Updated: 2017/07/02 12:20:38 by dburtnja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRC =	ft_memset.c\
 		ft_memcpy.c\
 		ft_memccpy.c\
