@@ -17,7 +17,7 @@ void    do_lfork_func(t_vm *main_struct, t_car *car)
 
 	i = 0;
 	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
-	dist = (int) get_short_from_byte_code(main_struct->map + car->pos + 1, car->op_tabble
+	dist = get_short_from_byte_code(main_struct->map + car->pos + 1, car->op_tabble
 			.codage_octal);
 	while (i < main_struct->players_nbr)
 	{

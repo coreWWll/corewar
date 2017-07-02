@@ -9,20 +9,28 @@ void change_alive_flag(t_vm *main_struct)
 {
 	t_player	**player;
 	t_car		*car;
+	t_car		*p;
 	int			i;
 
 	i = 0;
 	player = main_struct->players;
-	while (player[i])
+	while (i < main_struct->players_nbr)
 	{
 		car = player[i]->car;
 		player[i]->lives_in_current_period = 0;
 		while (car)
 		{
 			if (car->live == 0 || main_struct->cycle_to_die_for_viz <= 0)
+			{
+				p = car->next;
 				dell_car_from_list(&(player[i]->car), car, main_struct);
-			car->live = 0;
-			car = car->next;
+				car = p;
+			}
+			else
+			{
+				car->live = 0;
+				car = car->next;
+			}
 		}
 		i++;
 	}
