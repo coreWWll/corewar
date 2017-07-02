@@ -1,6 +1,6 @@
 NAME = virtual_machine
 
-FLAGS =	
+#FLAGS =	-Wall -Wextra -Werror
 
 SRC =	corewar.c\
         create_players.c\
@@ -55,7 +55,6 @@ SRO  =  $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@echo "1"
 		@$(MAKE) -C libft
 		@echo "-----------------------------------"
 		@echo "Compiling virtual_machine"
