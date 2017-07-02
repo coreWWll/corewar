@@ -27,6 +27,7 @@
 # define RED_TEXT_ON_CYAN	40
 # define TIME_TWO_MS		20000
 # define TIME_ONE_S			1000000
+# define WINDOW_RESIZE		410
 
 void	w_print_arena(t_vm *main_struct);
 void	erase_all(t_vis *vis);
@@ -40,5 +41,6 @@ int		check_if_refresh(t_vm *main_struct);
 void	read_commands(t_vm *main_struct);
 void	stop_vis_and_exit(t_vm *main_struct);
 void	create_windows(t_vm *main_struct);
+void	throw_resize_vis(t_vm *main_struct, char *status);
 
 #endif

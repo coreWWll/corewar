@@ -73,6 +73,7 @@ typedef struct			s_vis
 	WINDOW				*bg_arena;
 	WINDOW				*bg_param;
 	WINDOW				*bg_usage;
+	WINDOW				*font;
 }						t_vis;
 
 
