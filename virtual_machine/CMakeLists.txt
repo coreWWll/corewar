@@ -141,12 +141,13 @@ set(SOURCE_FILES
         get_args_and_value.c
         bonus/visualisation.c
         bonus/visualisation.h
+        bonus/ft_kbhit.c
         put_int_on_map.c
         bonus/visualisate.c
         bonus/w_print_memory.c
         bonus/w_print_param.c
         bonus/w_print_usage.c
-        bonus/put_caret_on_map.c get_args_and_values_part_2.c dump_memory.c bonus/time.c bonus/check_if_refresh.c bonus/read_commands.c bonus/create_windows.c)
+        bonus/put_caret_on_map.c get_args_and_values_part_2.c dump_memory.c bonus/time.c bonus/check_if_refresh.c bonus/read_commands.c)
 
 add_executable(virtual_mashine ${SOURCE_FILES})
 target_link_libraries( virtual_mashine ${CURSES_LIBRARIES} )
