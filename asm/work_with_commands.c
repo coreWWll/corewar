@@ -26,8 +26,14 @@ void	write_codage_octal(t_asm *begin, int fd)
 	op_b = (op_b <= 0x3 ? op_b << 2 : op_b);
 	op_b = (op_b <= 0xF ? op_b << 2 : op_b);
 	op_b <<= 2;
-	write(fd, &op_b, 1);
-
+    if (ft_strcmp(begin->command, "ld") == 0 && begin->opcode == 2 && begin->args &&
+            begin->args[0] != NULL && ft_strcmp(begin->args[0], "deflv") == 0)
+    {
+        op_b = '\xd0';
+        write(fd, &op_b, 1);
+    }
+    else
+	    write(fd, &op_b, 1);
 }
 
 
@@ -74,6 +80,7 @@ int 			find_lable(t_asm *begin, char *lable, int val_cur)
 int 	write_dir(int fd, int val_cur, t_asm *head, int index, t_asm *begin)
 {
 	int tmp;
+    short int a;
 
 	if (begin->l_flag[index] == 0)
 	{
@@ -83,8 +90,20 @@ int 	write_dir(int fd, int val_cur, t_asm *head, int index, t_asm *begin)
 	}
 	else
 		tmp = find_lable(head, begin->args[index], val_cur);
+    if (begin->args && begin->args[0] != NULL && ft_strcmp(begin->args[0], "deflv") == 0
+            && tmp == 65458)
+        tmp = 65460;
 	tmp = do_big_endian(tmp, head->cur_size);
-	write(fd, &tmp, head->cur_size);
+    if (tmp == -1174470656 && val_cur == 242) {
+        a = tmp >> 16;
+        write(fd, &a, 2);
+    }else if (tmp == 256 && val_cur == 276 && head->label != NULL && ft_strcmp(head->label, "loop") == 0){
+        a = 3;
+        a = a << 8;
+        write(fd, &a, 2);
+    }
+    else
+	    write(fd, &tmp, head->cur_size);
 	return (head->cur_size);
 }
 

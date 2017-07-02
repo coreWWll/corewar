@@ -7,6 +7,8 @@
 int 	check_if_comand(char *command)
 {
 	int i;
+	int size[] = {4, 4, 0, 0, 0, 4, 4, 4, 2, 2, 2, 2, 4, 2, 2, 4};
+	int codage_octal[] = {0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1};
 	char *comm[] = {"live", "ld", "st", "add", "sub", "and", "or",
 				  "xor", "zjmp", "ldi", "sti", "fork", "lld",
 				  "lldi", "lfork", "aff"};
@@ -36,6 +38,7 @@ void	get_commands(t_asm *head, int fd)
 		begin = begin->next;
 	}
 }
+#include "stdio.h"
 
 void	to_byte_code(t_asm *head)
 {
@@ -43,13 +46,11 @@ void	to_byte_code(t_asm *head)
 	char 	*file_name;
 	int		fd;
 
-
-
-	file_name = ft_strjoin(head->file_name, ".cor");
+	file_name = ft_strjoin(head->file_path, ".cor");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	begin = head;
 	head->header = (header_t *)malloc(sizeof(header_t));
-	header_parse(head);
+	header_parse(head, fd);
 	write(fd, &(*head->header), sizeof(header_t));
 	get_commands(head, fd);
 	ft_strdel(&file_name);

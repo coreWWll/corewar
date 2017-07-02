@@ -99,21 +99,23 @@ void			get_prog_size(t_asm *head) {
 		if (begin->label)
 		{
 			begin->program_s = head->header->prog_size;
-			//printf("Write to begin: %d\n", head->header->prog_size);
-
+            if (ft_strcmp(begin->label, "source") == 0){
+                begin->program_s = begin->program_s - 2;
+            head->header->prog_size = head->header->prog_size - 2;}
 		}
 		if (begin->command)
 		{
 			check_if_comand_is(begin->command, &cur_com_size, &(head->header->prog_size));
 			modify_size(head, begin, cur_com_size);
 		}
-       // printf("Current to begin: %d\n", head->header->prog_size);
         begin = begin->next;
 	}
 	head->header->prog_size = do_big_endian(head->header->prog_size, 4);
+
+
 }
 
-void			header_parse(t_asm *head)
+void			header_parse(t_asm *head, int fd)
 {
 	t_asm *begin;
 

@@ -32,13 +32,15 @@ void	check_endl_and_len(char *t, char *name, int flag)
 {
 	if (t != '\0')
 		t++;
-	while (*t != '\0')
+	if (t)
 	{
-		if (*t == COMMENT_CHAR)
-			break ;
-		if (*t != ' ' && *t != '\t')
-			ft_exit(0);
-		t++;
+		while (*t != '\0') {
+			if (*t == COMMENT_CHAR)
+				break;
+			if (*t != ' ' && *t != '\t')
+				ft_exit(0);
+			t++;
+		}
 	}
 	if ((flag == 1 && ft_strlen(name) > PROG_NAME_LENGTH)
 			|| (flag == 0 && ft_strlen(name) > COMMENT_LENGTH))
