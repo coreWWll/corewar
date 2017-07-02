@@ -53,7 +53,7 @@ void	get_label(char **line, t_asm *start)
 			while (dupline[len] != LABEL_CHAR && dupline[len] != '\0')
 				len++;
 		}
-		check_if_label_ok(*line, len);
+		//check_if_label_ok(*line, len);
 		if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR)
 			&& start->only_label != 1)
 			start->label = start->label;
@@ -104,21 +104,18 @@ void	get_all_info(t_asm *start, char *line)
 {
 	char	*dupline;
 	char	*p;
-	int		comm;
 
-	comm = 0;
 	if (start->only_label == 1 && is_label(line) == 1)
 	{
 		start->next = new_asm();
 		start->only_label = 0;
 		start = start->next;
 	}
-	if (ft_strchr(line, '#'))
+	if (ft_strchr(line, COMMENT_CHAR))
 	{
 		p = if_comment_at_end(line);
 		line = p;
 		ft_strdel(&p);
-		comm = 1;
 	}
 	line = good_strtrim(line);
 	dupline = line;

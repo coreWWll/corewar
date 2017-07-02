@@ -62,7 +62,6 @@ void 				header_parse(t_asm *asemb);
 void                validate_it(t_asm *start);
 char	            *clean_arg(char *line);
 void 	            check_if_end_is_newln(char *av);
-int 				if_lable(int *ar);
 void				write_op_code(t_asm *head, t_asm *begin, int op_c, int fd);
 unsigned int		do_big_endian(unsigned int magic, int size);
 char	            *get_full_name_or_comment(int fd, char *name, char *line, int flag);

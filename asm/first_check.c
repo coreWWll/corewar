@@ -34,7 +34,7 @@ void	check_endl_and_len(char *t, char *name, int flag)
 		t++;
 	while (*t != '\0')
 	{
-		if (*t == '#')
+		if (*t == COMMENT_CHAR)
 			break ;
 		if (*t != ' ' && *t != '\t')
 			ft_exit(0);

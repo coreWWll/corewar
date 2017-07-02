@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-void	check_if_label_ok(char *line, int len)
+/*void	check_if_label_ok(char *line, int len)
 {
 	char *t;
 	char *p;
@@ -24,7 +24,7 @@ void	check_if_label_ok(char *line, int len)
 		if (*t != DIRECT_CHAR)
 			ft_exit(7);
 	}
-}
+}*/
 
 void	check_label_syntax(char *line)
 {
@@ -83,9 +83,7 @@ void	check_if_end_is_newln(char *av)
 int		check_if_num_ok(char *reg, int f)
 {
 	int i;
-	int minus;
 
-	minus = 0;
 	i = 1;
 	while (reg[i])
 	{
