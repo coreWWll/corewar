@@ -15,13 +15,13 @@ void    do_or_func(t_vm *main_struct, t_car *car)
 {
 	if (car->args[2].name == T_REG && car->args[2].value > 0 && car->args_error)
 	{
-		car->reg[car->args[2].value - 1] = (unsigned int) (car->args[0].value |
+		car->reg[car->args[2].value - 1] = (car->args[0].value |
 														   car->args[1].value);
 	}
 	else
 	{
 		car->op_tabble.opcode = 0;
-		car->pos = car->pos++;
+		car->pos = car->pos + car->arg_size + 2;
 		return;
 	}
 	car->op_tabble.opcode = 0;

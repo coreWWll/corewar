@@ -25,7 +25,7 @@ void    do_sti_func(t_vm *main_struct, t_car *car)
 	else
 	{
 		car->op_tabble.opcode = 0;
-		car->pos = car->pos++;
+		car->pos = car->pos + car->arg_size + 2;
 		return ;
 	}
 	if (car->args[2].name == 1 && car->args[2].value > 0 && car->args[2]

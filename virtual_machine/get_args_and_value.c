@@ -93,12 +93,14 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 			car->op_tabble.opcode == 14) && (car->args[2].name == T_REG &&
 			car->args[2].value > 0 && car->args[2].value < REG_NUMBER ) )
 		get_values_reg_end(car, main_struct, 0);
-	if (car->op_tabble.opcode == 11 && (car->args[0].name == T_REG &&
+	else if (car->op_tabble.opcode == 11 && (car->args[0].name == T_REG &&
 										car->args[0].value > 0 &&
 			car->args[0].value < REG_NUMBER ))
 		get_values_reg_start(car, main_struct, 1);
-	if (car->op_tabble.opcode == 2 || car->op_tabble.opcode == 3 ||
+	else if (car->op_tabble.opcode == 2 || car->op_tabble.opcode == 3 ||
 			car->op_tabble.opcode == 13)
 		get_ldst_args(car, main_struct, 1);
+	else
+		return FALSE;
 	return TRUE;
 }
