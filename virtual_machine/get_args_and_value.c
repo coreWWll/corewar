@@ -53,7 +53,7 @@ int 	read_args(t_car *car, unsigned char *map)
 	while (i < car->op_tabble.args_am)
 	{
 		if (car->args[i].name == T_REG)
-			read_size = T_REG;          // CHECK IT CYKA!!!!!!OUT
+			read_size = T_REG;
 		else if (car->args[i].name == T_DIR)
 			read_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
 		else if (car->args[i].name == T_IND)
@@ -87,8 +87,18 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos))
 		return FALSE;
-	get_values_reg_end(car, main_struct, 0);
-	get_values_reg_start(car, main_struct, 1);
-
+	if ((car->op_tabble.opcode == 4 || car->op_tabble.opcode == 5 ||
+			car->op_tabble.opcode == 6 || car->op_tabble.opcode == 7 ||
+			car->op_tabble.opcode == 8 || car->op_tabble.opcode == 10 ||
+			car->op_tabble.opcode == 14) && (car->args[2].name == T_REG &&
+			car->args[2].value > 0 && car->args[2].value < REG_NUMBER ) )
+		get_values_reg_end(car, main_struct, 0);
+	if (car->op_tabble.opcode == 11 && (car->args[0].name == T_REG &&
+										car->args[0].value > 0 &&
+			car->args[0].value < REG_NUMBER ))
+		get_values_reg_start(car, main_struct, 1);
+	if (car->op_tabble.opcode == 2 || car->op_tabble.opcode == 3 ||
+			car->op_tabble.opcode == 13)
+		get_ldst_args(car, main_struct, 1);
 	return TRUE;
 }

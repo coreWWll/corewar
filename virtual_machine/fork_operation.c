@@ -6,11 +6,6 @@
 
 void get_fork_func(char *map, t_car *car)
 {
-	int arg_size;
-
-	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
-	if (!(car->data = ft_memdup((size_t)arg_size, map, car->pos + 1)))
-		ft_error(ft_strjoin(ERR_MEM_ALLOC, "file: fork_operation.c:10"));
 	car->op_tabble.nb_tours--;
 }
 
@@ -29,7 +24,6 @@ t_car	*add_car(t_car *car, int delta)
 	new = ft_memalloc(sizeof(t_car));
 	new = ft_memmove(new, car, sizeof(t_car));
 	new->pos = new->pos + delta;
-	fix_car_pos(new);
 	if (new->pos > MEM_SIZE)
 		new->pos = new->pos - MEM_SIZE;
 	new->op_tabble.opcode = 0;
@@ -55,7 +49,8 @@ void    do_fork_func(t_vm *main_struct, t_car *car)
 
 	i = 0;
 	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
-	dist = (int)get_short_from_byte_code(car->data, car->op_tabble
+	dist = (int)get_short_from_byte_code(main_struct->map + car->pos + 1,
+			car->op_tabble
 			.codage_octal) % IDX_MOD;
 	while (i < main_struct->players_nbr)
 	{
@@ -65,8 +60,5 @@ void    do_fork_func(t_vm *main_struct, t_car *car)
 		i++;
 	}
 	car->op_tabble.opcode = 0;
-	if (car->data)
-		ft_strdel(&(car->data));
 	car->pos = car->pos + arg_size + 1;
-	fix_car_pos(car);
 }
