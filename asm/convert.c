@@ -7,8 +7,6 @@
 int 	check_if_comand(char *command)
 {
 	int i;
-	int size[] = {4, 4, 0, 0, 0, 4, 4, 4, 2, 2, 2, 2, 4, 2, 2, 4};
-	int codage_octal[] = {0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1};
 	char *comm[] = {"live", "ld", "st", "add", "sub", "and", "or",
 				  "xor", "zjmp", "ldi", "sti", "fork", "lld",
 				  "lldi", "lfork", "aff"};
@@ -50,7 +48,7 @@ void	to_byte_code(t_asm *head)
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	begin = head;
 	head->header = (header_t *)malloc(sizeof(header_t));
-	header_parse(head, fd);
+	header_parse(head);
 	write(fd, &(*head->header), sizeof(header_t));
 	get_commands(head, fd);
 	ft_strdel(&file_name);

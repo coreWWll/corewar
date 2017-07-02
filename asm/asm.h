@@ -58,7 +58,7 @@ void				check_label_syntax(char *line);
 void				find_label_or_die(t_asm *start, char *label);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
-void 				header_parse(t_asm *asemb, int fd);
+void 				header_parse(t_asm *asemb);
 void                validate_it(t_asm *start);
 char	            *clean_arg(char *line);
 void 	            check_if_end_is_newln(char *av);
