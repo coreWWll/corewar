@@ -28,7 +28,7 @@ int		if_comment(char *line)
 	return ((line[i] == '\0') ? 1 : 0);
 }
 
-void	check_endl_and_len(char *t, char *name, char *line, int flag)
+void	check_endl_and_len(char *t, char *name, int flag)
 {
 	if (t != '\0')
 		t++;

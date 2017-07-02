@@ -1,6 +1,14 @@
-//
-// Created by Denys Burtnjak on 6/30/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_commands.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/01 16:38:47 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/01 16:38:49 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "visualisation.h"
 
@@ -73,5 +81,7 @@ void	read_commands(t_vm *main_struct)
 		change_time(main_struct, c);
 		read_when_play_and_pause(main_struct, c);
 	}
-	while (wgetch(main_struct->vis->arena) != EOF);	/*delete chars in stdin*/
+	while (wgetch(main_struct->vis->arena) != EOF)
+	{
+	}
 }
