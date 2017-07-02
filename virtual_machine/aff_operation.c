@@ -20,7 +20,6 @@ void    do_aff_func(t_vm *main_struct, t_car *car)
 	if (main_struct->f_aff)
 		ft_printf("AFF OPERATION = %c\n", print);
 	car->op_tabble.opcode = 0;
-	car->pos = car->pos + T_REG + 2;
-	fix_car_pos(car);
+	car->pos = car->pos + 1 + REG_SIZE;
 }
 
