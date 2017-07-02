@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "vm.h"
-#include "bonus/visualisation.h"
+#include "visualisation.h"
 
 void put_int_on_map(t_vm *main_struct, int data, char *players, char player_nbr)
 {
