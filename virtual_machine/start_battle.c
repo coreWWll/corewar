@@ -18,13 +18,18 @@ void change_alive_flag(t_vm *main_struct)
 		player[i]->lives_in_current_period = 0;
 		while (car)
 		{
-			if (car->live == 0)
+			if (car->live == 0 || main_struct->cycle_to_die_for_viz <= 0)
 				dell_car_from_list(&(player[i]->car), car, main_struct);
 			car->live = 0;
 			car = car->next;
 		}
 		i++;
 	}
+	/*if (main_struct->cycle_to_die_for_viz <= 0)
+	{
+		main_struct->cycle_to_die_for_viz += CYCLE_DELTA;
+		main_struct->processes = 0;
+	}*/
 }
 
 int check_alive(t_vm *main_struct)
@@ -78,8 +83,7 @@ void	the_winner_is(t_vm *main_struct)
 
 void    start_battle(t_vm *main_struct)
 {
-		while (check_alive(main_struct) && (CYCLE_TO_DIE -
-			main_struct->round * CYCLE_DELTA) >= 0)
+		while (check_alive(main_struct))
     {
 		if (main_struct->f_dump && main_struct->dump_cycle == main_struct->cycle)
 			dump_memory((unsigned char *) main_struct->map, MEM_SIZE);
@@ -91,6 +95,8 @@ void    start_battle(t_vm *main_struct)
         if (main_struct->cycle == main_struct->cycle_to_die)
 			cycles_and_rounds(main_struct);
 		(main_struct->cycle)++;
+		if (main_struct->cycle_to_die_for_viz <= 0)
+			break ;
     }
 	if (main_struct->f_v == TRUE)
 	{
@@ -99,4 +105,5 @@ void    start_battle(t_vm *main_struct)
 		stop_visualisation(main_struct);
 	}
 	the_winner_is(main_struct);
+
 }

@@ -89,5 +89,6 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 		return FALSE;
 	get_values_reg_end(car, main_struct, 0);
 	get_values_reg_start(car, main_struct, 1);
+
 	return TRUE;
 }
