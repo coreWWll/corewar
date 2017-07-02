@@ -106,7 +106,6 @@ set(SOURCE_FILES
         libft/libft.h
         corewar.c
         create_players.c
-        dodatkovi_fynkcii.c
         live_operation.c
         print_memory.c
         read_player_file.c

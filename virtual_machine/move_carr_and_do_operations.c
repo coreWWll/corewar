@@ -32,8 +32,10 @@ void    move_single_car(t_vm *main_struct, t_car *car)
         else
         {
             do_op_code(main_struct, car);
+			fix_car_pos(car);
 			if (main_struct->map[car->pos] != 0)
             	get_op_code(main_struct, car);
+			fix_car_pos(car);
         }
     }
     else

@@ -57,5 +57,6 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 	}
 	car->pos = car->pos + DIR_SIZE + 1;
     car->op_tabble.opcode = 0;
+	fix_car_pos(car);
 }
 
