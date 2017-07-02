@@ -16,8 +16,6 @@ int		get_int_from_byte_code(char *byte_array)
 void    get_live_func(char *map, t_car *car)
 {
 	car->live = 1;
-    if (!(car->data = ft_memdup(4, map, car->pos + 1)))
-		ft_error(ft_strjoin(ERR_MEM_ALLOC, "file: live_operation.c:17"));
 	car->op_tabble.nb_tours--;
 }
 
@@ -49,7 +47,8 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 	int 			new_life;
 
 	main_struct->count_live_functions++;
-	number = (unsigned int)get_int_from_byte_code(car->data);
+	number = (unsigned int)get_int_from_byte_code(main_struct->map +car->pos +
+			1);
 	new_life = check_who_live(number, main_struct);
 	if (new_life != 0)
 	{
@@ -58,6 +57,5 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 	}
 	car->pos = car->pos + DIR_SIZE + 1;
     car->op_tabble.opcode = 0;
-    ft_strdel(&(car->data));
 }
 

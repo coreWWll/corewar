@@ -33,6 +33,8 @@ void	read_flags(t_vm *main_struct, char **argv, int argc, int *i)
 		main_struct->f_aff = TRUE;
 	else if (ft_strcmp("-alive", argv[*i]) == 0)
 		main_struct->f_alive = TRUE;
+	else if (ft_strcmp("-usage", argv[*i]) == 0)
+		usage();
 	else
 		ft_error(ft_strjoin("NO such flag - ", argv[*i]));
 }
