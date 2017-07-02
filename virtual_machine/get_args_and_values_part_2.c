@@ -7,12 +7,13 @@
 void get_values_reg_end(t_car *car, t_vm *main_struct, int i)
 {
 	int mark;
+
 	while (i < 2)
 	{
 		if (car->args[i].name == T_REG)
 			{
 				if (car->args[i].value - 1 < 0 ||
-					car->args[i].value > REG_NUMBER)
+					car->args[i].value - 1 > REG_NUMBER)
 					car->args_error = FALSE;
 				else
 					car->args[i].value = car->reg[car->args[i].value - 1];
