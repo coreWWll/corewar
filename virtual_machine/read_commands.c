@@ -47,6 +47,11 @@ int		read_when_play_and_pause(t_vm *main_struct, int c)
 		stop_vis_and_exit(main_struct);
 		return (TRUE);
 	}
+	else if (c == WINDOW_RESIZE)
+	{
+		throw_resize_vis(main_struct, "/resize/");
+		return (FALSE);
+	}
 	return (FALSE);
 }
 

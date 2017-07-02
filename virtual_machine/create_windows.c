@@ -31,7 +31,7 @@ void	create_windows(t_vm *main_struct)
 	wbkgd(main_struct->vis->usage, COLOR_PAIR(COL_ARENA));
 	wrefresh(main_struct->vis->bg_arena);
 	wrefresh(main_struct->vis->bg_param);
-	wrefresh(main_struct->vis->bg_usage);
 	wrefresh(main_struct->vis->usage);
+	wrefresh(main_struct->vis->bg_usage);
 	nodelay(main_struct->vis->arena, TRUE);
 }

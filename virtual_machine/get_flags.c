@@ -50,6 +50,8 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 	{
 		boot_nbr = get_nbr_after_flag(argv, argc, i);
 		(*i)++;
+		if (*i >= argc)
+			ft_error("No file after -n N");
 	}
 	return (create_players(argv[*i], boot_nbr));
 }
