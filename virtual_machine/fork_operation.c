@@ -61,4 +61,5 @@ void    do_fork_func(t_vm *main_struct, t_car *car)
 	}
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + arg_size + 1;
+	fix_car_pos(car);
 }

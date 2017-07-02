@@ -21,7 +21,7 @@ void    do_lldi_func(t_vm *main_struct, t_car *car)
 	else
 	{
 		car->op_tabble.opcode = 0;
-		car->pos = car->pos + car->arg_size + 2;
+		car->pos = car->pos + car->arg_size + 1;
 		return ;
 	}
 	if (car->reg[car->args[2].value - 1] == 0 && car->carry == 0)
@@ -30,4 +30,5 @@ void    do_lldi_func(t_vm *main_struct, t_car *car)
 		car->carry = 0;
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
+	fix_car_pos(car);
 }

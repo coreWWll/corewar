@@ -182,6 +182,7 @@ void 	get_values_reg_end(t_car *car, t_vm *main_struct, int i);
 void 	get_values_reg_start(t_car *car, t_vm *main_struct, int i);
 void	usage(void);
 void	get_ldst_args(t_car *car, t_vm *main_struct, int i);
+void	fix_car_pos(t_car *car);
 
 
 
