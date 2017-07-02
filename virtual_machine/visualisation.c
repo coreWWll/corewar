@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../vm.h"
+#include "vm.h"
 #include "visualisation.h"
 
 void	erase_all(t_vis *vis)
