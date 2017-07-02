@@ -35,7 +35,8 @@ void	dell_car_from_list(t_car **head, t_car *to_dell, t_vm *main_struct)
 
 		//ft_strdel(&ptr->data);//doesnt work on all bots (fluttershy = ok, asombra and gagnant = ko)
 
-		ft_memdel((void **) &ptr);
+		//ft_memdel((void **) &ptr);
+		free(ptr);
 	}
 	else
 	{
@@ -47,7 +48,8 @@ void	dell_car_from_list(t_car **head, t_car *to_dell, t_vm *main_struct)
 				ptr->next = ptr->next->next;
 				main_struct->winner = ptr->index;
 				//ft_strdel(&dell->data); //doesnt work on all bots (fluttershy = ok, asombra and gagnant = ko)
-				ft_memdel((void **) &dell);
+				//ft_memdel((void **) &dell);
+				free(ptr);
 			}
 			else
 				ptr = ptr->next;
@@ -71,6 +73,7 @@ int count_car(t_vm *main_struct)
 		while (car)
 		{
 			count++;
+			//ft_printf("%d\n", count);
 			car = car->next;
 		}
 		i--;
