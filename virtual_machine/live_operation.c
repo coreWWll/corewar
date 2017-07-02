@@ -57,6 +57,7 @@ void    do_live_func(t_vm *main_struct, t_car *car)
 		main_struct->last_live[1] = main_struct->cycle;
 	}
 	car->pos = car->pos + DIR_SIZE + 1;
+	fix_car_pos(car);
     car->op_tabble.opcode = 0;
     ft_strdel(&(car->data));
 }

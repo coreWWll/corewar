@@ -35,4 +35,5 @@ void    do_lfork_func(t_vm *main_struct, t_car *car)
 	if (car->data)
 		ft_strdel(&(car->data));
 	car->pos = car->pos + arg_size + 1;
+	fix_car_pos(car);
 }
