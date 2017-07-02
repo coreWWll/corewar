@@ -5,7 +5,7 @@
 #ifndef COREWAR_ASM_H
 
 #include "../op.h"
-#include "../libft/libft.h"
+#include "../asm/libft/libft.h"
 #define COREWAR_ASM_H
 #define MAX_INT                 2147483647
 #define MAX_SHORT_INT 			65535
@@ -49,7 +49,7 @@ char				*get_name_or_comm(char *line, int fd, int flag);
 char				*get_file_name(char *av);
 char				*get_result_output(char *av);
 void				check_format(char *file);
-void				check_endl_and_len(char *t, char *name, char *line, int flag);
+void				check_endl_and_len(char *t, char *name, int flag);
 int					if_comment(char *line);
 int					is_label(char *line);
 char				*if_comment_at_end(char *line);
@@ -58,7 +58,7 @@ void				check_label_syntax(char *line);
 void				find_label_or_die(t_asm *start, char *label);
 void				ft_exit(int flag);
 void				to_byte_code(t_asm *head);
-void 				header_parse(t_asm *asemb, int fd);
+void 				header_parse(t_asm *asemb);
 void                validate_it(t_asm *start);
 char	            *clean_arg(char *line);
 void 	            check_if_end_is_newln(char *av);

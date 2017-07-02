@@ -1,15 +1,27 @@
-//
-// Created by Denys Burtnjak on 6/30/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_if_refresh.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/01 16:38:17 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/01 16:38:27 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "visualisation.h"
 
 int		time_refresh(t_vm *main_struct)
 {
-	if (main_struct->time > 50)
+	if (main_struct->time > 50 && main_struct->vis->refresh_time != 0)
 	{
-		if (main_struct->cycle )
-			return (TRUE);
+		if (main_struct->cycle == main_struct->vis->refresh_time)
+		{
+			main_struct->vis->refresh_time = 0;
+			return (FALSE);
+		}
+		return (TRUE);
 	}
 	return (FALSE);
 }

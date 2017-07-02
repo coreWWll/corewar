@@ -2,6 +2,7 @@
 // Created by Denys Burtnjak on 6/1/17.
 //
 
+
 #ifndef VIRTUAL_MACHINE_VM_H_H
 #define VIRTUAL_MACHINE_VM_H_H
 
@@ -65,6 +66,7 @@ typedef struct			s_vis
 	int					t_pause;
 	int 				h_pause;
 	int					go_to_end;
+	int					refresh_time;
 	WINDOW				*arena;
 	WINDOW				*param;
 	WINDOW				*usage;
@@ -178,7 +180,8 @@ int 	count_car(t_vm *main_struct);
 int 	get_correct_ind(int mark);
 void 	get_values_reg_end(t_car *car, t_vm *main_struct, int i);
 void 	get_values_reg_start(t_car *car, t_vm *main_struct, int i);
-void	fix_car_pos(t_car *car);
+void	usage(void);
+
 
 
 #endif

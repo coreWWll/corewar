@@ -15,7 +15,6 @@
 char	*get_name_or_comm(char *line, int fd, int flag)
 {
 	char	*t;
-	char	*p;
 	char	*name;
 	size_t	len;
 
@@ -36,7 +35,7 @@ char	*get_name_or_comm(char *line, int fd, int flag)
 		name = t;
 	}
 	else
-		check_endl_and_len(t, name, line, flag);
+		check_endl_and_len(t, name, flag);
 	return (name);
 }
 
@@ -63,7 +62,7 @@ char	*get_file_name(char *av)
 char	*get_result_output(char *av)
 {
 	size_t	len;
-	int		i;
+	size_t		i;
 	char	*name;
 	char	*t;
 
