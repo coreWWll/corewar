@@ -31,6 +31,7 @@ typedef struct		s_args
 typedef struct		s_car
 {
 	int 			args_error;
+	char 			*mem;
 	int 			index;
 	char 			color;
 	t_args			args[3];
