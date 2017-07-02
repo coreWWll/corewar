@@ -17,7 +17,7 @@
 # include <termios.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../vm.h"
+# include "vm.h"
 # include <ncurses.h>
 # include <time.h>
 
