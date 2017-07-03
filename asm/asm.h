@@ -35,7 +35,7 @@ typedef struct		s_asm
 	char			**args;
 	int				label_size;
 	struct s_asm	*next;
-	header_t		*header;
+	t_header		*header;
 	int				cur_size;
 	int				cur_codage_octal;
 	int				program_s;
