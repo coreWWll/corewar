@@ -15,8 +15,7 @@ entry:
 
 ardeftgt:
 
-ardefgeni:
-	st 		r1, 6
+ardefgeni:	st 		r1, 6
 
 ardefgen:
 	live 	%213904
@@ -39,8 +38,7 @@ ardefl1:
 	add		r2, r3, r2
 	sti		r4, %:ardeftgt, r2
 	add		r2, r3, r2
-ardefchk:
-	live	%3940641
+ardefchk:	live	%3940641
 	xor		r2, r5, r15
 	zjmp	%:ardefinit
 ardefloop:	
