@@ -28,6 +28,7 @@
 # define TIME_TWO_MS		20000
 # define TIME_ONE_S			1000000
 # define WINDOW_RESIZE		410
+# define COLOR_LIGHT		100
 
 void	w_print_arena(t_vm *main_struct);
 void	erase_all(t_vis *vis);

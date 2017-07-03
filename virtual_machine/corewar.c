@@ -11,7 +11,9 @@ void	create_color_array(t_vm *main_struct)
 
 	i = 0;
 	if ((main_struct->color = (char *)malloc(MEM_SIZE)) == NULL)
-		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:10"));
+		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:13"));
+	if ((main_struct->col_time = (char *)malloc(MEM_SIZE)) == NULL)
+		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:15"));
 	while (i < MEM_SIZE)
 	{
 		main_struct->color[i] = COL_ARENA;
@@ -24,11 +26,11 @@ t_vm	*create_main_struct(void)
 	t_vm		*main_struct;
 
 	if ((main_struct = (t_vm*)ft_memalloc(sizeof(t_vm))) == NULL)
-		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:11"));
+		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:29"));
 	main_struct->players = (t_player**)ft_memalloc(sizeof(t_player*) *
 												   (MAX_PLAYERS + 1));
 	if (main_struct->players == NULL)
-		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:16"));
+		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:33"));
 	create_color_array(main_struct);
 	main_struct->cycle_to_die = CYCLE_TO_DIE;
 	main_struct->time = 50;

@@ -94,6 +94,7 @@ typedef struct			s_vm
 	int					players_nbr;
 	char 				*map;
 	char				*color;
+	char				*col_time;
 	int					f_dump;
 	int					dump_cycle;
 	int					f_v;

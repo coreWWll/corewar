@@ -30,11 +30,14 @@ void put_int_on_map(t_vm *main_struct, int data, char *players, char player_nbr)
 			main_struct->map[cor + i - MEM_SIZE] = (char) data;
 			main_struct->color[cor + i - MEM_SIZE] = (char)
 					(player_nbr +  COL_NEW_MEM);
+			main_struct->col_time[cor + i - MEM_SIZE] = COLOR_LIGHT;
 		}
 		else
 		{
 			main_struct->map[cor + i] = (char) data;
 			main_struct->color[cor + i] = (char)(player_nbr + COL_NEW_MEM);
+			main_struct->col_time[cor + i] = COLOR_LIGHT;
+
 		}
 		data = data >> 8;
 		i--;
