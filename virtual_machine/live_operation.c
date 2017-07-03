@@ -24,7 +24,6 @@ int		check_who_live(unsigned int number, t_vm *main_struct)
 	int			i;
 
 	i = 0;
-	main_struct->f_alive = FALSE;
 	while (main_struct->players[i])
 	{
 		if (number == main_struct->players[i]->name)
