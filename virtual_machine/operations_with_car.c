@@ -18,6 +18,7 @@ void	put_cat_on_start(t_vm	*main_struct)
 				main_struct->players[i]->name;
 		main_struct->players[i]->car->carry = 0;
 		main_struct->players[i]->car->index = i;
+		main_struct->players[i]->car->nb = i;
 		i++;
 	}
 }
