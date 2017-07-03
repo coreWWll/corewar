@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:18:36 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 15:50:26 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/07/03 14:53:34 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_args_type(t_asm *p, int i)
 		if (op_tab[p->comm_num].args[i] != T_REG &&
 				op_tab[p->comm_num].args[i] != (T_REG | T_IND)
 				&& op_tab[p->comm_num].args[i] != (T_REG | T_DIR))
-            ft_exit(2);
+			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_IND)
 	{

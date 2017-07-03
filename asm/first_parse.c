@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 16:00:28 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/24 16:03:39 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/07/03 14:51:13 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*get_file_name(char *av)
 char	*get_result_output(char *av)
 {
 	size_t	len;
-	size_t		i;
+	size_t	i;
 	char	*name;
 	char	*t;
 

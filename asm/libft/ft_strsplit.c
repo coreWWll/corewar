@@ -6,13 +6,13 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 14:31:08 by arepnovs          #+#    #+#             */
-/*   Updated: 2016/12/10 14:35:46 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/07/03 15:38:30 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(const char *s, char c)
+static int		count_words(const char *s, char c)
 {
 	int			words;
 	size_t		i;
@@ -55,7 +55,7 @@ static size_t	length(const char *s, size_t start, char c)
 	return (len);
 }
 
-static void	fill_tabs(char **tab, const char *s, char c, int words)
+static void		fill_tabs(char **tab, const char *s, char c, int words)
 {
 	size_t		start;
 	int			i;
@@ -80,7 +80,7 @@ static void	fill_tabs(char **tab, const char *s, char c, int words)
 	tab[i] = NULL;
 }
 
-char		**ft_strsplit(const char *s, char c)
+char			**ft_strsplit(const char *s, char c)
 {
 	char	**tab;
 	int		words;
