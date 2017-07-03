@@ -45,7 +45,8 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 
 	(main_struct->players_nbr)++;
 	if (main_struct->players_nbr > MAX_PLAYERS)
-		ft_error(ft_strjoin("Many players, allowed - ", ft_itoa(MAX_PLAYERS)));
+		ft_error(ft_strjoin("To many players, allowed - ",
+							ft_itoa(MAX_PLAYERS)));
 	if (ft_strcmp("-n", argv[*i]) == 0)
 	{
 		boot_nbr = get_nbr_after_flag(argv, argc, i);
@@ -54,6 +55,32 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 			ft_error("No file after -n N");
 	}
 	return (create_players(argv[*i], boot_nbr));
+}
+
+void	check_if_number_is_valid(t_vm *main_struct)
+{
+	int i;
+	int	j;
+	int bul_same_number;
+	int bul_same_players;
+
+	i = 0;
+	while (main_struct->players_nbr > i)
+	{
+		j = 0;
+		while (main_struct->players_nbr > j)
+		{
+			bul_same_number = main_struct->players[i]->boot_nbr ==
+					main_struct->players[j]->boot_nbr;
+			bul_same_players = main_struct->players[i] ==
+					main_struct->players[j];
+			if (bul_same_number && !bul_same_players)
+				ft_error(ft_strjoin("Players have identical numbers = ",
+				ft_itoa(main_struct->players[i]->boot_nbr)));
+			j++;
+		}
+		i++;
+	};
 }
 
 void	read_arguments(t_vm *main_struct, char **argv, int argc)
@@ -70,5 +97,6 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc)
 					add_players(main_struct, argv, argc, &i);
 		i++;
 	}
+	check_if_number_is_valid(main_struct);
 	create_names_players(main_struct);
 }
