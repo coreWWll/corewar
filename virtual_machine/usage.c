@@ -16,8 +16,7 @@ void	usage(void)
 {
 	ft_printf("## USAGE #####################################\n");
 	ft_printf("Usage: ./corewar [-dump N | -v | -aff | -alive ] "
-					  "[[-n N] <champion1.cor>] "
-					  "[[-n N] <...>]\n");
+					"[[-n N] <champion1.cor>] [[-n N] <...>]\n");
 	ft_printf("\t%-10s %s\n", "-v", "Use visualization");
 	ft_printf("\t%-10s %s\n", "-usage", "Print usage then exits");
 	ft_printf("\t%-10s %s\n", "-dump N", "Dumps memory after N cycles "

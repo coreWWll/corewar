@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-int		get_nbr_after_flag(char **argv, int argc, int *i)
+int			get_nbr_after_flag(char **argv, int argc, int *i)
 {
 	int	error;
 	int ret_val;
@@ -26,7 +26,7 @@ int		get_nbr_after_flag(char **argv, int argc, int *i)
 	return (ret_val);
 }
 
-void	read_flags(t_vm *main_struct, char **argv, int argc, int *i)
+void		read_flags(t_vm *main_struct, char **argv, int argc, int *i)
 {
 	if (ft_strcmp("-dump", argv[*i]) == 0)
 	{
@@ -49,8 +49,9 @@ void	read_flags(t_vm *main_struct, char **argv, int argc, int *i)
 
 t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 {
-	int boot_nbr = 0;
+	int boot_nbr;
 
+	boot_nbr = 0;
 	(main_struct->players_nbr)++;
 	if (main_struct->players_nbr > MAX_PLAYERS)
 		ft_error(ft_strjoin("To many players, allowed - ",
@@ -65,7 +66,7 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 	return (create_players(argv[*i], boot_nbr));
 }
 
-void	check_if_name_is_valid(t_vm *main_struct)
+void		check_if_name_is_valid(t_vm *main_struct)
 {
 	int i;
 	int	j;
@@ -88,10 +89,10 @@ void	check_if_name_is_valid(t_vm *main_struct)
 			j++;
 		}
 		i++;
-	};
+	}
 }
 
-void	read_arguments(t_vm *main_struct, char **argv, int argc)
+void		read_arguments(t_vm *main_struct, char **argv, int argc)
 {
 	int			i;
 
@@ -101,7 +102,7 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc)
 		if (argv[i][0] == '-' && argv[i][1] != 'n')
 			read_flags(main_struct, argv, argc, &i);
 		else
-			main_struct->players[main_struct->players_nbr - 1] = /*on MAC - 1*/
+			main_struct->players[main_struct->players_nbr - 1] =
 					add_players(main_struct, argv, argc, &i);
 		i++;
 	}
