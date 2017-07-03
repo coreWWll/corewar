@@ -76,15 +76,15 @@ void	get_command(char *line, t_asm *start)
 	i = 16;
 	while (--i >= 0)
 	{
-		if ((t = ft_strstr(line, op_tab[i].command)) != 0)
+		if ((t = ft_strstr(line, g_op_tab[i].command)) != 0)
 		{
-			j = ft_strlen(op_tab[i].command);
+			j = ft_strlen(g_op_tab[i].command);
 			t = t + j;
 			if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR)
 			{
-				start->command = ft_strdup(op_tab[i].command);
+				start->command = ft_strdup(g_op_tab[i].command);
 				start->comm_num = i;
-				start->opcode = op_tab[i].opcode;
+				start->opcode = g_op_tab[i].opcode;
 				break ;
 			}
 		}

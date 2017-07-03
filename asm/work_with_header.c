@@ -24,7 +24,7 @@ int				check_if_comand_is(char *command, int *cur_com_size,
 	*prog_s += 2;
 	while (i < 16)
 	{
-		if (ft_strcmp(command, op_tab[i].command) == 0)
+		if (ft_strcmp(command, g_op_tab[i].command) == 0)
 		{
 			if (cur_com_size)
 				*cur_com_size = g_size2[i];
@@ -91,7 +91,7 @@ void			modify_size(t_asm *head, t_asm *begin, int cur_size)
 	}
 }
 
-void			get_prog_size(t_asm *head, int i)
+void			get_prog_size(t_asm *head)
 {
 	t_asm	*begin;
 	int		cur_com_size;
@@ -123,13 +123,11 @@ void			get_prog_size(t_asm *head, int i)
 void			header_parse(t_asm *head)
 {
 	t_asm	*begin;
-	int		i;
 
-	i = 0;
 	begin = head;
 	head->header->magic = do_big_endian(COREWAR_EXEC_MAGIC, 4);
 	ft_bzero(head->header->prog_name, PROG_NAME_LENGTH + 1);
 	ft_bzero(head->header->comment, COMMENT_LENGTH + 1);
 	fill_name_and_comment(head);
-	get_prog_size(head, i);
+	get_prog_size(head);
 }
