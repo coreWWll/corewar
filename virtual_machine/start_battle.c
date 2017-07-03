@@ -67,7 +67,6 @@ void	cycles_and_rounds(t_vm *main_struct)
 														   main_struct->round;
 		main_struct->cycle_to_die =	main_struct->cycle_to_die +
 									   main_struct->cycle_to_die_for_viz;
-
 		main_struct->max_checks = 0;
 	}
 	else

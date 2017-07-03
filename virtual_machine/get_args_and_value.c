@@ -4,7 +4,7 @@
 
 #include "vm.h"
 
-void	read_args_from_char(t_car *car, unsigned char c, int pos)
+void	read_args_from_char(t_car *car, unsigned char c)
 {
 	unsigned char	buf;
 	int				i;
@@ -28,7 +28,7 @@ void	read_args_from_char(t_car *car, unsigned char c, int pos)
 	}
 }
 
-int		read_one_arg(t_car *car, unsigned char *map, int read_size)
+int		read_one_arg(unsigned char **map, int read_size, t_vm *main_struct)
 {
 	int		nbr;
 	int		i;
@@ -37,14 +37,17 @@ int		read_one_arg(t_car *car, unsigned char *map, int read_size)
 	nbr = 0;
 	while (read_size > i)
 	{
+		if ((char*)*map >= &(main_struct->map[MEM_SIZE]))
+			*map = (unsigned char *)main_struct->map;
 		nbr = nbr << 8;
-		nbr |= map[i];
+		nbr |= **map;
 		i++;
+		(*map)++;
 	}
 	return (nbr);
 }
 
-int 	read_args(t_car *car, unsigned char *map)
+int 	read_args(t_car *car, unsigned char *map, t_vm *main_struct)
 {
 	int		i;
 	int		error;
@@ -67,13 +70,13 @@ int 	read_args(t_car *car, unsigned char *map)
 		if (buf != car->args[i].name || buf == 0)
 			error = TRUE;
 		if (error == FALSE)
-			car->args[i].value = read_one_arg(car, map, read_size);
+			car->args[i].value = read_one_arg(&map, read_size, main_struct);
 		if (car->args[i].name == T_IND)
 			car->args[i].value = (short)car->args[i].value;
 		if (car->args[i].name == T_REG && car->args[i].value < 0)
 			return (FALSE);
 		car->arg_size += read_size;
-		map += read_size;
+		//map += read_size;
 		i++;
 	}
 	return (error);
@@ -86,10 +89,10 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
  	car->arg_size = 0;
 	car->args_error = TRUE;
 	local_pos = car->pos + 1;
-	read_args_from_char(car, (unsigned char)main_struct->map[local_pos],
-			local_pos);
+	read_args_from_char(car, (unsigned char)main_struct->map[local_pos]);
 	local_pos++;
-	if (read_args(car, (unsigned char*)main_struct->map + local_pos))
+	if (read_args(car, (unsigned char*)main_struct->map + local_pos,
+				  main_struct))
 	{
 		if (car->arg_size == 0)
 			car->arg_size++;
@@ -99,12 +102,11 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 			car->op_tabble.opcode == 6 || car->op_tabble.opcode == 7 ||
 			car->op_tabble.opcode == 8 || car->op_tabble.opcode == 10 ||
 			car->op_tabble.opcode == 14) && (car->args[2].name == T_REG &&
-			car->args[2].value  > 0 && car->args[2].value <= REG_NUMBER
-													) )
+			car->args[2].value  > 0 && car->args[2].value <= REG_NUMBER))
 		get_values_reg_end(car, main_struct, 0);
 	else if (car->op_tabble.opcode == 11 && (car->args[0].name == T_REG &&
 										car->args[0].value > 0 &&
-			car->args[0].value  <= REG_NUMBER ))
+			car->args[0].value  <= REG_NUMBER))
 		get_values_reg_start(car, main_struct, 1);
 	else if (car->op_tabble.opcode == 2 || car->op_tabble.opcode == 3 ||
 			car->op_tabble.opcode == 13)

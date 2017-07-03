@@ -67,9 +67,7 @@ void		create_names_players(t_vm *main_struct)
 			names++;
 		}
 		else
-		{
 			main_struct->players[i]->name = - main_struct->players[i]->boot_nbr;
-		}
 		i++;
 	}
 }
