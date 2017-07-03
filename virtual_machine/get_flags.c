@@ -57,11 +57,11 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 	return (create_players(argv[*i], boot_nbr));
 }
 
-void	check_if_number_is_valid(t_vm *main_struct)
+void	check_if_name_is_valid(t_vm *main_struct)
 {
 	int i;
 	int	j;
-	int bul_same_number;
+	int bul_same_name;
 	int bul_same_players;
 
 	i = 0;
@@ -70,13 +70,13 @@ void	check_if_number_is_valid(t_vm *main_struct)
 		j = 0;
 		while (main_struct->players_nbr > j)
 		{
-			bul_same_number = main_struct->players[i]->boot_nbr ==
-					main_struct->players[j]->boot_nbr;
+			bul_same_name = main_struct->players[i]->name ==
+					main_struct->players[j]->name;
 			bul_same_players = main_struct->players[i] ==
 					main_struct->players[j];
-			if (bul_same_number && !bul_same_players)
-				ft_error(ft_strjoin("Players have identical numbers = ",
-				ft_itoa(main_struct->players[i]->boot_nbr)));
+			if (bul_same_name && !bul_same_players)
+				ft_error(ft_strjoin("Players have identical names = ",
+				ft_itoa(main_struct->players[i]->name)));
 			j++;
 		}
 		i++;
@@ -97,6 +97,6 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc)
 					add_players(main_struct, argv, argc, &i);
 		i++;
 	}
-	check_if_number_is_valid(main_struct);
 	create_names_players(main_struct);
+	check_if_name_is_valid(main_struct);
 }
