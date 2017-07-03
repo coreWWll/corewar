@@ -1,13 +1,21 @@
-//
-// Created by Denys Burtnjak on 5/24/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   corewar.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/03 18:27:43 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/03 18:50:06 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 #include "visualisation.h"
 
 void	create_color_array(t_vm *main_struct)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	if ((main_struct->color = (char *)malloc(MEM_SIZE)) == NULL)
@@ -28,7 +36,7 @@ t_vm	*create_main_struct(void)
 	if ((main_struct = (t_vm*)ft_memalloc(sizeof(t_vm))) == NULL)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:29"));
 	main_struct->players = (t_player**)ft_memalloc(sizeof(t_player*) *
-												   (MAX_PLAYERS + 1));
+			(MAX_PLAYERS + 1));
 	if (main_struct->players == NULL)
 		ft_error(ft_strjoin(ERR_MEM_ALLOC, "corewar.c:33"));
 	create_color_array(main_struct);
@@ -49,10 +57,10 @@ void	introducing(t_vm *main_struct)
 		while (main_struct->players[i])
 		{
 			ft_printf("* Player %d, weighing %d bytes,  \"%s\" (\"%s\") !\n",
-					  -main_struct->players[i]->name,
-					  main_struct->players[i]->prog_len,
-					  main_struct->players[i]->bot_name,
-					  main_struct->players[i]->comment);
+					-main_struct->players[i]->name,
+					main_struct->players[i]->prog_len,
+					main_struct->players[i]->bot_name,
+					main_struct->players[i]->comment);
 			i++;
 		}
 	}
@@ -75,5 +83,5 @@ int		main(int argc, char **argv)
 	start_battle(main_struct);
 	if (main_struct->f_v == TRUE)
 		stop_visualisation(main_struct);
-	return 0;
+	return (0);
 }

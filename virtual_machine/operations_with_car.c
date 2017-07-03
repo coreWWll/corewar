@@ -1,10 +1,18 @@
-//
-// Created by Yevhen Yefimov on 6/7/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations_with_car.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/03 18:37:49 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/03 18:37:51 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 
-void	put_cat_on_start(t_vm	*main_struct)
+void	put_cat_on_start(t_vm *main_struct)
 {
 	int i;
 
@@ -23,10 +31,28 @@ void	put_cat_on_start(t_vm	*main_struct)
 	}
 }
 
+void	dell_car(t_car *ptr, t_car *to_dell, t_vm *main_struct)
+{
+	t_car	*dell;
+
+	while (ptr)
+	{
+		if (to_dell == ptr->next)
+		{
+			dell = ptr->next;
+			ptr->next = ptr->next->next;
+			main_struct->winner = ptr->index;
+			ft_memdel((void **)&dell);
+			break ;
+		}
+		else
+			ptr = ptr->next;
+	}
+}
+
 void	dell_car_from_list(t_car **head, t_car *to_dell, t_vm *main_struct)
 {
 	t_car	*ptr;
-	t_car	*dell;
 
 	ptr = *head;
 	if (*head == to_dell)
@@ -37,25 +63,13 @@ void	dell_car_from_list(t_car **head, t_car *to_dell, t_vm *main_struct)
 	}
 	else
 	{
-		while (ptr)
-		{
-			if (to_dell == ptr->next)
-			{
-				dell = ptr->next;
-				ptr->next = ptr->next->next;
-				main_struct->winner = ptr->index;
-				ft_memdel((void **) &dell);
-				break ;
-			}
-			else
-				ptr = ptr->next;
-		}
+		dell_car(ptr, to_dell, main_struct);
 	}
 }
 
-int count_car(t_vm *main_struct)
+int		count_car(t_vm *main_struct)
 {
-	int 		count;
+	int			count;
 	t_player	**player;
 	t_car		*car;
 	int			i;

@@ -1,10 +1,18 @@
-//
-// Created by Denys Burtnjak on 6/1/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_flags.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/03 18:34:41 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/03 18:34:42 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 
-int		get_nbr_after_flag(char **argv, int argc, int *i)
+int			get_nbr_after_flag(char **argv, int argc, int *i)
 {
 	int	error;
 	int ret_val;
@@ -18,7 +26,7 @@ int		get_nbr_after_flag(char **argv, int argc, int *i)
 	return (ret_val);
 }
 
-void	read_flags(t_vm *main_struct, char **argv, int argc, int *i)
+void		read_flags(t_vm *main_struct, char **argv, int argc, int *i)
 {
 	if (ft_strcmp("-dump", argv[*i]) == 0)
 	{
@@ -41,8 +49,9 @@ void	read_flags(t_vm *main_struct, char **argv, int argc, int *i)
 
 t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 {
-	int boot_nbr = 0;
+	int boot_nbr;
 
+	boot_nbr = 0;
 	(main_struct->players_nbr)++;
 	if (main_struct->players_nbr > MAX_PLAYERS)
 		ft_error(ft_strjoin("To many players, allowed - ",
@@ -57,11 +66,11 @@ t_player	*add_players(t_vm *main_struct, char **argv, int argc, int *i)
 	return (create_players(argv[*i], boot_nbr));
 }
 
-void	check_if_number_is_valid(t_vm *main_struct)
+void		check_if_name_is_valid(t_vm *main_struct)
 {
 	int i;
 	int	j;
-	int bul_same_number;
+	int bul_same_name;
 	int bul_same_players;
 
 	i = 0;
@@ -70,20 +79,20 @@ void	check_if_number_is_valid(t_vm *main_struct)
 		j = 0;
 		while (main_struct->players_nbr > j)
 		{
-			bul_same_number = main_struct->players[i]->boot_nbr ==
-					main_struct->players[j]->boot_nbr;
+			bul_same_name = main_struct->players[i]->name ==
+					main_struct->players[j]->name;
 			bul_same_players = main_struct->players[i] ==
 					main_struct->players[j];
-			if (bul_same_number && !bul_same_players)
-				ft_error(ft_strjoin("Players have identical numbers = ",
-				ft_itoa(main_struct->players[i]->boot_nbr)));
+			if (bul_same_name && !bul_same_players)
+				ft_error(ft_strjoin("Players have identical names = ",
+				ft_itoa(main_struct->players[i]->name)));
 			j++;
 		}
 		i++;
-	};
+	}
 }
 
-void	read_arguments(t_vm *main_struct, char **argv, int argc)
+void		read_arguments(t_vm *main_struct, char **argv, int argc)
 {
 	int			i;
 
@@ -93,10 +102,10 @@ void	read_arguments(t_vm *main_struct, char **argv, int argc)
 		if (argv[i][0] == '-' && argv[i][1] != 'n')
 			read_flags(main_struct, argv, argc, &i);
 		else
-			main_struct->players[main_struct->players_nbr - 1] = /*on MAC - 1*/
+			main_struct->players[main_struct->players_nbr - 1] =
 					add_players(main_struct, argv, argc, &i);
 		i++;
 	}
-	check_if_number_is_valid(main_struct);
 	create_names_players(main_struct);
+	check_if_name_is_valid(main_struct);
 }

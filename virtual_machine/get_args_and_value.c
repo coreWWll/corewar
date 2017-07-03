@@ -1,6 +1,14 @@
-//
-// Created by Yevhen Yefimov on 6/7/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_args_and_value.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/03 18:34:12 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/03 18:34:15 by dburtnja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 
@@ -88,7 +96,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 
  	car->arg_size = 0;
 	car->args_error = TRUE;
-	local_pos = car->pos + 1;
+	local_pos = car->pos + 1 >= MEM_SIZE ? 0 : car->pos + 1;
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos]);
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos,
