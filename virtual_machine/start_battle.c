@@ -84,10 +84,20 @@ void	cycles_and_rounds(t_vm *main_struct)
 
 void	the_winner_is(t_vm *main_struct)
 {
-	if (main_struct->f_v == FALSE)
-		ft_printf("Player: %d -  \"%s\", has won.\n",
-				  -main_struct->players[main_struct->winner]->name,
-				  main_struct->players[main_struct->winner]->bot_name);
+	int i;
+
+	i = 0;
+	while (main_struct->players[i])
+	{
+		if (main_struct->last_live[0] == main_struct->players[i]->name)
+		{
+			if (main_struct->f_v == FALSE)
+				ft_printf("Contestant: %d -  \"%s\", has won.\n",
+						  -main_struct->players[i]->name,
+						  main_struct->players[i]->bot_name);
+		}
+		i++;
+	}
 }
 
 void    start_battle(t_vm *main_struct)

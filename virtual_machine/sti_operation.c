@@ -15,7 +15,9 @@ void    do_sti_func(t_vm *main_struct, t_car *car)
 {
 	int map_p;
 
-	map_p = get_correct_ind(car->pos + car->args[1].value + car->args[2].value);
+	map_p = car->pos + car->args[1].value + car->args[2].value;
+	if (map_p > MEM_SIZE - 1 || map_p < 0)
+		map_p = get_correct_ind(map_p);
 	if (car->args[0].name == T_REG && car->args[0].value > 0 && car->args[0]
 			.value <= REG_NUMBER && car->args_error)
 	{

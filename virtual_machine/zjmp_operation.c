@@ -22,7 +22,9 @@ void    do_zjmp_func(t_vm *main_struct, t_car *car)
 		car->pos = car->pos + dist;
 	}
 	else
-		car->pos = car->pos + arg_size + 1;
+	{
+		car->pos = car->pos + 1 + arg_size;
+	}
 	car->op_tabble.opcode = 0;
 	fix_car_pos(car);
 }
