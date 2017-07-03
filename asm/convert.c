@@ -51,9 +51,9 @@ void	to_byte_code(t_asm *head)
 	file_name = ft_strjoin(head->file_path, ".cor");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	begin = head;
-	head->header = (header_t *)malloc(sizeof(header_t));
+	head->header = (t_header *)malloc(sizeof(t_header));
 	header_parse(head);
-	write(fd, &(*head->header), sizeof(header_t));
+	write(fd, &(*head->header), sizeof(t_header));
 	get_commands(head, fd);
 	ft_strdel(&file_name);
 }
