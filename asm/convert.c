@@ -21,7 +21,7 @@ int		check_if_comand(char *command)
 		return (MAX_INT);
 	while (i < 16)
 	{
-		if (ft_strcmp(command, op_tab[i].command) == 0)
+		if (ft_strcmp(command, g_op_tab[i].command) == 0)
 			return (i + 1);
 		i++;
 	}

@@ -33,23 +33,23 @@ void	check_args_type(t_asm *p, int i)
 {
 	if (p->what_args[i] == T_REG)
 	{
-		if (op_tab[p->comm_num].args[i] != T_REG &&
-				op_tab[p->comm_num].args[i] != (T_REG | T_IND)
-				&& op_tab[p->comm_num].args[i] != (T_REG | T_DIR))
+		if (g_op_tab[p->comm_num].args[i] != T_REG &&
+				g_op_tab[p->comm_num].args[i] != (T_REG | T_IND)
+				&& g_op_tab[p->comm_num].args[i] != (T_REG | T_DIR))
 			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_IND)
 	{
-		if (op_tab[p->comm_num].args[i] != T_IND
-				&& op_tab[p->comm_num].args[i] != (T_IND | T_REG)
-				&& op_tab[p->comm_num].args[i] != (T_IND | T_DIR))
+		if (g_op_tab[p->comm_num].args[i] != T_IND
+				&& g_op_tab[p->comm_num].args[i] != (T_IND | T_REG)
+				&& g_op_tab[p->comm_num].args[i] != (T_IND | T_DIR))
 			ft_exit(2);
 	}
 	else if (p->what_args[i] == T_DIR)
 	{
-		if (op_tab[p->comm_num].args[i] != T_DIR
-				&& op_tab[p->comm_num].args[i] != (T_DIR | T_REG)
-				&& op_tab[p->comm_num].args[i] != (T_DIR | T_IND))
+		if (g_op_tab[p->comm_num].args[i] != T_DIR
+				&& g_op_tab[p->comm_num].args[i] != (T_DIR | T_REG)
+				&& g_op_tab[p->comm_num].args[i] != (T_DIR | T_IND))
 			ft_exit(2);
 	}
 }
@@ -59,9 +59,9 @@ void	check_args(t_asm *p)
 	int i;
 
 	i = 0;
-	while (i < op_tab[p->comm_num].args_am || (p->comm_num == 0 && i == 0))
+	while (i < g_op_tab[p->comm_num].args_am || (p->comm_num == 0 && i == 0))
 	{
-		if (op_tab[p->comm_num].args[i] != (T_REG | T_DIR | T_IND))
+		if (g_op_tab[p->comm_num].args[i] != (T_REG | T_DIR | T_IND))
 			check_args_type(p, i);
 		i++;
 	}
@@ -76,7 +76,7 @@ void	check_args_now(t_asm *start)
 	{
 		if (p->command && p->command[0] != '\0')
 		{
-			if (p->amount_of_args != op_tab[p->comm_num].args_am)
+			if (p->amount_of_args != g_op_tab[p->comm_num].args_am)
 				ft_exit(10);
 			check_args(p);
 		}

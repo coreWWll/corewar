@@ -78,6 +78,6 @@ typedef struct s_op
 	int				codage_octal;
 } t_op;
 
-extern t_op op_tab[17];
+extern t_op g_op_tab[17];
 
 #endif //COREWAR_OP_H

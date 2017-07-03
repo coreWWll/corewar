@@ -86,7 +86,7 @@ void	how_to_get_args(t_asm *start, char *dupline, size_t i)
 	size_t	j;
 	char	*args;
 
-	if (start->comm_num != -1 && op_tab[start->comm_num].args_am == 1)
+	if (start->comm_num != -1 && g_op_tab[start->comm_num].args_am == 1)
 		if_one_arg(start, dupline, i);
 	else
 	{
@@ -116,7 +116,7 @@ void	get_args(char *line, t_asm *start)
 		i++;
 	if (dupline[i] == '\0' && start->label == NULL)
 		ft_exit(2);
-	start->opcode = op_tab[start->comm_num].opcode;
+	start->opcode = g_op_tab[start->comm_num].opcode;
 	how_to_get_args(start, dupline, i);
 	if (start->command && !start->args[0])
 		ft_exit(2);
