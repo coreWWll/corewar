@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:39:37 by arepnovs          #+#    #+#             */
-/*   Updated: 2016/12/10 14:25:37 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/07/03 15:36:54 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	from_end(const char *s, size_t len)
 	return (len);
 }
 
-char		*ft_strtrim(char const *s)
+char			*ft_strtrim(char const *s)
 {
 	char	*res;
 	size_t	i;

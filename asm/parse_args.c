@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 14:14:23 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 19:54:54 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/07/03 14:52:34 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/07/03 14:53:09 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	put_args_types(t_asm *start, int i)
 
 	if (start->args[i][0] == DIRECT_CHAR || start->args[i][0] == LABEL_CHAR)
 	{
-		//start->what_args[i] = T_DIR;
 		start->what_args[i] = (start->args[i][0] == LABEL_CHAR) ? T_IND : T_DIR;
 		if (start->args[i][1] == LABEL_CHAR || start->args[i][0] == LABEL_CHAR)
 		{
 			temp = start->args[i];
 			start->args[i] = (start->args[i][0] == DIRECT_CHAR)
-                             ? ft_strsub(temp, 2, ft_strlen(temp) - 2) : ft_strsub(temp, 1, ft_strlen(temp) - 1);
+				? ft_strsub(temp, 2, ft_strlen(temp) - 2)
+				: ft_strsub(temp, 1, ft_strlen(temp) - 1);
 			free(temp);
 			start->l_flag[i] = 1;
 		}
@@ -94,13 +94,13 @@ void	how_to_get_args(t_asm *start, char *dupline, size_t i)
 		while (dupline[i] == ' ' || dupline[i] == '\t')
 			i++;
 		args = ft_strsub(dupline, (unsigned int)i, j);
-        if (args[0] != COMMENT_CHAR)
-        {
-            if (args[0] != '\0')
-                start->args = ft_strsplit(args, SEPARATOR_CHAR);
-            ft_strdel(&args);
-            if_more_args(start);
-        }
+		if (args[0] != COMMENT_CHAR)
+		{
+			if (args[0] != '\0')
+				start->args = ft_strsplit(args, SEPARATOR_CHAR);
+			ft_strdel(&args);
+			if_more_args(start);
+		}
 	}
 }
 

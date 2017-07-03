@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 15:44:19 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 15:56:05 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/07/03 15:24:41 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/07/03 15:25:32 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int		is_num(char *str)
 	while (str[i])
 	{
 		if (str[i] == '-')
-        {
-            i++;
-            minus++;
-        }
+		{
+			i++;
+			minus++;
+		}
 		if (ft_isdigit(str[i]) != 1 || minus > 1)
 			return (0);
 		i++;

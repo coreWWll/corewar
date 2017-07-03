@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 14:19:46 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/26 15:52:28 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/07/03 15:23:32 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/07/03 15:24:28 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,30 @@ t_asm	*new_asm(void)
 	return (new);
 }
 
-void	get_label(char **line, t_asm *start)
+void	get_label(char **line, t_asm *start, int len)
 {
-	int		len;
 	char	dupline[1000];
 
-	len = 0;
 	if (start->label == NULL)
 	{
-		ft_strcpy(dupline, *line);
-		if (ft_strchr(dupline, LABEL_CHAR) != NULL)
+		if (ft_strchr(ft_strcpy(dupline, *line), LABEL_CHAR) != NULL)
 		{
 			while (dupline[len] != LABEL_CHAR && dupline[len] != '\0')
 				len++;
 		}
-		//check_if_label_ok(*line, len);
 		if ((dupline[len] == '\0' || dupline[len - 1] == DIRECT_CHAR)
 			&& start->only_label != 1)
 			start->label = start->label;
 		else if (start->only_label != 1 && len != 0)
 		{
 			dupline[len] = '\0';
-            if (dupline[len - 1] != ' ' && dupline[len - 1] != ',' && dupline[len - 1] != '\t')
-            {
-                start->label = ft_strnew(0);
-                ft_strcpy(start->label, dupline);
-                check_label_syntax(start->label);
-                *line = *line + len + 1;
-            }
+			if (dupline[len - 1] != ' ' && dupline[len - 1] != ','
+				&& dupline[len - 1] != '\t')
+			{
+				start->label = ft_strnew(0);
+				check_label_syntax(ft_strcpy(start->label, dupline));
+				*line = *line + len + 1;
+			}
 		}
 	}
 }
@@ -104,7 +100,9 @@ void	get_all_info(t_asm *start, char *line)
 {
 	char	*dupline;
 	char	*p;
+	int		len;
 
+	len = 0;
 	if (start->only_label == 1 && is_label(line) == 1)
 	{
 		start->next = new_asm();
@@ -119,7 +117,7 @@ void	get_all_info(t_asm *start, char *line)
 	}
 	line = good_strtrim(line);
 	dupline = line;
-	get_label(&dupline, start);
+	get_label(&dupline, start, len);
 	get_command(dupline, start);
 	get_args(dupline, start);
 	ft_strdel(&line);

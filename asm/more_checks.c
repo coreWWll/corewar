@@ -12,20 +12,6 @@
 
 #include "asm.h"
 
-/*void	check_if_label_ok(char *line, int len)
-{
-	char *t;
-	char *p;
-
-	p = line + len + 1;
-	if ((t = ft_strchr(p, LABEL_CHAR)))
-	{
-		t--;
-		if (*t != DIRECT_CHAR)
-			ft_exit(7);
-	}
-}*/
-
 void	check_label_syntax(char *line)
 {
 	int i;

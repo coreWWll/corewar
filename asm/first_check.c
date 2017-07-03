@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 14:40:49 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/06/24 14:41:09 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/07/03 14:50:29 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	check_endl_and_len(char *t, char *name, int flag)
 		t++;
 	if (t)
 	{
-		while (*t != '\0') {
+		while (*t != '\0')
+		{
 			if (*t == COMMENT_CHAR)
-				break;
+				break ;
 			if (*t != ' ' && *t != '\t')
 				ft_exit(0);
 			t++;
