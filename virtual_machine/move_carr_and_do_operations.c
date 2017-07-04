@@ -33,8 +33,7 @@ void	fix_car_pos(t_car *car)
 	}
 }
 
-
-void    move_single_car(t_vm *main_struct, t_car *car)
+void	move_single_car(t_vm *main_struct, t_car *car)
 {
 	if (!car)
 		return ;
@@ -47,19 +46,15 @@ void    move_single_car(t_vm *main_struct, t_car *car)
 			{
 				car->pos++;
 				fix_car_pos(car);
-
 			}
-			if (main_struct->map[car->pos] > 0 && main_struct->map[car->pos]
-												  < 16)
+			if (main_struct->map[car->pos] > 0 && main_struct->map[car->pos] < 16)
 				get_op_code(main_struct, car);
-
 		}
         else if (car->op_tabble.command)
         {
             do_op_code(main_struct, car);
 			fix_car_pos(car);
-			//if (main_struct->map[car->pos] != 0)
-            	get_op_code(main_struct, car);
+			get_op_code(main_struct, car);
 			fix_car_pos(car);
         }
     }
@@ -67,7 +62,7 @@ void    move_single_car(t_vm *main_struct, t_car *car)
         car->op_tabble.nb_tours--;
 }
 
-void    move_all_car(t_vm *main_struct)
+void	move_all_car(t_vm *main_struct)
 {
     t_player	**player;
     t_car		*car;
@@ -81,9 +76,8 @@ void    move_all_car(t_vm *main_struct)
         while (car)
         {
             move_single_car(main_struct, car);
-			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE+1 || car->pos
-					< 0)
-				fix_car_pos(car);
+			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE+1 ||
+					car->pos < 0) fix_car_pos(car);
             car = car->next;
         }
         i--;
