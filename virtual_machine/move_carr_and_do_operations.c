@@ -53,9 +53,7 @@ void	move_single_car(t_vm *main_struct, t_car *car)
         else if (car->op_tabble.command)
         {
             do_op_code(main_struct, car);
-			fix_car_pos(car);
 			get_op_code(main_struct, car);
-			fix_car_pos(car);
         }
     }
     else
