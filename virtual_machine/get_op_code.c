@@ -69,29 +69,11 @@ t_op	find_op_tab(char code)
 void    get_op_code(t_vm *main_struct, t_car *car)
 {
 	car->op_tabble = find_op_tab(main_struct->map[car->pos]);
-
-	if (car->op_tabble.opcode == 0)
+	if (car->op_tabble.opcode != 0)
 	{
-		/*if (main_struct->map[car->pos] == 0)
-			car->pos++;*/
-		/*if (car->pos == MEM_SIZE - 1)
-			car->pos = 0;*/
-	}
-	else
-	{
-
-		if (car->op_tabble.opcode == 0 && main_struct->map[car->pos] != 0)
-			ft_error(ft_strjoin("OPCODE ERROR: map position = ", ft_itoa
-					(car->pos)));
+		if (car->op_tabble.args_am == 1)
+			get_op_code_part_one(main_struct->map, car);
 		else
-		{
-			if (car->op_tabble.args_am == 1)
-				get_op_code_part_one(main_struct->map, car);
-			else
-			{
-				//car->args_error= get_args_nd_value(car, main_struct);
-				get_op_code_part_two(car);
-			}
-		}
+			get_op_code_part_two(car);
 	}
 }
