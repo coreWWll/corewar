@@ -47,19 +47,15 @@ void    move_single_car(t_vm *main_struct, t_car *car)
 			{
 				car->pos++;
 				fix_car_pos(car);
-
 			}
 			if (main_struct->map[car->pos] > 0 && main_struct->map[car->pos]
 												  < 16)
 				get_op_code(main_struct, car);
-
 		}
         else if (car->op_tabble.command)
         {
             do_op_code(main_struct, car);
-			fix_car_pos(car);
 			get_op_code(main_struct, car);
-			fix_car_pos(car);
         }
     }
     else
