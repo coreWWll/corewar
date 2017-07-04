@@ -117,7 +117,6 @@ set(SOURCE_FILES
         st_operation.c
         add_operation.c
         sub_operation.c
-        ft_memdup.c
         and_operation.c
         or_operation.c
         xor_operation.c
@@ -134,7 +133,6 @@ set(SOURCE_FILES
         aff_operation.c
         get_flags.c
         create_map.c
-        memory_dump.c
         operations_with_car.c
         ../op.c
         get_args_and_value.c
