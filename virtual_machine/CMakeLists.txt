@@ -143,6 +143,6 @@ set(SOURCE_FILES
         w_print_memory.c
         w_print_param.c
         w_print_usage.c
-        put_caret_on_map.c get_args_and_values_part_2.c dump_memory.c time.c check_if_refresh.c read_commands.c create_windows.c usage.c)
+        put_caret_on_map.c get_args_and_values_part_2.c dump_memory.c time.c check_if_refresh.c read_commands.c create_windows.c usage.c get_args_and_values_part_3.c)
 add_executable(virtual_mashine ${SOURCE_FILES})
 target_link_libraries( virtual_mashine ${CURSES_LIBRARIES} )

@@ -64,19 +64,14 @@ int 	read_args(t_car *car, unsigned char *map, t_vm *main_struct, int i)
 	error = FALSE;
 	while (i < car->op_tabble.args_am)
 	{
-		if (car->args[i].name == T_REG)
-			read_size = T_REG;
-		else if (car->args[i].name == T_DIR)
-			read_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
-		else if (car->args[i].name == T_IND)
-			read_size = IND_SIZE;
-		else
-				read_size = 0;
+		read_size = check_args(car, i);
 		buf = car->op_tabble.args[i] & car->args[i].name;
 		if (buf != car->args[i].name || buf == 0)
 			error = TRUE;
 		if (error == FALSE)
 			car->args[i].value = read_one_arg(&map, read_size, main_struct);
+		if (car->args[i].name == T_IND)
+			car->args[i].value = (short)car->args[i].value;
 		if (car->args[i].name == T_REG && car->args[i].value < 0)
 			return (FALSE);
 		car->arg_size += read_size;
@@ -101,6 +96,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 {
 	int		local_pos;
 
+ 	car->arg_size = 0;
 	car->args_error = TRUE;
 	local_pos = car->pos + 1 >= MEM_SIZE ? 0 : car->pos + 1;
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos]);
@@ -115,8 +111,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	if (conditions(car))
 		get_values_reg_end(car, main_struct, 0);
 	else if (car->op_tabble.opcode == 11 && (car->args[0].name == T_REG &&
-										car->args[0].value > 0 &&
-			car->args[0].value  <= REG_NUMBER))
+			car->args[0].value > 0 && car->args[0].value  <= REG_NUMBER))
 		get_values_reg_start(car, main_struct, 1);
 	else if (car->op_tabble.opcode == 2 || car->op_tabble.opcode == 3 ||
 			car->op_tabble.opcode == 13)
