@@ -38,7 +38,6 @@ void    do_sti_func(t_vm *main_struct, t_car *car)
 		car->op_tabble.opcode = 0;
 		car->pos = car->pos + car->arg_size + 2;
 		return ;
-
 	}
 	car->op_tabble.opcode = 0;
 	car->pos = car->pos + car->arg_size + 2;
