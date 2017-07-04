@@ -84,17 +84,27 @@ int 	read_args(t_car *car, unsigned char *map, t_vm *main_struct)
 		if (car->args[i].name == T_REG && car->args[i].value < 0)
 			return (FALSE);
 		car->arg_size += read_size;
-		//map += read_size;
 		i++;
 	}
 	return (error);
+}
+
+int conditions(t_car *car)
+{
+	if ((car->op_tabble.opcode == 4 || car->op_tabble.opcode == 5 ||
+		 car->op_tabble.opcode == 6 || car->op_tabble.opcode == 7 ||
+		 car->op_tabble.opcode == 8 || car->op_tabble.opcode == 10 ||
+		 car->op_tabble.opcode == 14) && (car->args[2].name == T_REG &&
+		 car->args[2].value  > 0 && car->args[2].value <= REG_NUMBER))
+		return (1);
+	else
+		return (0);
 }
 
 int		get_args_nd_value(t_car *car, t_vm *main_struct)
 {
 	int		local_pos;
 
- 	car->arg_size = 0;
 	car->args_error = TRUE;
 	local_pos = car->pos + 1 >= MEM_SIZE ? 0 : car->pos + 1;
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos]);
@@ -106,11 +116,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 			car->arg_size++;
 		return FALSE;
 	}
-	if ((car->op_tabble.opcode == 4 || car->op_tabble.opcode == 5 ||
-			car->op_tabble.opcode == 6 || car->op_tabble.opcode == 7 ||
-			car->op_tabble.opcode == 8 || car->op_tabble.opcode == 10 ||
-			car->op_tabble.opcode == 14) && (car->args[2].name == T_REG &&
-			car->args[2].value  > 0 && car->args[2].value <= REG_NUMBER))
+	if (conditions(car))
 		get_values_reg_end(car, main_struct, 0);
 	else if (car->op_tabble.opcode == 11 && (car->args[0].name == T_REG &&
 										car->args[0].value > 0 &&
