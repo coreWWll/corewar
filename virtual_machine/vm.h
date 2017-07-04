@@ -112,7 +112,7 @@ t_player *create_players(char *file_name, int boot_nbr);
 void    start_battle(t_vm *main_struct);
 void	put_cat_on_start(t_vm	*main_struct);
 
-void    get_live_func(char *map, t_car *car);
+void get_live_func(t_car *car);
 void get_ld_func(t_car *car);
 void get_st_func(t_car *car);
 void get_add_func(t_car *car);
@@ -125,7 +125,7 @@ void get_sti_func(t_car *car);
 void get_fork_func(t_car *car);
 void get_lld_func(t_car *car);
 void get_lldi_func(t_car *car);
-void get_lfork_func(char *map, t_car *car);
+void get_lfork_func(t_car *car);
 void get_aff_func(char *map, t_car *car);
 void get_xor_func(t_car *car);
 void get_and_func(t_car *car);
@@ -133,7 +133,7 @@ void get_and_func(t_car *car);
 void	do_op_code(t_vm *main_struct, t_car *car);
 
 void    do_live_func(t_vm *main_struct, t_car *car);
-void    do_ld_func(t_vm *main_struct, t_car *car);
+void do_ld_func(t_car *car);
 void    do_st_func(t_vm *main_struct, t_car *car);
 void do_add_func(t_car *car);
 void    do_sub_func(t_vm *main_struct, t_car *car);
