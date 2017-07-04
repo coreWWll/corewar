@@ -24,7 +24,7 @@ void do_op_code_part_two(t_vm *main_struct, t_car *car)
 	else if (car->op_tabble.opcode == 12)
 		do_fork_func(main_struct, car);
 	else if (car->op_tabble.opcode == 13)
-		do_lld_func(main_struct, car);
+		do_lld_func(car);
 	else if (car->op_tabble.opcode == 14)
 		do_lldi_func(main_struct, car);
 	else if (car->op_tabble.opcode == 15)

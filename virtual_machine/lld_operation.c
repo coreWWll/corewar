@@ -12,21 +12,21 @@
 
 #include "vm.h"
 
-void get_lld_func(t_car *car)
+void	get_lld_func(t_car *car)
 {
 	car->op_tabble.nb_tours--;
 }
 
-void    do_lld_func(t_vm *main_struct, t_car *car)
+void	do_lld_func(t_car *car)
 {
 	if (car->args[0].name == T_DIR && car->args[1].name == T_REG &&
-		car->args[1].value > 0 && car->args[1].value <= REG_NUMBER  &&
+		car->args[1].value > 0 && car->args[1].value <= REG_NUMBER &&
 		car->args_error)
 		car->reg[car->args[1].value - 1] = car->args[0].value;
 	else if (car->args[0].name == T_IND && car->args[1].name == T_REG &&
-			 car->args[1].value > 0 &&  car->args[1].value <= REG_NUMBER &&
-			 car->args_error)
-		car->reg[car->args[1].value - 1] =  car->args[0].value;
+		car->args[1].value > 0 && car->args[1].value <= REG_NUMBER &&
+		car->args_error)
+		car->reg[car->args[1].value - 1] = car->args[0].value;
 	else
 	{
 		car->op_tabble.opcode = 0;
