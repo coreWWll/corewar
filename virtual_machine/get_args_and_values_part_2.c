@@ -83,13 +83,6 @@ void	get_ldst_args(t_car *car, t_vm *main_struct, int i)
 			car->args_error = FALSE;
 	}
 	if (car->op_tabble.opcode == 3)
-	{
-		/*if (car->args[0].name == T_IND)
-			car->args[0].value = get_correct_ind(car->pos + car->args[i].value % IDX_MOD);
-		else if (car->args[1].name == T_REG && car->args[1].value > 0 &&
-				car->args[1].value <= REG_NUMBER)
-			car->args[1].value = car->reg[car->args[0].value - 1];*/
 		if (car->args[0].name == T_DIR)
 			car->args_error = FALSE;
-	}
 }

@@ -56,7 +56,7 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
 
 void do_op_code(t_vm *main_struct, t_car *car)
 {
-
+	car->arg_size = 0;
 	car->args_error= get_args_nd_value(car, main_struct);
 	if (car->op_tabble.opcode < 9)
 		do_op_code_part_one(main_struct, car);

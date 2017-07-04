@@ -34,6 +34,7 @@ void    do_aff_func(t_vm *main_struct, t_car *car)
 	}
 	else
 	{
+		car->arg_size = 0;
 		car->args_error= get_args_nd_value(car, main_struct);
 		if (car->arg_size == 1)
 			car->pos = car->pos + 2 + car->arg_size;
