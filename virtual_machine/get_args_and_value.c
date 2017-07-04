@@ -55,14 +55,12 @@ int		read_one_arg(unsigned char **map, int read_size, t_vm *main_struct)
 	return (nbr);
 }
 
-int 	read_args(t_car *car, unsigned char *map, t_vm *main_struct)
+int 	read_args(t_car *car, unsigned char *map, t_vm *main_struct, int i)
 {
-	int		i;
 	int		error;
 	int		buf;
 	int 	read_size;
 
-	i = 0;
 	error = FALSE;
 	while (i < car->op_tabble.args_am)
 	{
@@ -79,8 +77,6 @@ int 	read_args(t_car *car, unsigned char *map, t_vm *main_struct)
 			error = TRUE;
 		if (error == FALSE)
 			car->args[i].value = read_one_arg(&map, read_size, main_struct);
-		if (car->args[i].name == T_IND)
-			car->args[i].value = (short)car->args[i].value;
 		if (car->args[i].name == T_REG && car->args[i].value < 0)
 			return (FALSE);
 		car->arg_size += read_size;
@@ -110,7 +106,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	read_args_from_char(car, (unsigned char)main_struct->map[local_pos]);
 	local_pos++;
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos,
-				  main_struct))
+				  main_struct, 0))
 	{
 		if (car->arg_size == 0)
 			car->arg_size++;
