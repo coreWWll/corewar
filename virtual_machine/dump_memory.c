@@ -31,10 +31,10 @@ void	put_nbr_dump(unsigned char c)
 	}
 }
 
-void dump_memory(unsigned char *map, size_t size)
+void	dump_memory(unsigned char *map, size_t size)
 {
-	int		i;
-	int 	count;
+	int	i;
+	int	count;
 
 	i = 0;
 	while (i < size)

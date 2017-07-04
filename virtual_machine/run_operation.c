@@ -43,11 +43,11 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
 	else if (car->op_tabble.opcode == 3)
 		do_st_func(main_struct, car);
 	else if (car->op_tabble.opcode  == 4)
-		do_add_func(main_struct, car);
+		do_add_func(car);
 	else if (car->op_tabble.opcode == 5)
 		do_sub_func(main_struct, car);
 	else if (car->op_tabble.opcode == 6)
-		do_and_func(main_struct, car);
+		do_and_func(car);
 	else if (car->op_tabble.opcode == 7)
 		do_or_func(main_struct, car);
 	else if (car->op_tabble.opcode == 8)

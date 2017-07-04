@@ -12,23 +12,22 @@
 
 #include "vm.h"
 
-t_player *add_player(int boot_nbr)
+t_player	*add_player(int boot_nbr)
 {
-    t_player    *new;
+	t_player	*new;
 
-
-    new = (t_player *)ft_memalloc(sizeof(t_player));
-    new->car = (t_car *)ft_memalloc(sizeof(t_car));
+	new = (t_player *)ft_memalloc(sizeof(t_player));
+	new->car = (t_car *)ft_memalloc(sizeof(t_car));
 	new->car->live = 0;
 	new->boot_nbr = boot_nbr;
 	new->car->next = NULL;
 	ft_bzero(new->car->reg, sizeof(int) * 16);
-    return (new);
+	return (new);
 }
 
 t_player	*create_players(char *file_name, int boot_nbr)
 {
-    t_player    *p_list;
+	t_player	*p_list;
 	int			fd;
 
 	p_list = add_player(boot_nbr);
@@ -52,16 +51,16 @@ int			name_is_taken(t_vm *main_struct, int name)
 	while (main_struct->players[i])
 	{
 		if (main_struct->players[i]->boot_nbr == name)
-			return TRUE;
+			return (TRUE);
 		i++;
 	}
-	return FALSE;
+	return (FALSE);
 }
 
 void		create_names_players(t_vm *main_struct)
 {
-	int		i;
-	int 	names;
+	int	i;
+	int	names;
 
 	i = 0;
 	names = 1;
@@ -75,7 +74,7 @@ void		create_names_players(t_vm *main_struct)
 			names++;
 		}
 		else
-			main_struct->players[i]->name = - main_struct->players[i]->boot_nbr;
+			main_struct->players[i]->name = -main_struct->players[i]->boot_nbr;
 		i++;
 	}
 }
