@@ -12,12 +12,12 @@
 
 #include "vm.h"
 
-void    get_zjmp_func(char *map, t_car *car)
+void	get_zjmp_func(t_car *car)
 {
 	car->op_tabble.nb_tours--;
 }
 
-void    do_zjmp_func(t_vm *main_struct, t_car *car)
+void	do_zjmp_func(t_vm *main_struct, t_car *car)
 {
 	int dist;
 	int arg_size;
