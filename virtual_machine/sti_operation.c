@@ -40,6 +40,10 @@ void    do_sti_func(t_vm *main_struct, t_car *car)
 		return ;
 	}
 	car->op_tabble.opcode = 0;
-	car->pos = car->pos + car->arg_size + 2;
+	if (car->args[0].name == 0 && car->args[1].name == 0)
+		car->pos = car->pos + 2;
+	else
+		car->pos = car->pos + car->arg_size + 2;
+//	car->pos = car->pos + car->arg_size + 2;
 	fix_car_pos(car);
 }
