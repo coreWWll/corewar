@@ -40,7 +40,8 @@ char	*get_champ_code(int fd, size_t prog_len)
 	char	*champ_code;
 
 	champ_code = ft_strnew(prog_len);
-	if (read(fd, champ_code, prog_len) != prog_len)
+	int n = read(fd, champ_code, prog_len);
+	if (n != prog_len)
 		ft_error(ERR_PLAYER_FILE_READING);
 	return (champ_code);
 }
