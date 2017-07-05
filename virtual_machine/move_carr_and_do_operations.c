@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dburtnja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/03 18:37:36 by dburtnja          #+#    #+#             */
-/*   Updated: 2017/07/03 18:37:38 by dburtnja         ###   ########.fr       */
+/*   Created: 2017/07/05 09:44:31 by dburtnja          #+#    #+#             */
+/*   Updated: 2017/07/05 09:44:33 by dburtnja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	move_single_car(t_vm *main_struct, t_car *car)
 {
 	if (!car)
 		return ;
-    if (car->op_tabble.nb_tours == 0)
-    {
-        if (!car->op_tabble.command)
+	if (car->op_tabble.nb_tours == 0)
+	{
+		if (!car->op_tabble.command)
 		{
 			get_op_code(main_struct, car);
 			if (!car->op_tabble.command)
@@ -47,37 +47,39 @@ void	move_single_car(t_vm *main_struct, t_car *car)
 				car->pos++;
 				fix_car_pos(car);
 			}
-			if (main_struct->map[car->pos] > 0 && main_struct->map[car->pos] < 16)
+			if (main_struct->map[car->pos] > 0 &&
+					main_struct->map[car->pos] < 16)
 				get_op_code(main_struct, car);
 		}
-        else if (car->op_tabble.command)
-        {
-            do_op_code(main_struct, car);
+		else if (car->op_tabble.command)
+		{
+			do_op_code(main_struct, car);
 			get_op_code(main_struct, car);
-        }
-    }
-    else
-        car->op_tabble.nb_tours--;
+		}
+	}
+	else
+		car->op_tabble.nb_tours--;
 }
 
 void	move_all_car(t_vm *main_struct)
 {
-    t_player	**player;
-    t_car		*car;
+	t_player	**player;
+	t_car		*car;
 	int			i;
 
 	i = main_struct->players_nbr;
 	player = main_struct->players;
-    while (i)
-    {
-        car = player[i - 1]->car;
-        while (car)
-        {
-            move_single_car(main_struct, car);
-			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE+1 ||
-					car->pos < 0) fix_car_pos(car);
-            car = car->next;
-        }
-        i--;
-    }
+	while (i)
+	{
+		car = player[i - 1]->car;
+		while (car)
+		{
+			move_single_car(main_struct, car);
+			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE + 1 ||
+					car->pos < 0)
+				fix_car_pos(car);
+			car = car->next;
+		}
+		i--;
+	}
 }
