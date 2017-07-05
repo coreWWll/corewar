@@ -51,7 +51,7 @@ void do_op_code_part_one(t_vm *main_struct, t_car *car)
 	else if (car->op_tabble.opcode == 7)
 		do_or_func(main_struct, car);
 	else if (car->op_tabble.opcode == 8)
-		do_xor_func(main_struct, car);
+		do_xor_func(car);
 }
 
 void do_op_code(t_vm *main_struct, t_car *car)
