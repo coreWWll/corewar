@@ -37,6 +37,7 @@ SRC =	corewar.c\
         get_args_and_values_part_2.c\
         dump_memory.c\
         put_int_on_map.c\
+		ft_memdup.c\
         bonus/visualisation.c\
         bonus/visualisate.c\
         bonus/w_print_memory.c\
