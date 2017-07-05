@@ -54,10 +54,14 @@ void	do_fork_func(t_vm *main_struct, t_car *car)
 	int dist;
 	int arg_size;
 	int i;
+	int ptr;
 
+	ptr = car->pos + 1;
+	if (ptr > MEM_SIZE - 1)
+		ptr = ptr - MEM_SIZE;
 	i = 0;
 	arg_size = car->op_tabble.codage_octal == 0 ? DIR_SIZE : IND_SIZE;
-	dist = get_short_from_byte_code(main_struct->map + car->pos + 1,
+	dist = get_short_from_byte_code(main_struct->map + ptr,
 			car->op_tabble.codage_octal) % IDX_MOD;
 	while (i < main_struct->players_nbr)
 	{
