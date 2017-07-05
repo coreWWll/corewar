@@ -107,7 +107,6 @@ set(SOURCE_FILES
         corewar.c
         create_players.c
         live_operation.c
-        print_memory.c
         read_player_file.c
         run_operation.c
         start_battle.c
