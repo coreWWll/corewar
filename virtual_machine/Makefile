@@ -1,11 +1,9 @@
-NAME = virtual_machine
+NAME = corewar
 
-#FLAGS =	-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC =	corewar.c\
         create_players.c\
-        live_operation.c\
-        print_memory.c\
         read_player_file.c\
         run_operation.c\
         start_battle.c\
@@ -15,11 +13,11 @@ SRC =	corewar.c\
         st_operation.c\
         add_operation.c\
         sub_operation.c\
-        ft_memdup.c\
         and_operation.c\
         or_operation.c\
         xor_operation.c\
         error.c\
+        usage.c\
         get_op_code.c\
         zjmp_operation.c\
         ldi_operation.c\
@@ -31,25 +29,25 @@ SRC =	corewar.c\
         aff_operation.c\
         get_flags.c\
         create_map.c\
-        memory_dump.c\
         operations_with_car.c\
         get_args_and_value.c\
         get_args_and_values_part_2.c\
         dump_memory.c\
         put_int_on_map.c\
-		ft_memdup.c\
-        bonus/visualisation.c\
-        bonus/visualisate.c\
-        bonus/w_print_memory.c\
-        bonus/w_print_param.c\
-        bonus/w_print_usage.c\
-        bonus/put_caret_on_map.c\
-        bonus/time.c\
-       	bonus/check_if_refresh.c\
-        bonus/read_commands.c\
-        bonus/create_windows.c\
+        visualisation.c\
+        visualisate.c\
+        w_print_memory.c\
+        w_print_param.c\
+        w_print_usage.c\
+        put_caret_on_map.c\
+        time.c\
+       	check_if_refresh.c\
+        read_commands.c\
+        create_windows.c\
+        get_args_and_values_part_3.c
 
 LIBFT = libft/libft.a
+FT_PRINTF = libft/ft_printf/libftprintf.a
 
 SRO  =  $(SRC:.c=.o)
 
@@ -57,16 +55,17 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 		@$(MAKE) -C libft
+		@$(MAKE) -C libft/ft_printf
 		@echo "-----------------------------------"
 		@echo "Compiling virtual_machine"
 		@gcc $(FLAGS) -c $(SRC) ../op.c
-		@echo "2"
-		@gcc $(FLAGS) -o $(NAME) op.o $(SRO) $(LIBFT)
+		@gcc $(FLAGS) -o $(NAME) op.o $(SRO) $(LIBFT) $(FT_PRINTF) -lcurses
 		@echo "-----------------------------------"
 		@echo "virtual_machine is ready"
 clean:
 	@rm -f $(SRO) op.o
 	@$(MAKE) clean -C libft
+	@$(MAKE) clean -C libft/ft_printf
 	@echo "-----------------------------------"
 	@echo "Objects successfully removed"
 fclean:	

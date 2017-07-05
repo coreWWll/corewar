@@ -24,7 +24,7 @@ void	w_print_usage(WINDOW *win)
 	wprintw(win, "%-35s %s\n", "Decrement speed", "-");
 	init_pair(RED_TEXT_ON_CYAN, COLOR_RED, COLOR_CYAN);
 	wattron(win, COLOR_PAIR(RED_TEXT_ON_CYAN));
-	wprintw(win, "\n\n\n\n\n\n\npowered by: arepnov, dburtnja, okres, "
+	wprintw(win, "\n\n\n\n\n\n\npowered by: arepnovs, dburtnja, okres, "
 			"yyefimov\n");
 	wprintw(win, "all rights reserved");
 	wattroff(win, COLOR_PAIR(RED_TEXT_ON_CYAN));

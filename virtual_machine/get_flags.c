@@ -14,14 +14,16 @@
 
 int			get_nbr_after_flag(char **argv, int argc, int *i)
 {
-	int	error;
-	int ret_val;
+	int		error;
+	int		ret_val;
+	char	*buf;
 
 	(*i)++;
 	if (*i >= argc)
 		ft_error(ft_strjoin("No parameter after flag ", argv[(*i) - 1]));
-	ret_val = ft_atoi_move(&(argv[*i]), &error, FALSE);
-	if (error == TRUE || ret_val <= 0)
+	buf = argv[*i];
+	ret_val = ft_atoi_move(&buf, &error, TRUE);
+	if (error == TRUE || ret_val <= 0 || *buf != 0)
 		ft_error(ft_strjoin("Bad number: ", argv[*i]));
 	return (ret_val);
 }

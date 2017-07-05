@@ -62,7 +62,7 @@ void	get_values_reg_start(t_car *car, t_vm *main_struct, int i)
 	}
 }
 
-void	get_ldst_args(t_car *car, t_vm *main_struct, int i)
+void	get_ldst_args(t_car *car, t_vm *main_struct)
 {
 	int mark;
 

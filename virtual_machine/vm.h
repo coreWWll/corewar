@@ -127,7 +127,7 @@ void				get_fork_func(t_car *car);
 void				get_lld_func(t_car *car);
 void				get_lldi_func(t_car *car);
 void				get_lfork_func(t_car *car);
-void				get_aff_func(char *map, t_car *car);
+void				get_aff_func(t_car *car);
 void				get_xor_func(t_car *car);
 void				get_and_func(t_car *car);
 
@@ -136,9 +136,9 @@ void				do_live_func(t_vm *main_struct, t_car *car);
 void				do_ld_func(t_car *car);
 void				do_st_func(t_vm *main_struct, t_car *car);
 void				do_add_func(t_car *car);
-void do_sub_func(t_car *car);
+void				do_sub_func(t_car *car);
 void				do_and_func(t_car *car);
-void do_or_func(t_car *car);
+void				do_or_func(t_car *car);
 void				do_xor_func(t_car *car);
 void				do_zjmp_func(t_vm *main_struct, t_car *car);
 void				do_ldi_func(t_vm *main_struct, t_car *car);
@@ -156,8 +156,8 @@ void				do_aff_func(t_vm *main_struct, t_car *car);
 
 void				move_all_car(t_vm *main_struct);
 int					get_int_from_file(int fd);
-char				*get_string_from_file(int fd, size_t define_len);
-char				*get_champ_code(int fd, size_t prog_len);
+char				*get_string_from_file(int fd, long define_len);
+char				*get_champ_code(int fd, long prog_len);
 void				dump_memory(unsigned char *map, size_t size);
 void				ft_error(char *error_message);
 void				get_op_code(t_vm *main_struct, t_car *car);
@@ -167,7 +167,7 @@ void				create_names_players(t_vm *main_struct);
 
 int					get_int_from_byte_code(char *buffer);
 int					get_args_nd_value(t_car *car, t_vm *main_struct);
-void put_int_on_map(t_vm *m_s, int data, char player_nbr);
+void				put_int_on_map(t_vm *m_s, int data, char player_nbr);
 
 void				move_single_car(t_vm *main_struct, t_car *car);
 void				start_visualisation(t_vm *main_struct);
@@ -182,7 +182,7 @@ int					get_correct_ind(int mark);
 void				get_values_reg_end(t_car *car, t_vm *main_struct, int i);
 void				get_values_reg_start(t_car *car, t_vm *main_struct, int i);
 void				usage(void);
-void				get_ldst_args(t_car *car, t_vm *main_struct, int i);
+void				get_ldst_args(t_car *car, t_vm *main_struct);
 void				fix_car_pos(t_car *car);
 int					check_args(t_car *car, int i);
 
