@@ -16,10 +16,10 @@ int		get_int_from_file(int fd)
 {
 	unsigned char	buffer[4];
 
-    if (read(fd, buffer, 4) != 4)
+	if ((read(fd, buffer, 4)) != 4)
 		ft_error(ERR_PLAYER_FILE_READING);
-	return (buffer[3] | ( (int)buffer[2] << 8 ) | ( (int)buffer[1] << 16 ) |
-				( (int)buffer[0] << 24 ));
+	return (buffer[3] | ((int)buffer[2] << 8) | ((int)buffer[1] << 16) |
+				((int)buffer[0] << 24));
 }
 
 char	*get_string_from_file(int fd, size_t define_len)
