@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-int check_args(t_car *car, int i)
+int		check_args(t_car *car, int i)
 {
 	int read_size;
 

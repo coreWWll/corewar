@@ -17,7 +17,7 @@ void	get_op_code_part_one(char *map, t_car *car)
 	if (map[car->pos]  == g_op_tab[0].opcode)
 		get_live_func(car);
 	if (map[car->pos]  == g_op_tab[8].opcode)
-		get_zjmp_func(map, car);
+		get_zjmp_func(car);
 	else if (map[car->pos] == g_op_tab[11].opcode)
 		get_fork_func(car);
 	else if (map[car->pos] == g_op_tab[14].opcode)
