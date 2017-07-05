@@ -21,11 +21,15 @@ void	do_aff_func(t_vm *main_struct, t_car *car)
 {
 	int		reg_n;
 	char	print;
+	int ptr;
 
-	if (main_struct->map[car->pos + 1] == 64)
+	ptr = car->pos + 1;
+	if (ptr > MEM_SIZE - 1)
+		ptr = ptr - MEM_SIZE;
+	if (main_struct->map[ptr] == 64)
 	{
-		reg_n = get_int_from_byte_code(main_struct->map + car->pos + 1);
-		print = (char)(reg_n % 256);
+		reg_n = main_struct->map[ptr + 1];
+		print = (char)(car->reg[reg_n - 1] % 256);
 		if (main_struct->f_aff)
 			ft_printf("AFF OPERATION = %c\n", print);
 		car->op_tabble.opcode = 0;

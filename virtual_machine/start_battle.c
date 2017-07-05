@@ -12,14 +12,12 @@
 
 #include "vm.h"
 
-void	change_alive_flag(t_vm *main_struct)
+void	change_alive_flag(t_vm *main_struct, int i)
 {
 	t_player	**player;
 	t_car		*car;
 	t_car		*p;
-	int			i;
 
-	i = 0;
 	player = main_struct->players;
 	while (i < main_struct->players_nbr)
 	{
@@ -77,7 +75,7 @@ void	cycles_and_rounds(t_vm *main_struct)
 		main_struct->cycle_to_die = main_struct->cycle_to_die + CYCLE_TO_DIE -
 				CYCLE_DELTA * main_struct->round;
 	}
-	change_alive_flag(main_struct);
+	change_alive_flag(main_struct, 0);
 	main_struct->nbr_of_lifes = 0;
 	main_struct->count_live_functions = 0;
 }
@@ -120,6 +118,8 @@ void	start_battle(t_vm *main_struct)
 	}
 	if (main_struct->f_v == TRUE)
 	{
+		if (main_struct->cycle_to_die_for_viz > 0)
+			main_struct->cycle--;
 		throw_visualization(main_struct, "BATTLE IS OVER");
 		while (wgetch(main_struct->vis->arena) != 'q')
 		{

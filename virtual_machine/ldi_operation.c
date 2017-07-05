@@ -30,9 +30,9 @@ int		get_correct_ind(int mark)
 			k = mark / (MEM_SIZE);
 			mark = mark % (k * (MEM_SIZE));
 		}
-		else
+		else if (mark < 0)
 		{
-			k = (mark / (-MEM_SIZE + 1)) + 1;
+			k = (mark / (-MEM_SIZE)) + 1;
 			mark = mark + k * (MEM_SIZE);
 		}
 	}
