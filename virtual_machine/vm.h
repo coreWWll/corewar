@@ -136,9 +136,9 @@ void				do_live_func(t_vm *main_struct, t_car *car);
 void				do_ld_func(t_car *car);
 void				do_st_func(t_vm *main_struct, t_car *car);
 void				do_add_func(t_car *car);
-void do_sub_func(t_car *car);
+void				do_sub_func(t_car *car);
 void				do_and_func(t_car *car);
-void do_or_func(t_car *car);
+void				do_or_func(t_car *car);
 void				do_xor_func(t_car *car);
 void				do_zjmp_func(t_vm *main_struct, t_car *car);
 void				do_ldi_func(t_vm *main_struct, t_car *car);
@@ -167,7 +167,7 @@ void				create_names_players(t_vm *main_struct);
 
 int					get_int_from_byte_code(char *buffer);
 int					get_args_nd_value(t_car *car, t_vm *main_struct);
-void put_int_on_map(t_vm *m_s, int data, char player_nbr);
+void				put_int_on_map(t_vm *m_s, int data, char player_nbr);
 
 void				move_single_car(t_vm *main_struct, t_car *car);
 void				start_visualisation(t_vm *main_struct);
