@@ -49,7 +49,7 @@ int		read_when_play_and_pause(t_vm *main_struct, int c)
 	}
 	else if (c == WINDOW_RESIZE)
 	{
-		throw_resize_vis(main_struct, "/resize/");
+		throw_resize_vis(main_struct);
 		return (FALSE);
 	}
 	return (FALSE);

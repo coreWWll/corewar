@@ -12,7 +12,7 @@
 
 #include "visualisation.h"
 
-void	throw_resize_vis(t_vm *main_struct, char *status)
+void	throw_resize_vis(t_vm *main_struct)
 {
 	int h;
 

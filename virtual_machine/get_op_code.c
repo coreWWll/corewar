@@ -23,7 +23,7 @@ void	get_op_code_part_one(char *map, t_car *car)
 	else if (map[car->pos] == g_op_tab[14].opcode)
 		get_lfork_func(car);
 	else if (map[car->pos] == g_op_tab[15].opcode)
-		get_aff_func(map, car);
+		get_aff_func(car);
 }
 
 void	get_op_code_part_two(t_car *car)

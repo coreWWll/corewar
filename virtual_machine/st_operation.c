@@ -47,7 +47,7 @@ void	do_st_func(t_vm *main_struct, t_car *car)
 	{
 		main_struct->coord_for_put_int_on_map = map_pos;
 		put_int_on_map(main_struct, car->reg[car->args[0].value - 1],
-					   car->color);
+				car->color);
 	}
 	car->op_tabble.opcode = 0;
 	if (car->args[0].name == 0 && car->args[1].name == 0)

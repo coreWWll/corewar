@@ -33,15 +33,15 @@ void	put_nbr_dump(unsigned char c)
 
 void	dump_memory(unsigned char *map, size_t size)
 {
-	int	i;
-	int	count;
+	size_t	i;
+	int		count;
 
 	i = 0;
 	while (i < size)
 	{
 		if (i % 64 == 0)
 		{
-			count = i / 64;
+			count = (int)i / 64;
 			ft_printf("0x%04x : ", count * 64);
 		}
 		if (map[i] < 16)
