@@ -6,7 +6,7 @@
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 15:25:48 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/07/03 15:33:50 by arepnovs         ###   ########.fr       */
+/*   Updated: 2017/07/05 09:13:29 by okres            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct		s_asm
 	int				cur_size;
 	int				cur_codage_octal;
 	int				program_s;
+	int				fd;
+	int short		a;
 }					t_asm;
 
 typedef enum		e_t
@@ -76,5 +78,9 @@ char				*get_full_name_or_comment(int fd, char *name, char *line,
 char				*start_getting_name(char **name, char *t, size_t len);
 void				check_if_name_comment_is_correct(char *line, int flag);
 int					check_if_num_ok(char *reg, int f);
+int					find_lable(t_asm *begin, char *lable, int val_cur);
+int					write_dir(int val_cur, t_asm *head, int index,
+					t_asm *begin);
+void				fill_name_and_comment(t_asm *head);
 
 #endif
