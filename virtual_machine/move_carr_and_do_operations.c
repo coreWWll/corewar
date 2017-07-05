@@ -75,9 +75,6 @@ void	move_all_car(t_vm *main_struct)
 		while (car)
 		{
 			move_single_car(main_struct, car);
-			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE + 1 ||
-					car->pos < 0)
-				fix_car_pos(car);
 			car = car->next;
 		}
 		i--;
