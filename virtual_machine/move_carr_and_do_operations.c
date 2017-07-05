@@ -27,7 +27,7 @@ void	fix_car_pos(t_car *car)
 		}
 		else if (car->pos < 0)
 		{
-			count = (car->pos / (-MEM_SIZE + 1)) + 1;
+			count = (car->pos / (-MEM_SIZE)) + 1;
 			car->pos = car->pos + count * (MEM_SIZE);
 		}
 	}
@@ -75,9 +75,6 @@ void	move_all_car(t_vm *main_struct)
 		while (car)
 		{
 			move_single_car(main_struct, car);
-			if (car->pos > MEM_SIZE - 1 || car->pos < -MEM_SIZE + 1 ||
-					car->pos < 0)
-				fix_car_pos(car);
 			car = car->next;
 		}
 		i--;

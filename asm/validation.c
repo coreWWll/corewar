@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 14:18:36 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/07/03 14:53:34 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/07/05 12:42:40 by arepnovs          #+#    #+#             */
+/*   Updated: 2017/07/05 12:42:42 by arepnovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,19 @@ void	check_args_type(t_asm *p, int i)
 void	check_args(t_asm *p)
 {
 	int i;
+	int args_sum;
 
 	i = 0;
+	args_sum = 0;
 	while (i < g_op_tab[p->comm_num].args_am || (p->comm_num == 0 && i == 0))
 	{
+		args_sum = args_sum + p->what_args[i];
 		if (g_op_tab[p->comm_num].args[i] != (T_REG | T_DIR | T_IND))
 			check_args_type(p, i);
 		i++;
 	}
+	if (args_sum == 0)
+		ft_exit(2);
 }
 
 void	check_args_now(t_asm *start)

@@ -23,7 +23,6 @@ int		get_int_from_byte_code(char *byte_array)
 
 void	get_live_func(t_car *car)
 {
-	car->live = 1;
 	car->op_tabble.nb_tours--;
 }
 
@@ -52,10 +51,14 @@ void	do_live_func(t_vm *main_struct, t_car *car)
 {
 	unsigned int	number;
 	int				new_life;
+	int ptr;
 
+	car->live = 1;
+	ptr = car->pos + 1;
+	if (ptr > MEM_SIZE - 1)
+		ptr = ptr - MEM_SIZE;
 	main_struct->count_live_functions++;
-	number = (unsigned int)get_int_from_byte_code(main_struct->map + car->pos +
-			1);
+	number = (unsigned int)get_int_from_byte_code(main_struct->map + ptr);
 	new_life = check_who_live(number, main_struct);
 	if (new_life != 0)
 	{

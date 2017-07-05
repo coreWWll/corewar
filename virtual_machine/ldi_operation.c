@@ -30,9 +30,9 @@ int		get_correct_ind(int mark)
 			k = mark / (MEM_SIZE);
 			mark = mark % (k * (MEM_SIZE));
 		}
-		else
+		else if (mark < 0)
 		{
-			k = (mark / (-MEM_SIZE + 1)) + 1;
+			k = (mark / (-MEM_SIZE)) + 1;
 			mark = mark + k * (MEM_SIZE);
 		}
 	}
@@ -56,10 +56,6 @@ void	do_ldi_func(t_vm *main_struct, t_car *car)
 	{
 		car->op_tabble.opcode = 0;
 		car->pos = car->pos + car->arg_size + 2;
-		/*if (car->args[0].name == 0 && car->args[1].name == 0)
-			car->pos = car->pos + 2;
-		else
-			car->pos = car->pos + car->arg_size + 2;*/
 		return ;
 	}
 	if (car->reg[car->args[2].value - 1] == 0 && car->carry == 0)

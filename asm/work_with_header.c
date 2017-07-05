@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work_with_header.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: okres <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/03 16:35:52 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/07/03 16:36:16 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/07/05 09:12:25 by okres             #+#    #+#             */
+/*   Updated: 2017/07/05 09:12:27 by okres            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,6 @@ unsigned int	do_big_endian(unsigned int magic, int size)
 		i += 8;
 	}
 	return (res);
-}
-
-void			fill_name_and_comment(t_asm *head)
-{
-	int i;
-
-	i = 0;
-	while (head->comm[i])
-	{
-		head->header->comment[i] = head->comm[i];
-		i++;
-	}
-	i = 0;
-	while (head->name[i])
-	{
-		head->header->prog_name[i] = head->name[i];
-		i++;
-	}
 }
 
 void			modify_size(t_asm *head, t_asm *begin, int cur_size)

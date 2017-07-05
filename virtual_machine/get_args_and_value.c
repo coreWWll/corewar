@@ -106,8 +106,8 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos,
 				main_struct, 0))
 	{
-		if (car->arg_size == 0)
-			car->arg_size++;
+		/*if (car->arg_size == 0)
+			car->arg_size++;*/
 		return (FALSE);
 	}
 	if (conditions(car))

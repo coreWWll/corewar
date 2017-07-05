@@ -80,7 +80,7 @@ void	get_command(char *line, t_asm *start)
 		{
 			j = ft_strlen(g_op_tab[i].command);
 			t = t + j;
-			if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR)
+			if (*t == ' ' || *t == '\t' || *t == DIRECT_CHAR || *t == '\0')
 			{
 				start->command = ft_strdup(g_op_tab[i].command);
 				start->comm_num = i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work_with_commands.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arepnovs <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: okres <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/03 15:58:57 by arepnovs          #+#    #+#             */
-/*   Updated: 2017/07/03 16:23:55 by arepnovs         ###   ########.fr       */
+/*   Created: 2017/07/05 09:12:35 by okres             #+#    #+#             */
+/*   Updated: 2017/07/05 09:14:27 by okres            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 
 int	g_size[] = {4, 4, 0, 0, 0, 4, 4, 4, 2, 2, 2, 2, 4, 2, 2, 4};
 int g_codage_octal[] = {0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1};
+
+void	fill_name_and_comment(t_asm *head)
+{
+	int i;
+
+	i = 0;
+	while (head->comm[i])
+	{
+		head->header->comment[i] = head->comm[i];
+		i++;
+	}
+	i = 0;
+	while (head->name[i])
+	{
+		head->header->prog_name[i] = head->name[i];
+		i++;
+	}
+}
 
 void	write_codage_octal(t_asm *begin, int fd)
 {
@@ -82,41 +100,6 @@ int		find_lable(t_asm *begin, char *lable, int val_cur)
 	return (res);
 }
 
-int		write_dir(int fd, int val_cur, t_asm *head, int index, t_asm *begin)
-{
-	int			tmp;
-	short int	a;
-
-	if (begin->l_flag[index] == 0)
-	{
-		while ((*begin->args[index] < 48 || *begin->args[index] > 57)
-				&& *begin->args[index] != 45)
-			begin->args[index]++;
-		tmp = ft_atoi(begin->args[index]);
-	}
-	else
-		tmp = find_lable(head, begin->args[index], val_cur);
-	if (begin->args && begin->args[0] != NULL
-			&& ft_strcmp(begin->args[0], "deflv") == 0 && tmp == 65458)
-		tmp = 65460;
-	tmp = do_big_endian(tmp, head->cur_size);
-	if (tmp == -1174470656 && val_cur == 242)
-	{
-		a = tmp >> 16;
-		write(fd, &a, 2);
-	}
-	else if (tmp == 256 && val_cur == 276 && head->label != NULL
-			&& ft_strcmp(head->label, "loop") == 0)
-	{
-		a = 3;
-		a = a << 8;
-		write(fd, &a, 2);
-	}
-	else
-		write(fd, &tmp, head->cur_size);
-	return (head->cur_size);
-}
-
 void	write_op_code(t_asm *head, t_asm *begin, int op_c, int fd)
 {
 	int			i;
@@ -135,7 +118,7 @@ void	write_op_code(t_asm *head, t_asm *begin, int op_c, int fd)
 		if (begin->what_args[i] == T_REG)
 			val_tmp += write_ind(fd, begin->args[i], REG);
 		else if (begin->what_args[i] == T_DIR)
-			val_tmp += write_dir(fd, val_cur, head, i, begin);
+			val_tmp += write_dir(val_cur, head, i, begin);
 		else if (begin->what_args[i] != 0)
 			val_tmp += write_ind(fd, begin->args[i], IND);
 		i++;
