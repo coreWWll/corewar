@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-void	get_aff_func(char *map, t_car *car)
+void	get_aff_func(t_car *car)
 {
 	car->op_tabble.nb_tours--;
 }
@@ -21,7 +21,7 @@ void	do_aff_func(t_vm *main_struct, t_car *car)
 {
 	int		reg_n;
 	char	print;
-	int ptr;
+	int		ptr;
 
 	ptr = car->pos + 1;
 	if (ptr > MEM_SIZE - 1)

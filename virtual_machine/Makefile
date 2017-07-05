@@ -1,6 +1,6 @@
 NAME = corewar
 
-FLAGS =
+FLAGS = -Wall -Wextra -Werror
 
 SRC =	corewar.c\
         create_players.c\

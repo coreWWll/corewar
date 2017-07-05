@@ -42,6 +42,6 @@ int		check_if_refresh(t_vm *main_struct);
 void	read_commands(t_vm *main_struct);
 void	stop_vis_and_exit(t_vm *main_struct);
 void	create_windows(t_vm *main_struct);
-void	throw_resize_vis(t_vm *main_struct, char *status);
+void	throw_resize_vis(t_vm *main_struct);
 
 #endif

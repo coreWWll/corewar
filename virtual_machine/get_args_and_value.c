@@ -106,8 +106,6 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 	if (read_args(car, (unsigned char*)main_struct->map + local_pos,
 				main_struct, 0))
 	{
-		/*if (car->arg_size == 0)
-			car->arg_size++;*/
 		return (FALSE);
 	}
 	if (conditions(car))
@@ -117,7 +115,7 @@ int		get_args_nd_value(t_car *car, t_vm *main_struct)
 		get_values_reg_start(car, main_struct, 1);
 	else if (car->op_tabble.opcode == 2 || car->op_tabble.opcode == 3 ||
 			car->op_tabble.opcode == 13)
-		get_ldst_args(car, main_struct, 1);
+		get_ldst_args(car, main_struct);
 	else
 		return (FALSE);
 	return (car->args_error);
